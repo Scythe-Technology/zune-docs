@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { ThemeSwitch, Footer, useTheme } from 'nextra-theme-docs';
+import { ThemeSwitch, useTheme } from 'nextra-theme-docs';
 
 import { Navbar } from './components/navbar';
 
