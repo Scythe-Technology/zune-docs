@@ -119,20 +119,14 @@ div.nextra-search > div:nth-child(1) > input:nth-child(1) {
   background-color: rgba(64, 64, 64, 0.1) !important;
 }
 
-.nextra-nav-container {
+.dark .nextra-nav-container {
   background-color: #000 !important;
+}
+.light .nextra-nav-container {
+  background-color: #fff !important;
 }
 .nextra-nav-container-blur {
   opacity: 0;
-}
-.nextra-sidebar-container {
-  background-color: #000 !important;
-}
-div.nx-sticky:nth-child(3) {
-  background-color: #000 !important;
-}
-div.div.nextra-nav-container-blur {
-  background-color: rgba(0, 0, 0, 0.9) !important;
 }
 
 @keyframes wave-pattern {
