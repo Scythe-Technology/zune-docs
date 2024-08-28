@@ -42,6 +42,7 @@
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
+  min-width: 19px;
 }
 
 .light .theme-toggle-button svg {
