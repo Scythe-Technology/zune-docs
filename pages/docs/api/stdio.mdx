@@ -1,0 +1,281 @@
+## Standard I/O
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
+
+## Functions
+1. [cursorMove](#cursormove)
+2. [erase](#erase)
+3. [style](#style)
+4. [reset](#reset)
+5. [color](#color)
+6. [bgcolor](#bgcolor)
+7. [color256](#color256)
+8. [bgcolor256](#bgcolor256)
+9. [trueColor](#truecolor)
+10. [bgtrueColor](#bgtruecolor)
+11. [writeOut](#writeout)
+12. [writeErr](#writeerr)
+13. [readIn](#readin)
+
+## Functions
+{/* CURSORMOVE */}
+#### cursorMove
+```luau
+stdio.cursorMove(action: "home"): string
+stdio.cursorMove(action: "goto", line: number, column: number): string
+stdio.cursorMove(action: "up" | "down" | "right" | "left", amount: number): string
+stdio.cursorMove(action: "nextline", linesDown: number): string
+stdio.cursorMove(action: "prevline", linesUp: number): string
+stdio.cursorMove(action: "gotocol", column: number): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Moves the cursor.
+##### Parameters
+- `action: "home"` - Moves the cursor to the home position.
+- `action: "goto"` - Moves the cursor to a specific line and column.
+  - `line: number` - The line to move to.
+  - `column: number` - The column to move to.
+- `action: "up" | "down" | "right" | "left"` - Moves the cursor in a direction.
+  - `amount: number` - The amount to move.
+- `action: "nextline"` - Moves the cursor to the next line.
+  - `linesDown: number` - The amount of lines to move down.
+- `action: "prevline"` - Moves the cursor to the previous line.
+  - `linesUp: number` - The amount of lines to move up.
+- `action: "gotocol"` - Moves the cursor to a specific column.
+  - `column: number` - The column to move to.
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* ERASE */}
+#### erase
+```luau
+stdio.erase(erase: "endOf" | "startOf" | "entire" | "savedLines" | "endOfLine" | "startOfLine" | "entireLine"): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Erases the screen.
+##### Parameters
+- `erase: "endOf"` - Erases from the cursor to the end of the screen.
+- `erase: "startOf"` - Erases from the cursor to the start of the screen.
+- `erase: "entire"` - Erases the entire screen.
+- `erase: "savedLines"` - Erases the saved lines.
+- `erase: "endOfLine"` - Erases from the cursor to the end of the line.
+- `erase: "startOfLine"` - Erases from the cursor to the start of the line.
+- `erase: "entireLine"` - Erases the entire line.
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* STYLE */}
+#### style
+```luau
+stdio.style(style: "bold" | "dim" | "italic" | "underline" | "blinking" | "inverse" | "hidden" | "strikethrough"): string
+```
+Styles the text.
+##### Parameters
+- `style: "bold"` - Makes the text bold.
+- `style: "dim"` - Makes the text dim.
+- `style: "italic"` - Makes the text italic.
+- `style: "underline"` - Makes the text underlined.
+- `style: "blinking"` - Makes the text blinking.
+- `style: "inverse"` - Inverts the text.
+- `style: "hidden"` - Hides the text.
+- `style: "strikethrough"` - Strikes through the text.
+##### Returns
+- `string` - The ANSI escape sequence.
+
+{/* RESET */}
+#### reset
+```luau
+stdio.reset(): string
+stdio.reset(reset: "weight" | "italic" | "underline" | "blinking" | "inverse" | "hidden" | "strikethrough" | "color"): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Resets the text style.
+##### Parameters
+- `reset: nil` - Resets All.
+- `reset: "weight"` - Resets the weight.
+- `reset: "italic"` - Resets the italic.
+- `reset: "underline"` - Resets the underline.
+- `reset: "blinking"` - Resets the blinking.
+- `reset: "inverse"` - Resets the inverse.
+- `reset: "hidden"` - Resets the hidden.
+- `reset: "strikethrough"` - Resets the strikethrough.
+- `reset: "color"` - Resets the color.
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* COLOR */}
+#### color
+```luau
+stdio.color(color: "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white" | "bblack" | "bred" | "bgreen" | "byellow" | "bblue" | "bmagenta" | "bcyan" | "bwhite"): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Generates color.
+##### Parameters
+- `color: "black"` - Makes the text black.
+- `color: "red"` - Makes the text red.
+- `color: "green"` - Makes the text green.
+- `color: "yellow"` - Makes the text yellow.
+- `color: "blue"` - Makes the text blue.
+- `color: "magenta"` - Makes the text magenta.
+- `color: "cyan"` - Makes the text cyan.
+- `color: "white"` - Makes the text white.
+- `color: "bblack"` - Makes the text bright black.
+- `color: "bred"` - Makes the text bright red.
+- `color: "bgreen"` - Makes the text bright green.
+- `color: "byellow"` - Makes the text bright yellow.
+- `color: "bblue"` - Makes the text bright blue.
+- `color: "bmagenta"` - Makes the text magenta.
+- `color: "bcyan"` - Makes the text bright cyan.
+- `color: "bwhite"` - Makes the text bright white.
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* BGCOLOR */}
+#### bgcolor
+```luau
+stdio.bgcolor(color: "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white" | "bblack" | "bred" | "bgreen" | "byellow" | "bblue" | "bmagenta" | "bcyan" | "bwhite"): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Generates background color.
+##### Parameters
+- `color: "black"` - Makes the background black.
+- `color: "red"` - Makes the background red.
+- `color: "green"` - Makes the background green.
+- `color: "yellow"` - Makes the background yellow.
+- `color: "blue"` - Makes the background blue.
+- `color: "magenta"` - Makes the background magenta.
+- `color: "cyan"` - Makes the background cyan.
+- `color: "white"` - Makes the background white.
+- `color: "bblack"` - Makes the background bright black.
+- `color: "bred"` - Makes the background bright red.
+- `color: "bgreen"` - Makes the background bright green.
+- `color: "byellow"` - Makes the background bright yellow.
+- `color: "bblue"` - Makes the background bright blue.
+- `color: "bmagenta"` - Makes the background magenta.
+- `color: "bcyan"` - Makes the background bright cyan.
+- `color: "bwhite"` - Makes the background bright white.
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* COLOR256 */}
+#### color256
+```luau
+stdio.color256(code: number): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Generates color with a 256 color code.
+##### Parameters
+- `code: number` - The color code.
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* BGCOLOR256 */}
+#### bgcolor256
+```luau
+stdio.bgcolor256(code: number): string
+```
+Generates background color with a 256 color code.
+##### Parameters
+- `code: number` - The color code.
+##### Returns
+- `string` - The ANSI escape sequence.
+
+{/* TRUECOLOR */}
+#### trueColor
+```luau
+stdio.trueColor(r: number, g: number, b: number): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Generates true color.
+##### Parameters
+- `r: number` - The red value (0-255).
+- `g: number` - The green value (0-255).
+- `b: number` - The blue value (0-255).
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* BGTRUECOLOR */}
+#### bgtrueColor
+```luau
+stdio.bgtrueColor(r: number, g: number, b: number): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Generates background true color.
+##### Parameters
+- `r: number` - The red value (0-255).
+- `g: number` - The green value (0-255).
+- `b: number` - The blue value (0-255).
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* WRITEOUT */}
+#### writeOut
+```luau
+stdio.writeOut(text: string): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Writes to stdout.
+##### Parameters
+- `text: string` - The text to write.
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If the output fails to write, an error will be thrown.
+
+{/* WRITEERR */}
+#### writeErr
+```luau
+stdio.writeErr(text: string): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Writes to stderr.
+##### Parameters
+- `text: string` - The text to write.
+##### Returns
+- `string` - The ANSI escape sequence.
+##### Throws
+- If the output fails to write, an error will be thrown.
+
+{/* READIN */}
+#### readIn
+```luau
+stdio.readIn(amount: number?): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Reads from stdin.
+##### Parameters
+- `amount: number` - The amount of bytes to read (Nil reads all).
+##### Returns
+- `string` - The input.
+##### Throws
+- If the input fails to read, an error will be thrown.
+- If out of memory, an error will be thrown.

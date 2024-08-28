@@ -1,0 +1,11 @@
+{
+  "globals": "Globals",
+  "fs": "FileSystem",
+  "process": "Process",
+  "testing": "Testing",
+  "task": "Task",
+  "net": "Network",
+  "luau": "Luau",
+  "serde": "Serde",
+  "stdio": "Stdio"
+}

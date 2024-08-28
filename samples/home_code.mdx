@@ -1,0 +1,78 @@
+import { Tabs } from 'nextra/components'
+
+### Run Luau on your machine
+<Tabs items={['Hello World', 'Process', 'Server', 'Testing']}>
+  <Tabs.Tab>
+```luau copy showLineNumbers filename="hello_world.luau"
+print("Hello World!")
+```
+```sh
+$ zune run hello_world
+```
+```ansi
+Hello World!
+```
+  </Tabs.Tab>
+  <Tabs.Tab>
+```luau copy showLineNumbers filename="os_arch.luau"
+local process = require("@zcore/process")
+
+print(process.os) -- <Operating System>
+print(process.arch) -- <CPU Architecture>
+```
+```sh
+$ zune run os_arch
+```
+```ansi
+Linux
+x86_64
+```
+  </Tabs.Tab>
+  <Tabs.Tab>
+```luau copy showLineNumbers filename="server.luau"
+local net = require("@zcore/net")
+
+local ok, serverHandle = net.serve({
+     port = 8080,
+     request = function(req)
+          return "Hello!";
+     end
+})
+
+-- Check if the server started successfully
+assert(ok, serverHandle)
+
+print("Http Server Running.")
+```
+```sh
+$ zune run server
+```
+```ansi
+Http Server Running.
+```
+  </Tabs.Tab>
+  <Tabs.Tab>
+```luau copy showLineNumbers filename="test_cases.luau"
+local testing = require("@zcore/testing")
+
+local describe = testing.describe
+local expect = testing.expect
+local test = testing.test
+
+describe("Scope", function()
+    test("Case", function()
+        expect(1).toBe(1);
+    end)
+end)
+```
+```sh
+$ zune test test_cases
+```
+```ansi
+[1;32mPASS[0m [2mScope [0m([1mCase[0m) [2m[0ms][0m
+
+[1mTests[0m: 1 total
+[1mTime[0m:  0.001 s
+```
+  </Tabs.Tab>
+</Tabs>

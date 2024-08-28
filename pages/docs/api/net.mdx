@@ -1,0 +1,239 @@
+## Network
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
+
+### Functions
+1. [serve](#serve)
+2. [request](#request)
+3. [websocket](#websocket)
+
+## Functions
+{/* SERVE */}
+#### serve
+```luau
+net.serve(options: ServeOptions): (boolean, string | NetServerHandle)
+```
+Starts a server on the specified port.
+##### Parameters
+- `options:`[`ServeOptions?`](#serveoptions) - The options for the server.
+##### Returns
+- `boolean` - Whether the server started successfully.
+- `string` | [`NetServerHandle`](#netserverhandle) - The error message, or the server handle.
+
+{/* REQUEST */}
+#### request
+```luau
+net.request(host: string, options: RequestOptions?): (boolean, string | Response)
+```
+Makes a request to the specified host.
+
+Optional options, defaults to GET request.
+
+*TLS is supported*.
+##### Parameters
+- `host: string` - The host to make the request to.
+- `options:`[`RequestOptions?`](#requestoptions) - The options for the request.
+
+{/* WEBSOCKET */}
+#### websocket
+```luau
+net.websocket(host: string, protocols: {string}?): (boolean, string | NetClientWebSocket)
+```
+Creates a websocket client.
+
+*TLS is not supported, yet.*
+##### Parameters
+- `host: string` - The host to connect to.
+- `protocols: {string}?` - The protocols to use.
+##### Returns
+- `boolean` - Whether the connection was successful.
+- `string` | [`NetClientWebSocket`](#netclientwebsocket) - The error message, or the websocket handle.
+
+## Types
+{/* SERVERREQUEST */}
+#### ServerRequest
+```luau copy
+export type ServerRequest = {
+    method : string,
+    path : string,
+    headers : {[string] : string},
+    body : string,
+}
+```
+
+{/* SERVERRESPONSE */}
+#### ServerResponse
+```luau copy
+export type ServerResponse = string | {
+    status : number,
+    headers : {[string] : string},
+    body : string,
+}
+```
+
+{/* NETWEBSOCKET */}
+#### NetWebSocket
+```luau copy
+export type NetWebSocket = userdata<{
+     --[[
+        Whether the websocket is connected.
+    ]]
+    connected : boolean,
+     --[[
+        Sends a message to the websocket.
+    ]]
+    send : (self: NetWebSocket, message: string) -> (),
+     --[[
+        Closes the websocket.
+    ]]
+    close : (self: NetWebSocket) -> (),
+}>
+```
+
+{/* NETCLIENTWEBSOCKET */}
+#### NetClientWebSocket
+```luau copy
+export type NetClientWebSocket = NetWebSocket & userdata<{
+     --[[
+        Binds a function to the open event.
+        
+        *Only one function can be bound at a time*.
+    ]]
+     bindOpen : (self: NetClientWebSocket, func: () -> ()) -> (),
+     --[[
+        Binds a function to the message event.
+
+        *Only one function can be bound at a time*.
+    ]]
+     bindMessage : (self: NetClientWebSocket, func: (message: string) -> ()) -> (),
+     --[[
+        Binds a function to the close event.
+
+        *Only one function can be bound at a time*.
+    ]]
+     bindClose : (self: NetClientWebSocket, func: () -> ()) -> (),
+}>
+```
+
+{/* SERVERWEBSOCKETHANDLERS */}
+#### ServerWebSocketHandlers
+```luau copy
+export type ServerWebSocketHandlers = {
+    --[[
+        Function to check if the request should be upgraded to a websocket.
+        Should return true if the request should be upgraded.
+        @return boolean
+    ]]
+    upgrade : ((request: ServerRequest) -> boolean)?,
+
+    --[[
+        A function event for when a websocket is opened.
+        
+        *`WebSocket` class will keep the same reference per connection*.
+    ]]
+    open : ((websocket: NetWebSocket) -> ())?,
+    --[[
+        A function event for when a websocket receives a message.
+
+        *`WebSocket` class will keep the same reference per connection*.
+    ]]
+    message : ((websocket: NetWebSocket, message: string) -> ())?,
+    --[[
+        A function event for when a websocket is closed.
+
+        *`WebSocket` class will keep the same reference per connection*.
+    ]]
+    close : ((websocket: NetWebSocket) -> ())?,
+};
+```
+
+{/* SERVEOPTIONS */}
+#### ServeOptions
+```luau copy
+export type ServeOptions = {
+    --[[
+        The port to bind to.
+    ]]
+    port : number,
+
+    --[[
+        The address to bind to.
+        - Default: `0.0.0.0`
+    ]]
+    address : string?,
+
+    --[[
+        Whether to reuse the address.
+        - Useful for multi-threaded servers.
+        
+        Default: `false`
+    ]]
+    reuseAddress : boolean?,
+
+    --[[
+        The function to handle requests.
+    ]]
+    request : (request: ServerRequest) -> ServerResponse,
+
+    --[[
+        Functions to handle websockets.
+    ]]
+    webhook : ServerWebSocketHandlers?,
+}
+```
+
+{/* BAREREQUESTOPTIONS */}
+#### BareRequestOptions
+```luau copy
+type BareRequestOptions = {
+    method : "GET",
+    headers : {[string] : string}?,
+
+    --[[
+        Whether to follow redirects.
+        - Default: `true`
+    ]]
+    allowRedirects : boolean?,
+}
+```
+
+{/* BODYREQUESTOPTIONS */}
+#### BodyRequestOptions
+```luau copy
+type BodyRequestOptions = {
+    method : "POST" | "PUT" | "DELETE",
+    headers : {[string] : string}?,
+    body : string,
+}
+```
+
+{/* REQUESTOPTIONS */}
+#### RequestOptions
+```luau copy
+export type RequestOptions = BareRequestOptions & BodyRequestOptions
+```
+
+{/* NETSERVERHANDLE */}
+#### NetServerHandle
+```luau copy
+export type NetServerHandle = userdata<{
+     --[[
+        Closes the server.
+    ]]
+    close : (self: NetServerHandle) -> (),
+}>
+```
+
+{/* RESPONSE */}
+#### Response
+```luau copy
+export type Response = {
+    ok : boolean,
+    statusCode : number,
+    statusReason : string,
+    headers : {[string] : string},
+    body : string,
+}
+```

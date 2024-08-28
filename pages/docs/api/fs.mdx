@@ -1,0 +1,354 @@
+## File System
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
+
+A built-in module that provides access to the file system.
+### Functions
+1. [readFile](#readfile)
+2. [readDir](#readdir)
+3. [writeFile](#writefile)
+4. [writeDir](#writedir)
+5. [removeFile](#removefile)
+6. [removeDir](#removedir)
+7. [metadata](#metadata)
+8. [isFile](#isfile)
+9. [isDir](#isdir)
+10. [move](#move`)
+11. [copy](#copy)
+12. [symlink](#symlink)
+
+## Functions
+{/* READFILE */}
+#### readFile
+```luau
+fs.readFile(path: string, useBuffer: boolean?): (boolean, string | buffer | FileReadError)
+```
+##### Parameters
+- `path: string` - The path to the file to read.
+- `useBuffer: boolean` - If true, the function will return a `buffer` instead of a `string`.
+  - Default: `false`
+##### Returns
+- `boolean` - If the operation was successful.
+- `string` | `buffer` | [`FileReadError`](#filereaderror) - The content of the file or an error.
+
+{/* READDIR */}
+#### readDir
+```luau
+fs.readDir(path: string): (boolean, { string } | string)
+```
+##### Parameters
+- `path: string` - The path to the directory to read.
+##### Returns
+- `boolean` - If the operation was successful.
+- `{ string }` | `string` - The content of the directory or an error.
+
+{/* WRITEFILE */}
+#### writeFile
+```luau
+fs.writeFile(path: string, contents: buffer | string): (boolean, FileWriteError?)
+```
+##### Parameters
+- `path: string` - The path to the file to write.
+- `contents: buffer | string` - The content to write to the file (This may be limited to the max luau `string`).
+##### Returns
+- `boolean` - If the operation was successful.
+- [`FileWriteError?`](#filewriteerror) - An error if the operation failed.
+
+{/* WRITEDIR */}
+#### writeDir
+```luau
+fs.writeDir(path: string, recursive: boolean?): (boolean, DirWriteError?)
+```
+##### Parameters
+- `path: string` - The path to the directory to write.
+- `recursive: boolean` - If true, the function will create the directory and all parent directories.
+  - Default: `false`
+##### Returns
+- `boolean` - If the operation was successful.
+- [`DirWriteError?`](#dirwriteerror) - An error if the operation failed.
+
+{/* REMOVEFILE */}
+#### removeFile
+```luau
+fs.removeFile(path: string): (boolean, FileRemoveError?)
+```
+##### Parameters
+- `path: string` - The path to the file to remove.
+##### Returns
+- `boolean` - If the operation was successful.
+- [`FileRemoveError?`](#fileremoveerror) - An error if the operation failed.
+
+{/* REMOVEDIR */}
+#### removeDir
+```luau
+fs.removeDir(path: string, recursive: boolean?): (boolean, DirRemoveError?)
+```
+##### Parameters
+- `path: string` - The path to the directory to remove.
+- `recursive: boolean` - If true, the function will remove the directory and all its contents.
+  - Default: `false`
+##### Returns
+- `boolean` - If the operation was successful.
+- [`DirRemoveError?`](#dirremoveerror) - An error if the operation failed.
+
+{/* METADATA */}
+#### metadata
+```luau
+fs.metadata(path: string): (boolean, Metadata? | MetadataError)
+```
+##### Parameters
+- `path: string` - The path to the file or directory to get metadata from.
+##### Returns
+- `boolean` - If the operation was successful.
+- [`Metadata?`](#metadata) | [`MetadataError`](#metadataerror)- The metadata of the file or directory, or error, or nil.
+
+{/* ISFILE */}
+#### isFile
+```luau
+fs.isFile(path: string): boolean
+```
+##### Parameters
+- `path: string` - The path to the file to check.
+##### Returns
+- `boolean` - If the path is a file.
+
+{/* ISDIR */}
+#### isDir
+```luau
+fs.isDir(path: string): boolean
+```
+##### Parameters
+- `path: string` - The path to the directory to check.
+##### Returns
+- `boolean` - If the path is a directory.
+
+{/* MOVE */}
+#### move
+```luau
+fs.move(from: string, to: string, overwrite: boolean?): (boolean, MoveError?)
+```
+##### Parameters
+- `from: string` - The path to the file or directory to move.
+- `to: string` - The path to move the file or directory to.
+- `overwrite: boolean` - If true, the function will overwrite the file if it exists.
+  - Default: `false`
+##### Returns
+- `boolean` - If the operation was successful.
+- [`MoveError?`](#moverror) - An error if the operation failed.
+
+{/* COPY */}
+#### copy
+```luau
+fs.copy(from: string, to: string, overwrite: boolean?): (boolean, CopyError?)
+```
+##### Parameters
+- `from: string` - The path to the file or directory to copy.
+- `to: string` - The path to copy the file or directory to.
+- `overwrite: boolean` - If true, the function will overwrite the file if it exists.
+  - Default: `false`
+##### Returns
+- `boolean` - If the operation was successful.
+- [`CopyError?`](#copyerror) - An error if the operation failed.
+
+{/* SYMLINK */}
+#### symlink
+```luau
+fs.symlink(from: string, to: string): (boolean, SymlinkError?)
+```
+<Callout type="error" emoji="️🚫">Windows: Not Supported</Callout>
+##### Parameters
+- `from: string` - The path to the file or directory to link.
+- `to: string` - The path to link the file or directory to.
+##### Returns
+- `boolean` - If the operation was successful.
+- [`SymlinkError?`](#symlinkerror) - An error if the operation failed.
+  - Windows: Always returns `"NotSupported"`.
+
+
+## Types
+{/* IOError */}
+#### IOError
+```luau copy
+type IOError = "AccessDenied"
+| "FileNotFound"
+| "UnknownError"
+```
+
+{/* DISKERROR */}
+#### DiskError
+```luau copy
+type DiskError = "DiskQuotaExceeded"
+```
+
+{/* FILEERROR */}
+#### FileError
+```luau copy
+type FileError = "Aborted"
+```
+
+{/* DEVICEERROR */}
+#### DeviceError
+```luau copy
+type DeviceError = "Busy"
+```
+
+{/* READERROR */}
+#### ReadError
+```luau copy
+type ReadError = "OutOfMemory"
+```
+
+{/* NETWORKERROR */}
+#### NetworkError
+```luau copy
+type NetworkError = "NetworkNotFound"
+```
+
+{/* ENCODINGERROR */}
+#### EncodingError
+```luau copy
+type EncodingError = "InvalidUtf-8"
+| "InvalidWtf-8"
+```
+
+{/* FILEREADERROR */}
+#### FileReadError
+```luau copy
+export type FileReadError = IOError
+| FileError
+| DeviceError
+| ReadError
+| "NotFile"
+| "NotOpenForReading"
+| "FailedToCreateBuffer"
+```
+
+{/* FILEWRITEERROR */}
+#### FileWriteError
+```luau copy
+export type FileWriteError = IOError
+| DiskError
+| FileError
+| DeviceError
+| "TooBig"
+| "OutOfSpace"
+| "Locked"
+| "NotOpenForWriting"
+| "FailedToWriteBuffer"
+```
+
+{/* DIRWRITEERROR */}
+#### DirWriteError
+```luau copy
+export type DirWriteError = IOError
+| DiskError
+| NetworkError
+| EncodingError
+| "BadName"
+| "TooLong"
+| "SymbolicLinkLoop"
+| "PathAlreadyExists"
+| "SymbolicLinkQuotaExceeded"
+```
+
+{/* FILEREMOVEERROR */}
+#### FileRemoveError
+```luau copy
+export type FileRemoveError = IOError
+| DeviceError
+| "NotFile"
+```
+
+{/* DIRREMOVEERROR */}
+#### DirRemoveError
+```luau copy
+export type DirRemoveError = IOError
+| DeviceError
+| "NotDirectory"
+| "DirNotEmpty"
+```
+
+{/* METADATAERROR */}
+#### MetadataError
+```luau copy
+export type MetadataError = IOError
+| DeviceError
+```
+
+{/* METADATAKIND */}
+#### MetadataKind
+```luau copy
+export type MetadataKind = "file"
+	| "dir"
+	| "symlink"
+	| "door"
+	| "character_device"
+	| "unix_domain_socket"
+	| "block_device"
+	| "event_port"
+	| "named_pipe"
+	| "whiteout"
+	| "unknown"
+```
+
+{/* METADATA */}
+#### Metadata
+```luau copy
+export type Metadata = {
+	kind : MetadataKind,
+	symlink : boolean,
+	createdAt : number,
+	modifiedAt : number,
+	accessedAt : number,
+	size : number,
+	permissions : {
+		readOnly : boolean,
+	},
+}
+```
+
+{/* MOVEERROR */}
+#### MoveError
+```luau copy
+export type MoveError = IOError
+| DeviceError
+| DiskError
+| NetworkError
+| EncodingError
+| "NotFile"
+| "NotDirectory"
+| "PathAlreadyExists"
+| "DirNotEmpty"
+| "SymbolicLinkLoop"
+| "SharingViolation"
+| "TooLong"
+| "AntivirusInterference"
+| "BadName"
+```
+
+{/* COPYERROR */}
+#### CopyError
+```luau copy
+export type CopyError = IOError
+| DeviceError
+```
+
+{/* SYMLINKERROR */}
+#### SymlinkError
+```luau copy
+export type SymlinkError = IOError
+| DiskError
+| EncodingError
+| NetworkError
+| "TooLong"
+| "PathAlreadyExists"
+| "BadName"
+| "NotDirectory"
+| "OutOfSpace"
+| "SymbolicLinkLoop"
+| "NotDirectory"
+| "NotFile"
+| "NotSupported"
+```

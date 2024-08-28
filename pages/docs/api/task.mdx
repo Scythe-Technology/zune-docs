@@ -1,0 +1,106 @@
+## Task
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
+
+A built-in library to access the task scheduler.
+
+Task scheduler is designed to be similar to Roblox's task scheduler.
+
+### Functions
+1. [cancel](#cancel)
+2. [defer](#defer)
+3. [delay](#delay)
+4. [spawn](#spawn)
+5. [wait](#wait)
+6. [count](#count)
+
+## Functions
+{/* CANCEL */}
+#### cancel
+```luau
+task.cancel(thread: thread): ()
+```
+Cancels a task.
+##### Parameters
+- `thread: thread` - The thread to cancel.
+
+{/* DEFER */}
+#### defer
+```luau
+task.defer<A..., R...>(f: ((A...) -> R...) | thread, A...): thread
+```
+Defers a task.
+
+Runs on next frame.
+##### Parameters
+- `f: ((A...) -> R...) | thread` - The function to defer.
+- `A...` - The arguments to pass to the function.
+##### Returns
+- `thread`
+
+{/* DELAY */}
+#### delay
+```luau
+task.delay<A..., R...>(sec: number, f: ((A...) -> (R...)) | thread, A...): thread
+```
+Delays a task.
+
+Runs after a certain amount of time.
+##### Parameters
+- `sec: number` - The amount of time to delay.
+- `f: ((A...) -> (R...)) | thread` - The function to delay.
+- `A...` - The arguments to pass to the function.
+##### Returns
+- `thread`
+
+{/* SPAWN */}
+#### spawn
+```luau
+task.spawn<A..., R...>(f: ((A...) -> (R...)) | thread, A...): thread
+```
+Spawns a task.
+
+Runs immediately.
+##### Parameters
+- `f: ((A...) -> (R...)) | thread` - The function to spawn.
+- `A...` - The arguments to pass to the function.
+##### Returns
+- `thread`
+
+{/* WAIT */}
+#### wait
+```luau
+task.wait(sec: number?): number
+```
+Sleeps task.
+
+Yields caller.
+Resumes after a certain amount of time.
+##### Parameters
+- `sec: number` - The amount of time to wait.
+  - Default: `0`
+##### Returns
+- `number` - The amount of time waited.
+
+{/* COUNT */}
+#### count
+```luau
+task.count(): number
+task.count(kinds: string?): ...number
+```
+Counts the number of tasks.
+
+Optional kinds parameter to count a specific kind of task.
+
+Kinds:
+- `s` to count sleeping tasks.
+- `d` to count deferred tasks.
+- `w` to count awaiting tasks. (Zune backend)
+- `t` to count internal tasks. (Zune backend)
+##### Parameters
+- `kinds: string?` - The kinds of tasks to count.
+  - Default: `nil`
+##### Returns
+- `number` | `...number` - The number of tasks.

@@ -1,0 +1,137 @@
+## Testing
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
+
+A built-in testing suite for Luau.
+
+### Properties
+1. [running](#running)
+2. [_FAILED](#_failed) *&lt;hidden&gt;*
+3. [_COUNT](#_count) *&lt;hidden&gt;*
+4. [_START](#_start) *&lt;hidden&gt;*
+
+### Functions
+1. [test](#test)
+2. [describe](#describe)
+3. [defer](#defer)
+4. [expect](#expect)
+5. [expected](#expected)
+5. [expectEqual](#expectEqual)
+
+## Properties
+{/* RUNNING */}
+#### running
+```luau
+running: boolean
+```
+Whether the testing suite is running.
+{/* _FAILED */}
+#### _FAILED
+```luau
+_FAILED: number
+```
+[Internal]
+
+The number of tests that have failed.
+
+{/* _COUNT */}
+#### _COUNT
+```luau
+_COUNT: number
+```
+[Internal]
+
+The number of tests conducted.
+
+{/* _START */}
+#### _START
+```luau
+_START: number
+```
+[Internal]
+
+The time the testing suite started. Based on `os.clock()`.
+
+## Functions
+{/* TEST */}
+#### test
+```luau
+testing.test(name: string, callback: () -> ()): ()
+```
+<Callout type="info" emoji="ℹ️">When the test suite is not running, the function will do nothing.</Callout>
+
+Conducts a test.
+##### Parameters
+- `name: string` - The name of the test.
+- `callback: () -> ()` - The function to run the test.
+  - The function should throw an error if the test fails.
+
+{/* DESCRIBE */}
+#### describe
+```luau
+testing.describe(name: string, callback: () -> ()): ()
+```
+<Callout type="info" emoji="ℹ️">When the test suite is not running, the function will do nothing.</Callout>
+
+Describes a test suite.
+##### Parameters
+- `name: string` - The name of the test suite.
+- `callback: () -> ()` - The function to run the test suite.
+  - The function should not error, and should call test functions.
+  - If the function does error, it will still count as a fail.
+
+{/* DEFER */}
+#### defer
+```luau
+testing.defer(fn: () -> ()): ()
+```
+Defers a function.
+
+Deferred function will be executed after a test completes.
+Useful for cleaning up resources.
+##### Parameters
+- `fn: () -> ()` - The function to defer.
+
+{/* EXPECT */}
+#### expect
+```luau
+testing.expect(value: any): ExpectCases | FunctionalCases
+```
+##### Parameters
+- `value: any` - The value to test.
+##### Returns
+- [`ExpectCases`](#expectcases) | [`FunctionalCases`](#functionalcases) - The object to test the value.
+
+{/* EXPECTED */}
+#### expected
+```luau
+testing.expected(value: any): ()
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Expects a value to be true or non nil.
+
+Similar to `assert(value)`
+##### Parameters
+- `value: any` - The value to expect.
+  - If the value is `false`, the test will fail.
+##### Throws
+- If the function fails, an error will be thrown.
+
+{/* EXPECTEQUAL */}
+#### expectEqual
+```luau
+testing.expectEqual(expected: any, value: any): ()
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Expects a value to equal another.
+
+Similar to `assert(value == expected, ...)`
+##### Parameters
+- `expected: any` - The expected value.
+- `value: any` - The value to test.
+##### Throws
+- If the function fails, an error will be thrown.
