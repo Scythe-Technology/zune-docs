@@ -10,7 +10,7 @@ export default {
     const { theme } = useTheme()
     return <Image src={theme === "light" ? "https://raw.githubusercontent.com/Scythe-Technology/zune-docs/master/public/logo-light.svg" : "https://raw.githubusercontent.com/Scythe-Technology/zune-docs/master/public/logo-dark.svg"} className="text-center block m-auto" width={128} height={48} />
   },
-  docsRepositoryBase: "https://github.com/Scythe-Technology/zune-docs/blob/main",
+  docsRepositoryBase: "https://github.com/Scythe-Technology/zune-docs/blob/master",
   project: {
     link: 'https://github.com/Scythe-Technology/Zune'
   },
