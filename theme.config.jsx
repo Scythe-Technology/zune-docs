@@ -2,15 +2,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ThemeSwitch, useTheme } from 'nextra-theme-docs';
 
-import { Navbar } from './components/navbar';
-
 /**
  * @type {import('nextra-theme-docs').DocsThemeConfig}
  */
 export default {
   logo: () => {
     const { theme } = useTheme()
-    return <Image src={theme === "light" ? "/zune-docs/logo-light.svg" : "/zune-docs/logo-dark.svg"} className="text-center block m-auto" width={128} height={48} />
+    return <Image src={theme === "light" ? "https://raw.githubusercontent.com/Scythe-Technology/zune-docs/master/public/logo-light.svg" : "https://raw.githubusercontent.com/Scythe-Technology/zune-docs/master/public/logo-dark.svg"} className="text-center block m-auto" width={128} height={48} />
   },
   docsRepositoryBase: "https://github.com/Scythe-Technology/zune-docs/blob/main",
   project: {
@@ -21,7 +19,6 @@ export default {
   },
   darkMode: true,
   navbar: {
-    component: Navbar,
     extraContent: (
       <ThemeSwitch lite={true} className='theme-toggle-button' />
     )
@@ -39,7 +36,7 @@ export default {
   },
   head: (
     <>
-      <link rel="icon" href="/zune-docs/logo.svg" />
+      <link rel="icon" href="https://raw.githubusercontent.com/Scythe-Technology/zune-docs/master/public/logo.svg" />
     </>
   ),
   useNextSeoProps() {
