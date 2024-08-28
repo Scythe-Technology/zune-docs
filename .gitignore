@@ -1,7 +1,10 @@
 node_modules
 package-lock.json
 bun.lockb
+
+#Next.js build output
 /.next
+out/
 
 #Nix Environment
 shell.nix

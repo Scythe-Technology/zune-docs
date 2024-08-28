@@ -29,5 +29,10 @@ export default nextra({
     }
   }
 })({
+  images: {
+    unoptimized: true,
+  },
   reactStrictMode: true,
+  output: 'export',
+  basePath: '/pages',
 })
