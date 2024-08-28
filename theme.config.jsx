@@ -10,7 +10,7 @@ import { Navbar } from './components/navbar';
 export default {
   logo: () => {
     const { theme } = useTheme()
-    return <Image src={theme === "light" ? "/logo-light.svg" : "/logo-dark.svg"} className="text-center block m-auto" width={128} height={48} />
+    return <Image src={theme === "light" ? "/zune-docs/logo-light.svg" : "/zune-docs/logo-dark.svg"} className="text-center block m-auto" width={128} height={48} />
   },
   docsRepositoryBase: "https://github.com/Scythe-Technology/zune-docs/blob/main",
   project: {
@@ -39,7 +39,7 @@ export default {
   },
   head: (
     <>
-      <link rel="icon" href="/logo.svg" />
+      <link rel="icon" href="/zune-docs/logo.svg" />
     </>
   ),
   useNextSeoProps() {
