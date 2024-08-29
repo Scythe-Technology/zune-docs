@@ -22,7 +22,25 @@ for the rest of the globals.
 _VERSION: string
 ```
 The version of the Luau runtime.
-In Zune, this should idealy be `Zune #.#.#+###` where `#` is a number.
+In Zune, this should idealy be
+
+`Zune <zune version>+<luau version>`
+
+`Zune <major>.<minor>.<patch>+<major>.<minor>`
+
+Example: `Zune 0.1.0+0.640`
+
+The following code example shows how to detect if zune is running and provide the Zune version with the Luau version.
+```luau filename="detect_zune.lua" showLineNumbers
+local pattern = "(Zune) (%d+%.%d+%.%d+)+(%d+%.%d+)"
+
+local isZune, zuneVersion, luauVersion = string.match(_VERSION, pattern)
+
+if (isZune) then
+    print(`Zune Version: {zuneVersion}`)
+    print(`Luau Version: {luauVersion}`)
+end
+```
 
 {/* _FILE */}
 #### _FILE
