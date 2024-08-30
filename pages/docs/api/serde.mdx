@@ -4,7 +4,7 @@ import { Callout } from 'nextra/components'
 
 <Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
 
-### Properties
+### Namespaces
 1. [json](#json)
 2. [toml](#toml)
 3. [yaml](#yaml)
@@ -12,70 +12,15 @@ import { Callout } from 'nextra/components'
 5. [zlib](#zlib)
 6. [lz4](#lz4)
 
-### Functions
+---
+{/* JSON */}
+### json
+
+#### Functions
 1. [json.encode](#jsonencode)
 2. [json.decode](#jsondecode)
-3. [toml.encode](#tomlencode)
-4. [toml.decode](#tomldecode)
-5. [yaml.encode](#yamlencode)
-6. [yaml.decode](#yamldecode)
-7. [gzip.compress](#gzipcompress)
-8. [gzip.decompress](#gzipdecompress)
-9. [zlib.compress](#zlibcompress)
-10. [zlib.decompress](#zlibdecompress)
-11. [lz4.compress](#lz4compress)
-12. [lz4.decompress](#lz4decompress)
 
-## Properties
-{/* JSON */}
-#### json
-```luau
-serde.json: {
-    encode: (value: any) -> string,
-    decode: (json: string) -> any,
-}
-```
-
-{/* TOML */}
-#### toml
-```luau
-serde.toml: {
-    encode: (object: {[string]: any}) -> string,
-    decode: (toml: string) -> {[string]: any},
-}
-```
-
-{/* YAML */}
-#### yaml
-```luau
-serde.yaml: {
-    encode: (object: {[string]: any}) -> string,
-    decode: (yaml: string) -> {[string]: any},
-}
-```
-
-{/* GZIP */}
-#### gzip
-```luau
-serde.gzip: GenericCompressor
-```
-[`GenericCompressor`](#genericcompressor)
-
-{/* ZLIB */}
-#### zlib
-```luau
-serde.zlib: GenericCompressor
-```
-[`GenericCompressor`](#genericcompressor)
-
-{/* LZ4 */}
-#### lz4
-```luau
-serde.lz4: GenericCompressor
-```
-[`GenericCompressor`](#genericcompressor)
-
-## Functions
+---
 {/* JSON.ENCODE */}
 #### json.encode
 ```luau
@@ -106,6 +51,15 @@ Decodes JSON
 ##### Throws
 - If the JSON is invalid, an error will be thrown.
 
+---
+{/* TOML */}
+### toml
+
+#### Functions
+1. [toml.encode](#tomlencode)
+2. [toml.decode](#tomldecode)
+
+---
 {/* TOML.ENCODE */}
 #### toml.encode
 ```luau
@@ -136,6 +90,15 @@ Decodes TOML
 ##### Throws
 - If the TOML is invalid, an error will be thrown.
 
+---
+{/* YAML */}
+### yaml
+
+#### Functions
+1. [yaml.encode](#yamlencode)
+2. [yaml.decode](#yamldecode)
+
+---
 {/* YAML.ENCODE */}
 #### yaml.encode
 ```luau
@@ -166,6 +129,16 @@ Decodes YAML
 ##### Throws
 - If the YAML is invalid, an error will be thrown.
 
+---
+{/* GZIP */}
+### gzip
+[`GenericCompressor`](#genericcompressor)
+
+#### Functions
+1. [gzip.encode](#gzipencode)
+2. [gzip.decode](#gzipdecode)
+
+---
 {/* GZIP.COMPRESS */}
 #### gzip.compress
 ```luau
@@ -198,6 +171,16 @@ Decompresses a string.
 ##### Throws
 - If the decompression fails, an error will be thrown.
 
+---
+{/* ZLIB */}
+### zlib
+[`GenericCompressor`](#genericcompressor)
+
+#### Functions
+1. [zlib.encode](#zlibencode)
+2. [zlib.decode](#zlibdecode)
+
+---
 {/* ZLIB.COMPRESS */}
 #### zlib.compress
 ```luau
@@ -230,6 +213,16 @@ Decompresses a string.
 ##### Throws
 - If the decompression fails, an error will be thrown.
 
+---
+{/* LZ4 */}
+### lz4
+[`GenericCompressor`](#genericcompressor)
+
+#### Functions
+1. [lz4.encode](#lz4encode)
+2. [lz4.decode](#lz4decode)
+
+---
 {/* LZ4.COMPRESS */}
 #### lz4.compress
 ```luau

@@ -1,0 +1,651 @@
+## Cryptography
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
+
+### Namespaces
+1. [hash](#hash)
+2. [hmac](#hmac)
+3. [password](#password)
+
+---
+{/* HASH */}
+### hash
+
+{/*
+type HashFn = (str: string) -> string;
+type HmacFn = (str: string, key: string) -> string;
+
+type HashAlgorithms<F> = {
+    sha1: F,
+    md5: F,
+    blake3: F,
+    sha2: {
+        sha224: F,
+        sha256: F,
+        sha384: F,
+        sha512: F,
+    },
+    sha3: {
+        sha3_224: F,
+        sha3_256: F,
+        sha3_384: F,
+        sha3_512: F,
+    },
+    blake2: {
+        b128: F,
+        b160: F,
+        b256: F,
+        b512: F,
+        s128: F,
+        s160: F,
+        s224: F,
+        s256: F,
+    },
+};
+
+*/}
+
+#### Namespaces
+1. [hash.sha2](#hashsha2)
+2. [hash.sha3](#hashsha3)
+3. [hash.blake2](#hashblake2)
+
+#### Functions
+1. [hash.md5](#hashmd5)
+2. [hash.sha1](#hashsha1)
+3. [hash.blake3](#hashblake3)
+
+---
+{/* HASH.MD5 */}
+#### hash.md5
+```luau
+crypto.hash.md5(str: string): string
+```
+Hashes a string using the MD5 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.SHA1 */}
+#### hash.sha1
+```luau
+crypto.hash.sha1(str: string): string
+```
+Hashes a string using the Sha1 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.BLAKE3 */}
+#### hash.blake3
+```luau
+crypto.hash.blake3(str: string): string
+```
+Hashes a string using the Blake3 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+---
+{/* HASH.SHA2 */}
+### hash.sha2
+
+#### Functions
+1. [hash.sha2.sha224](#hashsha2sha224)
+2. [hash.sha2.sha256](#hashsha2sha256)
+3. [hash.sha2.sha384](#hashsha2sha384)
+4. [hash.sha2.sha512](#hashsha2sha512)
+
+---
+{/* HASH.SHA2.SHA224 */}
+#### hash.sha2.sha224
+```luau
+crypto.hash.sha2.sha224(str: string): string
+```
+Hashes a string using the Sha2-Sha224 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.SHA2.SHA256 */}
+#### hash.sha2.sha256
+```luau
+crypto.hash.sha2.sha256(str: string): string
+```
+Hashes a string using the Sha2-Sha256 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.SHA2.SHA384 */}
+#### hash.sha2.sha384
+```luau
+crypto.hash.sha2.sha384(str: string): string
+```
+Hashes a string using the Sha2-Sha384 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.SHA2.SHA512 */}
+#### hash.sha2.sha512
+```luau
+crypto.hash.sha2.sha512(str: string): string
+```
+Hashes a string using the Sha2-Sha512 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+---
+{/* HASH.SHA3 */}
+### hash.sha3
+
+#### Functions
+1. [hash.sha3.sha3_224](#hashsha3sha3_224)
+2. [hash.sha3.sha3_256](#hashsha3sha3_256)
+3. [hash.sha3.sha3_384](#hashsha3sha3_384)
+4. [hash.sha3.sha3_512](#hashsha3sha3_512)
+
+---
+{/* HASH.SHA3.SHA3_224 */}
+#### hash.sha3.sha3_224
+```luau
+crypto.hash.sha3.sha3_224(str: string): string
+```
+Hashes a string using the Sha3-Sha3_224 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.SHA3.SHA3_256 */}
+#### hash.sha3.sha3_256
+```luau
+crypto.hash.sha3.sha3_256(str: string): string
+```
+Hashes a string using the Sha3-Sha3_256 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.SHA3.SHA3_384 */}
+#### hash.sha3.sha3_384
+```luau
+crypto.hash.sha3.sha3_384(str: string): string
+```
+Hashes a string using the Sha3-Sha3_384 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.SHA3.SHA3_512 */}
+#### hash.sha3.sha3_512
+```luau
+crypto.hash.sha3.sha3_512(str: string): string
+```
+Hashes a string using the Sha3-Sha3_512 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+---
+{/* HASH.BLAKE2 */}
+### hash.blake2
+
+#### Functions
+1. [hash.blake2.b128](#hashblake2b128)
+2. [hash.blake2.b160](#hashblake2b160)
+3. [hash.blake2.b256](#hashblake2b256)
+4. [hash.blake2.b512](#hashblake2b512)
+5. [hash.blake2.s128](#hashblake2s128)
+6. [hash.blake2.s160](#hashblake2s160)
+7. [hash.blake2.s224](#hashblake2s224)
+8. [hash.blake2.s256](#hashblake2s256)
+
+---
+{/* HASH.BLAKE2.B128 */}
+#### hash.blake2.b128
+```luau
+crypto.hash.blake2.b128(str: string): string
+```
+Hashes a string using the Blake2-B128 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.BLAKE2.B160 */}
+#### hash.blake2.b160
+```luau
+crypto.hash.blake2.b160(str: string): string
+```
+Hashes a string using the Blake2-B160 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.BLAKE2.B256 */}
+#### hash.blake2.b256
+```luau
+crypto.hash.blake2.b256(str: string): string
+```
+Hashes a string using the Blake2-B256 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.BLAKE2.B512 */}
+#### hash.blake2.b512
+```luau
+crypto.hash.blake2.b512(str: string): string
+```
+Hashes a string using the Blake2-B512 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.BLAKE2.S128 */}
+#### hash.blake2.s128
+```luau
+crypto.hash.blake2.s128(str: string): string
+```
+Hashes a string using the Blake2-S128 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.BLAKE2.S160 */}
+#### hash.blake2.s160
+```luau
+crypto.hash.blake2.s160(str: string): string
+```
+Hashes a string using the Blake2-S160 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.BLAKE2.S224 */}
+#### hash.blake2.s224
+```luau
+crypto.hash.blake2.s224(str: string): string
+```
+Hashes a string using the Blake2-S224 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HASH.BLAKE2.S256 */}
+#### hash.blake2.s256
+```luau
+crypto.hash.blake2.s256(str: string): string
+```
+Hashes a string using the Blake2-S256 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+##### Returns
+- `string` - The hashed string in hex.
+
+---
+{/* HMAC */}
+### hmac
+
+#### Namespaces
+1. [hmac.sha2](#hashsha2)
+2. [hmac.sha3](#hashsha3)
+3. [hmac.blake2](#hashblake2)
+
+#### Functions
+1. [hmac.md5](#hashmd5)
+2. [hmac.sha1](#hashsha1)
+3. [hmac.blake3](#hashblake3)
+
+---
+{/* HMAC.MD5 */}
+#### hmac.md5
+```luau
+crypto.hmac.md5(str: string, key: string): string
+```
+Hashes a string using the MD5 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.SHA1 */}
+#### hmac.sha1
+```luau
+crypto.hmac.sha1(str: string, key: string): string
+```
+Hashes a string using the Sha1 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.BLAKE3 */}
+#### hmac.blake3
+```luau
+crypto.hmac.blake3(str: string, key: string): string
+```
+Hashes a string using the Blake3 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+---
+{/* HMAC.SHA2 */}
+### hmac.sha2
+
+#### Functions
+1. [hmac.sha2.sha224](#hashsha2sha224)
+2. [hmac.sha2.sha256](#hashsha2sha256)
+3. [hmac.sha2.sha384](#hashsha2sha384)
+4. [hmac.sha2.sha512](#hashsha2sha512)
+
+---
+{/* HMAC.SHA2.SHA224 */}
+#### hmac.sha2.sha224
+```luau
+crypto.hmac.sha2.sha224(str: string, key: string): string
+```
+Hashes a string using the Sha2-Sha224 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.SHA2.SHA256 */}
+#### hmac.sha2.sha256
+```luau
+crypto.hmac.sha2.sha256(str: string, key: string): string
+```
+Hashes a string using the Sha2-Sha256 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.SHA2.SHA384 */}
+#### hmac.sha2.sha384
+```luau
+crypto.hmac.sha2.sha384(str: string, key: string): string
+```
+Hashes a string using the Sha2-Sha384 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.SHA2.SHA512 */}
+#### hmac.sha2.sha512
+```luau
+crypto.hmac.sha2.sha512(str: string, key: string): string
+```
+Hashes a string using the Sha2-Sha512 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+---
+{/* HMAC.SHA3 */}
+### hmac.sha3
+
+#### Functions
+1. [hmac.sha3.sha3_224](#hashsha3sha3_224)
+2. [hmac.sha3.sha3_256](#hashsha3sha3_256)
+3. [hmac.sha3.sha3_384](#hashsha3sha3_384)
+4. [hmac.sha3.sha3_512](#hashsha3sha3_512)
+
+---
+{/* HMAC.SHA3.SHA3_224 */}
+#### hmac.sha3.sha3_224
+```luau
+crypto.hmac.sha3.sha3_224(str: string, key: string): string
+```
+Hashes a string using the Sha3-Sha3_224 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.SHA3.SHA3_256 */}
+#### hmac.sha3.sha3_256
+```luau
+crypto.hmac.sha3.sha3_256(str: string, key: string): string
+```
+Hashes a string using the Sha3-Sha3_256 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.SHA3.SHA3_384 */}
+#### hmac.sha3.sha3_384
+```luau
+crypto.hmac.sha3.sha3_384(str: string, key: string): string
+```
+Hashes a string using the Sha3-Sha3_384 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.SHA3.SHA3_512 */}
+#### hmac.sha3.sha3_512
+```luau
+crypto.hmac.sha3.sha3_512(str: string, key: string): string
+```
+Hashes a string using the Sha3-Sha3_512 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+---
+{/* HMAC.BLAKE2 */}
+### hmac.blake2
+
+#### Functions
+1. [hmac.blake2.b128](#hashblake2b128)
+2. [hmac.blake2.b160](#hashblake2b160)
+3. [hmac.blake2.b256](#hashblake2b256)
+4. [hmac.blake2.b512](#hashblake2b512)
+5. [hmac.blake2.s128](#hashblake2s128)
+6. [hmac.blake2.s160](#hashblake2s160)
+7. [hmac.blake2.s224](#hashblake2s224)
+8. [hmac.blake2.s256](#hashblake2s256)
+
+---
+{/* HMAC.BLAKE2.B128 */}
+#### hmac.blake2.b128
+```luau
+crypto.hmac.blake2.b128(str: string, key: string): string
+```
+Hashes a string using the Blake2-B128 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.BLAKE2.B160 */}
+#### hmac.blake2.b160
+```luau
+crypto.hmac.blake2.b160(str: string, key: string): string
+```
+Hashes a string using the Blake2-B160 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.BLAKE2.B256 */}
+#### hmac.blake2.b256
+```luau
+crypto.hmac.blake2.b256(str: string, key: string): string
+```
+Hashes a string using the Blake2-B256 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.BLAKE2.B512 */}
+#### hmac.blake2.b512
+```luau
+crypto.hmac.blake2.b512(str: string, key: string): string
+```
+Hashes a string using the Blake2-B512 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.BLAKE2.S128 */}
+#### hmac.blake2.s128
+```luau
+crypto.hmac.blake2.s128(str: string, key: string): string
+```
+Hashes a string using the Blake2-S128 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.BLAKE2.S160 */}
+#### hmac.blake2.s160
+```luau
+crypto.hmac.blake2.s160(str: string, key: string): string
+```
+Hashes a string using the Blake2-S160 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.BLAKE2.S224 */}
+#### hmac.blake2.s224
+```luau
+crypto.hmac.blake2.s224(str: string, key: string): string
+```
+Hashes a string using the Blake2-S224 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* HMAC.BLAKE2.S256 */}
+#### hmac.blake2.s256
+```luau
+crypto.hmac.blake2.s256(str: string, key: string): string
+```
+Hashes a string using the Blake2-S256 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `key: string` - The key to hash with.
+##### Returns
+- `string` - The hashed string in hex.
+
+---
+{/* PASSWORD */}
+### password
+
+#### Functions
+1. [password.hash](#passwordhash)
+2. [password.verify](#passwordverify)
+
+---
+{/* PASSWORD.HASH */}
+#### password.hash
+```luau
+crypto.password.hash(str: string, options: PasswordOptions?): string
+```
+Hashes a string using the Argon2 algorithm.
+##### Parameters
+- `str: string` - The string to hash.
+- `options:`[`PasswordOptions?`](#passwordoptions) - The options for the hashing.
+##### Returns
+- `string` - The hashed string in hex.
+
+{/* PASSWORD.VERIFY */}
+#### password.verify
+```luau
+crypto.password.verify(str: string, hash: string): boolean
+```
+Verifies a string against a hash using the Argon2 algorithm.
+##### Parameters
+- `str: string` - The string to verify.
+- `hash: string` - The hash to verify against.
+##### Returns
+- `boolean` - Whether the string matches the hash.
+
+## Types
+
+### BcryptPasswordOptions
+```luau
+type BcryptPasswordOptions = {
+    --- Default: "argon2d"
+    algorithm: "bcrypt"?,
+    --[[
+        Default: 4
+        
+        Only between 4 and 31
+    ]]
+    cost: number?,
+}
+```
+
+### Argon2PasswordOptions
+```luau
+type Argon2PasswordOptions = {
+    --- Default: "argon2d"
+    algorithm: ("argon2d" | "argon2i" | "argon2id")?,
+    --- Default: 2
+    timeCost: number?,
+    --- Default: 65536
+    memoryCost: number?,
+}
+```
+
+### PasswordOptions
+```luau
+type PasswordOptions = BcryptPasswordOptions | Argon2PasswordOptions
+```
