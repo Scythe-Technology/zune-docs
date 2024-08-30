@@ -598,7 +598,7 @@ Hashes a string using the Blake2-S256 algorithm.
 ```luau
 crypto.password.hash(str: string, options: PasswordOptions?): string
 ```
-Hashes a string using the Argon2 algorithm.
+Hashes a string using the specified algorithm in options, or defaults to `argon2d`.
 ##### Parameters
 - `str: string` - The string to hash.
 - `options:`[`PasswordOptions?`](#passwordoptions) - The options for the hashing.
@@ -610,7 +610,7 @@ Hashes a string using the Argon2 algorithm.
 ```luau
 crypto.password.verify(str: string, hash: string): boolean
 ```
-Verifies a string against a hash using the Argon2 algorithm.
+Verifies a string against a hash using the algorithm encoded in the hash.
 ##### Parameters
 - `str: string` - The string to verify.
 - `hash: string` - The hash to verify against.
