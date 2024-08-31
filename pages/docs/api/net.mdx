@@ -13,14 +13,14 @@ import { Callout } from 'nextra/components'
 {/* SERVE */}
 #### serve
 ```luau
-net.serve(options: ServeOptions): (boolean, string | NetServerHandle)
+net.serve(options: ServeOptions): (boolean, string | ServerHandle)
 ```
 Starts a server on the specified port.
 ##### Parameters
 - `options:`[`ServeOptions?`](#serveoptions) - The options for the server.
 ##### Returns
 - `boolean` - Whether the server started successfully.
-- `string` | [`NetServerHandle`](#netserverhandle) - The error message, or the server handle.
+- `string` | [`ServerHandle`](#serverhandle) - The error message, or the server handle.
 
 {/* REQUEST */}
 #### request
@@ -39,7 +39,7 @@ Optional options, defaults to GET request.
 {/* WEBSOCKET */}
 #### websocket
 ```luau
-net.websocket(host: string, protocols: {string}?): (boolean, string | NetClientWebSocket)
+net.websocket(host: string, protocols: {string}?): (boolean, string | ClientWebSocket)
 ```
 Creates a websocket client.
 
@@ -49,7 +49,7 @@ Creates a websocket client.
 - `protocols: {string}?` - The protocols to use.
 ##### Returns
 - `boolean` - Whether the connection was successful.
-- `string` | [`NetClientWebSocket`](#netclientwebsocket) - The error message, or the websocket handle.
+- `string` | [`ClientWebSocket`](#clientwebsocket) - The error message, or the websocket handle.
 
 ## Types
 {/* SERVERREQUEST */}
@@ -66,17 +66,17 @@ export type ServerRequest = {
 {/* SERVERRESPONSE */}
 #### ServerResponse
 ```luau copy
-export type ServerResponse = string | {
-    status : number,
+export type ServerResponse = {
+    statusCode : number,
     headers : {[string] : string},
-    body : string,
+    body : buffer | string,
 }
 ```
 
-{/* NETWEBSOCKET */}
-#### NetWebSocket
+{/* WEBSOCKET */}
+#### WebSocket
 ```luau copy
-export type NetWebSocket = userdata<{
+export type WebSocket = userdata<{
      --[[
         Whether the websocket is connected.
     ]]
@@ -84,36 +84,36 @@ export type NetWebSocket = userdata<{
      --[[
         Sends a message to the websocket.
     ]]
-    send : (self: NetWebSocket, message: string) -> (),
+    send : (self: WebSocket, message: string) -> (),
      --[[
         Closes the websocket.
     ]]
-    close : (self: NetWebSocket) -> (),
+    close : (self: WebSocket) -> (),
 }>
 ```
 
-{/* NETCLIENTWEBSOCKET */}
-#### NetClientWebSocket
+{/* CLIENTWEBSOCKET */}
+#### ClientWebSocket
 ```luau copy
-export type NetClientWebSocket = NetWebSocket & userdata<{
+export type ClientWebSocket = WebSocket & userdata<{
      --[[
         Binds a function to the open event.
         
         *Only one function can be bound at a time*.
     ]]
-     bindOpen : (self: NetClientWebSocket, func: () -> ()) -> (),
+     bindOpen : (self: ClientWebSocket, func: () -> ()) -> (),
      --[[
         Binds a function to the message event.
 
         *Only one function can be bound at a time*.
     ]]
-     bindMessage : (self: NetClientWebSocket, func: (message: string) -> ()) -> (),
+     bindMessage : (self: ClientWebSocket, func: (message: string) -> ()) -> (),
      --[[
         Binds a function to the close event.
 
         *Only one function can be bound at a time*.
     ]]
-     bindClose : (self: NetClientWebSocket, func: () -> ()) -> (),
+     bindClose : (self: ClientWebSocket, func: () -> ()) -> (),
 }>
 ```
 
@@ -133,19 +133,19 @@ export type ServerWebSocketHandlers = {
         
         *`WebSocket` class will keep the same reference per connection*.
     ]]
-    open : ((websocket: NetWebSocket) -> ())?,
+    open : ((websocket: WebSocket) -> ())?,
     --[[
         A function event for when a websocket receives a message.
 
         *`WebSocket` class will keep the same reference per connection*.
     ]]
-    message : ((websocket: NetWebSocket, message: string) -> ())?,
+    message : ((websocket: WebSocket, message: string) -> ())?,
     --[[
         A function event for when a websocket is closed.
 
         *`WebSocket` class will keep the same reference per connection*.
     ]]
-    close : ((websocket: NetWebSocket) -> ())?,
+    close : ((websocket: WebSocket) -> ())?,
 };
 ```
 
@@ -175,7 +175,7 @@ export type ServeOptions = {
     --[[
         The function to handle requests.
     ]]
-    request : (request: ServerRequest) -> ServerResponse,
+    request : (request: ServerRequest) -> string | buffer | ServerResponse,
 
     --[[
         Functions to handle websockets.
@@ -215,14 +215,14 @@ type BodyRequestOptions = {
 export type RequestOptions = BareRequestOptions & BodyRequestOptions
 ```
 
-{/* NETSERVERHANDLE */}
-#### NetServerHandle
+{/* SERVERHANDLE */}
+#### ServerHandle
 ```luau copy
-export type NetServerHandle = userdata<{
+export type ServerHandle = userdata<{
      --[[
         Closes the server.
     ]]
-    close : (self: NetServerHandle) -> (),
+    close : (self: ServerHandle) -> (),
 }>
 ```
 

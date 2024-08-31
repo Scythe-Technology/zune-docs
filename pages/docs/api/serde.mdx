@@ -135,23 +135,24 @@ Decodes YAML
 [`GenericCompressor`](#genericcompressor)
 
 #### Functions
-1. [gzip.encode](#gzipencode)
-2. [gzip.decode](#gzipdecode)
+1. [gzip.compress](#gzipcompress)
+2. [gzip.decompress](#gzipdecompress)
 
 ---
 {/* GZIP.COMPRESS */}
 #### gzip.compress
 ```luau
 serde.gzip.compress(raw: string, options: GenericCompressionOptions?): string
+serde.gzip.compress(raw: buffer, options: GenericCompressionOptions?): buffer
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Compresses a string.
 ##### Parameters
-- `raw: string` - The string to compress.
+- `raw: string | buffer` - The string/buffer to compress.
 - `options:`[`GenericCompressionOptions?`](#genericcompressionoptions) - The options for the compression.
 ##### Returns
-- `string` - The compressed string.
+- `string` | `buffer` - The compressed string/buffer.
 ##### Throws
 - If the compression fails, an error will be thrown.
 - If the options are invalid, an error will be thrown.
@@ -160,14 +161,15 @@ Compresses a string.
 #### gzip.decompress
 ```luau
 serde.gzip.decompress(compressed: string): string
+serde.gzip.decompress(compressed: buffer): buffer
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Decompresses a string.
 ##### Parameters
-- `compressed: string` - The compressed string to decompress.
+- `compressed: string | buffer` - The compressed string/buffer to decompress.
 ##### Returns
-- `string` - The decompressed string.
+- `string` | `buffer` - The compressed string/buffer.
 ##### Throws
 - If the decompression fails, an error will be thrown.
 
@@ -177,23 +179,24 @@ Decompresses a string.
 [`GenericCompressor`](#genericcompressor)
 
 #### Functions
-1. [zlib.encode](#zlibencode)
-2. [zlib.decode](#zlibdecode)
+1. [zlib.compress](#zlibcompress)
+2. [zlib.decompress](#zlibdecompress)
 
 ---
 {/* ZLIB.COMPRESS */}
 #### zlib.compress
 ```luau
 serde.zlib.compress(raw: string, options: GenericCompressionOptions?): string
+serde.zlib.compress(raw: buffer, options: GenericCompressionOptions?): buffer
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Compresses a string.
 ##### Parameters
-- `raw: string` - The string to compress.
+- `raw: string | buffer` - The string/buffer to compress.
 - `options:`[`GenericCompressionOptions?`](#genericcompressionoptions) - The options for the compression.
 ##### Returns
-- `string` - The compressed string.
+- `string` | `buffer` - The compressed string/buffer.
 ##### Throws
 - If the compression fails, an error will be thrown.
 - If the options are invalid, an error will be thrown.
@@ -202,14 +205,15 @@ Compresses a string.
 #### zlib.decompress
 ```luau
 serde.zlib.decompress(compressed: string): string
+serde.zlib.decompress(compressed: buffer): buffer
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Decompresses a string.
 ##### Parameters
-- `compressed: string` - The compressed string to decompress.
+- `compressed: string | buffer` - The compressed string/buffer to decompress.
 ##### Returns
-- `string` - The decompressed string.
+- `string` | `buffer` - The compressed string/buffer.
 ##### Throws
 - If the decompression fails, an error will be thrown.
 
@@ -219,23 +223,24 @@ Decompresses a string.
 [`GenericCompressor`](#genericcompressor)
 
 #### Functions
-1. [lz4.encode](#lz4encode)
-2. [lz4.decode](#lz4decode)
+1. [lz4.compress](#lz4compress)
+2. [lz4.decompress](#lz4decompress)
 
 ---
 {/* LZ4.COMPRESS */}
 #### lz4.compress
 ```luau
 serde.lz4.compress(raw: string, options: GenericCompressionOptions?): string
+serde.lz4.compress(raw: buffer, options: GenericCompressionOptions?): buffer
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Compresses a string.
 ##### Parameters
-- `raw: string` - The string to compress.
+- `raw: string | buffer` - The string/buffer to compress.
 - `options:`[`GenericCompressionOptions?`](#genericcompressionoptions) - The options for the compression.
 ##### Returns
-- `string` - The compressed string.
+- `string` | `buffer` - The compressed string/buffer.
 ##### Throws
 - If the compression fails, an error will be thrown.
 - If the options are invalid, an error will be thrown.
@@ -244,14 +249,15 @@ Compresses a string.
 #### lz4.decompress
 ```luau
 serde.lz4.decompress(compressed: string): string
+serde.lz4.decompress(compressed: buffer): buffer
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Decompresses a string.
 ##### Parameters
-- `compressed: string` - The compressed string to decompress.
+- `compressed: string | buffer` - The compressed string/buffer to decompress.
 ##### Returns
-- `string` - The decompressed string.
+- `string` | `buffer` - The compressed string/buffer.
 ##### Throws
 - If the decompression fails, an error will be thrown.
 - If the options are invalid, an error will be thrown.
@@ -275,10 +281,14 @@ export type GenericCompressor = {
     --[[
         Compresses a string.
     ]]
-    compress : (raw: string, options: GenericCompressionOptions?) -> string,
+    compress :
+        & ((raw: string, options: GenericCompressionOptions?) -> string)
+        & ((raw: buffer, options: GenericCompressionOptions?) -> buffer),
     --[[
         Decompresses a string.
     ]]
-    decompress : (compressed: string) -> string,
+    decompress :
+        & (compressed: string) -> string
+        & (compressed: buffer) -> buffer,
 }
 ```
