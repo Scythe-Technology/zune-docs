@@ -8,5 +8,6 @@
   "luau": "Luau",
   "serde": "Serde",
   "stdio": "Stdio",
-  "crypto": "Crypto"
+  "crypto": "Crypto",
+  "regex": "Regex"
 }

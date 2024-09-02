@@ -4,6 +4,9 @@ import { Callout } from 'nextra/components'
 
 <Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
 
+## Properties
+1. [MAX_READ](#max_read)
+
 ## Functions
 1. [cursorMove](#cursormove)
 2. [erase](#erase)
@@ -15,9 +18,21 @@ import { Callout } from 'nextra/components'
 8. [bgcolor256](#bgcolor256)
 9. [trueColor](#truecolor)
 10. [bgtrueColor](#bgtruecolor)
-11. [writeOut](#writeout)
-12. [writeErr](#writeerr)
-13. [readIn](#readin)
+
+## Classes
+1. [stdout](#stdout)
+2. [stderr](#stderr)
+3. [stdin](#stdin)
+4. [terminal](#terminal)
+
+## Properties
+
+{/* MAX_READ */}
+### MAX_READ
+```luau
+stdio.MAX_READ: number
+```
+The maximum recommended amount of bytes to be read.
 
 ## Functions
 {/* CURSORMOVE */}
@@ -234,48 +249,102 @@ Generates background true color.
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* WRITEOUT */}
-#### writeOut
+## Classes
+
+{/* STDOUT */}
+### stdout
+
+#### Functions
+1. [stdout.write](#stdoutwrite)
+
+---
+#### stdout.write
 ```luau
-stdio.writeOut(text: string): string
+stdio.stdout:write(text: string | buffer): ()
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Writes to stdout.
 ##### Parameters
-- `text: string` - The text to write.
-##### Returns
-- `string` - The ANSI escape sequence.
+- `text: string | buffer` - The text to write.
 ##### Throws
-- If the output fails to write, an error will be thrown.
+- If the stdout fails to write, an error will be thrown.
 
-{/* WRITEERR */}
-#### writeErr
+---
+{/* STDERR */}
+### stderr
+
+#### Functions
+1. [stderr.write](#stderrwrite)
+
+---
+#### stderr.write
 ```luau
-stdio.writeErr(text: string): string
+stdio.stderr:write(text: string | buffer): ()
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Writes to stderr.
 ##### Parameters
-- `text: string` - The text to write.
-##### Returns
-- `string` - The ANSI escape sequence.
+- `text: string | buffer` - The text to write.
 ##### Throws
-- If the output fails to write, an error will be thrown.
+- If the stderr fails to write, an error will be thrown.
 
-{/* READIN */}
-#### readIn
+---
+{/* STDIN */}
+### stdin
+
+#### Functions
+1. [stdin.read](#stdinread)
+
+---
+#### stdin.read
 ```luau
-stdio.readIn(amount: number?): string
+stdio.stdin:read(amount: number?): string
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Reads from stdin.
 ##### Parameters
-- `amount: number` - The amount of bytes to read (Nil reads all).
+- `amount: number` - The amount of bytes to read (Nil reads 1 byte).
 ##### Returns
 - `string` - The input.
 ##### Throws
-- If the input fails to read, an error will be thrown.
 - If out of memory, an error will be thrown.
+- If the input fails to read, an error will be thrown.
+
+---
+{/* TERMINAL */}
+### terminal
+
+#### Properties
+1. [terminal.isTTY](#terminalistty)
+
+#### Functions
+1. [terminal.enableRawMode](#terminalenablerawmode)
+2. [terminal.restoreMode](#terminalrestoremode)
+
+---
+#### terminal.isTTY
+```luau
+stdio.terminal.isTTY: boolean
+```
+
+---
+#### terminal.enableRawMode
+```luau
+stdio.terminal:enableRawMode(): boolean
+```
+
+Enables raw mode.
+##### Returns
+- `boolean` - If raw mode was enabled.
+
+#### terminal.restoreMode
+```luau
+stdio.terminal:restoreMode(): boolean
+```
+
+Restores the terminal to the original mode.
+##### Returns
+- `boolean` - If the operation was successful.

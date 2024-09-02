@@ -1,0 +1,143 @@
+## Regular Expression
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
+
+### Functions
+1. [new](#new)
+
+### Classes
+1. [Regex](#regex)
+
+## Functions
+{/* NEW */}
+#### new
+```luau
+regex.new(pattern: string): Regex
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Compiles a regular expression pattern.
+##### Parameters
+- `pattern: string` - The pattern to compile.
+##### Returns
+- [`Regex`](#regex) - The compiled regular expression.
+##### Throws
+- If the pattern is invalid, an error will be thrown.
+
+## Classes
+{/* REGEX */}
+### Regex
+#### Functions
+1. [match](#regexmatch)
+2. [search](#regexsearch)
+3. [format](#regexformat)
+4. [isMatch](#regexismatch)
+5. [replace](#regexreplace)
+6. [replaceAll](#regexreplaceall)
+
+---
+{/* MATCH */}
+#### Regex.match
+```luau
+regex.Regex:match(str: string): {RegexMatch}?
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Match a string
+##### Parameters
+- `str: string` - The string to match.
+##### Returns
+- `{`[`RegexMatch`](#regexmatch-1)`}?` - The match result.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* SEARCH */}
+#### Regex.search
+```luau
+regex.Regex:search(str: string): {RegexMatch}?
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Search a string
+##### Parameters
+- `str: string` - The string to search.
+##### Returns
+- `{`[`RegexMatch`](#regexmatch-1)`}?` - The search result.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* FORMAT */}
+#### Regex.format
+```luau
+regex.Regex:format(str: string, format: string): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Format a string
+##### Parameters
+- `str: string` - The string to format.
+##### Returns
+- `string` - The formatted string.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* ISMATCH */}
+#### Regex.isMatch
+```luau
+regex.Regex:isMatch(str: string): boolean
+```
+Check if a string matches
+##### Parameters
+- `str: string` - The string to check.
+##### Returns
+- `boolean` - If the string matches.
+
+{/* REPLACE */}
+#### Regex.replace
+```luau
+regex.Regex:replace(str: string, replacement: string): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Replace the first occurrence of a string
+##### Parameters
+- `str: string` - The string to replace.
+- `replacement: string` - The replacement string.
+##### Returns
+- `string` - The replaced string.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* REPLACEALL */}
+#### Regex.replaceAll
+```luau
+regex.Regex:replaceAll(str: string, replacement: string): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Replace all occurrences of a string
+##### Parameters
+- `str: string` - The string to replace.
+- `replacement: string` - The replacement string.
+##### Returns
+- `string` - The replaced string.
+##### Throws
+- If out of memory, an error will be thrown.
+
+## Types
+
+#### RegexMatch
+```luau copy
+export type RegexMatch = {
+    --[[
+        The captured group.
+    ]]
+    string : string;
+    --[[
+        The index of the group.
+    ]]
+    index : number;
+}
+```
