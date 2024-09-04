@@ -23,6 +23,9 @@ export default {
       <ThemeSwitch lite={true} className='theme-toggle-button' />
     )
   },
+  chat: {
+    link: 'https://discord.gg/zEc7muuYbX',
+  },
   themeSwitch: {
     component: null,
   },
