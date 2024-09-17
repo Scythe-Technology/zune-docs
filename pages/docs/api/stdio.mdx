@@ -323,6 +323,7 @@ Reads from stdin.
 #### Functions
 1. [terminal.enableRawMode](#terminalenablerawmode)
 2. [terminal.restoreMode](#terminalrestoremode)
+3. [terminal.getSize](#terminalgetsize)
 
 ---
 #### terminal.isTTY
@@ -348,3 +349,16 @@ stdio.terminal:restoreMode(): boolean
 Restores the terminal to the original mode.
 ##### Returns
 - `boolean` - If the operation was successful.
+
+#### terminal.getSize
+```luau
+stdio.terminal:getSize(): (number, number)
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Gets the terminal size.
+##### Returns
+- `number` - The x/width/column.
+- `number` - The y/height/row.
+##### Throws
+- If the terminal is not TTY, an error will be thrown.

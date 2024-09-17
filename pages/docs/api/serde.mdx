@@ -11,6 +11,7 @@ import { Callout } from 'nextra/components'
 4. [gzip](#gzip)
 5. [zlib](#zlib)
 6. [lz4](#lz4)
+7. [base64](#base64)
 
 ---
 {/* JSON */}
@@ -261,6 +262,46 @@ Decompresses a string.
 ##### Throws
 - If the decompression fails, an error will be thrown.
 - If the options are invalid, an error will be thrown.
+
+---
+{/* BASE64 */}
+### base64
+
+#### Functions
+1. [base64.encode](#base64encode)
+2. [base64.decode](#base64decode)
+
+---
+{/* BASE64.ENCODE */}
+#### base64.encode
+```luau
+serde.base64.encode(value: string): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Encodes a string to base64
+##### Parameters
+- `value: string` - The string to encode.
+##### Returns
+- `string` - The encoded base64.
+##### Throws
+- If out of memory, an error will be thrown.
+
+{/* BASE64.DECODE */}
+#### base64.decode
+```luau
+serde.base64.decode(base64: string): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Decodes base64
+##### Parameters
+- `base64: string` - The base64 to decode.
+##### Returns
+- `string` - The decoded string.
+##### Throws
+- If the base64 is invalid, an error will be thrown.
+- If out of memory, an error will be thrown.
 
 ## Types
 {/* GENERICCOMPRESSIONOPTIONS */}

@@ -36,6 +36,7 @@ Compiles a regular expression pattern.
 4. [isMatch](#regexismatch)
 5. [replace](#regexreplace)
 6. [replaceAll](#regexreplaceall)
+7. [captures](#regexcaptures)
 
 ---
 {/* MATCH */}
@@ -125,6 +126,27 @@ Replace all occurrences of a string
 - `string` - The replaced string.
 ##### Throws
 - If out of memory, an error will be thrown.
+
+{/* CAPTURES */}
+#### Regex.captures
+```luau
+regex.Regex:captures(str: string, flags: string?): {{RegexMatch}}
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Capture all occurrences of a string
+
+Flags:
+    - `g`: Global
+    - `m`: Multiline
+
+##### Parameters
+- `str: string` - The string to capture.
+- `flags: string?` - The flags to use.
+##### Returns
+- `{{`[`RegexMatch`](#regexmatch-1)`}}` - The captured strings.
+##### Throws
+- If regex search fails, an error will be thrown.
 
 ## Types
 

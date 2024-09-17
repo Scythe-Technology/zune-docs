@@ -14,6 +14,7 @@ for the rest of the globals.
 ### Functions
 1. [print](#print)
 2. [require](#require)
+3. [warn](#warn)
 
 ## Variables
 {/* _VERSION */}
@@ -76,3 +77,12 @@ require(path: string): any
 - If the module is not found, an error will be thrown.
 - If the module throws an error, the error will be thrown.
 - If out of memory, an error will be thrown.
+
+{/* WARN */}
+#### warn
+```luau
+warn(...any): ()
+```
+##### Parameters
+- `...any` - Values to print.
+  - A table will be transformed into readable string, this is recursive.

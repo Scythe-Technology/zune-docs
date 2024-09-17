@@ -9,5 +9,6 @@
   "serde": "Serde",
   "stdio": "Stdio",
   "crypto": "Crypto",
-  "regex": "Regex"
+  "regex": "Regex",
+  "datetime": "DateTime"
 }

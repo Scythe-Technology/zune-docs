@@ -1,0 +1,232 @@
+## Datetime
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
+
+### Functions
+1. [now](#now)
+2. [parse](#parse)
+3. [fromIsoDate](#fromisodate)
+4. [fromUnixTimestamp](#fromunixtimestamp)
+5. [fromUnixTimestampMillis](#fromunixtimestampmillis)
+6. [fromLocalTime](#fromlocaltime)
+7. [fromUniversalTime](#fromuniversaltime)
+
+### Classes
+1. [DateTime](#datetime-1)
+
+## Functions
+{/* NOW */}
+#### now
+```luau
+datetime.now(): DateTime
+```
+##### Returns
+- [`DateTime`](#datetime-1) - The current date and time.
+
+{/* PARSE */}
+#### parse
+```luau
+datetime.parse(date: string): DateTime
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Parse a string
+
+- Supports ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`
+- Supports RFC3339 format, `YYYY-MM-DDTHH:MM:SS+00:00`
+- Supports RFC2822 format, `Day, DD Mon YYYY HH:MM:SS GMT`
+
+##### Parameters
+- `date: string` - The string to parse.
+##### Returns
+- [`DateTime`](#datetime-1) - The parsed date and time.
+##### Throws
+- If the date is invalid, an error will be thrown.
+
+{/* FROMISODATE */}
+#### fromIsoDate
+```luau
+datetime.fromIsoDate(date: string): DateTime
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Parse a string in ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`
+
+##### Parameters
+- `date: string` - The string to parse.
+##### Returns
+- [`DateTime`](#datetime-1) - The parsed date and time.
+##### Throws
+- If the date is invalid, an error will be thrown.
+
+{/* FROMUNIXTIMESTAMP */}
+#### fromUnixTimestamp
+```luau
+datetime.fromUnixTimestamp(timestamp: number): DateTime
+```
+##### Parameters
+- `timestamp: number` - The timestamp to convert.
+##### Returns
+- [`DateTime`](#datetime-1) - The converted date and time.
+
+{/* FROMUNIXTIMESTAMPMILLIS */}
+#### fromUnixTimestampMillis
+```luau
+datetime.fromUnixTimestampMillis(timestamp: number): DateTime
+```
+##### Parameters
+- `timestamp: number` - The timestamp to convert.
+##### Returns
+- [`DateTime`](#datetime-1) - The converted date and time.
+
+{/* FROMLOCALTIME */}
+#### fromLocalTime
+```luau
+datetime.fromLocalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
+```
+##### Parameters
+- `year: number` - The year.
+- `month: number` - The month.
+- `day: number` - The day.
+- `hour: number` - The hour.
+- `minute: number` - The minute.
+- `second: number` - The second.
+- `millisecond: number` - The millisecond.
+##### Returns
+- [`DateTime`](#datetime-1) - The converted date and time.
+
+{/* FROMUNIVERSALTIME */}
+#### fromUniversalTime
+```luau
+datetime.fromUniversalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
+```
+##### Parameters
+- `year: number` - The year.
+- `month: number` - The month.
+- `day: number` - The day.
+- `hour: number` - The hour.
+- `minute: number` - The minute.
+- `second: number` - The second.
+- `millisecond: number` - The millisecond.
+##### Returns
+- [`DateTime`](#datetime-1) - The converted date and time.
+
+## Classes
+{/* DATETIME */}
+### DateTime
+
+#### Properties
+1. [unixTimestamp | UnixTimestamp](#datetimeunixtimestamp)
+2. [unixTimestampMillis | UnixTimestampMillis](#datetimeunixtimestampmillis)
+
+#### Functions
+1. [toLocalTime | ToLocalTime](#datetimetolocaltime)
+2. [toUniversalTime | ToUniversalTime](#datetimetouniversaltime)
+3. [toIsoDate | ToIsoDate](#datetimetoisodate)
+4. [formatLocalTime | FormatLocalTime](#datetimeformatlocaltime)
+5. [formatUniversalTime | FormatUniversalTime](#datetimeformatuniversaltime)
+
+---
+{/* UNIXTIMESTAMP */}
+#### DateTime.unixTimestamp
+```luau
+datetime.DateTime.unixTimestamp: number
+datetime.DateTime.UnixTimestamp: number
+```
+
+{/* UNIXTIMESTAMPMILLIS */}
+#### DateTime.unixTimestampMillis
+```luau
+datetime.DateTime.unixTimestampMillis: number
+datetime.DateTime.UnixTimestampMillis: number
+```
+
+---
+{/* TOLOCALTIME */}
+#### DateTime.toLocalTime
+```luau
+datetime.DateTime:toLocalTime(): TimeDictionary
+datetime.DateTime:ToLocalTime(): TimeDictionary
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Convert to local time and return a table
+##### Returns
+- [`TimeDictionary`](#timedictionary) - The converted time.
+##### Throws
+- If datetime fails to convert, an error will be thrown.
+
+{/* TOUNIVERSALTIME */}
+#### DateTime.toUniversalTime
+```luau
+datetime.DateTime:toUniversalTime(): TimeDictionary
+datetime.DateTime:ToUniversalTime(): TimeDictionary
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Convert to universal time and return a table
+##### Returns
+- [`TimeDictionary`](#timedictionary) - The converted time.
+##### Throws
+- If datetime fails to convert, an error will be thrown.
+
+{/* TOISODATE */}
+#### DateTime.toIsoDate
+```luau
+datetime.DateTime:toIsoDate(): string
+datetime.DateTime:ToIsoDate(): string
+```
+Convert to ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`
+##### Returns
+- `string` - The converted date.
+
+{/* FORMATLOCALTIME */}
+#### DateTime.formatLocalTime
+```luau
+datetime.DateTime:formatLocalTime(format: string): string
+datetime.DateTime:FormatLocalTime(format: string): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Format the time in local time from a string
+##### Parameters
+- `format: string` - The format to use.
+##### Returns
+- `string` - The formatted time.
+##### Throws
+- If datetime fails to convert, an error will be thrown.
+- If out of memory, an error will be thrown.
+
+{/* FORMATUNIVERSALTIME */}
+#### DateTime.formatUniversalTime
+```luau
+datetime.DateTime:formatUniversalTime(format: string): string
+datetime.DateTime:FormatUniversalTime(format: string): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Format the time in universal time from a string
+##### Parameters
+- `format: string` - The format to use.
+##### Returns
+- `string` - The formatted time.
+##### Throws
+- If datetime fails to convert, an error will be thrown.
+- If out of memory, an error will be thrown.
+
+## Types
+
+#### TimeDictionary
+```luau copy
+export type TimeDictionary = {
+    year : number,
+    month : number,
+    day : number,
+    hour : number,
+    minute : number,
+    second : number,
+    millisecond : number,
+}
+```

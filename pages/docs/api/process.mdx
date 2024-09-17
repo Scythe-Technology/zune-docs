@@ -18,6 +18,7 @@ A built-in library that interacts with the system process.
 2. [create](#create)
 3. [run](#run)
 4. [exit](#exit)
+5. [onSignal](#onsignal)
 
 ## Properties
 {/* OS */}
@@ -114,6 +115,20 @@ process.exit(code: number): ()
 Exits the current process.
 ##### Parameters
 - `code: number` - The exit code.
+
+{/* ONSIGNAL */}
+#### onSignal
+```luau
+process.onSignal(signal: "INT", callback: () -> ()): ()
+```
+Registers a signal handler.
+
+Supported signals:
+- `INT` - Interrupt signal (SIGINT).
+
+##### Parameters
+- `signal: "INT"` - The signal to handle.
+- `callback: () -> ()` - The callback to run when the signal is received.
 
 ## Types
 {/* PROCESSOPTIONS */}

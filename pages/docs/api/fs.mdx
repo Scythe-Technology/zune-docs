@@ -18,6 +18,9 @@ A built-in module that provides access to the file system.
 10. [move](#move`)
 11. [copy](#copy)
 12. [symlink](#symlink)
+13. [watch](#watch)
+14. [openFile](#openfile)
+15. [createFile](#createfile)
 
 ## Functions
 {/* READFILE */}
@@ -166,6 +169,47 @@ fs.symlink(from: string, to: string): (boolean, SymlinkError?)
 - [`SymlinkError?`](#symlinkerror) - An error if the operation failed.
   - Windows: Always returns `"NotSupported"`.
 
+{/* WATCH */}
+#### watch
+```luau
+fs.watch(path: string, callback: (path: string, events: {"created" | "modified" | "moved" | "renamed" | "deleted" | "metadata"}) -> ()): FileWatcher
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+<Callout type="info" emoji="ℹ️">Experimental</Callout>
+
+Watches a directory for changes.
+
+*Does not watch subdirectories.*
+*Windows: Can watch changes in first child subdirectories.*
+##### Parameters
+- `path: string` - The path to the directory to watch.
+- `callback: (path: string, events: {"created" | "modified" | "moved" | "renamed" | "deleted" | "metadata"}) -> ()` - The function to call when a change is detected.
+##### Returns
+- [`FileWatcher`](#filewatcher) - The file watcher.
+
+{/* OPENFILE */}
+#### openFile
+```luau
+fs.openFile(path: string, opts: OpenFileOptions?): (boolean, FileHandle | FileReadError);
+```
+##### Parameters
+- `path: string` - The path to the file to open.
+- `opts: `[`OpenFileOptions`](#openfileoptions) - The options for opening the file.
+##### Returns
+- `boolean` - If the operation was successful.
+- [`FileHandle`](#filehandle) | [`FileReadError`](#filereaderror) - The file handle or an error.
+
+{/* CREATEFILE */}
+#### createFile
+```luau
+fs.createFile(path: string, opts: CreateFileOptions?): (boolean, FileHandle | FileReadError);
+```
+##### Parameters
+- `path: string` - The path to the file to create.
+- `opts: `[`CreateFileOptions`](#createfileoptions) - The options for creating the file.
+##### Returns
+- `boolean` - If the operation was successful.
+- [`FileHandle`](#filehandle) | [`FileReadError`](#filereaderror) - The file handle or an error.
 
 ## Types
 {/* IOError */}
@@ -351,4 +395,141 @@ export type SymlinkError = IOError
 | "NotDirectory"
 | "NotFile"
 | "NotSupported"
+```
+
+{/* FILEWATCHER */}
+#### FileWatcher
+```luau copy
+export type FileWatcher = {
+	--[[
+		Stops the watcher.
+	]]
+	stop : (self: FileWatcher) -> (),
+}
+```
+
+{/* FILEHANDLE */}
+#### FileHandle
+```luau copy
+
+export type FileHandle = {
+	--[[
+		Reads the contents of a file.
+
+		*Optional: The amount of bytes to read, if nil, reads the whole till EOF or Luau limit.*
+
+		@param amount The amount of bytes to read.
+	]]
+	read :
+		& ((self: FileHandle, amount: number?, useBuffer: false?) -> string)
+		& ((self: FileHandle, amount: number?, useBuffer: true) -> buffer),
+
+
+	--[[
+		Writes to a file.
+
+		@param contents The contents to write to the file.
+	]]
+	write : (self: FileHandle, contents: buffer | string) -> (),
+
+	--[[
+		Appends to a file.
+		
+		@param contents The contents to append to the file.
+	]]
+	append : (self: FileHandle, contents: buffer | string) -> (),
+
+	--[[
+		Returns the size of the file. Based on current state of the file object.
+	]]
+	getSize : (self: FileHandle) -> number,
+
+	--[[
+		Returns the current position of the file.
+	]]
+	getSeekPosition : (self: FileHandle) -> number,
+
+	--[[
+		Seeks to a position in the file relative to the end.
+
+		*Optional: The amount of bytes to seek, if nil, seeks to the end*
+
+		@param amount The amount of bytes to seek.
+	]]
+	seekFromEnd : (self: FileHandle, amount: number?) -> (),
+
+	--[[
+		Seeks to a position in the file absolute to the start.
+
+		*Optional: The amount of bytes to seek, if nil, seeks to the start, 0*
+
+		@param amount The amount of bytes to seek.
+	]]
+	seekTo : (self: FileHandle, amount: number?) -> (),
+
+	--[[
+		Seeks to a position in the file relative to the current position.
+
+		*Optional: The amount of bytes to seek, if nil, seeks to the next position, 1*
+
+		*If `0` is provided, seek will not move.*
+
+		@param amount The amount of bytes to seek.
+	]]
+	seekBy : (self: FileHandle, amount: number?) -> (),
+
+	--[[
+		Locks the file.
+
+		*Optional: The mode to lock the file, if nil, locks the file in exclusive mode.*
+
+		@param lockMode The mode to lock the file.
+	]]
+	lock : (self: FileHandle, lockMode: ("shared" | "exclusive" | "none")?) -> boolean,
+
+	--[[
+		Unlocks the file.
+	]]
+	unlock : (self: FileHandle) -> (),
+
+	--[[
+		Flushes the file. Writes the contents to the disk.
+
+		Does not yield, **blocks** process.
+	]]
+	sync : (self: FileHandle) -> (),
+
+	--[[
+		Closes the file. (Will flush the file)
+	]]
+	close : (self: FileHandle) -> (),
+}
+```
+
+{/* OPENFILEOPTIONS */}
+#### OpenFileOptions
+```luau copy
+type OpenFileOptions = {
+	--[[
+		The mode to open the file in.
+
+		Available modes: `r`, `w`
+
+		*Default: `rw`*
+	]]
+	mode : string?,
+}
+```
+
+{/* CREATEFILEOPTIONS */}
+#### CreateFileOptions
+```luau copy
+type CreateFileOptions = {
+	--[[
+		Whether to create the file in exclusive mode.
+
+		*Default: false*
+	]]
+	exclusive : boolean?,
+}
 ```

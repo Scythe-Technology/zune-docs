@@ -8,44 +8,12 @@ import { Callout } from 'nextra/components'
 1. [hash](#hash)
 2. [hmac](#hmac)
 3. [password](#password)
+4. [random](#random)
+5. [aes](#aes)
 
 ---
 {/* HASH */}
 ### hash
-
-{/*
-type HashFn = (str: string) -> string;
-type HmacFn = (str: string, key: string) -> string;
-
-type HashAlgorithms<F> = {
-    sha1: F,
-    md5: F,
-    blake3: F,
-    sha2: {
-        sha224: F,
-        sha256: F,
-        sha384: F,
-        sha512: F,
-    },
-    sha3: {
-        sha3_224: F,
-        sha3_256: F,
-        sha3_384: F,
-        sha3_512: F,
-    },
-    blake2: {
-        b128: F,
-        b160: F,
-        b256: F,
-        b512: F,
-        s128: F,
-        s160: F,
-        s224: F,
-        s256: F,
-    },
-};
-
-*/}
 
 #### Namespaces
 1. [hash.sha2](#hashsha2)
@@ -617,6 +585,147 @@ Verifies a string against a hash using the algorithm encoded in the hash.
 ##### Returns
 - `boolean` - Whether the string matches the hash.
 
+---
+{/* RANDOM */}
+### random
+
+Cryptographically secure pseudorandom number generator (CSPRNG).
+
+#### Functions
+1. [random.nextNumber](#randomnextnumber)
+2. [random.nextInteger](#randomnextinteger)
+3. [random.nextBoolean](#randomnextboolean)
+4. [random.fill](#randomfill)
+
+---
+{/* RANDOM.NEXTNUMBER */}
+#### random.nextNumber
+```luau
+crypto.random.nextNumber(): number
+crypto.random.nextNumber(min: number, max: number): number
+```
+Generates a random number (f64), if no arguments are provided, it will generate a number between 0 and 1.
+##### Parameters
+- `min: number?` - The minimum number to generate.
+- `max: number?` - The maximum number to generate.
+##### Returns
+- `number` - The generated number.
+
+{/* RANDOM.NEXTINTEGER */}
+#### random.nextInteger
+```luau
+crypto.random.nextInteger(): number
+crypto.random.nextInteger(min: number, max: number): number
+```
+Generates a random integer (i32), if no arguments are provided,
+
+it will generate a number between the limits of a signed 32-bit integer.
+##### Parameters
+- `min: number?` - The minimum number to generate.
+- `max: number?` - The maximum number to generate.
+##### Returns
+- `number` - The generated number.
+
+{/* RANDOM.NEXTBOOLEAN */}
+#### random.nextBoolean
+```luau
+crypto.random.nextBoolean(): boolean
+```
+Generates a random boolean.
+##### Returns
+- `boolean` - The generated boolean.
+
+{/* RANDOM.FILL */}
+#### random.fill
+```luau
+crypto.random.fill(buffer: buffer, offset: number, length: number): ()
+```
+Writes random bytes to the buffer.
+##### Parameters
+- `buffer: buffer` - The buffer to write to.
+- `offset: number` - The offset to start writing at.
+- `length: number` - The number of bytes to write.
+
+---
+{/* AES */}
+### aes
+
+#### Functions
+1. [aes.aes128](#aesaes128)
+2. [aes.aes256](#aesaes256)
+
+---
+{/* AES.AES128 */}
+### aes.aes128
+
+#### Functions
+1. [aes.aes128.encrypt](#aesaes128encrypt)
+2. [aes.aes128.decrypt](#aesaes128decrypt)
+
+---
+{/* AES.AES128.encrypt */}
+#### aes.aes128.encrypt
+```luau
+crypto.aes.aes128.encrypt(data: string | buffer, key: string | buffer, nonce: string | buffer): EncryptedAes
+```
+Encrypts a string or buffer using the AES-128 algorithm.
+##### Parameters
+- `data: string | buffer` - The data to encrypt.
+- `key: string | buffer` - The key to encrypt with.
+- `nonce: string | buffer` - The nonce to encrypt with.
+##### Returns
+- [`EncryptedAes`](#encryptedaes) - The encrypted data.
+
+{/* AES.AES128.decrypt */}
+#### aes.aes128.decrypt
+```luau
+crypto.aes.aes128.decrypt(cipher: string | buffer, tag: string | buffer, key: string | buffer, nonce: string | buffer): string
+```
+Decrypts a string or buffer using the AES-128 algorithm.
+##### Parameters
+- `cipher: string | buffer` - The data to decrypt.
+- `tag: string | buffer` - The tag to decrypt with.
+- `key: string | buffer` - The key to decrypt with.
+- `nonce: string | buffer` - The nonce to decrypt with.
+##### Returns
+- `string` - The decrypted data.
+
+---
+{/* AES.AES256 */}
+### aes.aes256
+
+#### Functions
+1. [aes.aes256.encrypt](#aesaes256encrypt)
+2. [aes.aes256.decrypt](#aesaes256decrypt)
+
+---
+{/* AES.AES256.encrypt */}
+#### aes.aes256.encrypt
+```luau
+crypto.aes.aes256.encrypt(data: string | buffer, key: string | buffer, nonce: string | buffer): EncryptedAes
+```
+Encrypts a string or buffer using the AES-256 algorithm.
+##### Parameters
+- `data: string | buffer` - The data to encrypt.
+- `key: string | buffer` - The key to encrypt with.
+- `nonce: string | buffer` - The nonce to encrypt with.
+##### Returns
+- [`EncryptedAes`](#encryptedaes) - The encrypted data.
+
+{/* AES.AES256.decrypt */}
+#### aes.aes256.decrypt
+```luau
+crypto.aes.aes256.decrypt(cipher: string | buffer, tag: string | buffer, key: string | buffer, nonce: string | buffer): string
+```
+Decrypts a string or buffer using the AES-256 algorithm.
+##### Parameters
+- `cipher: string | buffer` - The data to decrypt.
+- `tag: string | buffer` - The tag to decrypt with.
+- `key: string | buffer` - The key to decrypt with.
+- `nonce: string | buffer` - The nonce to decrypt with.
+##### Returns
+- `string` - The decrypted data.
+
 ## Types
 
 ### BcryptPasswordOptions
@@ -648,4 +757,12 @@ type Argon2PasswordOptions = {
 ### PasswordOptions
 ```luau
 type PasswordOptions = BcryptPasswordOptions | Argon2PasswordOptions
+```
+
+### EncryptedAes
+```luau
+type EncryptedAes = {
+    cipher : string,
+    tag : string,
+}
 ```
