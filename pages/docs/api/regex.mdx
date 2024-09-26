@@ -14,11 +14,16 @@ import { Callout } from 'nextra/components'
 {/* NEW */}
 #### new
 ```luau
-regex.new(pattern: string): Regex
+regex.new(pattern: string, flags: string?): Regex
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Compiles a regular expression pattern.
+
+Flags:
+    - `i`: Case insensitive
+    - `m`: Multiline
+
 ##### Parameters
 - `pattern: string` - The pattern to compile.
 ##### Returns
@@ -130,19 +135,15 @@ Replace all occurrences of a string
 {/* CAPTURES */}
 #### Regex.captures
 ```luau
-regex.Regex:captures(str: string, flags: string?): {{RegexMatch}}
+regex.Regex:captures(str: string, global: boolean?): {{RegexMatch}}
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Capture all occurrences of a string
 
-Flags:
-    - `g`: Global
-    - `m`: Multiline
-
 ##### Parameters
 - `str: string` - The string to capture.
-- `flags: string?` - The flags to use.
+- `global: boolean?` - The flags to use.
 ##### Returns
 - `{{`[`RegexMatch`](#regexmatch-1)`}}` - The captured strings.
 ##### Throws
