@@ -10,5 +10,6 @@
   "stdio": "Stdio",
   "crypto": "Crypto",
   "regex": "Regex",
-  "datetime": "DateTime"
+  "datetime": "DateTime",
+  "ffi": "FFI"
 }

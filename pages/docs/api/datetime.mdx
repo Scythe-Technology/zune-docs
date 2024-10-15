@@ -17,7 +17,6 @@ import { Callout } from 'nextra/components'
 1. [DateTime](#datetime-1)
 
 ## Functions
-{/* NOW */}
 #### now
 ```luau
 datetime.now(): DateTime
@@ -25,7 +24,6 @@ datetime.now(): DateTime
 ##### Returns
 - [`DateTime`](#datetime-1) - The current date and time.
 
-{/* PARSE */}
 #### parse
 ```luau
 datetime.parse(date: string): DateTime
@@ -45,7 +43,6 @@ Parse a string
 ##### Throws
 - If the date is invalid, an error will be thrown.
 
-{/* FROMISODATE */}
 #### fromIsoDate
 ```luau
 datetime.fromIsoDate(date: string): DateTime
@@ -61,7 +58,6 @@ Parse a string in ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`
 ##### Throws
 - If the date is invalid, an error will be thrown.
 
-{/* FROMUNIXTIMESTAMP */}
 #### fromUnixTimestamp
 ```luau
 datetime.fromUnixTimestamp(timestamp: number): DateTime
@@ -71,7 +67,6 @@ datetime.fromUnixTimestamp(timestamp: number): DateTime
 ##### Returns
 - [`DateTime`](#datetime-1) - The converted date and time.
 
-{/* FROMUNIXTIMESTAMPMILLIS */}
 #### fromUnixTimestampMillis
 ```luau
 datetime.fromUnixTimestampMillis(timestamp: number): DateTime
@@ -81,7 +76,6 @@ datetime.fromUnixTimestampMillis(timestamp: number): DateTime
 ##### Returns
 - [`DateTime`](#datetime-1) - The converted date and time.
 
-{/* FROMLOCALTIME */}
 #### fromLocalTime
 ```luau
 datetime.fromLocalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
@@ -97,7 +91,6 @@ datetime.fromLocalTime(year: number, month: number, day: number, hour: number, m
 ##### Returns
 - [`DateTime`](#datetime-1) - The converted date and time.
 
-{/* FROMUNIVERSALTIME */}
 #### fromUniversalTime
 ```luau
 datetime.fromUniversalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
@@ -114,7 +107,6 @@ datetime.fromUniversalTime(year: number, month: number, day: number, hour: numbe
 - [`DateTime`](#datetime-1) - The converted date and time.
 
 ## Classes
-{/* DATETIME */}
 ### DateTime
 
 #### Properties
@@ -129,14 +121,12 @@ datetime.fromUniversalTime(year: number, month: number, day: number, hour: numbe
 5. [formatUniversalTime | FormatUniversalTime](#datetimeformatuniversaltime)
 
 ---
-{/* UNIXTIMESTAMP */}
 #### DateTime.unixTimestamp
 ```luau
 datetime.DateTime.unixTimestamp: number
 datetime.DateTime.UnixTimestamp: number
 ```
 
-{/* UNIXTIMESTAMPMILLIS */}
 #### DateTime.unixTimestampMillis
 ```luau
 datetime.DateTime.unixTimestampMillis: number
@@ -144,7 +134,6 @@ datetime.DateTime.UnixTimestampMillis: number
 ```
 
 ---
-{/* TOLOCALTIME */}
 #### DateTime.toLocalTime
 ```luau
 datetime.DateTime:toLocalTime(): TimeDictionary
@@ -158,7 +147,6 @@ Convert to local time and return a table
 ##### Throws
 - If datetime fails to convert, an error will be thrown.
 
-{/* TOUNIVERSALTIME */}
 #### DateTime.toUniversalTime
 ```luau
 datetime.DateTime:toUniversalTime(): TimeDictionary
@@ -172,7 +160,6 @@ Convert to universal time and return a table
 ##### Throws
 - If datetime fails to convert, an error will be thrown.
 
-{/* TOISODATE */}
 #### DateTime.toIsoDate
 ```luau
 datetime.DateTime:toIsoDate(): string
@@ -182,7 +169,6 @@ Convert to ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`
 ##### Returns
 - `string` - The converted date.
 
-{/* FORMATLOCALTIME */}
 #### DateTime.formatLocalTime
 ```luau
 datetime.DateTime:formatLocalTime(format: string): string
@@ -199,7 +185,6 @@ Format the time in local time from a string
 - If datetime fails to convert, an error will be thrown.
 - If out of memory, an error will be thrown.
 
-{/* FORMATUNIVERSALTIME */}
 #### DateTime.formatUniversalTime
 ```luau
 datetime.DateTime:formatUniversalTime(format: string): string

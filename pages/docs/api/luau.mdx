@@ -9,7 +9,6 @@ import { Callout } from 'nextra/components'
 2. [load](#load)
 
 ## Functions
-{/* COMPILE */}
 #### compile
 ```luau
 luau.compile(source: string, options: CompileOptions?): (boolean, string)
@@ -22,7 +21,6 @@ Compiles Luau source code.
 - `boolean` - Whether the operation was successful.
 - `string` - The compiled source code or compile error.
 
-{/* LOAD */}
 #### load
 ```luau
 luau.load(bytecode: string, options: LoadOptions?): ((...any) -> (...any))
@@ -45,7 +43,6 @@ Loads Luau source code.
 - If the bytecode is invalid, an error will be thrown.
 
 ## Types
-{/* COMPILEOPTIONS */}
 #### CompileOptions
 ```luau copy
 export type CompileOptions = {
@@ -55,7 +52,6 @@ export type CompileOptions = {
 }
 ```
 
-{/* LOADOPTIONS */}
 #### LoadOptions
 ```luau copy
 export type LoadOptions = {

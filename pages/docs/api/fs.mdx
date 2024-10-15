@@ -23,7 +23,6 @@ A built-in module that provides access to the file system.
 15. [createFile](#createfile)
 
 ## Functions
-{/* READFILE */}
 #### readFile
 ```luau
 fs.readFile(path: string, useBuffer: boolean?): (boolean, string | buffer | FileReadError)
@@ -36,7 +35,6 @@ fs.readFile(path: string, useBuffer: boolean?): (boolean, string | buffer | File
 - `boolean` - If the operation was successful.
 - `string` | `buffer` | [`FileReadError`](#filereaderror) - The content of the file or an error.
 
-{/* READDIR */}
 #### readDir
 ```luau
 fs.readDir(path: string): (boolean, { string } | string)
@@ -47,7 +45,6 @@ fs.readDir(path: string): (boolean, { string } | string)
 - `boolean` - If the operation was successful.
 - `{ string }` | `string` - The content of the directory or an error.
 
-{/* WRITEFILE */}
 #### writeFile
 ```luau
 fs.writeFile(path: string, contents: buffer | string): (boolean, FileWriteError?)
@@ -59,7 +56,6 @@ fs.writeFile(path: string, contents: buffer | string): (boolean, FileWriteError?
 - `boolean` - If the operation was successful.
 - [`FileWriteError?`](#filewriteerror) - An error if the operation failed.
 
-{/* WRITEDIR */}
 #### writeDir
 ```luau
 fs.writeDir(path: string, recursive: boolean?): (boolean, DirWriteError?)
@@ -72,7 +68,6 @@ fs.writeDir(path: string, recursive: boolean?): (boolean, DirWriteError?)
 - `boolean` - If the operation was successful.
 - [`DirWriteError?`](#dirwriteerror) - An error if the operation failed.
 
-{/* REMOVEFILE */}
 #### removeFile
 ```luau
 fs.removeFile(path: string): (boolean, FileRemoveError?)
@@ -83,7 +78,6 @@ fs.removeFile(path: string): (boolean, FileRemoveError?)
 - `boolean` - If the operation was successful.
 - [`FileRemoveError?`](#fileremoveerror) - An error if the operation failed.
 
-{/* REMOVEDIR */}
 #### removeDir
 ```luau
 fs.removeDir(path: string, recursive: boolean?): (boolean, DirRemoveError?)
@@ -96,7 +90,6 @@ fs.removeDir(path: string, recursive: boolean?): (boolean, DirRemoveError?)
 - `boolean` - If the operation was successful.
 - [`DirRemoveError?`](#dirremoveerror) - An error if the operation failed.
 
-{/* METADATA */}
 #### metadata
 ```luau
 fs.metadata(path: string): (boolean, Metadata? | MetadataError)
@@ -107,7 +100,6 @@ fs.metadata(path: string): (boolean, Metadata? | MetadataError)
 - `boolean` - If the operation was successful.
 - [`Metadata?`](#metadata) | [`MetadataError`](#metadataerror)- The metadata of the file or directory, or error, or nil.
 
-{/* ISFILE */}
 #### isFile
 ```luau
 fs.isFile(path: string): boolean
@@ -117,7 +109,6 @@ fs.isFile(path: string): boolean
 ##### Returns
 - `boolean` - If the path is a file.
 
-{/* ISDIR */}
 #### isDir
 ```luau
 fs.isDir(path: string): boolean
@@ -127,7 +118,6 @@ fs.isDir(path: string): boolean
 ##### Returns
 - `boolean` - If the path is a directory.
 
-{/* MOVE */}
 #### move
 ```luau
 fs.move(from: string, to: string, overwrite: boolean?): (boolean, MoveError?)
@@ -141,7 +131,6 @@ fs.move(from: string, to: string, overwrite: boolean?): (boolean, MoveError?)
 - `boolean` - If the operation was successful.
 - [`MoveError?`](#moverror) - An error if the operation failed.
 
-{/* COPY */}
 #### copy
 ```luau
 fs.copy(from: string, to: string, overwrite: boolean?): (boolean, CopyError?)
@@ -155,7 +144,6 @@ fs.copy(from: string, to: string, overwrite: boolean?): (boolean, CopyError?)
 - `boolean` - If the operation was successful.
 - [`CopyError?`](#copyerror) - An error if the operation failed.
 
-{/* SYMLINK */}
 #### symlink
 ```luau
 fs.symlink(from: string, to: string): (boolean, SymlinkError?)
@@ -169,7 +157,6 @@ fs.symlink(from: string, to: string): (boolean, SymlinkError?)
 - [`SymlinkError?`](#symlinkerror) - An error if the operation failed.
   - Windows: Always returns `"NotSupported"`.
 
-{/* WATCH */}
 #### watch
 ```luau
 fs.watch(path: string, callback: (path: string, events: {"created" | "modified" | "moved" | "renamed" | "deleted" | "metadata"}) -> ()): FileWatcher
@@ -187,7 +174,6 @@ Watches a directory for changes.
 ##### Returns
 - [`FileWatcher`](#filewatcher) - The file watcher.
 
-{/* OPENFILE */}
 #### openFile
 ```luau
 fs.openFile(path: string, opts: OpenFileOptions?): (boolean, FileHandle | FileReadError);
@@ -199,7 +185,6 @@ fs.openFile(path: string, opts: OpenFileOptions?): (boolean, FileHandle | FileRe
 - `boolean` - If the operation was successful.
 - [`FileHandle`](#filehandle) | [`FileReadError`](#filereaderror) - The file handle or an error.
 
-{/* CREATEFILE */}
 #### createFile
 ```luau
 fs.createFile(path: string, opts: CreateFileOptions?): (boolean, FileHandle | FileReadError);
@@ -212,7 +197,6 @@ fs.createFile(path: string, opts: CreateFileOptions?): (boolean, FileHandle | Fi
 - [`FileHandle`](#filehandle) | [`FileReadError`](#filereaderror) - The file handle or an error.
 
 ## Types
-{/* IOError */}
 #### IOError
 ```luau copy
 type IOError = "AccessDenied"
@@ -220,44 +204,37 @@ type IOError = "AccessDenied"
 | "UnknownError"
 ```
 
-{/* DISKERROR */}
 #### DiskError
 ```luau copy
 type DiskError = "DiskQuotaExceeded"
 ```
 
-{/* FILEERROR */}
 #### FileError
 ```luau copy
 type FileError = "Aborted"
 ```
 
-{/* DEVICEERROR */}
 #### DeviceError
 ```luau copy
 type DeviceError = "Busy"
 ```
 
-{/* READERROR */}
 #### ReadError
 ```luau copy
 type ReadError = "OutOfMemory"
 ```
 
-{/* NETWORKERROR */}
 #### NetworkError
 ```luau copy
 type NetworkError = "NetworkNotFound"
 ```
 
-{/* ENCODINGERROR */}
 #### EncodingError
 ```luau copy
 type EncodingError = "InvalidUtf-8"
 | "InvalidWtf-8"
 ```
 
-{/* FILEREADERROR */}
 #### FileReadError
 ```luau copy
 export type FileReadError = IOError
@@ -269,7 +246,6 @@ export type FileReadError = IOError
 | "FailedToCreateBuffer"
 ```
 
-{/* FILEWRITEERROR */}
 #### FileWriteError
 ```luau copy
 export type FileWriteError = IOError
@@ -283,7 +259,6 @@ export type FileWriteError = IOError
 | "FailedToWriteBuffer"
 ```
 
-{/* DIRWRITEERROR */}
 #### DirWriteError
 ```luau copy
 export type DirWriteError = IOError
@@ -297,7 +272,6 @@ export type DirWriteError = IOError
 | "SymbolicLinkQuotaExceeded"
 ```
 
-{/* FILEREMOVEERROR */}
 #### FileRemoveError
 ```luau copy
 export type FileRemoveError = IOError
@@ -305,7 +279,6 @@ export type FileRemoveError = IOError
 | "NotFile"
 ```
 
-{/* DIRREMOVEERROR */}
 #### DirRemoveError
 ```luau copy
 export type DirRemoveError = IOError
@@ -314,14 +287,12 @@ export type DirRemoveError = IOError
 | "DirNotEmpty"
 ```
 
-{/* METADATAERROR */}
 #### MetadataError
 ```luau copy
 export type MetadataError = IOError
 | DeviceError
 ```
 
-{/* METADATAKIND */}
 #### MetadataKind
 ```luau copy
 export type MetadataKind = "file"
@@ -337,7 +308,6 @@ export type MetadataKind = "file"
 	| "unknown"
 ```
 
-{/* METADATA */}
 #### Metadata
 ```luau copy
 export type Metadata = {
@@ -353,7 +323,6 @@ export type Metadata = {
 }
 ```
 
-{/* MOVEERROR */}
 #### MoveError
 ```luau copy
 export type MoveError = IOError
@@ -372,14 +341,12 @@ export type MoveError = IOError
 | "BadName"
 ```
 
-{/* COPYERROR */}
 #### CopyError
 ```luau copy
 export type CopyError = IOError
 | DeviceError
 ```
 
-{/* SYMLINKERROR */}
 #### SymlinkError
 ```luau copy
 export type SymlinkError = IOError
@@ -397,7 +364,6 @@ export type SymlinkError = IOError
 | "NotSupported"
 ```
 
-{/* FILEWATCHER */}
 #### FileWatcher
 ```luau copy
 export type FileWatcher = {
@@ -408,7 +374,6 @@ export type FileWatcher = {
 }
 ```
 
-{/* FILEHANDLE */}
 #### FileHandle
 ```luau copy
 
@@ -506,7 +471,6 @@ export type FileHandle = {
 }
 ```
 
-{/* OPENFILEOPTIONS */}
 #### OpenFileOptions
 ```luau copy
 type OpenFileOptions = {
@@ -521,7 +485,6 @@ type OpenFileOptions = {
 }
 ```
 
-{/* CREATEFILEOPTIONS */}
 #### CreateFileOptions
 ```luau copy
 type CreateFileOptions = {

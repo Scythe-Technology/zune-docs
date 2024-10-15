@@ -10,7 +10,6 @@ import { Callout } from 'nextra/components'
 3. [websocket](#websocket)
 
 ## Functions
-{/* SERVE */}
 #### serve
 ```luau
 net.serve(options: ServeOptions): (boolean, string | ServerHandle)
@@ -22,7 +21,6 @@ Starts a server on the specified port.
 - `boolean` - Whether the server started successfully.
 - `string` | [`ServerHandle`](#serverhandle) - The error message, or the server handle.
 
-{/* REQUEST */}
 #### request
 ```luau
 net.request(host: string, options: RequestOptions?): (boolean, string | Response)
@@ -36,7 +34,6 @@ Optional options, defaults to GET request.
 - `host: string` - The host to make the request to.
 - `options:`[`RequestOptions?`](#requestoptions) - The options for the request.
 
-{/* WEBSOCKET */}
 #### websocket
 ```luau
 net.websocket(host: string, protocols: {string}?): (boolean, string | ClientWebSocket)
@@ -52,7 +49,6 @@ Creates a websocket client.
 - `string` | [`ClientWebSocket`](#clientwebsocket) - The error message, or the websocket handle.
 
 ## Types
-{/* SERVERREQUEST */}
 #### ServerRequest
 ```luau copy
 export type ServerRequest = {
@@ -63,7 +59,6 @@ export type ServerRequest = {
 }
 ```
 
-{/* SERVERRESPONSE */}
 #### ServerResponse
 ```luau copy
 export type ServerResponse = {
@@ -73,7 +68,6 @@ export type ServerResponse = {
 }
 ```
 
-{/* WEBSOCKET */}
 #### WebSocket
 ```luau copy
 export type WebSocket = userdata<{
@@ -92,7 +86,6 @@ export type WebSocket = userdata<{
 }>
 ```
 
-{/* CLIENTWEBSOCKET */}
 #### ClientWebSocket
 ```luau copy
 export type ClientWebSocket = WebSocket & userdata<{
@@ -117,7 +110,6 @@ export type ClientWebSocket = WebSocket & userdata<{
 }>
 ```
 
-{/* SERVERWEBSOCKETHANDLERS */}
 #### ServerWebSocketHandlers
 ```luau copy
 export type ServerWebSocketHandlers = {
@@ -149,7 +141,6 @@ export type ServerWebSocketHandlers = {
 };
 ```
 
-{/* SERVEOPTIONS */}
 #### ServeOptions
 ```luau copy
 export type ServeOptions = {
@@ -184,7 +175,6 @@ export type ServeOptions = {
 }
 ```
 
-{/* BAREREQUESTOPTIONS */}
 #### BareRequestOptions
 ```luau copy
 type BareRequestOptions = {
@@ -199,7 +189,6 @@ type BareRequestOptions = {
 }
 ```
 
-{/* BODYREQUESTOPTIONS */}
 #### BodyRequestOptions
 ```luau copy
 type BodyRequestOptions = {
@@ -209,13 +198,11 @@ type BodyRequestOptions = {
 }
 ```
 
-{/* REQUESTOPTIONS */}
 #### RequestOptions
 ```luau copy
 export type RequestOptions = BareRequestOptions & BodyRequestOptions
 ```
 
-{/* SERVERHANDLE */}
 #### ServerHandle
 ```luau copy
 export type ServerHandle = userdata<{
@@ -226,7 +213,6 @@ export type ServerHandle = userdata<{
 }>
 ```
 
-{/* RESPONSE */}
 #### Response
 ```luau copy
 export type Response = {

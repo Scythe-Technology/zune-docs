@@ -21,13 +21,11 @@ A built-in testing suite for Luau.
 5. [expectEqual](#expectEqual)
 
 ## Properties
-{/* RUNNING */}
 #### running
 ```luau
 running: boolean
 ```
 Whether the testing suite is running.
-{/* _FAILED */}
 #### _FAILED
 ```luau
 _FAILED: number
@@ -36,7 +34,6 @@ _FAILED: number
 
 The number of tests that have failed.
 
-{/* _COUNT */}
 #### _COUNT
 ```luau
 _COUNT: number
@@ -45,7 +42,6 @@ _COUNT: number
 
 The number of tests conducted.
 
-{/* _START */}
 #### _START
 ```luau
 _START: number
@@ -55,7 +51,6 @@ _START: number
 The time the testing suite started. Based on `os.clock()`.
 
 ## Functions
-{/* TEST */}
 #### test
 ```luau
 testing.test(name: string, callback: () -> ()): ()
@@ -68,7 +63,6 @@ Conducts a test.
 - `callback: () -> ()` - The function to run the test.
   - The function should throw an error if the test fails.
 
-{/* DESCRIBE */}
 #### describe
 ```luau
 testing.describe(name: string, callback: () -> ()): ()
@@ -82,7 +76,6 @@ Describes a test suite.
   - The function should not error, and should call test functions.
   - If the function does error, it will still count as a fail.
 
-{/* DEFER */}
 #### defer
 ```luau
 testing.defer(fn: () -> ()): ()
@@ -94,7 +87,6 @@ Useful for cleaning up resources.
 ##### Parameters
 - `fn: () -> ()` - The function to defer.
 
-{/* EXPECT */}
 #### expect
 ```luau
 testing.expect(value: any): ExpectCases | FunctionalCases
@@ -104,7 +96,6 @@ testing.expect(value: any): ExpectCases | FunctionalCases
 ##### Returns
 - [`ExpectCases`](#expectcases) | [`FunctionalCases`](#functionalcases) - The object to test the value.
 
-{/* EXPECTED */}
 #### expected
 ```luau
 testing.expected(value: any): ()
@@ -120,7 +111,6 @@ Similar to `assert(value)`
 ##### Throws
 - If the function fails, an error will be thrown.
 
-{/* EXPECTEQUAL */}
 #### expectEqual
 ```luau
 testing.expectEqual(expected: any, value: any): ()

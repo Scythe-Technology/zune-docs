@@ -43,10 +43,10 @@ export default {
     </>
   ),
   useNextSeoProps() {
-    const { asPath } = useRouter()
+    const { asPath, pathname } = useRouter()
     if (asPath !== '/') {
       return {
-        titleTemplate: 'Zune - %s'
+        titleTemplate: `Zune - ${pathname.split('/').pop()}`
       }
     }
   }

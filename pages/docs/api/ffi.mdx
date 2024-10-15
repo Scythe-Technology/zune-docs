@@ -1,0 +1,323 @@
+## Foreign Function Interface
+
+import { Callout } from 'nextra/components'
+
+<Callout type="warning" emoji="⚠️">Experimental</Callout>
+
+Must be enabled in `zune.toml` to use.
+```toml
+[experimental]
+ffi=true
+```
+
+<Callout type="info" emoji="ℹ️">Page is being worked on.</Callout>
+
+### Properties
+1. [supported](#supported)
+2. [prefix](#prefix)
+3. [suffix](#suffix)
+
+### Functions
+1. [sizeOf](#sizeof)
+2. [alignOf](#alignOf)
+3. [eqlPtr](#eqlptr)
+4. [intFromPtr](#intfromptr)
+5. [valueFromPtr](#valuefromptr)
+6. [readFromPtr](#readfromptr)
+7. [spanFromPtr](#spanFromPtr)
+8. [writeIntoPtr](#writeIntoPtr)
+9. [struct](#struct)
+10. [call](#call)
+11. [closure](#closure)
+12. [dlopen](#dlopen)
+
+### Namespaces
+1. [types](#types)
+
+## Properties
+
+### supported
+```luau
+ffi.supported: boolean
+```
+Whether the FFI is supported on the platform.
+
+### prefix
+```luau
+ffi.prefix: string
+```
+The recommended prefix for the library file.
+Platforms:
+- Windows: none
+- Linux: `lib`
+- macOS: `lib`
+
+### suffix
+```luau
+ffi.suffix: string
+```
+The recommended suffix for the library file.
+Platforms:
+- Windows: `.dll`
+- Linux: `.so`
+- macOS: `.dylib`
+
+## Functions
+
+### sizeOf
+```luau
+ffi.sizeOf(type: Structure | number): number
+```
+Gets the size of a type.
+#### Parameters
+- `type:` [`Structure`](#structure) | `number` - The type to get the size of.
+#### Returns
+- `number` - The size of the type.
+
+### alignOf
+```luau
+ffi.alignOf(type: Structure | number): number
+```
+Gets the alignment of a type.
+#### Parameters
+- `type:` [`Structure`](#structure) | `number` - The type to get the alignment of.
+#### Returns
+- `number` - The alignment of the type.
+
+### eqlPtr
+```luau
+ffi.eqlPtr(a: buffer, b: buffer?): boolean
+```
+Checks if two underlying pointers are equal from a buffer.
+#### Parameters
+- `a: buffer` - The first pointer.
+- `b: buffer?` - The second pointer.
+#### Returns
+- `boolean` - Whether the pointers are equal.
+
+### intFromPtr
+```luau
+ffi.intFromPtr(ptr: buffer, src: buffer): buffer
+```
+Gets then integer from of the source pointer and writes the value to the destination pointer.
+#### Parameters
+- `ptr: buffer` - The destination pointer.
+- `src: buffer` - The source pointer.
+#### Returns
+- `buffer` - The destination pointer.
+
+### valueFromPtr
+```luau
+ffi.valueFromPtr(ptr: buffer, type: Structure | number): any
+```
+Gets the value from a pointer.
+#### Parameters
+- `ptr: buffer` - The buffer holding the pointer.
+- `type:` [`Structure`](#structure) | `number` - The type of the value.
+#### Returns
+- `any` - The value.
+
+### readFromPtr
+```luau
+ffi.readFromPtr(srcPtr: buffer, srcOffset: number, dest: buffer, destOffset: number, size: number): ()
+```
+Reads data from a pointer to a buffer.
+#### Parameters
+- `srcPtr: buffer` - The source pointer.
+- `srcOffset: number` - The source offset.
+- `dest: buffer` - The destination buffer.
+- `destOffset: number` - The destination offset.
+- `size: number` - The size to read.
+
+### spanFromPtr
+```luau
+ffi.spanFromPtr(srcPtr: buffer, srcOffset: number): buffer
+```
+Takes a pointer and loops through it until it finds a null terminator.
+#### Parameters
+- `srcPtr: buffer` - The source pointer.
+- `srcOffset: number` - The source offset.
+#### Returns
+- `buffer` - The data.
+
+### writeIntoPtr
+```luau
+ffi.writeIntoPtr(destPtr: buffer, destOffset: number, src: buffer, srcOffset: number, size: number): ()
+```
+Writes data from a buffer to a pointer.
+#### Parameters
+- `destPtr: buffer` - The destination pointer.
+- `destOffset: number` - The destination offset.
+- `src: buffer` - The source buffer.
+- `srcOffset: number` - The source offset.
+- `size: number` - The size to write.
+
+### struct
+```luau
+ffi.struct(name: string, fields: {{ [string]: Structure | number }}): Structure
+```
+Creates a structure.
+#### Parameters
+- `name: string` - The name of the structure.
+- `fields: {{ [string]:` [`Structure`](#structure) | `number` `}}` - The fields of the structure.
+#### Returns
+- [`Structure`](#structure) - The structure.
+
+### call
+```luau
+ffi.call(definition: FunctionDefinition, srcPtr: buffer, ...any): any
+```
+Calls a function at the pointer.
+#### Parameters
+- `definition:` [`FunctionDefinition`](#functiondefinition) - The function definition.
+- `srcPtr: buffer` - The pointer to the function.
+- `...any` - The arguments to pass to the function.
+#### Returns
+- `any` - The return value.
+
+### closure
+```luau
+ffi.closure(definition: FunctionDefinition, handler: (...any) -> any): Closure
+```
+Creates a closure for C functions to use, calling the lua handler.
+#### Parameters
+- `definition:` [`FunctionDefinition`](#functiondefinition) - The function definition.
+- `handler: (...any) -> any` - The lua function.
+#### Returns
+- [`Closure`](#closure-1) - The closure.
+
+### dlopen
+```luau
+ffi.dlopen(path: string, { [string] : FunctionDefinition }): Library
+```
+Opens a dynamic library.
+#### Parameters
+- `path: string` - The path to the library.
+- `{ [string] :` [`FunctionDefinition`](#functiondefinition) `}` - The functions to load.
+#### Returns
+- [`Library`](#library) - The library.
+
+## Namespaces
+
+### types
+
+#### Properties
+1. [types.void](#typesvoid)
+2. [types.i8](#typesi8)
+3. [types.u8](#typesu8)
+4. [types.i16](#typesi16)
+5. [types.u16](#typesu16)
+6. [types.i32](#typesi32)
+7. [types.u32](#typesu32)
+8. [types.i64](#typesi64)
+9. [types.u64](#typesu64)
+10. [types.float](#typesfloat)
+11. [types.double](#typesdouble)
+12. [types.pointer](#typespointer)
+
+---
+### types.void
+```luau
+ffi.types.void: number
+```
+The void type.
+
+### types.i8
+```luau
+ffi.types.i8: number
+```
+The signed 8-bit integer type.
+
+### types.u8
+```luau
+ffi.types.u8: number
+```
+The unsigned 8-bit integer type.
+
+### types.i16
+```luau
+ffi.types.i16: number
+```
+The signed 16-bit integer type.
+
+### types.u16
+```luau
+ffi.types.u16: number
+```
+The unsigned 16-bit integer type.
+
+### types.i32
+```luau
+ffi.types.i32: number
+```
+The signed 32-bit integer type.
+
+### types.u32
+```luau
+ffi.types.u32: number
+```
+The unsigned 32-bit integer type.
+
+### types.i64
+```luau
+ffi.types.i64: number
+```
+The signed 64-bit integer type.
+
+### types.u64
+```luau
+ffi.types.u64: number
+```
+The unsigned 64-bit integer type.
+
+### types.float
+```luau
+ffi.types.float: number
+```
+The float (f32) type.
+
+### types.double
+```luau
+ffi.types.double: number
+```
+The double (f64) type.
+
+### types.pointer
+```luau
+ffi.types.pointer: number
+```
+The pointer type.
+
+## Types
+#### FunctionDefinition
+```luau copy
+export type FunctionDefinition = {
+    returns : Structure | number,
+    args : { Structure | number }
+}
+```
+
+#### Closure
+```luau copy
+export type Closure = {
+    ptr : buffer
+}
+```
+
+#### Library
+```luau copy
+export type Library = {
+    close : (self: Library) -> (),
+    [string]: (...any) -> any,
+}
+```
+
+#### Structure
+```luau copy
+export type Structure = {
+    size : (self: Structure) -> number,
+    alignment : (self: Structure) -> number,
+    offset : (self: Structure, field: string) -> number,
+    new : (self: Structure, fields: {{ [string]: buffer | number }}) -> buffer,
+}
+```

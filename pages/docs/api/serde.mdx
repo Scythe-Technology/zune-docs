@@ -6,54 +6,185 @@ import { Callout } from 'nextra/components'
 
 ### Namespaces
 1. [json](#json)
-2. [toml](#toml)
-3. [yaml](#yaml)
-4. [gzip](#gzip)
-5. [zlib](#zlib)
-6. [lz4](#lz4)
-7. [base64](#base64)
+2. [json5](#json5)
+3. [toml](#toml)
+4. [yaml](#yaml)
+5. [gzip](#gzip)
+6. [zlib](#zlib)
+7. [lz4](#lz4)
+8. [base64](#base64)
 
 ---
-{/* JSON */}
 ### json
 
 #### Functions
 1. [json.encode](#jsonencode)
 2. [json.decode](#jsondecode)
 
+#### Namespaces
+1. [json.Indents](#indents)
+2. [json.Values](#values)
+
+### Functions
 ---
-{/* JSON.ENCODE */}
 #### json.encode
 ```luau
-serde.json.encode(value: any): string
+serde.json.encode(value: any, config: JsonEncodeConfig?): string
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Encodes a value to JSON
 ##### Parameters
 - `value: any` - The value to encode.
+- `config:` [`JsonEncodeConfig`](#jsonencodeconfig)`?` - The configuration for the encoding.
 ##### Returns
 - `string` - The encoded JSON.
 ##### Throws
 - If the value is invalid, an error will be thrown.
 
-{/* JSON.DECODE */}
 #### json.decode
 ```luau
-serde.json.decode(json: string): any
+serde.json.decode(json: string, config: JsonDecodeConfig?): any
 ```
 <Callout type="warning" emoji="️⚠️">Can Error</Callout>
 
 Decodes JSON
 ##### Parameters
 - `json: string` - The JSON to decode.
+- `config:` [`JsonDecodeConfig`](#jsondecodeconfig)`?` - The configuration for the decoding.
 ##### Returns
 - `any` - The decoded value.
 ##### Throws
 - If the JSON is invalid, an error will be thrown.
 
+### Namespaces
+
+#### Indents
+
+##### Properties
+1. [None](#none)
+2. [TwoSpaces](#twospaces)
+3. [FourSpaces](#fourspaces)
+4. [Tabs](#tabs)
+
+#### None
+```luau
+serde.json.Indents.None: number
+```
+
+#### TwoSpaces
+```luau
+serde.json.Indents.TwoSpaces: number
+```
+
+#### FourSpaces
+```luau
+serde.json.Indents.FourSpaces: number
+```
+
+#### Tabs
+```luau
+serde.json.Indents.Tabs: number
+```
+
+#### Values
+
+##### Properties
+1. [Null](#null)
+
+#### Null
+```luau
+serde.json.Values.Null: any
+```
+
 ---
-{/* TOML */}
+### json5
+
+#### Functions
+1. [json5.encode](#json5encode)
+2. [json5.decode](#json5decode)
+
+#### Namespaces
+1. [json5.Indents](#indents-1)
+2. [json5.Values](#values-1)
+
+### Functions
+---
+#### json5.encode
+```luau
+serde.json5.encode(value: any, config: JsonEncodeConfig?): string
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Encodes a value to JSON
+##### Parameters
+- `value: any` - The value to encode.
+- `config:` [`JsonEncodeConfig`](#jsonencodeconfig)`?` - The configuration for the encoding.
+##### Returns
+- `string` - The encoded JSON.
+##### Throws
+- If the value is invalid, an error will be thrown.
+
+#### json5.decode
+```luau
+serde.json5.decode(json: string, config: JsonDecodeConfig?): any
+```
+<Callout type="warning" emoji="️⚠️">Can Error</Callout>
+
+Decodes JSON5
+##### Parameters
+- `json: string` - The JSON5 to decode.
+- `config:` [`JsonDecodeConfig`](#jsondecodeconfig)`?` - The configuration for the decoding.
+##### Returns
+- `any` - The decoded value.
+##### Throws
+- If the JSON5 is invalid, an error will be thrown.
+
+### Namespaces
+
+#### Indents
+
+The same as [json.Indents](#indents).
+
+##### Properties
+1. [None](#none-1)
+2. [TwoSpaces](#twospaces-1)
+3. [FourSpaces](#fourspaces-1)
+4. [Tabs](#tabs-1)
+
+#### None
+```luau
+serde.json5.Indents.None: number
+```
+
+#### TwoSpaces
+```luau
+serde.json5.Indents.TwoSpaces: number
+```
+
+#### FourSpaces
+```luau
+serde.json5.Indents.FourSpaces: number
+```
+
+#### Tabs
+```luau
+serde.json5.Indents.Tabs: number
+```
+
+#### Values
+
+The same as [json.Values](#values).
+
+##### Properties
+1. [Null](#null-1)
+
+#### Null
+```luau
+serde.json5.Values.Null: any
+```
+
+---
 ### toml
 
 #### Functions
@@ -61,7 +192,6 @@ Decodes JSON
 2. [toml.decode](#tomldecode)
 
 ---
-{/* TOML.ENCODE */}
 #### toml.encode
 ```luau
 serde.toml.encode(object: {[string]: any}): string
@@ -76,7 +206,6 @@ Encodes a table to TOML
 ##### Throws
 - If the table is invalid, an error will be thrown.
 
-{/* TOML.DECODE */}
 #### toml.decode
 ```luau
 serde.toml.decode(toml: string): {[string]: any}
@@ -92,7 +221,6 @@ Decodes TOML
 - If the TOML is invalid, an error will be thrown.
 
 ---
-{/* YAML */}
 ### yaml
 
 #### Functions
@@ -100,7 +228,6 @@ Decodes TOML
 2. [yaml.decode](#yamldecode)
 
 ---
-{/* YAML.ENCODE */}
 #### yaml.encode
 ```luau
 serde.yaml.encode(object: {[string]: any}): string
@@ -115,7 +242,6 @@ Encodes a table to YAML
 ##### Throws
 - If the table is invalid, an error will be thrown.
 
-{/* YAML.DECODE */}
 #### yaml.decode
 ```luau
 serde.yaml.decode(yaml: string): {[string]: any}
@@ -131,7 +257,6 @@ Decodes YAML
 - If the YAML is invalid, an error will be thrown.
 
 ---
-{/* GZIP */}
 ### gzip
 [`GenericCompressor`](#genericcompressor)
 
@@ -140,7 +265,6 @@ Decodes YAML
 2. [gzip.decompress](#gzipdecompress)
 
 ---
-{/* GZIP.COMPRESS */}
 #### gzip.compress
 ```luau
 serde.gzip.compress(raw: string, options: GenericCompressionOptions?): string
@@ -158,7 +282,6 @@ Compresses a string.
 - If the compression fails, an error will be thrown.
 - If the options are invalid, an error will be thrown.
 
-{/* GZIP.DECOMPRESS */}
 #### gzip.decompress
 ```luau
 serde.gzip.decompress(compressed: string): string
@@ -175,7 +298,6 @@ Decompresses a string.
 - If the decompression fails, an error will be thrown.
 
 ---
-{/* ZLIB */}
 ### zlib
 [`GenericCompressor`](#genericcompressor)
 
@@ -184,7 +306,6 @@ Decompresses a string.
 2. [zlib.decompress](#zlibdecompress)
 
 ---
-{/* ZLIB.COMPRESS */}
 #### zlib.compress
 ```luau
 serde.zlib.compress(raw: string, options: GenericCompressionOptions?): string
@@ -202,7 +323,6 @@ Compresses a string.
 - If the compression fails, an error will be thrown.
 - If the options are invalid, an error will be thrown.
 
-{/* ZLIB.DECOMPRESS */}
 #### zlib.decompress
 ```luau
 serde.zlib.decompress(compressed: string): string
@@ -219,7 +339,6 @@ Decompresses a string.
 - If the decompression fails, an error will be thrown.
 
 ---
-{/* LZ4 */}
 ### lz4
 [`GenericCompressor`](#genericcompressor)
 
@@ -228,7 +347,6 @@ Decompresses a string.
 2. [lz4.decompress](#lz4decompress)
 
 ---
-{/* LZ4.COMPRESS */}
 #### lz4.compress
 ```luau
 serde.lz4.compress(raw: string, options: GenericCompressionOptions?): string
@@ -246,7 +364,6 @@ Compresses a string.
 - If the compression fails, an error will be thrown.
 - If the options are invalid, an error will be thrown.
 
-{/* LZ4.DECOMPRESS */}
 #### lz4.decompress
 ```luau
 serde.lz4.decompress(compressed: string): string
@@ -264,7 +381,6 @@ Decompresses a string.
 - If the options are invalid, an error will be thrown.
 
 ---
-{/* BASE64 */}
 ### base64
 
 #### Functions
@@ -272,7 +388,6 @@ Decompresses a string.
 2. [base64.decode](#base64decode)
 
 ---
-{/* BASE64.ENCODE */}
 #### base64.encode
 ```luau
 serde.base64.encode(value: string): string
@@ -287,7 +402,6 @@ Encodes a string to base64
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* BASE64.DECODE */}
 #### base64.decode
 ```luau
 serde.base64.decode(base64: string): string
@@ -304,7 +418,6 @@ Decodes base64
 - If out of memory, an error will be thrown.
 
 ## Types
-{/* GENERICCOMPRESSIONOPTIONS */}
 #### GenericCompressionOptions
 ```luau copy
 export type GenericCompressionOptions = {
@@ -315,7 +428,6 @@ export type GenericCompressionOptions = {
 }
 ```
 
-{/* GENERICCOMPRESSOR */}
 #### GenericCompressor
 ```luau copy
 export type GenericCompressor = {

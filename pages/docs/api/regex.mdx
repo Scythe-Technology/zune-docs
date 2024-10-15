@@ -11,7 +11,6 @@ import { Callout } from 'nextra/components'
 1. [Regex](#regex)
 
 ## Functions
-{/* NEW */}
 #### new
 ```luau
 regex.new(pattern: string, flags: string?): Regex
@@ -32,7 +31,6 @@ Flags:
 - If the pattern is invalid, an error will be thrown.
 
 ## Classes
-{/* REGEX */}
 ### Regex
 #### Functions
 1. [match](#regexmatch)
@@ -44,7 +42,6 @@ Flags:
 7. [captures](#regexcaptures)
 
 ---
-{/* MATCH */}
 #### Regex.match
 ```luau
 regex.Regex:match(str: string): {RegexMatch}?
@@ -59,7 +56,6 @@ Match a string
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* SEARCH */}
 #### Regex.search
 ```luau
 regex.Regex:search(str: string): {RegexMatch}?
@@ -74,7 +70,6 @@ Search a string
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* FORMAT */}
 #### Regex.format
 ```luau
 regex.Regex:format(str: string, format: string): string
@@ -89,7 +84,6 @@ Format a string
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* ISMATCH */}
 #### Regex.isMatch
 ```luau
 regex.Regex:isMatch(str: string): boolean
@@ -100,7 +94,6 @@ Check if a string matches
 ##### Returns
 - `boolean` - If the string matches.
 
-{/* REPLACE */}
 #### Regex.replace
 ```luau
 regex.Regex:replace(str: string, replacement: string): string
@@ -116,7 +109,6 @@ Replace the first occurrence of a string
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* REPLACEALL */}
 #### Regex.replaceAll
 ```luau
 regex.Regex:replaceAll(str: string, replacement: string): string
@@ -132,7 +124,6 @@ Replace all occurrences of a string
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* CAPTURES */}
 #### Regex.captures
 ```luau
 regex.Regex:captures(str: string, global: boolean?): {{RegexMatch}}

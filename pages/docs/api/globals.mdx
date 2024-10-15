@@ -17,7 +17,6 @@ for the rest of the globals.
 3. [warn](#warn)
 
 ## Variables
-{/* _VERSION */}
 #### _VERSION
 ```luau
 _VERSION: string
@@ -43,7 +42,6 @@ if (isZune) then
 end
 ```
 
-{/* _FILE */}
 #### _FILE
 ```luau
 _FILE: string
@@ -52,7 +50,6 @@ The path of the file that is currently being executed, as an `Absolute` path.
 This variable may not be available in all cases, such as executing luau in a custom environment.
 
 ## Functions
-{/* PRINT */}
 #### print
 ```luau
 print(...any): ()
@@ -61,7 +58,6 @@ print(...any): ()
 - `...any` - Values to print.
   - A table will be transformed into readable string, this is recursive.
 
-{/* REQUIRE */}
 #### require
 ```luau
 require(path: string): any
@@ -78,7 +74,6 @@ require(path: string): any
 - If the module throws an error, the error will be thrown.
 - If out of memory, an error will be thrown.
 
-{/* WARN */}
 #### warn
 ```luau
 warn(...any): ()

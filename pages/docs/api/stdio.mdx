@@ -27,7 +27,6 @@ import { Callout } from 'nextra/components'
 
 ## Properties
 
-{/* MAX_READ */}
 ### MAX_READ
 ```luau
 stdio.MAX_READ: number
@@ -35,7 +34,6 @@ stdio.MAX_READ: number
 The maximum recommended amount of bytes to be read.
 
 ## Functions
-{/* CURSORMOVE */}
 #### cursorMove
 ```luau
 stdio.cursorMove(action: "home"): string
@@ -66,7 +64,6 @@ Moves the cursor.
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* ERASE */}
 #### erase
 ```luau
 stdio.erase(erase: "endOf" | "startOf" | "entire" | "savedLines" | "endOfLine" | "startOfLine" | "entireLine"): string
@@ -87,7 +84,6 @@ Erases the screen.
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* STYLE */}
 #### style
 ```luau
 stdio.style(style: "bold" | "dim" | "italic" | "underline" | "blinking" | "inverse" | "hidden" | "strikethrough"): string
@@ -105,7 +101,6 @@ Styles the text.
 ##### Returns
 - `string` - The ANSI escape sequence.
 
-{/* RESET */}
 #### reset
 ```luau
 stdio.reset(): string
@@ -129,7 +124,6 @@ Resets the text style.
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* COLOR */}
 #### color
 ```luau
 stdio.color(color: "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white" | "bblack" | "bred" | "bgreen" | "byellow" | "bblue" | "bmagenta" | "bcyan" | "bwhite"): string
@@ -159,7 +153,6 @@ Generates color.
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* BGCOLOR */}
 #### bgcolor
 ```luau
 stdio.bgcolor(color: "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white" | "bblack" | "bred" | "bgreen" | "byellow" | "bblue" | "bmagenta" | "bcyan" | "bwhite"): string
@@ -189,7 +182,6 @@ Generates background color.
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* COLOR256 */}
 #### color256
 ```luau
 stdio.color256(code: number): string
@@ -204,7 +196,6 @@ Generates color with a 256 color code.
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* BGCOLOR256 */}
 #### bgcolor256
 ```luau
 stdio.bgcolor256(code: number): string
@@ -215,7 +206,6 @@ Generates background color with a 256 color code.
 ##### Returns
 - `string` - The ANSI escape sequence.
 
-{/* TRUECOLOR */}
 #### trueColor
 ```luau
 stdio.trueColor(r: number, g: number, b: number): string
@@ -232,7 +222,6 @@ Generates true color.
 ##### Throws
 - If out of memory, an error will be thrown.
 
-{/* BGTRUECOLOR */}
 #### bgtrueColor
 ```luau
 stdio.bgtrueColor(r: number, g: number, b: number): string
@@ -251,7 +240,6 @@ Generates background true color.
 
 ## Classes
 
-{/* STDOUT */}
 ### stdout
 
 #### Functions
@@ -271,7 +259,6 @@ Writes to stdout.
 - If the stdout fails to write, an error will be thrown.
 
 ---
-{/* STDERR */}
 ### stderr
 
 #### Functions
@@ -291,7 +278,6 @@ Writes to stderr.
 - If the stderr fails to write, an error will be thrown.
 
 ---
-{/* STDIN */}
 ### stdin
 
 #### Functions
@@ -314,7 +300,6 @@ Reads from stdin.
 - If the input fails to read, an error will be thrown.
 
 ---
-{/* TERMINAL */}
 ### terminal
 
 #### Properties
