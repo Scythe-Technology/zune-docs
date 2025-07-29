@@ -1,0 +1,183 @@
+@import 'tailwindcss';
+@import 'nextra-theme-docs/style.css';
+
+@tailwind utilities;
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    --x-color-nextra-bg: #d9d9d9;
+    --x-color-gray-100: #e0e0e0;
+}
+
+.dark {
+    --x-color-nextra-bg: #010101;
+    --x-color-neutral-900: #020202;
+    --x-color-gray-50: #5f5f5f;
+}
+
+.dark body {
+    background-color: rgba(0, 0, 0, 0.65) !important;
+}
+
+div.nextra-code {
+    margin-top: calc(var(--x-spacing) * 3);
+    overflow: auto;
+}
+
+.luau-code-block {
+    overflow-y: visible;
+    overflow-x: auto;
+}
+
+.luau-tooltips {
+    display: inline;
+    cursor: pointer;
+    position: relative;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+    color: var(--shiki-light, #24292e);
+}
+
+.dark .luau-tooltips {
+    color: var(--shiki-dark, #e1e4e8);
+}
+
+.luau-tooltips-content {
+    position: fixed;
+    z-index: 10;
+    top: 100%;
+    left: 0;
+    padding: 8px;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: grid;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    overflow: auto;
+    background-color: var(--x-color-white);
+    transform: scale(0.95);
+    transform-origin: center center;
+    transition:
+        transform 0.12s ease-in-out,
+        opacity 0.15s ease-in-out,
+        visibility 0.15s ease-in-out;
+}
+
+.dark .luau-tooltips-content {
+    background-color: var(--x-color-black);
+}
+
+.luau-tooltips:hover .luau-tooltips-content {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+.luau-tooltips-content-static {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: scale(1) !important;
+}
+
+/* x:dark:nextra-border {
+    border-color: rgb(0, 0, 0) !important;
+}
+
+.nextra-border {
+    border-color: rgb(255, 255, 255) !important;
+} */
+
+/* .light body {
+    background-color: rgb(232, 232, 232) !important;
+} */
+
+/* .nx-bg-transparent {
+    background-color: rgb(8, 8, 8) !important;
+} */
+
+div :is(html[class~="dark"] .dark\:nx-bg-primary-300\/10) {
+    background-color: black !important;
+}
+
+div .nx-bg-primary-700\/5 {
+    background-color: rgb(216, 216, 216) !important;
+}
+
+div.x\:sticky:nth-child(2) {
+    background-color: rgba(255, 255, 255, 0) !important;
+}
+
+/* .light .nextra-nav-container-blur2 {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+} */
+
+/* .dark .nextra-nav-container-blur2 {
+    background-color: rgba(0, 0, 0, 1) !important;
+} */
+
+/* .dark .nx-text-gray-400 {
+    color: rgba(160, 160, 160, 0);
+} */
+
+.theme-toggle-button span {
+    visibility: collapse;
+}
+
+.pattern-container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    filter: contrast(10);
+    --mask: linear-gradient(rgba(0, 0, 0, 0.425), rgba(255, 0, 0, 0.8));
+    z-index: -100;
+    overflow: visible;
+    animation: wave-pattern 8s ease-in-out 0s infinite alternate;
+}
+
+.pattern-container::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    content: "";
+}
+
+.dark .pattern-container {
+    background-color: rgba(0, 0, 0, 1);
+    opacity: 0.025;
+}
+
+.dark .pattern-container::before {
+    background: linear-gradient(45deg, #fff, transparent) 0 0/1em 1em space;
+}
+
+.light .pattern-container {
+    background-color: rgba(255, 255, 255, 1);
+    opacity: 0.1;
+}
+
+.light .pattern-container::before {
+    background: linear-gradient(45deg, #000, transparent) 0 0/1em 1em space;
+}
+
+.nextra-nav-container-blur {
+    opacity: 0;
+}
+
+@keyframes wave-pattern {
+    0% {
+        margin-top: 10rem;
+    }
+
+    100% {
+        margin-top: 6rem;
+    }
+}

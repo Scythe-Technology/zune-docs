@@ -15,7 +15,7 @@ Hello World!
   </Tabs.Tab>
   <Tabs.Tab>
 ```luau copy showLineNumbers filename="os_arch.luau"
-local process = require("@zcore/process")
+local process = zune.process
 
 print(process.os) -- <Operating System>
 print(process.arch) -- <CPU Architecture>
@@ -30,17 +30,14 @@ x86_64
   </Tabs.Tab>
   <Tabs.Tab>
 ```luau copy showLineNumbers filename="server.luau"
-local net = require("@zcore/net")
+local net = zune.net
 
-local ok, serverHandle = net.serve({
+local server = net.serve({
      port = 8080,
      request = function(req)
           return "Hello!";
      end
 })
-
--- Check if the server started successfully
-assert(ok, serverHandle)
 
 print("Http Server Running.")
 ```
@@ -53,7 +50,7 @@ Http Server Running.
   </Tabs.Tab>
   <Tabs.Tab>
 ```luau copy showLineNumbers filename="test_cases.luau"
-local testing = require("@zcore/testing")
+local testing = zune.testing
 
 local describe = testing.describe
 local expect = testing.expect
