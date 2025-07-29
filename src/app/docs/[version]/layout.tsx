@@ -5,6 +5,10 @@ import { getPageMap } from 'nextra/page-map';
 import '../../styles/global.css';
 import { generateStaticParamsFor } from 'nextra/pages';
 
+export async function generateStaticParams() {
+    return (await getPageMap("/docs/")).map((page) => ({ version: (page as any).name }));;
+}
+
 export const metadata: Metadata = {
     title: {
         absolute: '',

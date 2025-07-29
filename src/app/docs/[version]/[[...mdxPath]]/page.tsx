@@ -1,8 +1,24 @@
-import { generateStaticParamsFor, importPage } from 'nextra/pages'
+import { PageMapItem } from 'nextra';
+import { importPage } from 'nextra/pages'
+import { getPageMap } from 'nextra/page-map'
 import { useMDXComponents } from '../../../../../mdx-components'
-import { convertToPageMap, getPageMap, mergeMetaWithPageMap, normalizePageMap } from 'nextra/page-map'
 
-export const generateStaticParams = generateStaticParamsFor('mdxPath')
+export async function generateStaticParams({ params }) {
+    const version = params.version;
+    const pages = await getPageMap("/docs/" + version);
+    var result: { version: string, mdxPath: string[] }[] = [];
+    const scanPage = (page: PageMapItem) => {
+        if ("route" in page) {
+            const mdxPath = page.route.split('/').filter((s) => s !== '');
+            mdxPath.splice(0, 2);
+            result.push({ version: version, mdxPath: mdxPath });
+            if ("children" in page)
+                page.children.forEach(scanPage);
+        }
+    }
+    pages.forEach(scanPage);
+    return result;
+}
 
 export async function generateMetadata(props) {
     const params = await props.params;
