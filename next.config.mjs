@@ -18,6 +18,6 @@ export default withNextra({
     unoptimized: true,
   },
   reactStrictMode: true,
-  output: 'standalone',
+  output: 'export',
   basePath: '',
 })
