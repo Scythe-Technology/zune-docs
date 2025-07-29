@@ -10,9 +10,13 @@ export const metadata: Metadata = {
     }
 }
 
-export default async function ({ children, ...props }) {
-    const pageMap = await getPageMap("/guides");
-    if (pageMap === undefined) {
+export default async function ({ children }) {
+    let pageMap;
+    try {
+        pageMap = await getPageMap("/guides");
+        if (pageMap === undefined)
+            throw new Error("Page map not found");
+    } catch (error) {
         return <NotFoundPage content={null} >
             <h1 className='next-error-h1 inline-block font-medium align-top'>404</h1>
             <h1>The page is not found</h1>
