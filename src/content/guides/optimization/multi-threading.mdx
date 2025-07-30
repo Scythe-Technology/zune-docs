@@ -1,0 +1,126 @@
+# Faster Multi-threading
+---
+import { Callout, Image } from 'nextra/components'
+
+import CYCLE_IMAGE from '../../../../public/images/guide_multithreading_cycle.png'
+import EXAMPLE_1_IMAGE from '../../../../public/images/guide_multithreading_example1.png'
+import EXAMPLE_2_IMAGE from '../../../../public/images/guide_multithreading_example2.png'
+
+<Callout type="warning">This guide is for `0.5.*`</Callout>
+
+Multi-threading in zune is a powerful feature that allows you to run multiple tasks concurrently, improving performance and responsiveness. This guide will help you set up and optimize multi-threading in your zune projects.
+
+Below is a diagram on how the runtime manages messages between threads; the outgoing and incoming "ports" are basically like tunnels.
+Internally, it's just a queue with mutex locks.
+<Image src={CYCLE_IMAGE} className="text-center mx-auto pt-10 pb-2" alt='' />
+
+### Slow example
+Here is a simple example of a multi-threading usage in zune
+
+Ideally, this is useful for just sending data and getting it back, but if you can make your program send data in bulk,
+that kind of usage could be much faster than the example below.
+
+```luau copy showLineNumbers filename="main.luau"
+local worker = zune.thread.fromModule("./worker")
+
+worker:start()
+
+for i = 1, 10 do
+    worker:send(i)
+    local result = worker:receive()
+    print(result)
+end
+
+worker:join()
+```
+
+```luau copy showLineNumbers filename="worker.luau"
+local thread = zune.thread
+for i = 1, 10 do
+    local result = thread.receive()
+    print(result)
+    thread.send(result * 20)
+end
+```
+
+<Image src={EXAMPLE_1_IMAGE} className="text-center mx-auto pt-10 pb-2" alt='' />
+
+(Showing ~3 iterations on the first main loop)
+
+Not a very accurate graph, but it should show the lock friction, causing less work to be done in parallel, since most of the lock
+is held by either thread, and either "port" would have high friction, leading to the other "port" rarely being used.
+
+This alone would cause higher delays, where the lines are much longer, as illustrated in the graph above.
+
+There would be too much friction in this example; the runtime would try to obtain a lock while a thread could be holding that lock.
+
+Also, if the data is not available, the receiver end would yield until a signal is sent.
+
+This would cause too much overhead.
+
+### Fast example
+Here is a more optimized example of multi-threading in zune. This is much faster than the previous example,
+as the main thread sends data in "bulk", and doesn't wait immediately after sending.
+
+The worker thread remains unchanged; the only difference is the main thread.
+
+Reducing lock friction and yielding, because as the data exists in the "ports", the function call does not need to yield.
+
+```luau copy showLineNumbers filename="main.luau"
+local worker = zune.thread.fromModule("./worker")
+
+worker:start()
+
+for i = 1, 10 do
+    worker:send(i)
+end
+
+for i = 1, 10 do
+    local result = worker:receive()
+    print(result)
+end
+
+worker:join()
+```
+
+```luau copy showLineNumbers filename="worker.luau"
+local thread = zune.thread
+for i = 1, 10 do
+    local result = thread.receive()
+    print(result)
+    thread.send(result * 20)
+end
+```
+
+<Image src={EXAMPLE_2_IMAGE} className="text-center mx-auto pt-10 pb-2" alt='' />
+
+
+(Showing ~4 iterations on the first main loop)
+
+In this graph, more data is sent on the `incoming port` from the worker, and more data is sent to the worker on the `outgoing port`,
+hitting less lock friction, as the main thread rarely uses the `incoming port`.
+
+This example would be much faster, as the main thread would not obtain a lock for the `incoming port`,
+Although there is some friction on the `outgoing port`, it is much less than in the previous example.
+
+The difference is fewer blocked locks and less yielding.
+
+By the time the main thread receives all data from the `incoming port`, it should already be available; thus, it should not yield.
+
+Another possible faster version could be this example, where after sending all data, the main thread would start the worker,
+and immediately join the worker thread. Once the thread has completed processing the data,  the main thread can receive it immediately.
+```luau copy showLineNumbers filename="main.luau"
+local worker = zune.thread.fromModule("./worker")
+
+for i = 1, 10 do
+    worker:send(i)
+end
+
+worker:start()
+worker:join()
+
+for i = 1, 10 do
+    local result = worker:receive()
+    print(result)
+end
+```

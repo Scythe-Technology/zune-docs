@@ -10,5 +10,5 @@ export default {
     '---1': {
         "type": "separator"
     },
-    // optimization: "Optimization",
+    optimization: "Optimization",
 }
