@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check
-        run: next -h
+        run: node -h
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,6 +27,4 @@ jobs:
         run: bun install
 
       - name: Build
-        run: |
-          bunx next build
-          bun run postbuild
+        run: bun run build
