@@ -1,0 +1,299 @@
+# Network
+`zune.net`
+
+---
+
+A library to do networking in luau. Provides functions to create sockets, start an HTTP server, make HTTP requests, and handle WebSockets.
+
+## Properties
+### ADDRF
+The table of address families.
+```luau tooltips
+-- @hover: (9,14)[{
+    RDS: number,
+    ROSE: number,
+    BRIDGE: number,
+    PHONET: number,
+    SNA: number,
+    FILE: number,
+    MPLS: number,
+    ROUTE: number,
+    WANPIPE: number,
+    ... truncated
+}]
+ADDRF: <table>
+```
+
+### SOCKF
+Table of socket flags.
+```luau tooltips
+-- @hover: (9,14)[{
+    DCCP: number,
+    RAW: number,
+    RDM: number,
+    DGRAM: number,
+    PACKET: number,
+    STREAM: number,
+    SEQPACKET: number,
+    CLOEXEC: number,
+    NONBLOCK: number,
+}]
+SOCKF: <table>
+```
+
+### SOCKOPT
+Table of socket options.
+```luau tooltips
+-- @hover: (11,16)[{
+    ATTACH_FILTER: number,
+    CNX_ADVICE: number,
+    PEERCRED: number,
+    LINGER: number,
+    DEBUG: number,
+    RXQ_OVFL: number,
+    SNDBUF: number,
+    DONTROUTE: number,
+    ZEROCOPY: number,
+    ... truncated
+}]
+SOCKOPT: <table>
+```
+
+### SOCKOPTLV
+Table of socket option levels.
+```luau tooltips
+-- @hover: (13,18)[{
+    PPPOL2TP: number,
+    RDS: number,
+    TIPC: number,
+    ALG: number,
+    PNPIPE: number,
+    BLUETOOTH: number,
+    PACKET: number,
+    IPV6: number,
+    KCM: number,
+    ... truncated
+}]
+SOCKOPTLV: <table>
+```
+
+### IPPROTO
+Table of IP protocols.
+```luau tooltips
+-- @hover: (11,16)[{
+    COMP: number,
+    ICMP: number,
+    ESP: number,
+    IGMP: number,
+    TCP: number,
+    ICMPV6: number,
+    MTP: number,
+    GRE: number,
+    SCTP: number,
+    ... truncated
+}]
+IPPROTO: <table>
+```
+
+---
+## Functions
+### createSocket
+Creates a new socket from OS.
+```luau tooltips
+-- @link: (72,85)[../objects/NetworkSocket]
+createSocket(address_family: number, flags: number, protocol: number): NetworkSocket
+```
+<details open>
+<summary>Parameters</summary>
+- `address_family: number{:luau}` - The address family to use.
+- `flags: number{:luau}` - The flags to use.
+- `protocol: number{:luau}` - The protocol to use.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+- Network Error
+</details>
+
+### getAddressList
+Gets a list of addresses for the provided name and port.
+```luau tooltips
+-- @hover: (46,60)[type NetworkAddress = {
+    family: number,
+    port: number,
+    address: string,
+}]
+getAddressList(name: string, port: number): {NetworkAddress}
+```
+<details open>
+<summary>Parameters</summary>
+- `address_family: number{:luau}` - The address family to use.
+- `flags: number{:luau}` - The flags to use.
+- `protocol: number{:luau}` - The protocol to use.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+---
+## Namespaces
+### http
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### serve
+Starts a server on the specified port.
+```luau tooltips
+-- @hover: (13,25)[
+type ServerRequest = {
+    method: string,
+    path: string,
+    query: {[string]: string},
+    headers: {[string]: string},
+    body: string?,
+}
+
+type ServerResponse = {
+    status_code: number,
+    headers: {[string]: string}?,
+    body: string | buffer,
+}
+
+type ServerWebSocketHandlers = {
+    upgrade: ((request: ServerRequest) -> boolean)?,
+-- @link: (24,40)[../objects/NetHttpWebSocket]
+    open: ((websocket: NetHttpWebSocket) -> ())?,
+-- @link: (27,43)[../objects/NetHttpWebSocket]
+    message: ((websocket: NetHttpWebSocket, message: string) -> ())?,
+-- @link: (25,41)[../objects/NetHttpWebSocket]
+    close: ((websocket: NetHttpWebSocket, code: number) -> ())?,
+}
+
+type ServeOptions = {
+    port: number,
+    address: string?,
+    reuse_address: boolean?,
+    backlog: number?,
+    max_body_size: number?,
+    client_timeout: number?,
+    max_connections: number?,
+    request: (request: ServerRequest) -> string | buffer | ServerResponse,
+    websocket: ServerWebSocketHandlers?,
+}]
+-- @link: (28,40)[../objects/NetHttpServer]
+serve(opts: ServeOptions): NetHttpServer
+```
+<details open>
+<summary>Parameters</summary>
+- `opts: ServeOptions{:luau}` - The options for the server.
+  - `port: number{:luau}` - The port to listen on.
+  - `address: string?{:luau}` - The address to bind to.
+    - default: `"127.0.0.1"{:luau}`
+  - `reuse_address: boolean?{:luau}` - Whether to reuse the address.
+    - default: `false{:luau}`
+  - `backlog: number?{:luau}` - The maximum number of connections the
+    - default: `128{:luau}`
+  - `max_body_size: number?{:luau}` - The maximum size of the request body.
+    - default: `4096{:luau}`
+  - `client_timeout: number?{:luau}` - The timeout for the client.
+    - default: `60{:luau}`
+    - `0{:luau}` for no timeout
+  - `max_connections: number?{:luau}` - The maximum number of connections.
+    - default: `1024{:luau}`
+    - `0{:luau}` for no limit
+  - `request: (ServerRequest) -> string | buffer | ServerResponse{:luau}` - The function to call when a request is received.
+    - If the function returns a `string{:luau}` or `buffer{:luau}`, the reuslt will be sent as the response body.
+    - If the function returns a `ServerResponse`, the result will be used as the response.
+  - `websocket: ServerWebSocketHandlers?{:luau}` - The handlers for WebSocket connections.
+    - `upgrade: ((ServerRequest) -> boolean)?{:luau}` - The function to call when a WebSocket upgrade request is received.
+      - If the function returns `true{:luau}`, the WebSocket connection will be accepted.
+      - If the function returns `false{:luau}`, the WebSocket connection will be rejected.
+    - `open: ((NetHttpWebSocket) -> ())?{:luau}` - The function to call when a WebSocket connection is opened.
+    - `message: ((NetHttpWebSocket, string) -> ())?{:luau}` - The function to call when a message is received on a WebSocket connection.
+    - `close: ((NetHttpWebSocket, number) -> ())?{:luau}` - The function to call when a WebSocket connection is closed.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+- Network Error
+</details>
+
+#### request
+Makes a request to the specified host.
+
+Options are optional, defaults to GET request.
+```luau tooltips
+-- @hover: (29,43)[type RequestOptions = {
+    headers: {[string]: string}?,
+    method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+    body: (string | buffer)?,
+    allow_redirects: boolean?,
+}]
+--@hover: (47,55)[type Response = {
+    ok: boolean,
+    status_code: number,
+    status_reason: string,
+    headers: {[string]: string},
+    body: string,
+}]
+request(host: string, opts: RequestOptions?): Response
+```
+<details open>
+<summary>Parameters</summary>
+- `host: string{:luau}` - The host to make the request to.
+- `opts: RequestOptions?{:luau}` - The options for the request.
+  - `headers: {[string]: string}?{:luau}` - The headers to send with the request.
+  - `method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?{:luau}` - The HTTP method to use.
+    - default: `"GET"{:luau}`
+  - `body: (string | buffer)?{:luau}` - The body of the request.
+  - `allow_redirects: boolean?{:luau}` - Whether to follow redirects.
+    - default: `true{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- Request Error
+- Network Error
+</details>
+
+#### websocket
+Creates a websocket client.
+```luau tooltips
+-- @hover: (31,47)[type ServerResponse = {
+    status_code: number,
+    headers: {[string]: string}?,
+    body: string | buffer,
+}
+
+type WebSocketOptions = {
+    protocols: {string}?,
+    timeout: number?,
+-- @link: (23,39)[../objects/NetHttpWebSocket]
+    accept: ((socket: NetHttpWebSocket, request: ServerResponse) -> boolean)?,
+-- @link: (21,37)[../objects/NetHttpWebSocket]
+    open: ((socket: NetHttpWebSocket) -> ())?,
+-- @link: (22,38)[../objects/NetHttpWebSocket]
+    close: ((socket: NetHttpWebSocket, close: number?) -> ())?,
+-- @link: (24,40)[../objects/NetHttpWebSocket]
+    message: ((socket: NetHttpWebSocket, message: string) -> ())?,
+}]
+-- @link: (50,66)[../objects/NetHttpWebSocket]
+websocket(host: string, opts: WebSocketOptions): NetHttpWebSocket
+```
+<details open>
+<summary>Parameters</summary>
+- `host: string{:luau}` - The host to connect to.
+- `opts: WebSocketOptions{:luau}` - The options for the WebSocket.
+  - `protocols: {string}?{:luau}` - The protocols to send to the server.
+  - `timeout: number?{:luau}` - The timeout for the WebSocket connection.
+    - default: `30{:luau}`
+    - negative value for no timeout
+  - `accept: ((NetHttpWebSocket, ServerResponse) -> boolean)?{:luau}` - The function to call to accept the WebSocket connection.
+  - `open: ((NetHttpWebSocket) -> ())?{:luau}` - The function to call when the WebSocket is opened.
+  - `close: ((NetHttpWebSocket, number?) -> ())?{:luau}` - The function to call when the WebSocket is closed.
+  - `message: ((NetHttpWebSocket, string) -> ())?{:luau}` - The function to call when a message is received.
+</details>
+<details>
+<summary>Throws</summary>
+- WebSocket Error
+- Network Error
+</details>

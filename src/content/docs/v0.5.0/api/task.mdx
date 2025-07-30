@@ -1,0 +1,86 @@
+# Task
+`zune.task`
+
+---
+
+A library to interact with the task scheduler.
+
+## Functions
+### cancel
+Cancels a task, and resets thread.
+```luau
+cancel(thread: thread): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `thread: thread{:luau}` - The thread to cancel.
+</details>
+
+### defer
+Runs function or thread on end of scheduler frame.
+```luau
+defer<A..., R...>(f: ((A...) -> R...) | thread, A...): thread
+```
+<details open>
+<summary>Parameters</summary>
+- `f: ((A...) -> R...) | thread{:luau}` - The function to defer.
+- `A...{:luau}` - The arguments to pass to the function.
+</details>
+
+### delay
+Runs function or thread after a certain amount of time.
+```luau
+delay<A..., R...>(sec: number, f: ((A...) -> (R...)) | thread, A...): thread
+```
+<details open>
+<summary>Parameters</summary>
+- `sec: number{:luau}` - The amount of time to delay.
+- `f: ((A...) -> (R...)) | thread{:luau}` - The function to delay.
+- `A...{:luau}` - The arguments to pass to the function.
+</details>
+
+### spawn
+Runs function or thread immediately.
+```luau
+spawn<A..., R...>(f: ((A...) -> (R...)) | thread, A...): thread
+```
+<details open>
+<summary>Parameters</summary>
+- `f: ((A...) -> (R...)) | thread{:luau}` - The function to spawn.
+- `A...{:luau}` - The arguments to pass to the function.
+</details>
+
+### wait
+Yields and resumes current calling thread after a certain amount of time, returning the total time the sleep took.
+```luau
+wait(sec: number?): number
+```
+<details open>
+<summary>Parameters</summary>
+- `sec: number?{:luau}` - The amount of time to wait.
+  - default: `0{:luau}`
+</details>
+
+### count
+Counts the number of current tasks.
+
+Optional kinds parameter to count a specific kind of task.
+
+Kinds:
+- `s` to count sleeping tasks.
+- `d` to count deferred tasks.
+- `w` to count awaiting tasks. (zune backend)
+- `t` to count internal tasks. (zune backend)
+```luau
+count(): number
+count(kinds: string?): ...number
+```
+<details open>
+<summary>Parameters</summary>
+- `kinds: string?{:luau}` - The kinds of tasks to count. `nil{:luau}` to count all tasks.
+  - default: `nil{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- Error
+</details>

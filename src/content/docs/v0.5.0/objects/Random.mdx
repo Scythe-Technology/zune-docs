@@ -1,0 +1,50 @@
+# Random
+---
+
+## Methods
+### nextNumber
+Generates a random number.
+
+If no arguments are provided, the function will generate a number between 0 and 1.
+```luau tooltips
+:nextNumber(min: number?, max: number?): number
+:NextNumber(min: number?, max: number?): number
+```
+<details open>
+<summary>Parameters</summary>
+- `min: number?{:luau}` - The minimum number.
+  - If `max` is provided, `min` must also be provided.
+- `max: number?{:luau}` - The maximum number.
+  - If `min` is provided, `max` must also be provided.
+</details>
+<details>
+<summary>Throws</summary>
+- Range Error
+</details>
+
+### nextInteger
+Generates a random integer.
+
+If no arguments are provided, the function will generate a number between the limits of a signed 32-bit integer.
+```luau tooltips
+:nextInteger(min: number?, max: number?): number
+:NextInteger(min: number?, max: number?): number
+```
+<details open>
+<summary>Parameters</summary>
+- `min: number?{:luau}` - The minimum number.
+  - If `max` is provided, `min` must also be provided.
+- `max: number?{:luau}` - The maximum number.
+  - If `min` is provided, `max` must also be provided.
+</details>
+<details>
+<summary>Throws</summary>
+- Range Error
+</details>
+
+### clone
+Creates a new random number generator with the same state as the current one.
+```luau tooltips
+:clone(): Random
+:Clone(): Random
+```

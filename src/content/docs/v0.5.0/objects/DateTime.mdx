@@ -1,0 +1,106 @@
+# DateTime
+---
+
+## Properties
+### unixTimestamp
+```luau tooltips
+unixTimestamp: number
+UnixTimestamp: number
+```
+
+### unixTimestampMillis
+```luau tooltips
+unixTimestampMillis: number
+UnixTimestampMillis: number
+```
+
+---
+## Methods
+### toLocalTime
+```luau tooltips
+-- @hover: (17,31)[type TimeDictionary = {
+    year: number,
+    month: number,
+    day: number,
+    hour: number,
+    minute: number,
+    second: number,
+    millisecond: number,
+}]
+:toLocalTime(): TimeDictionary
+-- @hover: (17,31)[type TimeDictionary = {
+    year: number,
+    month: number,
+    day: number,
+    hour: number,
+    minute: number,
+    second: number,
+    millisecond: number,
+}]
+:ToLocalTime(): TimeDictionary
+```
+<details>
+<summary>Throws</summary>
+- DateTime Error
+</details>
+
+### toUniversalTime
+```luau tooltips
+-- @hover: (21,35)[type TimeDictionary = {
+    year: number,
+    month: number,
+    day: number,
+    hour: number,
+    minute: number,
+    second: number,
+    millisecond: number,
+}]
+:toUniversalTime(): TimeDictionary
+-- @hover: (21,35)[type TimeDictionary = {
+    year: number,
+    month: number,
+    day: number,
+    hour: number,
+    minute: number,
+    second: number,
+    millisecond: number,
+}]
+:ToUniversalTime(): TimeDictionary
+```
+<details>
+<summary>Throws</summary>
+- DateTime Error
+</details>
+
+### toIsoDate
+Return the date in ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`
+```luau tooltips
+:toIsoDate(): string
+:ToIsoDate(): string
+```
+<details>
+<summary>Throws</summary>
+- DateTime Error
+</details>
+
+### formatLocalTime
+```luau tooltips
+:formatLocalTime(): string
+:FormatLocalTime(): string
+```
+<details>
+<summary>Throws</summary>
+- DateTime Error
+- Memory Error
+</details>
+
+### formatUniversalTime
+```luau tooltips
+:formatUniversalTime(): string
+:FormatUniversalTime(): string
+```
+<details>
+<summary>Throws</summary>
+- DateTime Error
+- Memory Error
+</details>

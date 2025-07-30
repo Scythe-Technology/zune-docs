@@ -1,0 +1,54 @@
+# SQLite3Database
+---
+
+## Methods
+### transaction
+```luau tooltips
+:transaction(callback: (...any) -> (), kind: ("deferred" | "immediate" | "exclusive")?): ((...any) -> ())
+```
+<details open>
+<summary>Parameters</summary>
+- `callback: (...any) -> (){:luau}` - The function to call within the transaction.
+- `kind: ("deferred" | "immediate" | "exclusive")?{:luau}` - The kind of transaction.
+</details>
+<details>
+<summary>Throws</summary>
+- SQLite3 Error
+- Memory Error
+</details>
+
+### query
+```luau tooltips
+-- @link: (24,40)[../objects/SQLite3Statement]
+:query(query: string): SQLite3Statement
+```
+<details open>
+<summary>Parameters</summary>
+- `query: string{:luau}` - The SQL query to start.
+</details>
+<details>
+<summary>Throws</summary>
+- SQLite3 Error
+- Memory Error
+</details>
+
+### exec
+```luau tooltips
+-- @hover: (28,41)[type SQLite3Values = {[string]: number | string | buffer}]
+:exec(query: string, args: SQLite3Values?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `query: string{:luau}` - The SQL query to execute.
+- `args: SQLite3Values?{:luau}` - The arguments to bind to the query.
+</details>
+<details>
+<summary>Throws</summary>
+- SQLite3 Error
+- Memory Error
+</details>
+
+### close
+```luau tooltips
+:close(): ()
+```

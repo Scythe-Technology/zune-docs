@@ -1,0 +1,36 @@
+# ProcessChild
+---
+import { Callout } from 'nextra/components'
+
+## Properties
+### stdin
+```luau tooltips
+-- @link: (8,18)[./FileHandle]
+stdin: FileHandle?
+```
+
+### stdout
+```luau tooltips
+-- @link: (9,19)[./FileHandle]
+stdout: FileHandle?
+```
+
+### stderr
+```luau tooltips
+-- @link: (9,19)[./FileHandle]
+stderr: FileHandle?
+```
+
+---
+## Methods
+### kill
+Kills the process.
+```luau tooltips
+:kill(): ()
+```
+
+### wait
+Yields until the process exits.
+```luau tooltips
+:wait(): ()
+```

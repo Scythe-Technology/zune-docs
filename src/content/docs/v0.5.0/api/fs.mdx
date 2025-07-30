@@ -1,0 +1,475 @@
+# File System
+`zune.fs`
+
+---
+import { Callout, Tabs } from 'nextra/components'
+
+A library that provides access to the file system.
+
+## Functions
+### createFile
+Creates a file. If the file already exists, the function will throw an error only when `exclusive` is `true`.
+
+```luau tooltips
+-- @hover: (32,49)[type CreateFileOptions = {
+    exclusive: boolean?,
+}]
+-- @link: (53,63)[../objects/FileHandle]
+createFile(path: string, opts: CreateFileOptions?): FileHandle
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the file to open/create.
+- `opts: CreateFileOptions?{:luau}` - The create options.
+  - `exclusive: boolean?{:luau}` - If true, the function will fail if the file already exists.
+    - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### openFile
+Opens a file. If the file does not exists, the function will throw an error.
+```luau tooltips
+-- @hover: (30,45)[type OpenFileOptions = {
+    mode: ("r" | "w" | "rw" | "wr")?,
+}]
+-- @link: (49,59)[../objects/FileHandle]
+openFile(path: string, opts: OpenFileOptions?): FileHandle
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the file to open.
+- `opts: OpenFileOptions?{:luau}` - The create options.
+  - `mode: string?{:luau}` - If provided, the file will be opened in the specified mode.
+    - modes: `"r"{:luau}`, `"w"{:luau}`, `"rw"{:luau}`
+    - default: `"rw"{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### readFile
+Read the contents of a file from the provided path.
+```luau tooltips
+readFile(path: string): string
+readFile(path: string, useBuffer: true): buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the file to read.
+- `useBuffer: boolean?{:luau}` - If true, the function will return a `buffer` instead of a `string`.
+  - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### readDir
+Get a list of files or directories in the provided path.
+```luau tooltips
+readDir(path: string): { string }
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the directory to read.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### writeFile
+Write the contents to a file at the provided path.
+```luau tooltips
+writeFile(path: string, contents: buffer | string): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the file to write.
+- `contents: buffer | string{:luau}` - The content to write to the file (This may be limited to the max luau `string`).
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### writeDir
+Creates a directory at the provided path.
+```luau tooltips
+writeDir(path: string, recursive: boolean?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the directory to write.
+- `recursive: boolean{:luau}` - If true, the function will create the directory and all parent directories.
+  - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### removeFile
+Removes a file at the provided path.
+```luau tooltips
+removeFile(path: string): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the file to remove.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### removeDir
+Removes a directory at the provided path.
+```luau tooltips
+removeDir(path: string, recursive: boolean?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the directory to remove.
+- `recursive: boolean{:luau}` - If true, the function will remove the directory and all its contents.
+  - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### metadata
+Get metadata of a file or directory at the provided path.
+```luau tooltips
+-- @hover: (25,33)[
+type MetadataKind = "file"
+    | "directory"
+    | "sym_link"
+    | "door"
+    | "character_device"
+    | "unix_domain_socket"
+    | "block_device"
+    | "event_port"
+    | "named_pipe"
+    | "whiteout"
+    | "unknown"
+ 
+type Metadata = {
+    kind : MetadataKind,
+    symlink : boolean,
+    createdAt : number,
+    modifiedAt : number,
+    accessedAt : number,
+    size : number,
+    permissions : {
+        readOnly : boolean,
+    },
+}]
+metadata(path: string): Metadata?
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the file or directory to get metadata from.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### isDir
+Check if the provided path is a directory.
+```luau tooltips
+isDir(path: string): boolean
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the directory
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### move
+Moves a file or directory from one path to another path.
+```luau tooltips
+move(from: string, to: string, overwrite: boolean?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `from: string{:luau}` - The path to the file or directory to move.
+- `to: string{:luau}` - The path to move the file or directory to.
+- `overwrite: boolean{:luau}` - If true, the function will overwrite the file if `to` exists.
+  - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### copy
+Copies a file or directory from one path to another path.
+```luau tooltips
+copy(from: string, to: string, overwrite: boolean?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `from: string{:luau}` - The path to the file or directory to copy.
+- `to: string{:luau}` - The path to copy the file or directory to.
+- `overwrite: boolean{:luau}` - If true, the function will overwrite the file if it exists.
+  - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### symlink
+Create a symbolic link from one path to another path.
+```luau tooltips
+symlink(from: string, to: string): ()
+```
+<Callout type="warning">Windows: must have developer mode enabled</Callout>
+<details open>
+<summary>Parameters</summary>
+- `from: string{:luau}` - The path to the file or directory to link.
+- `to: string{:luau}` - The path to link the file or directory to.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+- Not Supported (`Windows`)
+</details>
+
+### getExePath
+Get the path to the current executable.
+```luau tooltips
+getExePath(): string
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### realPath
+Get absolute path to the file or directory.
+```luau tooltips
+realPath(path: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to resolve.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### watch
+Watches a directory for changes.
+
+*Does not watch subdirectories.*
+*Windows: Can watch changes in first child subdirectories.*
+```luau tooltips
+-- @hover: (55,60)[type Event = "created" | "modified" | "moved" | "renamed" | "deleted" | "metadata"]
+-- @link: (71,82)[../objects/FileWatcher]
+watch(path: string, callback: (path: string, events: {Event}) -> ()): FileWatcher
+```
+<Callout type="info">Experimental</Callout>
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the directory to watch.
+- `callback: (path: string, events: {Event}) -> (){:luau}` - The function to call when a change is detected.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### embedFile
+When called from a bundled context, this would get and load the contents of the embedded file.
+Otherwise would synchronously read a file relative to the calling script.
+```luau tooltips
+embedFile(path: string): buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The file path relative to calling script.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### embeddedFiles
+Will return the list of all embedded files, the table will always be empty when called from an unbundled context.
+```luau tooltips
+embeddedFiles(): {string}
+```
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### embeddedScripts
+Will return the list of all embedded scripts, the table will always be empty when called from an unbundled context.
+```luau tooltips
+embeddedScripts(): {string}
+```
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+## Namespaces
+### path
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### join
+Joins multiple paths into a single path with OS specific separator.
+<Tabs items={['Unix', 'Windows']}>
+  <Tabs.Tab>
+  - (`lib`, `main.luau`) -> `lib/main.luau`
+  - (`lib`, `lib/main.luau`) -> `lib/lib/main.luau`
+  </Tabs.Tab>
+  <Tabs.Tab>
+  - (`lib`, `main.luau`) -> `lib\main.luau`
+  - (`lib`, `lib\main.luau`) -> `lib\lib\main.luau`
+  </Tabs.Tab>
+</Tabs>
+```luau tooltips
+path.join(...string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `...string{:luau}` - The paths to join. if no arguments are provided, will result in `nil`.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### relative
+Gets the relative path from one path to another.
+<Tabs items={['Unix', 'Windows']}>
+  <Tabs.Tab>
+  - (`lib`, `lib/main.luau`) -> `main.luau`
+  - (`lib`, `main.luau`) -> `../main.luau`
+  </Tabs.Tab>
+  <Tabs.Tab>
+  - (`lib`, `lib/main.luau`) -> `main.luau`
+  - (`lib`, `main.luau`) -> `..\main.luau`
+  </Tabs.Tab>
+</Tabs>
+```luau tooltips
+path.relative(from: string, to: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `from: string{:luau}` - The path to resolve from.
+- `to: string{:luau}` - The path to resolve to.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### resolve
+Resolves relatives and parent paths combined.
+<Tabs items={['Unix', 'Windows']}>
+  <Tabs.Tab>
+  - (`lib`, `main.luau`) -> `lib/main.luau`
+  - (`lib`, `../main.luau`) -> `main.luau`
+  </Tabs.Tab>
+  <Tabs.Tab>
+  - (`lib`, `main.luau`) -> `lib\main.luau`
+  - (`lib`, `../main.luau`) -> `main.luau`
+  </Tabs.Tab>
+</Tabs>
+```luau tooltips
+path.resolve(...string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `...string{:luau}` - The paths to resolve. if no arguments are provided, will result in `nil`.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### dirname
+Returns the directory name of the provided path, will return nil if there are no more directories.
+- `lib/main.luau` -> `lib`
+- `lib` -> nil
+```luau tooltips
+path.dirname(path: string): string?
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to get the directory name from.
+</details>
+
+#### basename
+Returns the base name of the provided path.
+- `/lib/main.test.luau` -> `main.test.luau`
+- `/lib/main.luau` -> `main.luau`
+```luau tooltips
+path.basename(path: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to get the base name from.
+</details>
+
+#### stem
+Returns the name of file without extension of the provided path.
+- `/lib/main.test.luau` -> `main.test`
+- `/lib/main.luau` -> `main`
+```luau tooltips
+path.stem(path: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to get the stem from.
+</details>
+
+#### extension
+Returns the extension of the provided path.
+- `/lib/main.test.luau` -> `.luau`
+- `/lib/main.luau` -> `.luau`
+- `/lib/main.` -> `.`
+- `/lib/main` -> ``
+```luau tooltips
+path.extension(path: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to get the extension from.
+</details>
+
+#### isAbsolute
+Checks if the provided path is an absolute path based on OS.
+```luau tooltips
+path.isAbsolute(path: string): boolean
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to check if it is absolute.
+</details>
+
+#### globMatch
+Checks if the provided path matches the glob pattern.
+```luau tooltips
+path.globMatch(path: string, pattern: string): boolean
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to check.
+- `pattern: string{:luau}` - The glob pattern to match against.
+</details>

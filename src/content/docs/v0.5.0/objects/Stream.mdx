@@ -1,0 +1,149 @@
+# Stream
+---
+
+`Stream` is a simple class to write data or read data dynamically.
+
+`IoReadable` and `IoWritable` are based on `Stream`.
+
+Read functions are for when the stream is with reading enabled.
+Write functions are for when the stream is with writing enabled.
+
+## Methods
+### read
+```luau tooltips
+:read(amount: number?, bytes: boolean?): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit.
+- `bytes: boolean?{:luau}` - If false, the function will return a `string` instead of a `buffer`.
+</details>
+<details>
+<summary>Throws</summary>
+- Reader Error
+</details>
+
+### readu8
+```luau tooltips
+:readu8(): number
+```
+
+### readu16
+```luau tooltips
+:readu16(): number
+```
+
+### readu32
+```luau tooltips
+:readu32(): number
+```
+
+### readi8
+```luau tooltips
+:readi8(): number
+```
+
+### readi16
+```luau tooltips
+:readi16(): number
+```
+
+### readi32
+```luau tooltips
+:readi32(): number
+```
+
+### readf32
+```luau tooltips
+:readf32(): number
+```
+
+### readf64
+```luau tooltips
+:readf64(): number
+```
+
+### write
+```luau tooltips
+:write(data: string | buffer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `data: string | buffer{:luau}` - The data to write to the stream.
+</details>
+<details>
+<summary>Throws</summary>
+- Writer Error
+</details>
+
+### writeu8
+```luau tooltips
+:writeu8(value: number): ()
+```
+<details>
+<summary>Throws</summary>
+- Writer Error
+</details>
+
+### writeu16
+```luau tooltips
+:writeu16(value: number): ()
+```
+<details>
+<summary>Throws</summary>
+- Writer Error
+</details>
+
+### writeu32
+```luau tooltips
+:writeu32(value: number): ()
+```
+<details>
+<summary>Throws</summary>
+- Writer Error
+</details>
+
+### writei8
+```luau tooltips
+:writei8(value: number): ()
+```
+<details>
+<summary>Throws</summary>
+- Writer Error
+</details>
+
+### writei16
+```luau tooltips
+:writei16(value: number): ()
+```
+<details>
+<summary>Throws</summary>
+- Writer Error
+</details>
+
+### writei32
+```luau tooltips
+:writei32(value: number): ()
+```
+<details>
+<summary>Throws</summary>
+- Writer Error
+</details>
+
+### writef32
+```luau tooltips
+:writef32(value: number): ()
+```
+<details>
+<summary>Throws</summary>
+- Writer Error
+</details>
+
+### writef64
+```luau tooltips
+:writef64(value: number): ()
+```
+<details>
+<summary>Throws</summary>
+- Writer Error
+</details>

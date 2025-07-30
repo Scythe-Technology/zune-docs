@@ -1,0 +1,163 @@
+# Testing
+`zune.testing`
+
+---
+import { Callout } from 'nextra/components'
+
+A library to interact with the testing suite.
+
+## Properties
+### running
+Whether the testing suite is running.
+```luau tooltips
+running: boolean
+```
+### _FAILED
+[for internal use]
+
+The number of tests that have failed.
+```luau tooltips
+_FAILED: number
+```
+
+### _COUNT
+[for internal use]
+
+The number of tests conducted.
+```luau
+_COUNT: number
+```
+
+### _START
+[for internal use]
+
+The time the testing suite started. Based on `os.clock()`.
+```luau
+_START: number
+```
+
+---
+## Functions
+### test
+A function to run a test.
+```luau
+test(name: string, callback: () -> ()): ()
+```
+<Callout type="info">When the test suite is not running, the function will do nothing.</Callout>
+<details open>
+<summary>Parameters</summary>
+- `name: string{:luau}` - The name of the test.
+- `callback: () -> (){:luau}` - The function to run the test.
+  - The function should throw an error if the test fails.
+</details>
+
+### describe
+A function to describe the test scope.
+```luau
+describe(name: string, callback: () -> ()): ()
+```
+<Callout type="info">When the test suite is not running, the function will do nothing.</Callout>
+<details open>
+<summary>Parameters</summary>
+- `name: string{:luau}` - The name of the test suite.
+- `callback: () -> (){:luau}` - The function to run the test suite.
+  - The function should not error, and should call test functions.
+  - If the function does error, it will still count as a fail.
+</details>
+
+### defer
+Deferred function will be executed after a test completes.
+Useful for cleaning up resources.
+```luau
+defer(fn: () -> ()): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `fn: () -> (){:luau}` - The function to defer.
+</details>
+
+### expect
+```luau tooltips
+-- @hover: (21,32)[
+type BasicCases = {
+    toBe: (expected: any) -> (),
+    toBeDefined: () -> (),
+    toBeCloseTo: (expected: number, precision: number) -> (),
+    toBeGreaterThan: (expected: number) -> (),
+    toBeGreaterThanOrEqual: (expected: number) -> (),
+    toBeLessThan: (expected: number) -> (),
+    toBeLessThanOrEqual: (expected: number) -> (),
+    toBeNil: () -> (),
+    toBeNan: () -> (),
+    toHaveLength: (expected: number) -> (),
+    toBeFalsy: () -> (),
+    toBeTruthy: () -> (),
+}
+ 
+type ExpectCases = BasicCases & {
+    never: BasicCases,
+}]
+-- @hover: (35,50)[
+type BasicCases = {
+    toBe: (expected: any) -> (),
+    toBeDefined: () -> (),
+    toBeCloseTo: (expected: number, precision: number) -> (),
+    toBeGreaterThan: (expected: number) -> (),
+    toBeGreaterThanOrEqual: (expected: number) -> (),
+    toBeLessThan: (expected: number) -> (),
+    toBeLessThanOrEqual: (expected: number) -> (),
+    toBeNil: () -> (),
+    toBeNan: () -> (),
+    toHaveLength: (expected: number) -> (),
+    toBeFalsy: () -> (),
+    toBeTruthy: () -> (),
+}
+ 
+type ExpectCases = BasicCases & {
+    never: BasicCases,
+}
+
+type FunctionalCases = ExpectCases & {
+    toThrow: (expected: string?) -> (),
+    never: FunctionalCases,
+}]
+expect(value: any): ExpectCases | FunctionalCases
+```
+<details open>
+<summary>Parameters</summary>
+- `value: any{:luau}` - The value to test.
+</details>
+
+### expected
+Expects a value to be true or non nil.
+
+Similar to `assert(value)`
+```luau
+expected(value: any): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `value: any{:luau}` - The value to test.
+  - If the value is `false`, the test will fail.
+</details>
+<details>
+<summary>Throws</summary>
+- Lua Error
+</details>
+
+#### expectEqual
+Expects a value to equal another.
+
+Similar to `assert(value == expected, ...)`
+```luau
+expectEqual(expected: any, value: any): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `expected: any{:luau}` - The expected value.
+- `value: any{:luau}` - The value to test.
+</details>
+<details>
+<summary>Throws</summary>
+- Lua Error
+</details>

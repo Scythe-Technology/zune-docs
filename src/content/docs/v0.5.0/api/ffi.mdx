@@ -1,0 +1,326 @@
+# Foreign Function Interface
+`zune.ffi`
+---
+
+A library to interact with foreign functions and libraries.
+
+## Properties
+### prefix
+The recommended prefix for the library file.
+Platforms:
+- Windows: none
+- Linux: `lib`
+- macOS: `lib`
+```luau
+prefix: string
+```
+
+### suffix
+The recommended suffix for the library file.
+Platforms:
+- Windows: `.dll`
+- Linux: `.so`
+- macOS: `.dylib`
+```luau
+suffix: string
+```
+
+---
+## Functions
+### ptr
+```luau tooltips
+-- @link: (10,20)[../objects/FFIPointer]
+-- @link: (23,33)[../objects/FFIPointer]
+ptr(src: FFIPointer): FFIPointer
+```
+<details open>
+<summary>Parameters</summary>
+- `src: FFIPointer{:luau}` - The pointer to reference.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### ptrFromAddress
+```luau tooltips
+-- @link: (34,44)[../objects/FFIPointer]
+ptrFromAddress(address: buffer): FFIPointer
+```
+<details open>
+<summary>Parameters</summary>
+- `address: buffer{:luau}` - The address of the pointer.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### getLuaState
+Returns the lua state
+```luau tooltips
+-- @link: (34,44)[../objects/FFIPointer]
+getLuaState(mainthread: boolean?): FFIPointer
+```
+<details open>
+<summary>Parameters</summary>
+- `mainthread: boolean?{:luau}` - Whether to get the main thread or the current thread.
+  - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### alloc
+```luau tooltips
+-- @link: (42,52)[../objects/FFIPointer]
+alloc(size: number, alignment: number?): FFIPointer
+```
+<details open>
+<summary>Parameters</summary>
+- `size: number{:luau}` - The size to allocate.
+- `alignment: number?{:luau}` - The alignment to use.
+  - default: `1{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>
+
+### free
+```luau tooltips
+-- @link: (11,21)[../objects/FFIPointer]
+free(src: FFIPointer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `src: FFIPointer{:luau}` - The pointer to free.
+  - If the pointer is static, it must have a known size.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>
+
+### dupe
+```luau tooltips
+-- @link: (20,30)[../objects/FFIPointer]
+-- @link: (33,33)[../objects/FFIPointer]
+dupe(src: buffer | FFIPointer): FFIPointer
+```
+<details open>
+<summary>Parameters</summary>
+- `src: buffer | FFIPointer{:luau}` - The source to copy.
+  - If the source is a static pointer, it must have a known size.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### len
+```luau tooltips
+-- @link: (30,40)[../objects/FFIPointer]
+len(src: buffer | FFIPointer): number?
+```
+<details open>
+<summary>Parameters</summary>
+- `src: buffer | FFIPointer{:luau}` - The source to get the length of.
+</details>
+
+### copy
+```luau tooltips
+-- @link: (40,50)[../objects/FFIPointer]
+copy(dest: buffer | FFIPointer, destOffset: number, src: buffer | FFIPointer, srcOffset: number, count: number): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `dest: buffer | FFIPointer{:luau}` - The destination to write to.
+- `destOffset: number{:luau}` - The offset to write to in the destination.
+- `src: buffer | FFIPointer{:luau}` - The source to read from.
+- `srcOffset: number{:luau}` - The offset to read from in the source.
+- `count: number{:luau}` - The number of bytes to copy.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+</details>
+
+### tagName
+```luau tooltips
+tagName(tag: number): string?
+```
+<details open>
+<summary>Parameters</summary>
+- `tag: number{:luau}` - The tag id to get the name of.
+</details>
+
+### struct
+```luau tooltips
+-- @link: (29,40)[../objects/FFIDataType]
+-- @link: (46,57)[../objects/FFIDataType]
+struct(fields: {{ [string]: FFIDataType }}): FFIDataType
+```
+<details open>
+<summary>Parameters</summary>
+- `fields: {{ [string]: FFIDataType{:luau} }}{:luau}` - The fields to set in the struct.
+  - The order of the fields is the number index of the field table.
+    - There cannot be multiple fields in the same field table.
+    - Multiple fields with the same field name is not allowed.
+  - Example:
+    ```lua
+    ffi.struct {
+      { age = ffi.types.u8 },
+      { height = ffi.types.f32 },
+    }
+    ```
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>
+
+### fn
+```luau tooltips
+-- @hover: (16,30)[type FFIFunctionDef = {
+-- @link: (14,25)[../objects/FFIDataType]
+    returns: FFIDataType,
+-- @link: (13,24)[../objects/FFIDataType]
+    args: { FFIDataType }
+}]
+-- @link: (40,50)[../objects/FFIPointer]
+fn(definition: FFIFunctionDef, srcPtr: FFIPointer): ((...any) -> ...any)
+```
+<details open>
+<summary>Parameters</summary>
+- `definition: FFIFunctionDef{:luau}` - The function definition.
+  - `returns: FFIDataType{:luau}` - The return type of the function.
+  - `args: { FFIDataType }{:luau}` - The argument types of the function.
+- `srcPtr: FFIPointer{:luau}` - The pointer to the function.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>
+
+### closure
+```luau tooltips
+-- @hover: (21,35)[type FFIFunctionDef = {
+-- @link: (14,25)[../objects/FFIDataType]
+    returns: FFIDataType,
+-- @link: (13,24)[../objects/FFIDataType]
+    args: { FFIDataType }
+}]
+-- @link: (64,74)[../objects/FFIPointer]
+closure(definition: FFIFunctionDef, handler: (...any) -> any): FFIPointer,
+```
+<details open>
+<summary>Parameters</summary>
+- `definition: FFIFunctionDef{:luau}` - The function definition.
+  - `returns: FFIDataType{:luau}` - The return type of the function.
+  - `args: { FFIDataType }{:luau}` - The argument types of the function.
+- `handler: (...any) -> any{:luau}` - The lua function to call.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>
+
+### dlopen
+```luau tooltips
+-- @hover: (34,48)[type FFIFunctionDef = {
+-- @link: (14,25)[../objects/FFIDataType]
+    returns: FFIDataType,
+-- @link: (13,24)[../objects/FFIDataType]
+    args: { FFIDataType }
+}]
+-- @link: (53,63)[../objects/FFILibrary]
+dlopen(path: string, { [string]: FFIFunctionDef }): FFILibrary,
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the library.
+- `{ [string]: FFIFunctionDef{:luau} }{:luau}` - The functions to load.
+  - `[string]: FFIFunctionDef{:luau}` - The function definition for library symbols.
+    - `returns: FFIDataType{:luau}` - The return type of the function.
+    - `args: { FFIDataType }{:luau}` - The argument types of the function.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>
+
+---
+## Namespaces
+### types
+```luau tooltips
+-- @hover: (9,14)[type FFIDataType = {
+-- @link: (11,22)[../objects/FFIDataType]
+    void: FFIDataType,
+-- @link: (9,20)[../objects/FFIDataType]
+    i8: FFIDataType,
+-- @link: (9,20)[../objects/FFIDataType]
+    u8: FFIDataType,
+-- @link: (10,21)[../objects/FFIDataType]
+    i16: FFIDataType,
+-- @link: (10,21)[../objects/FFIDataType]
+    u16: FFIDataType,
+-- @link: (10,21)[../objects/FFIDataType]
+    i32: FFIDataType,
+-- @link: (10,21)[../objects/FFIDataType]
+    u32: FFIDataType,
+-- @link: (10,21)[../objects/FFIDataType]
+    i64: FFIDataType,
+-- @link: (10,21)[../objects/FFIDataType]
+    u64: FFIDataType,
+-- @link: (12,23)[../objects/FFIDataType]
+    float: FFIDataType,
+-- @link: (13,24)[../objects/FFIDataType]
+    double: FFIDataType,
+-- @link: (14,25)[../objects/FFIDataType]
+    pointer: FFIDataType,
+}]
+types: <table>
+```
+
+---
+### c
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### compile
+```luau tooltips
+-- @hover: (30,47)[type FFICompileOptions = {
+    options: string?,
+    files: {string}?,
+    libraries: {string}?,
+    includes: {string}?,
+    sysincludes: {string}?,
+-- @link: (25,35)[../objects/FFIPointer]
+    symbols: {[string]: FFIPointer}?,
+}]
+-- @link: (51,62)[../objects/FFICompiled]
+c.compile(src: string, opts: FFICompileOptions?): FFICompiled
+```
+<details open>
+<summary>Parameters</summary>
+- `src: string{:luau}` - The source code to compile.
+- `opts: FFICompileOptions?{:luau}` - The options for the compilation.
+  - `options: string?{:luau}` - The compiler options to use.
+  - `files: {string}?{:luau}` - The files to include in the compilation.
+  - `libraries: {string}?{:luau}` - The libraries to link against.
+  - `includes: {string}?{:luau}` - The include directories to use.
+  - `sysincludes: {string}?{:luau}` - The system include directories to use.
+  - `symbols: {[string]: FFIPointer}?{:luau}` - The symbols to define.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>

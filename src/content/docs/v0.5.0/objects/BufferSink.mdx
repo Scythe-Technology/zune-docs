@@ -1,0 +1,52 @@
+# BufferSink
+---
+
+## Properties
+### len
+```luau tooltips
+len: number
+```
+
+### closed
+```luau tooltips
+closed: boolean
+```
+
+---
+## Methods
+### flush
+```luau tooltips
+:flush(bytes: boolean?): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `bytes: boolean?{:luau}` - If false, the function will return a `string` instead of a `buffer`.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### write
+```luau tooltips
+:write(data: string | buffer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `data: string | buffer{:luau}` - The data to write.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### writer
+```luau tooltips
+-- @link: (12,22)[../objects/Stream]
+:writer(): IoWritable
+```
+
+### close
+```luau tooltips
+:close(): ()
+```

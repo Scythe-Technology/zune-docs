@@ -1,0 +1,61 @@
+# FFIDataType
+---
+import { Callout } from 'nextra/components'
+
+## Methods
+### size
+```luau tooltips
+:size(): number
+```
+
+### alignment
+```luau tooltips
+:alignment(): number
+```
+
+### offset
+```luau tooltips
+:offset(field: string): number
+```
+<Callout type="info">Method available only for `struct` datatype</Callout>
+<details open>
+<summary>Parameters</summary>
+- `field: string{:luau}` - The field to get the offset for.
+</details>
+
+### new
+```luau tooltips
+:new(fields: {{ [string]: buffer | number }}): buffer
+```
+<Callout type="info">Method available only for `struct` datatype</Callout>
+<details open>
+<summary>Parameters</summary>
+- `fields: {{ [string]: buffer | number }}{:luau}` - The fields to set in the struct.
+  - The keys are the field names, and the values are the field values.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>
+
+### tag
+```luau tooltips
+:tag(): number
+```
+<Callout type="info">Method available only for `pointer` datatype</Callout>
+
+### newTag
+```luau tooltips
+:newTag(tag: string | buffer): FFIDataType
+```
+<Callout type="info">Method available only for base `pointer` datatype</Callout>
+<details open>
+<summary>Parameters</summary>
+- `tag: string | buffer{:luau}` - The tag to set.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>

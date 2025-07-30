@@ -1,0 +1,175 @@
+# Test Command
+---
+
+The command `zune test <file>` will run the test suite in the specified file, enabling the testing backend for [`zune.testing`](./api/testing).
+
+Testing is able to:
+- Preview line in error tracebacks.
+- Detect runtime memory leaks. *(ideally for reporting as an issue for zune)*
+
+## Making tests
+
+Tests are conducted using the `testing.test` function. The function takes two parameters, a name and a callback function.
+
+```luau copy showLineNumbers
+testing.test("Test Name", function()
+    -- Test code here
+end)
+```
+
+The test suite will run the callback function and check for any errors. If an error occurs, the test will fail.
+
+### Passing Example
+```ansi
+ [1;32mPASS[0m [0m([1mTest Name[0m) [2m[0ms][0m
+
+ [1mTests[0m: 1 total
+ [1mTime[0m:  0.001 s
+```
+
+### Failing Example
+```ansi
+ [1;31mFAIL[0m [0m([1mTest Name[0m) [2m[0ms][0m
+ │ [31m[string "filename"]:2: Error message[0m
+ │ [31mpath/to/filename:4:2:[0m [2m0x123456 called error (test)[0m
+ │     error("Error Message") -- Test code here
+ │     ^
+ │ [31mpath/to/filename:9:1:[0m [2m0x123456 called test (test)[0m
+ │ testing.test("Test Name", function()
+ └─       ^
+
+ [1mTests[0m: [1;31m1 failed[0m, 1 total
+ [1mTime[0m:  0.001 s
+```
+
+## Test Describing
+
+Organizing tests can be done with then `testing.describe` function. The function takes two parameters, a name and a callback function.
+
+```luau copy showLineNumbers
+testing.describe("Test Scope Name", function()
+    testing.test("Test Name", function()
+        -- Test code here
+    end)
+end)
+```
+
+An example of the scope can be shown below:
+```ansi
+ [1;32mPASS[0m [2mTest Scope Name [0m([1mTest Name[0m) [2m[0ms][0m
+```
+
+If an error occurs in any test within the describe block, it would be an unexpected error, warning the error.
+
+## Expecting
+
+The testing suite provides the `testing.expect` function to check for expected values.
+
+```luau copy showLineNumbers
+testing.expect(1).toBe(1)
+testing.expect(1).never.toBe(2)
+testing.expect(1).toBeCloseTo(1, 0)
+```
+
+These functions act like assertions. If the value is not as expected, the expect function will throw an error.
+
+## Easy Integration
+
+The testing suite is designed to be easy to use. The test suite can be disabled or enabled with `zune run` or `zune test` without extra configuration, allowing to you write tests within the same file as your code.
+Ideally, tests are mostly written on a separate file, but this is still an option for you to write tests on the same file without runtime errors.
+
+While tests are disabled during runtime with `zune run`, the field `zune.testing.running` would be `false`,
+and test functions would be a `NOOP` and accessing nil results from `expect().index` would cause a runtime error.
+This could be used to know the running context.
+
+```luau copy showLineNumbers
+local testing = zune.testing
+
+if (testing.running) then
+    -- prepare tests
+    -- ... or you could use another testing library here.
+    testing.test("Test Name", function()
+        -- Test code here
+    end)
+end
+```
+##### NOOP
+```luau copy showLineNumbers
+local testing = zune.testing
+
+-- NOOP if testing is inactive
+testing.test("Test Name", function()
+    -- Test code here
+end)
+-- code continues
+```
+##### Example
+```luau copy showLineNumbers
+local function add(a: number, b: number): number
+    return a + b
+end
+
+if (zune.testing.running) then
+    local testing = zune.testing
+
+    local test = testing.test
+    local expect = testing.expect
+
+    test("1 + 2", function()
+        expect(add(1, 2)).toBe(3)
+    end)
+
+    test("{} + {} (should error)", function()
+        expect(function()
+            add({}, {})
+        end).toThrow("attempt to perform arithmetic (add) on table")
+    end)
+end
+
+return add
+```
+Output:
+```ansi
+> zune test path/to/module.lua
+ [1;32mPASS[0m [0m([1m1 + 2[0m) [2m[0ms][0m
+ [1;32mPASS[0m [0m([1m{} + {} (should error)[0m) [2m[0ms][0m
+
+ [1mTests[0m: 2 total
+ [1mTime[0m:  0.001 s
+```
+
+## Flags
+
+### Optimization Level
+```bash
+zune test -O=0|1|2 ...
+```
+
+### Debug Level
+```bash
+zune test -g=0|1|2 ...
+```
+
+### Native
+Enables native code generation by default. This is the default behavior.
+```bash
+zune test --native ...
+```
+
+### No-native
+Stops zune from using native code generation by default.
+This does not remove the native code generation, checkout [no-jit flag](#no-jit).
+```bash
+zune test --no-native ...
+```
+
+### No-jit
+Disables native code generation entirely.
+```bash
+zune test --no-jit ...
+```
+
+### Limbo
+Disables all of zune libraries.
+```bash
+zune test --limbo ...

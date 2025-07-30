@@ -1,0 +1,120 @@
+# Regex
+---
+
+## Methods
+### match
+```luau tooltips
+-- @hover: (34,44)[type RegexMatch = {
+    string: string,
+    index: number,
+}]
+:match(input: string | buffer): {RegexMatch}?
+```
+<details open>
+<summary>Parameters</summary>
+- `input: string | buffer{:luau}` - The input to match against the regex.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### search
+```luau tooltips
+-- @hover: (35,45)[type RegexMatch = {
+    string: string,
+    index: number,
+}]
+:search(input: string | buffer): {RegexMatch}?
+```
+<details open>
+<summary>Parameters</summary>
+- `input: string | buffer{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- Regex Error
+- Memory Error
+</details>
+
+### captures
+```luau tooltips
+-- @hover: (56,66)[type RegexMatch = {
+    string: string,
+    index: number,
+}]
+:captures(input: string | buffer, global: boolean?): {{RegexMatch}}
+```
+<details open>
+<summary>Parameters</summary>
+- `input: string | buffer{:luau}`
+- `global: boolean?{:luau}` - If true, the function will return all captures instead of just the first.
+  - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- Regex Error
+- Memory Error
+</details>
+
+### isMatch
+Returns if a string matches the pattern.
+```luau tooltips
+:isMatch(input: string | buffer): boolean
+```
+<details open>
+<summary>Parameters</summary>
+- `input: string | buffer{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- Regex Error
+</details>
+
+### format
+Format a string.
+```luau tooltips
+:format(str: string, format: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `str: string{:luau}` - The string to format.
+- `format: string{:luau}` - The format string to use.
+</details>
+<details>
+<summary>Throws</summary>
+- Regex Error
+- Memory Error
+</details>
+
+### replace
+Replace the first occurrence of a string.
+```luau tooltips
+:replace(str: string, replacement: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `str: string{:luau}` - The string to replace.
+- `replacement: string{:luau}` - The replacement string.
+</details>
+<details>
+<summary>Throws</summary>
+- Regex Error
+- Memory Error
+</details>
+
+### replaceAll
+Replace all occurrences of a string.
+```luau tooltips
+:replaceAll(str: string, replacement: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `str: string{:luau}` - The string to replace.
+- `replacement: string{:luau}` - The replacement string.
+</details>
+<details>
+<summary>Throws</summary>
+- Regex Error
+- Memory Error
+</details>

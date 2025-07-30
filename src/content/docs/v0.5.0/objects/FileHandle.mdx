@@ -1,0 +1,212 @@
+# FileHandle
+---
+
+A FileHandle is an object that represents an open file. It provides methods to read, write, and manipulate the file.
+
+## Methods
+### read
+Read the contents of the file.
+```luau tooltips
+:read(amount: number?, useBuffer: boolean?): buffer | string
+```
+<details open>
+<summary>Parameters</summary>
+- `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit
+- `useBuffer: boolean?{:luau}` - If true, the function will return a `buffer` instead of a `string`.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### readSync
+Read the contents of the file synchronously.
+```luau tooltips
+:readSync(amount: number?, useBuffer: boolean?): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit
+- `useBuffer: boolean?{:luau}` - If true, the function will return a `buffer` instead of a `string`.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### write
+Write the contents to the file.
+```luau tooltips
+:write(contents: string | buffer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `contents: string | buffer{:luau}` - The contents to write to the file.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### writeSync
+Write the contents to the file synchronously.
+```luau tooltips
+:writeSync(contents: string | buffer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `contents: string | buffer{:luau}` - The contents to write to the file.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### append
+Append the contents to the file.
+```luau tooltips
+:append(contents: string | buffer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `contents: string | buffer{:luau}` - The contents to append to the file.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### appendSync
+Append the contents to the file synchronously.
+```luau tooltips
+:appendSync(contents: string | buffer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `contents: string | buffer{:luau}` - The contents to append to the file.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### getSize
+Returns the size of the file in bytes.
+```luau tooltips
+:getSize(): number
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### getSeekPosition
+Returns the current seek position of the file.
+```luau tooltips
+:getSeekPosition(): number
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### seekFromEnd
+Seeks the file from the end.
+```luau tooltips
+:seekFromEnd(amount: number?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `amount: number?{:luau}` - The amount of bytes to seek from the end, if not provided, it will seek to the end of the file.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### seekTo
+Seeks the file to a specific position.
+```luau tooltips
+:seekTo(amount: number?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `amount: number?{:luau}` - The amount of bytes to seek from the start, if not provided, it will seek to 0.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### seekBy
+Seeks the file by relative to the current position.
+```luau tooltips
+:seekBy(amount: number?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `amount: number?{:luau}` - The amount of bytes to seek from the current seek, if not provided or 0, seek will not move.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### lock
+Locks the file for reading or writing.
+```luau tooltips
+:lock(lockMode: ("shared" | "exclusive" | "none")?): boolean
+```
+<details open>
+<summary>Parameters</summary>
+- `lockMode: ("shared" | "exclusive" | "none")?{:luau}` - The mode to lock the file, if nil, locks the file in exclusive mode.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### unlock
+Unlocks from the current lock mode.
+```luau tooltips
+:unlock(): ()
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### sync
+Flushes the file. Writes the contents to the disk. This does not yield, it would block the process until the file is flushed.
+```luau tooltips
+:sync(): ()
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### readonly
+Get readonly state or set the file to readonly.
+```luau tooltips
+:readonly(): boolean
+:readonly(enabled: boolean?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `enabled: boolean?{:luau}` - Whether to set the file to readonly, if nil, returns the current state.
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### close
+Close the file handle.
+```luau tooltips
+:close(): ()
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>

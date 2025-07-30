@@ -1,0 +1,22 @@
+# Setup Command
+---
+
+The `setup` command is used to setup the zune environment for [`luau-lsp`](https://github.com/JohnnyMorganz/luau-lsp).
+
+Supported Editors:
+- [Visual Studio Code](https://code.visualstudio.com/) - configuration based on [JohnnyMorganz/luau-lsp](https://github.com/JohnnyMorganz/luau-lsp)
+- [neovim](https://neovim.io/) - configuration based on [lopi-py/luau-lsp.nvim](https://github.com/lopi-py/luau-lsp.nvim)
+- [Zed](https://zed.dev/) - configuration based on [4teapo/zed-luau](https://github.com/4teapo/zed-luau)
+- [GNU Emacs](https://www.gnu.org/software/emacs/) - configuration based on [kennethloeffler/eglot-luau](https://github.com/kennethloeffler/eglot-luau)
+
+### Usage
+
+```bash
+zune setup [editor]
+```
+`editor` Options:
+- `vscode` - automatically applies settings to `.vscode/settings.json`.
+- `neovim` - automatically creates `.nvim.lua` or outputs settings.
+- `zed` - automatically applies settings to `.zed/settings.json`.
+- `emacs` - automatically creates `.dir-locals.el` or outputs settings.
+- *none* - stores type definitions in `~/.zune/typedefs/` without editor configuration.

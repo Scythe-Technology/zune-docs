@@ -1,0 +1,24 @@
+# SQLite3
+`zune.sqlite`
+
+---
+
+A library to interact with SQLite databases.
+
+## Functions
+### open
+Opens a database.
+```luau tooltips
+-- @link: (22,37)[../objects/SQLite3Database]
+open(path: string?): SQLite3Database
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string?{:luau}` - The path of the database.
+  - defaults to `":memory:"{:luau}`.
+</details>
+<details>
+<summary>Throws</summary>
+- SQLite3 Error
+- Memory Error
+</details>

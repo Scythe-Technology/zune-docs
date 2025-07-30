@@ -1,0 +1,37 @@
+# Require
+`zune.require`
+
+---
+
+A library to use zune's require resolver in luau.
+
+## Functions
+### navigate
+````luau
+navigate(path: string, from: string?, config: string?): string
+````
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to navigate to.
+- `from: string?{:luau}` - The path to navigate from.
+- `config: string?{:luau}` - The configuration to use.
+</details>
+<details>
+<summary>Throws</summary>
+- Require Error
+- Memory Error
+</details>
+
+### getCached
+```luau
+getCached(resolvedPath: string): any?
+```
+<details open>
+<summary>Parameters</summary>
+- `resolvedPath: string{:luau}` - The resolved path to fetch cached require.
+</details>
+<details>
+<summary>Throws</summary>
+- Require Error
+- Memory Error
+</details>

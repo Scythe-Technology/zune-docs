@@ -1,0 +1,58 @@
+# Thread
+---
+
+## Methods
+### start
+```luau tooltips
+:start(): ()
+```
+<details>
+<summary>Throws</summary>
+- Thread Error
+</details>
+
+### join
+Waits for the thread to finish.
+```luau tooltips
+:join(): ()
+```
+<details>
+<summary>Throws</summary>
+- Thread Error
+</details>
+
+### status
+Returns the status of the thread.
+```luau tooltips
+:status(): "ready" | "running" | "dead"
+```
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### receive
+Immediately receive or yields until a value is sent from the thread.
+```luau tooltips
+:receive(): any
+```
+<details>
+<summary>Throws</summary>
+- Thread Error
+- Memory Error
+</details>
+
+### send
+Sends a value to the thread.
+```luau tooltips
+:send(...: any): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `...: any{:luau}` - The values to send to the thread.
+</details>
+<details>
+<summary>Throws</summary>
+- Thread Error
+- Memory Error
+</details>

@@ -1,0 +1,62 @@
+# BufferStream
+---
+
+## Methods
+### read
+```luau tooltips
+:read(amount: number?, bytes: boolean?): (buffer | string)?
+```
+<details open>
+<summary>Parameters</summary>
+- `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit.
+- `bytes: boolean?{:luau}` - If false, the function will return a `string` instead of a `buffer`.
+</details>
+
+### write
+```luau tooltips
+:write(data: string | buffer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `data: string | buffer{:luau}` - The data to write to the stream.
+</details>
+
+### pos
+```luau tooltips
+:pos(): number
+```
+
+### size
+```luau tooltips
+:size(): number
+```
+
+### seekTo
+```luau tooltips
+:seekTo(pos: number): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `pos: number{:luau}` - The position to seek to.
+</details>
+
+### seekBy
+```luau tooltips
+:seekBy(offset: number): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `offset: number{:luau}` - The offset to seek by.
+</details>
+
+### writer
+```luau tooltips
+-- @link: (12,22)[../objects/Stream]
+:writer(): IoWritable
+```
+
+### reader
+```luau tooltips
+-- @link: (12,22)[../objects/Stream]
+:reader(): IoReadable
+```

@@ -1,0 +1,26 @@
+# FFILibrary
+---
+
+## Properties
+### [string]
+A table of functions with pre-defined function symbols created by the FFI library.
+```luau tooltips
+[string]: (...any) -> any
+```
+
+---
+## Methods
+### getSymbol
+```luau tooltips
+-- @link: (29,39)[./FFIPointer]
+:getSymbol(symbol: string): FFIPointer?
+```
+<details open>
+<summary>Parameters</summary>
+- `symbol: string{:luau}` - The symbol to get.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>

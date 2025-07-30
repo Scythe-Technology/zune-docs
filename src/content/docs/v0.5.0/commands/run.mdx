@@ -1,0 +1,72 @@
+# Run Command
+---
+
+The `run` command is used to run a script in the current environment.
+
+### Usage
+
+```bash
+zune run [script]
+```
+
+#### Run from Standard Input
+```bash
+ zune run -
+```
+- Example
+  ```bash
+  echo "print('Hello World!')" | zune run -
+  ```
+
+## Flags
+
+### Profiler
+A run flag that profiles the script and outputs a performance report.
+
+The file can be found as `profile.out` in the current working directory.
+
+Use this [`perfgraph.py`](https://github.com/luau-lang/luau/blob/master/tools/perfgraph.py) python script by [Luau](https://luau.org/) to visualize the profile.
+
+Profile with default frequency (~10000).
+```bash
+zune run --profile ...
+```
+Profile with a custom frequency.
+```bash
+zune run --profile=100000 ...
+```
+
+### Optimization Level
+```bash
+zune run -O=0|1|2 ...
+```
+
+### Debug Level
+```bash
+zune run -g=0|1|2 ...
+```
+
+### Native
+Enables native code generation by default. This is the default behavior.
+```bash
+zune run --native ...
+```
+
+### No-native
+Stops zune from using native code generation by default.
+This does not remove the native code generation, checkout [no-jit flag](#no-jit).
+```bash
+zune test --no-native ...
+```
+
+### No-jit
+Disables native code generation entirely.
+```bash
+zune test --no-jit ...
+```
+
+### Limbo
+Disables all of zune libraries.
+```bash
+zune run --limbo ...
+```

@@ -12,10 +12,10 @@ export default {
         title: 'Docs',
         type: 'menu',
         items: {
-            // 'master': {
-            //     title: 'master',
-            //     href: '/docs/master'
-            // },
+            'v0.5.0': {
+                title: 'v0.5.0',
+                href: '/docs/v0.5.0'
+            },
             'v0.4.2': {
                 title: 'v0.4.2',
                 href: '/docs/v0.4.2'

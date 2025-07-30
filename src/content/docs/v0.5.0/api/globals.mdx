@@ -1,0 +1,100 @@
+# Globals
+---
+
+Globals are available in every module. The listed globals are modified by the zune backend, refer to the [luau globals](https://luau.org/library#global-functions)
+for the rest of the globals.
+
+## Variables
+### zune
+The global `zune` variable is a table that contains all the zune apis.
+```luau tooltips
+-- @hover: (8,13)[{
+    compiled: {
+        optimize: number,
+        debug: number,
+        mode: "debug" | "release",
+    }?,
+    fs: FileSystemLib,
+    process: ProcessLib,
+    testing: TestingLib,
+    task: TaskLib,
+    net: NetworkLib,
+    luau: LuauLib,
+    serde: SerdeLib,
+    io: IoLib,
+    crypto: CryptoLib,
+    regex: RegexLib,
+    datetime: DatetimeLib,
+    ffi: FFILib,
+    sqlite: SQLiteLib,
+    require: RequireLib,
+    random: RandomLib,
+    thread: ThreadLib,
+}]
+zune: <table>
+```
+
+### _VERSION
+```luau
+_VERSION: string
+```
+The version of the Luau runtime.
+In zune, this should idealy be
+
+`zune <zune version>[-buildtag]+<luau version>`
+
+`zune <major>.<minor>.<patch>[-buildtag]+<major>.<minor>`
+
+examples:
+- `zune 0.1.0+0.640`
+- `zune 0.1.0-dev.1234567+0.640`
+
+The following code example shows how to detect if zune is running and provide the zune version with the Luau version.
+```luau filename="detect_zune.luau" showLineNumbers
+local pattern = "(zune) (%d+%.%d+%.%d+)%-?([%.%w%d]*)%+(%d+%.%d+)"
+
+local isZune, zuneVersion, buildTag, luauVersion = string.match(_VERSION, pattern)
+
+if (isZune) then
+    print(`zune Version: {zuneVersion}-{buildTag}`)
+    print(`luau Version: {luauVersion}`)
+end
+```
+
+### _FILE
+The source file of the currently executing code. `source` property may not be available in all cases,
+such as executing without detailed error and not testing.
+`_FILE` variable may not be available in all cases, such as executing luau in a custom environment.
+```luau tooltips
+-- @hover: (9,14)[{
+   source: string?
+   main: boolean,
+}]
+_FILE: <table>
+```
+
+## Functions
+### print
+Writes formatted values to `stderr`.
+```luau
+print(...any): ()
+```
+
+### require
+Luau require function, used to load modules.
+
+Based on the [Luau RFC](https://rfcs.luau.org/amended-require-resolution.html).
+
+examples:
+- `require("./module"){:luau}`
+- `require("@alias/module"){:luau}`
+- `require("../module"){:luau}`
+```luau
+require(path: string): any
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+- Memory Error
+- Resolve Error
+</details>

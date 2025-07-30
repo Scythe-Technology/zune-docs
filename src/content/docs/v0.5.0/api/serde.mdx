@@ -1,0 +1,404 @@
+# Serializer/Deserializer
+`zune.serde`
+
+---
+
+A library to serialize and deserialize data in luau.
+
+## Namespaces
+### json
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`PROPERTIES`</u></h4>
+#### indents
+Indentation levels for JSON.
+```luau tooltips
+-- @hover: (16,21)[{
+    none: 0,
+    two_spaces: 1,
+    four_spaces: 2,
+    tabs: 3,
+}]
+json.indents: <table>
+```
+#### values
+Special values for JSON.
+```luau tooltips
+-- @hover: (15,20)[{
+    null: any,
+}]
+json.values: <table>
+```
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### encode
+Encodes a value to JSON.
+```luau tooltips
+-- @hover: (33,49)[type JsonEncodeConfig = {
+    pretty_indent: number,
+}]
+json.encode(value: any, config: JsonEncodeConfig?): string
+```
+<details open>
+<summary>Parameters</summary>
+- `value: any{:luau}` - The value to encode.
+- `config: JsonEncodeConfig?{:luau}` - The configuration for the encoding.
+  - `pretty_indent: number?{:luau}` - The indentation level for pretty printing
+    - default: `0`
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decode
+Decodes JSON.
+```luau tooltips
+-- @hover: (35,51)[type JsonDecodeConfig = {
+    preserve_null: boolean,
+}]
+json.decode(json: string, config: JsonDecodeConfig?): any
+```
+<details open>
+<summary>Parameters</summary>
+- `json: string{:luau}` - The JSON to decode.
+- `config: JsonDecodeConfig?{:luau}` - The configuration for the decoding.
+  - `preserve_null: boolean?{:luau}` - Whether to preserve null values
+    - default: `false`
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+---
+### json5
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`PROPERTIES`</u></h4>
+#### indents
+Indentation levels for JSON5.
+```luau tooltips
+-- @hover: (17,22)[{
+    none: 0,
+    two_spaces: 1,
+    four_spaces: 2,
+    tabs: 3,
+}]
+json5.indents: <table>
+```
+#### values
+Special values for JSON5.
+```luau tooltips
+-- @hover: (16,21)[{
+    null: any,
+}]
+json5.values: <table>
+```
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### encode
+Encodes a value to JSON5.
+```luau tooltips
+-- @hover: (34,50)[type JsonEncodeConfig = {
+    pretty_indent: number,
+}]
+json5.encode(value: any, config: JsonEncodeConfig?): string
+```
+<details open>
+<summary>Parameters</summary>
+- `value: any{:luau}` - The value to encode.
+- `config: JsonEncodeConfig?{:luau}` - The configuration for the encoding.
+  - `pretty_indent: number?{:luau}` - The indentation level for pretty printing
+    - default: `0`
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decode
+Decodes JSON5.
+```luau tooltips
+-- @hover: (35,51)[type JsonDecodeConfig = {
+    preserve_null: boolean,
+}]
+json5.decode(json: string, config: JsonDecodeConfig?): any
+```
+<details open>
+<summary>Parameters</summary>
+- `json: string{:luau}` - The JSON5 to decode.
+- `config: JsonDecodeConfig?{:luau}` - The configuration for the decoding.
+  - `preserve_null: boolean?{:luau}` - Whether to preserve null values
+    - default: `false`
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+---
+### toml
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### encode
+Encodes a table to TOML.
+```luau tooltips
+toml.encode(object: {[string]: any}): string
+```
+<details open>
+<summary>Parameters</summary>
+- `object: {[string]: any}{:luau}` - The table to encode.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decode
+Decodes TOML.
+```luau tooltips
+toml.decode(toml: string): {[string]: any}
+```
+<details open>
+<summary>Parameters</summary>
+- `toml: string{:luau}` - The TOML to decode.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+---
+### yaml
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### encode
+Encodes a table to YAML.
+```luau tooltips
+yaml.encode(object: {[string]: any}): string
+```
+<details open>
+<summary>Parameters</summary>
+- `object: {[string]: any}{:luau}` - The table to encode.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decode
+Decodes YAML.
+```luau tooltips
+yaml.decode(yaml: string): {[string]: any}
+```
+<details open>
+<summary>Parameters</summary>
+- `yaml: string{:luau}` - The YAML to decode.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+---
+### base64
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### encode
+Encodes a string to Base64.
+```luau tooltips
+base64.encode(value: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `value: string{:luau}` - The string to encode.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decode
+Decodes Base64.
+```luau tooltips
+base64.decode(base64: string): string
+```
+<details open>
+<summary>Parameters</summary>
+- `base64: string{:luau}` - The YAML to decode.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+---
+### gzip
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### compress
+```luau tooltips
+-- @hover: (43,68)[type GenericCompressionOptions = {
+    level: number?,
+}]
+gzip.compress(raw: string | buffer, opts: GenericCompressionOptions?): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `raw: string | buffer{:luau}` - The data to compress.
+  - If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
+- `opts: GenericCompressionOptions?{:luau}` - The options for the compression.
+  - `level: number?{:luau}` - The compression level
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decompress
+```luau tooltips
+gzip.decompress(compressed: string | buffer): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `compressed: string | buffer{:luau}` - The compressed data to decompress.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+---
+### zlib
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### compress
+```luau tooltips
+-- @hover: (43,68)[type GenericCompressionOptions = {
+    level: number?,
+}]
+zlib.compress(raw: string | buffer, opts: GenericCompressionOptions?): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `raw: string | buffer{:luau}` - The data to compress.
+  - If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
+- `opts: GenericCompressionOptions?{:luau}` - The options for the compression.
+  - `level: number?{:luau}` - The compression level
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decompress
+```luau tooltips
+zlib.decompress(compressed: string | buffer): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `compressed: string | buffer{:luau}` - The compressed data to decompress.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+---
+### lz4
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### compress
+```luau tooltips
+lz4.compress(raw: string | buffer): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `raw: string | buffer{:luau}` - The data to compress.
+  - If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### compressFrame
+```luau tooltips
+-- @hover: (47,72)[type GenericCompressionOptions = {
+    level: number?,
+}]
+lz4.compressFrame(raw: string | buffer, opts: GenericCompressionOptions?): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `raw: string | buffer{:luau}` - The data to compress.
+  - If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
+- `opts: GenericCompressionOptions?{:luau}` - The options for the compression.
+  - `level: number?{:luau}` - The compression level
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decompress
+```luau tooltips
+lz4.decompress(compressed: string | buffer, size: number): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `compressed: string | buffer{:luau}` - The compressed data to decompress.
+- `size: number{:luau}` - The size of the decompressed data.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decompressFrame
+```luau tooltips
+lz4.decompressFrame(compressed: string | buffer): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `compressed: string | buffer{:luau}` - The compressed data to decompress.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+---
+### zstd
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### compress
+```luau tooltips
+-- @hover: (43,68)[type GenericCompressionOptions = {
+    level: number?,
+}]
+zstd.compress(raw: string | buffer, opts: GenericCompressionOptions?): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `raw: string | buffer{:luau}` - The data to compress.
+  - If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
+- `opts: GenericCompressionOptions?{:luau}` - The options for the compression.
+  - `level: number?{:luau}` - The compression level
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decompress
+```luau tooltips
+zstd.decompress(compressed: string | buffer): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `compressed: string | buffer{:luau}` - The compressed data to decompress.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>

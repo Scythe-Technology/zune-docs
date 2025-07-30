@@ -1,0 +1,183 @@
+# NetworkSocket
+---
+
+A NetworkSocket is an object that represents a network socket. It provides methods to connect, send, and receive data over the network.
+
+## Methods
+### send
+Sends data over the socket, and returns the number of bytes sent.
+```luau tooltips
+:send(data: string | buffer, offset: number?): number
+```
+<details open>
+<summary>Parameters</summary>
+- `data: string | buffer{:luau}` - The data to send over the socket.
+- `offset: number?{:luau}` - The offset of the string/buffer.
+  - default: `0`
+</details>
+<details>
+<summary>Throws</summary>
+- Network Error
+- Memory Error
+</details>
+
+### sendMsg
+Sends data over the socket, and returns the number of bytes sent.
+```luau tooltips
+:sendMsg(port: number, address: string, data: string | buffer, offset: number?): number
+```
+<details open>
+<summary>Parameters</summary>
+- `port: number{:luau}` - The port to send the data to.
+- `address: string{:luau}` - The address to send the data to.
+- `data: string | buffer{:luau}` - The data to send over the socket.
+- `offset: number?{:luau}` - The offset of the string/buffer.
+  - default: `0`
+</details>
+<details>
+<summary>Throws</summary>
+- Network Error
+- Memory Error
+</details>
+
+### recv
+```luau tooltips
+:recv(max_size: number?): buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `max_size: number?{:luau}` - The max amount of bytes to receive.
+  - default: `8192`
+</details>
+<details>
+<summary>Throws</summary>
+- Network Error
+- Memory Error
+</details>
+
+### recvMsg
+```luau tooltips
+-- @hover: (31,45)[type NetworkAddress = {
+    family: number,
+    port: number,
+    address: string,
+}]
+:recvMsg(max_size: number?): (NetworkAddress, buffer)
+```
+<details open>
+<summary>Parameters</summary>
+- `max_size: number?{:luau}` - The max amount of bytes to receive.
+  - default: `8192`
+</details>
+<details>
+<summary>Throws</summary>
+- Network Error
+- Memory Error
+</details>
+
+### accept
+Yields and waits for a connection to be made on the socket, and returns a `NetworkSocket` object.
+```luau tooltips
+:accept(): NetworkSocket
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### connect
+Connects the socket to the specified address and port.
+```luau tooltips
+:connect(address: string, port: number): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `address: string{:luau}` - The address to connect to.
+- `port: number{:luau}` - The port to connect to.
+</details>
+<details>
+<summary>Throws</summary>
+- Network Error
+</details>
+
+### listen
+Starts listening for incoming connections on the socket.
+```luau tooltips
+:listen(backlog: number?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `backlog: number?{:luau}` - The maximum number of connections the OS should queue before refusing new connections.
+  - default: `128`
+</details>
+<details>
+<summary>Throws</summary>
+- Network Error
+</details>
+
+### bindIp
+Binds the socket to the specified address and port.
+```luau tooltips
+:bindIp(address: string, port: number): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `address: string{:luau}` - The address to bind to.
+- `port: number{:luau}` - The port to bind to.
+</details>
+<details>
+<summary>Throws</summary>
+- Network Error
+</details>
+
+### getName
+```luau tooltips
+-- @hover: (13,27)[type NetworkAddress = {
+    family: number,
+    port: number,
+    address: string,
+}]
+:getName(): NetworkAddress
+```
+<details>
+<summary>Throws</summary>
+- Network Error
+- Memory Error
+</details>
+
+### setOption
+Sets an option for the socket.
+```luau tooltips
+:setOption(level: number, optname: number, value: boolean | string | buffer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `level: number{:luau}` - The level of the option to set.
+- `optname: number{:luau}` - The name of the option to set.
+- `value: boolean | string | buffer{:luau}` - The value to set the option to.
+</details>
+<details>
+<summary>Throws</summary>
+- Network Error
+</details>
+
+### close
+Closes the socket.
+```luau tooltips
+:close(): ()
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+- Memory Error
+</details>
+
+### isOpen
+Returns if the socket is open.
+```luau tooltips
+:isOpen(): boolean
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>

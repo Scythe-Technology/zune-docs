@@ -1,0 +1,150 @@
+# Process
+`zune.process`
+
+---
+
+A library that interacts with the system process.
+
+## Properties
+### os
+The operating system that the process is running on.
+```luau tooltips
+os: "linux" | "windows" | "macos"
+```
+
+### arch
+The cpu architecture that the process is running on.
+This property can have more possible values (Usually from a custom zune build for another architecture).
+Currently this is based on the official releases of zune.
+```luau tooltips
+arch: "aarch64" | "x86_64" | "riscv64"
+```
+
+### args
+The arguments passed to the process.
+```luau tooltips
+args: { string }
+```
+
+### env
+The process enviroment table.
+
+(Loaded from top to bottom)
+- Includes `.env` file in the current working directory.
+- Includes `.env.production` file in the current working directory. When `LUAU_ENV` is set to `PRODUCTION`.
+- Includes `.env.development` file in the current working directory. When `LUAU_ENV` is set to `DEVELOPMENT`.
+- Includes `.env.test` file in the current working directory. When `LUAU_ENV` is set to `TEST`.
+- Includes `.env.local` file in the current working directory.
+```luau tooltips
+env: { [string]: string }
+```
+
+---
+## Functions
+### loadEnv
+Same behavior as `process.env`, does not update `process.env`.
+```luau tooltips
+loadEnv(): { [string]: string }
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+- Memory Error
+</details>
+
+### create
+Creates a new process.
+```luau tooltips
+-- @hover: (47,61)[type ProcessOptions = {
+    cwd: string?,
+    env: { [string]: string }?,
+    shell: (boolean | string)?,
+}]
+-- @link: (65,77)[../objects/ProcessChild]
+create(exec: string, args: { string }?, opts: ProcessOptions?): ProcessChild
+```
+<details open>
+<summary>Parameters</summary>
+- `exec: string{:luau}` - The executable to run.
+- `args: { string }?{:luau}` - The arguments to pass to the executable.
+- `opts: ProcessOptions?{:luau}` - The options for the process.
+  - `cwd: string?{:luau}` - The current working directory of the process.
+  - `env: { [string]: string }?{:luau}` - The environment variables to set for the process.
+  - `shell: (boolean | string)?{:luau}` - The  shell to use, `true` would use the common shell for your os.
+</details>
+<details>
+<summary>Throws</summary>
+- Process Error
+</details>
+
+### run
+Runs a new process, and yields for the result.
+```luau tooltips
+-- @hover: (44,58)[type ProcessOptions = {
+    cwd: string?,
+    env: { [string]: string }?,
+    shell: (boolean | string)?,
+}]
+-- @hover: (62,78)[
+type ProcessResult = {
+    ok: boolean,
+    code: number,
+    status: "Exited" | "Stopped" | "Signal" | "Unknown",
+}
+ 
+type ProcessRunResult = ProcessResult & {
+    stdout: string,
+    stderr: string,
+}]
+run(exec: string, args: { string }?, opts: ProcessOptions?): ProcessRunResult
+```
+<details open>
+<summary>Parameters</summary>
+- `exec: string{:luau}` - The executable to run.
+- `args: { string }?{:luau}` - The arguments to pass to the executable.
+- `opts: ProcessOptions{:luau}` - The options for the process.
+</details>
+<details>
+<summary>Throws</summary>
+- Process Error
+</details>
+
+### getCwd
+Get the current working directory (absolute path).
+```luau tooltips
+getCwd(): string
+```
+<details>
+<summary>Throws</summary>
+- IO Error
+- Memory Error
+</details>
+
+### exit
+Exits the current process.
+```luau tooltips
+exit(code: number): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `code: number{:luau}` - The exit code to use.
+</details>
+
+### onSignal
+Registers a signal handler.
+
+Supported signals:
+- `INT` - Interrupt signal (SIGINT).
+```luau tooltips
+onSignal(signal: "INT", callback: () -> ()): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `signal: "INT"{:luau}` - The signal to handle.
+- `callback: () -> (){:luau}` - The callback to run when the signal is received.
+</details>
+<details>
+<summary>Throws</summary>
+- Process Error
+- Thread Error
+</details>

@@ -1,0 +1,37 @@
+# Init Command
+---
+import { FileTree } from 'nextra/components'
+
+The `init` command is used create files for a new project in the current directory.
+
+### Usage
+
+```bash
+zune init [template]
+```
+
+### Templates
+- \<none\> - Create a new project template.
+- `bare` - Create a blank template.
+- `module` - Create a module template.
+
+
+#### Sample Tree
+##### Project
+<FileTree>
+  <FileTree.File name="zune.toml" />
+  <FileTree.Folder name="src" defaultOpen>
+    <FileTree.File name="main.luau" />
+  </FileTree.Folder>
+</FileTree>
+##### Bare
+<FileTree>
+  <FileTree.File name="zune.toml" />
+</FileTree>
+##### Module
+<FileTree>
+  <FileTree.File name="zune.toml" />
+  <FileTree.Folder name="src" defaultOpen>
+    <FileTree.File name="init.luau" />
+  </FileTree.Folder>
+</FileTree>

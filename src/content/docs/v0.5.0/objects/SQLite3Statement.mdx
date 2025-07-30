@@ -1,0 +1,60 @@
+# SQLite3Statement
+---
+
+## Methods
+### run
+```luau tooltips
+-- @hover: (12,25)[type SQLite3Values = {[string]: number | string | buffer}]
+-- @hover: (29,42)[type SQLite3Result = {
+    last_insert_row_id: number,
+    changes: number,
+}]
+:run(args: SQLite3Values?): SQLite3Result
+```
+<details open>
+<summary>Parameters</summary>
+- `args: SQLite3Values?{:luau}` - The arguments to bind to the statement.
+</details>
+<details>
+<summary>Throws</summary>
+- SQLite3 Error
+- Memory Error
+</details>
+
+### get
+```luau tooltips
+-- @hover: (12,25)[type SQLite3Values = {[string]: number | string | buffer}]
+-- @hover: (29,42)[type SQLite3Values = {[string]: number | string | buffer}]
+:get(args: SQLite3Values?): SQLite3Values?
+```
+<details open>
+<summary>Parameters</summary>
+- `args: SQLite3Values?{:luau}` - The arguments to bind to the statement.
+</details>
+<details>
+<summary>Throws</summary>
+- SQLite3 Error
+- Memory Error
+</details>
+
+### all
+```luau tooltips
+-- @hover: (12,25)[type SQLite3Values = {[string]: number | string | buffer}]
+-- @hover: (30,43)[type SQLite3Values = {[string]: number | string | buffer}]
+:all(args: SQLite3Values?): {SQLite3Values}
+```
+<details open>
+<summary>Parameters</summary>
+- `args: SQLite3Values?{:luau}` - The arguments to bind to the statement.
+</details>
+<details>
+<summary>Throws</summary>
+- SQLite3 Error
+- Memory Error
+</details>
+
+### finalize
+closes the statement and frees resources.
+```luau tooltips
+:finalize(): ()
+```

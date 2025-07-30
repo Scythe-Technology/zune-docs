@@ -1,0 +1,36 @@
+# Debug Command
+---
+> [!WARNING]
+>
+> This command is pretty experimental. Report any issues you find.
+
+The `debug` command is used to run a script in the current environment with debugging capabilities.
+
+This would load an interactive debugger at the start of the command, allowing to setup your debugging environment.
+
+Compile default for debug level would be set to level `2`, and native codegen will be disabled.
+
+### Usage
+
+```bash
+zune debug [script]
+```
+
+## Flags
+
+### Optimization Level
+```bash
+zune debug -O=0|1|2 ...
+```
+
+### Once
+Enables the `--once` flag, which runs the debugger once, will not restart scripts.
+```bash
+zune debug --once ...
+```
+
+### Limbo
+Disables all of zune libraries.
+```bash
+zune debug --limbo ...
+```

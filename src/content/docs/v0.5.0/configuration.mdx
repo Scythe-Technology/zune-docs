@@ -1,0 +1,167 @@
+# Configuration
+---
+
+A configuration file, `zune.toml`, is used to configure the zune runtime for the workspace.
+
+This is where you could disable features, set compiler flags, and configure the runtime, change output, change formatting, and more.
+
+Behavior changes here would also apply to a bundled zune application once it is built.
+It would not change the bundled application after it is already built.
+
+## Example
+```toml
+[runtime.debug]
+detailedError = true
+
+[runtime.luau.options]
+debugLevel = 2
+optimizationLevel = 1
+nativeCodeGen = true
+
+[resolvers.formatter]
+maxDepth = 4
+useColor = true
+showTableAddress = true
+showRecursiveTable = false
+displayBufferContentsMax = 48
+
+[runtime.luau.fflags]
+DebugCodegenOptSize = false
+
+[features.builtins]
+ffi = false
+```
+
+## Settings
+
+#### `runtime.debug`
+  Modify the debug settings of the runtime.
+  - `detailedError: boolean{:luau}` - Show detailed error messages.
+  <details>
+  <summary>Preview</summary>
+  **Disabled**
+    ```ansi
+    [string "example_file.luau"]:2: Oops
+    [C] function error
+    [string "example_file.luau"]:2
+    [string "example_file.luau"]:4
+    ```
+  **Enabled**
+    ```ansi
+    [31merror:[0m Oops
+    [1;4mexample_file.luau:2[0m
+      |
+    2 |     error("Oops")
+      |     [31m^^^^^^^^^^^^^[0m
+    [1;4mexample_file.luau:4[0m
+      |
+    4 | main()
+      | [31m^^^^^^[0m
+    ```
+  </details>
+#### `runtime.luau.options`
+  Modify the compiler settings, applies to every loaded luau code in zune.
+  - `debugLevel: number{:luau}` - Debug level for the compiler.
+  - `optimizationLevel: number{:luau}` - Optimization level for the compiler.
+  - `nativeCodeGen: boolean{:luau}` - Enable native code generation.
+#### `resolvers.formatter`
+  Modify the output of the `print`/[`stdio.format`](./api/stdio#format) function.
+  - `maxDepth: number{:luau}` - Maximum depth to display tables.
+    <details>
+    <summary>Preview</summary>
+    `1`
+      ```ansi
+      [2m<table: 0x0001> {[0m
+        [2m[[0;96m1[0m[2m] = [2m<table: 0x0002> {[0m
+          [2m[[0m{...}[0m[2m] = [0m{...}[0m[2m,
+        [2m}[0m
+      [2m}[0m
+      ```
+    `3`
+      ```ansi
+      [2m<table: 0x0001> {[0m
+        [2m[[0;96m1[0m[2m] = [2m<table: 0x0002> {[0m
+          [2m[[0;96m1[0m[2m] = [2m<table: 0x0003> {[0m
+            [2m[[0;96m1[0m[2m] = [2m<table: 0x0004> {[0m
+              [2m[[0m{...}[0m[2m] = [0m{...}[0m[2m,
+            [2m}[0m
+          [2m}[0m,
+        [2m}[0m
+      [2m}[0m
+      ```
+    </details>
+  - `useColor: boolean{:luau}` - Use color in output.
+    <details>
+    <summary>Preview</summary>
+    **Disabled**
+      ```ansi
+      <table> {
+        [1] = "Color",
+      }
+      ```
+    **Enabled**
+      ```ansi
+      [2m<table> {[0m
+        [2m[[0;96m1[0m[2m] = [0;32m"Color"[0;2m,
+      [2m}[0m
+      ```
+    </details>
+  - `showTableAddress: boolean{:luau}` - Show table address in output.
+    <details>
+    <summary>Preview</summary>
+    **Disabled**
+      ```ansi
+      [2m<table> { }
+      ```
+    **Enabled**
+      ```ansi
+      [2m<table: 0x1235678> { }
+      ```
+    </details>
+  - `showRecursiveTable: boolean{:luau}` - Show recursive tables in output.
+    <details>
+    <summary>Preview</summary>
+    **Disabled**
+      ```ansi
+      [2m<table: 0x0001> {[0m
+        [2m[[0;96m1[0m[2m] = [2m<table: 0x0002> {[0m
+          [2m[[0;96m1[0m[2m] = <recursive, table: 0x0001>,
+        [2m}[0m
+      [2m}[0m
+      ```
+    **Enabled**
+      ```ansi
+      [2m<table: 0x0001> {[0m
+        [2m[[0;96m1[0m[2m] = [2m<table: 0x0002> {[0m
+          [2m[[0;96m1[0m[2m] = [2m<table: 0x0001> {[0m
+            [2m[[0;96m1[0m[2m] = [2m<table: 0x0002> {[0m
+              [2m[[0m{...}[0m[2m] = [0m{...}[0m[2m,
+            [2m}[0m
+          [2m}[0m,
+        [2m}[0m
+      [2m}[0m
+      ```
+    </details>
+  - `displayBufferContentsMax: number{:luau}` - Maximum amount of data to display previewing buffers.
+    <details>
+    <summary>Preview</summary>
+    `4`
+      ```ansi
+      [95m<buffer: 0x12345678 { 00 00 FF FF } ...4 truncated>
+      ```
+    `8`
+      ```ansi
+      [95m<buffer: 0x12345678 { 00 00 FF FF 10 10 12 12 }>
+      ```
+    </details>
+#### `runtime.luau.fflags`
+  Modify the flags of the [Luau](https://luau.org/) compiler or runtime.
+  Use the `zune luau list-fflags` command to list fflags with default values, flags without a default value would not be shown but hidden flags could still be modified.
+
+#### `features.builtins`
+  Enable/disable built-in features.
+  - All of zune's api can be disabled or enabled.
+
+## Environment Variables
+Environment variables can also be used to configure the zune runtime.
+- `NO_COLOR` - Disable color in output, overrides `resolvers.formatters.useColor` in `zune.toml`.

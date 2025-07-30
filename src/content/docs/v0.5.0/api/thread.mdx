@@ -1,0 +1,81 @@
+# Multi Threading
+`zune.thread`
+
+---
+import { Callout } from 'nextra/components'
+
+A library to create multiple lua states and execute in parallel.
+
+## Properties
+### isThread
+```luau tooltips
+isThread: boolean
+```
+
+---
+## Functions
+### fromModule
+Creates a new thread from a module. Resolves relative to the calling module.
+```luau tooltips
+-- @link: (29,35)[../objects/Thread]
+fromModule(module: string): Thread
+```
+<details open>
+<summary>Parameters</summary>
+- `module: string{:luau}` - The module to resolve.
+</details>
+<details>
+<summary>Throws</summary>
+- Thread Error
+- Memory Error
+</details>
+
+### fromBytecode
+Creates a new thread from bytecode.
+```luau tooltips
+-- @link: (42,48)[../objects/Thread]
+fromBytecode(bytecode: string | buffer): Thread
+```
+<details open>
+<summary>Parameters</summary>
+- `bytecode: string | buffer{:luau}` - The bytecode to create the thread from.
+</details>
+<details>
+<summary>Throws</summary>
+- Thread Error
+- Memory Error
+</details>
+
+### receive
+Receives a message from the owner thread.
+```luau tooltips
+receive(): ...any
+```
+<Callout type="info">This will error when called from Main Thread</Callout>
+<details>
+<summary>Throws</summary>
+- Thread Error
+- Memory Error
+</details>
+
+### send
+Sends a message to the owner thread.
+```luau tooltips
+send(...: any): ()
+```
+<Callout type="info">This will error when called from Main Thread</Callout>
+<details open>
+<summary>Parameters</summary>
+- `...: any{:luau}` - The values to send to the owner thread.
+</details>
+<details>
+<summary>Throws</summary>
+- Thread Error
+- Memory Error
+</details>
+
+### getCpuCount
+Returns the number of CPUs available.
+```luau tooltips
+getCpuCount(): number
+```

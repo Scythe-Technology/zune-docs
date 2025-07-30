@@ -1,0 +1,135 @@
+# Standard I/O
+`zune.io`
+
+---
+
+A library to use standard input/output in luau.
+
+## Properties
+### MAX_READ
+The maximum amount of bytes luau can run.
+```luau
+MAX_READ: number
+```
+
+### stdin
+```luau tooltips
+-- @link: (8,18)[../objects/FileHandle]
+stdin: FileHandle
+```
+
+### stdout
+```luau tooltips
+-- @link: (9,19)[../objects/FileHandle]
+stdout: FileHandle
+```
+
+### stderr
+```luau tooltips
+-- @link: (9,19)[../objects/FileHandle]
+stderr: FileHandle
+```
+
+---
+## Functions
+### format
+Formats input to a readable string.
+```luau tooltips
+format(...any): string
+```
+<details open>
+<summary>Parameters</summary>
+- `...any{:luau}` - The data to format.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### createBufferSink
+Creates a buffer sink.
+```luau tooltips
+-- @hover: (24,41)[type BufferSinkOptions = {
+  limit: number?,
+}]
+-- @link: (45,55)[../objects/BufferSink]
+createBufferSink(opts: BufferSinkOptions?): BufferSink
+```
+<details open>
+<summary>Parameters</summary>
+- `opts: BufferSinkOptions?{:luau}` - The options for the buffer sink.
+  - `limit: number?{:luau}` - The maximum amount of bytes allowed to be written to the buffer.
+    - default: `1073741824`
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### createFixedBufferStream
+Creates a buffer sink.
+```luau tooltips
+-- @link: (42,54)[../objects/BufferStream]
+createFixedBufferStream(buffer: buffer): BufferStream
+```
+<details open>
+<summary>Parameters</summary>
+- `buffer: buffer{:luau}` - The buffer to use for the stream.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+---
+## Namespaces
+### terminal
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`PROPERTIES`</u></h4>
+#### isTTY
+Whether the terminal is a TTY.
+```luau tooltips
+terminal.isTTY: boolean
+```
+
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### getCurrentMode
+Get current saved mode.
+```luau tooltips
+terminal.getCurrentMode(): "normal" | "raw"
+```
+
+#### enableRawMode
+Enable raw mode.
+
+On unix: Will attempt to change terminal mode.
+On windows: Will attempt to change console mode.
+
+returns `true` if the operation was successful.
+```luau tooltips
+terminal.enableRawMode(): boolean
+```
+
+#### restoreMode
+Restores the terminal to the original mode.
+
+On unix: Will attempt to restore the original terminal mode.
+On windows: Will attempt to restore the original console mode.
+
+returns `true` if the operation was successful.
+```luau tooltips
+terminal.restoreMode(): boolean
+```
+
+#### getSize
+Gets the terminal size.
+
+Returns a tuple of `(width, height)`. Otherwise returns `(nil, nil)` if current terminal is not a TTY.
+```luau tooltips
+terminal.getSize(): (number?, number?)
+```
+<details>
+<summary>Throws</summary>
+- Terminal Error
+</details>
