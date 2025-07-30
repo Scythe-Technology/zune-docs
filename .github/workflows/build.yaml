@@ -23,10 +23,5 @@ jobs:
       - name: Install Packages
         run: bun install
 
-      - name: Debug
-        run: |
-          ls
-          ls plugins
-
       - name: Build
         run: bun run build

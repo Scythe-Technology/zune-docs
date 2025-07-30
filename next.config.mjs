@@ -1,6 +1,6 @@
 import nextra from 'nextra'
 
-import rehypeLuauTooltips from './plugins/luau-tooltips'
+import rehypeLuauTooltips from './plugins/luau-tooltips.ts'
 
 const withNextra = nextra({
   latex: true,
