@@ -24,4 +24,6 @@ jobs:
         run: bun install
 
       - name: Build
-        run: bun run build
+        run: |
+          bunx next build
+          bun run postbuild
