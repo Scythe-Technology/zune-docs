@@ -1,0 +1,97 @@
+
+# Installation
+---
+
+import { Callout, Steps, Tabs } from 'nextra/components'
+
+Current install method is through [Releases](https://github.com/Scythe-Technology/zune/releases)
+
+<Tabs items={['GitHub', 'Rokit', 'Build']}>
+  <Tabs.Tab>
+    <Steps>
+    ### Download from Releases
+    Navigate to the [Releases](https://github.com/Scythe-Technology/zune/releases) and download the latest release for your device.
+    ### Unzip
+    Extract the contents of the downloaded file to a directory of your choice.
+    ### Setup
+    Setup the path if needed and run the executable. Based on your OS, the path setup process may vary.
+    ### Running `zune`
+    If you have properly setup the environment, you can run zune by executing the following command.
+    ```bash copy
+    zune
+    ```
+    Alternatively, you can run the executable directly without the path setup process.
+    ```bash copy
+    path/to/zune
+    ```
+    </Steps>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Callout type="warning">This installation method could cause zune to not work properly, use at your own risk.</Callout>
+    <Steps>
+    ### Install `Rokit`
+    Navigate to the [rokit installation](https://github.com/rojo-rbx/rokit?tab=readme-ov-file#installation) step and proceed there.
+    ### Installing `zune`
+    Run this command in your project directory to install zune.
+    You would also need to have rokit setup on your project, using `rokit init`.
+    ```bash copy
+    rokit add Scythe-Technology/zune
+    ```
+    Alternatively, you can install zune globally with the `--global` flag.
+    ```bash copy
+    rokit add --global Scythe-Technology/zune
+    ```
+    ### Running `zune`
+    After installing zune with `rokit`, the command should work out of the box.
+    ```bash copy
+    zune
+    ```
+    </Steps>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Steps>
+    ### Install `Zig`
+    Navigate to [zig download](https://ziglang.org/download/) and proceed there.
+    
+    Make sure to get the matching zig version for zune.
+    
+    **Requirements**:
+    <Tabs items={['0.5.*', '0.4.*']}>
+      <Tabs.Tab>
+      - git
+      - zig: `0.14.1`
+      </Tabs.Tab>
+      <Tabs.Tab>
+      - git
+      - zig: `0.13.0`
+      </Tabs.Tab>
+    </Tabs>
+    
+    ### Clone the Repository
+    Use this git command to clone the repository.
+    ```bash copy
+    git clone https://github.com/Scythe-Technology/zune.git
+    ```
+    Make sure to navigate to the cloned repository.
+    ```bash copy
+    cd zune
+    ```
+    ### Compiling `zune`
+    You can run this command to compile zune with `zig` matching the optimization settings for zune releases.
+
+    Optionally you can use `zig build` for a debug build.
+    ```bash copy
+    zig build -Doptimize=ReleaseFast
+    ```
+    ### Setup
+    You can copy the zune binary from `zig-out/bin/zune` to a directory of your choice and add to your enviroment.
+    ```bash copy
+    zune
+    ```
+    Alternatively, you can run the executable directly without the path setup process.
+    ```bash copy
+    zig-out/bin/zune
+    ```
+    </Steps>
+  </Tabs.Tab>
+</Tabs>
