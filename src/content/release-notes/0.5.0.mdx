@@ -1,0 +1,232 @@
+# 0.5.0
+
+import { Image, Callout } from 'nextra/components'
+import LOGO_TAG from '../../../public/logo-tag.png'
+
+This major release was long overdue and has been in development for a long time. The majority of the focus was on turning a poorly made runtime into a production-level runtime, with a lot of new features, improvements, and bug fixes.
+
+Also, with a slight rebranding of the runtime. From `Zune` to `zune`/`ZUNE`, and a new logo.
+
+<Image src={LOGO_TAG} className="text-center mx-auto pt-10 pb-2" width={256} height={256} alt='' />
+
+### Breaking Changes
+- All functions that return a boolean & result tuple would now return only the results or throw a Lua error instead.
+- `require` is now based on **Amended Require Syntax and Resolution Semantics**.
+- zune libraries have been changed to a global variable instead of a module.
+  - `require("@zcore/fs")` would be `zune.fs`.
+- The majority of the API is not backwards compatible with `0.4.*`.
+
+### General Runtime
+In this version, the runtime scheduler has been improved and optimized for asynchronous operations.
+
+The entire original `0.4.*` design has been changed to a more efficient and faster design.
+
+- Better sleeping/waiting.
+- Better asynchronous IO operations.
+
+This version also uses a new partial zig written luau VM backend built by us, for improved performance and stability whilst using luau API in the zune runtime.
+
+- Better zune backend error handling.
+- Direct luau VM access.
+
+Improved error output and handling, such as better error messages and stack traces.
+- This option has existed but had some bug edge cases which should be improved, and is now the default option.
+
+No longer has experimental features but now is able to selectively disable libraries in `zune.toml`.
+
+Colored zune output can be disabled in `zune.toml` or NO_COLOR environment variable.
+
+### Debugger
+A debugger has been added in this version, allowing you to debug your Luau scripts.
+Currently, the debugger is an interactive CLI similar to `gdb` program or `repl` command, but there is a [DAP server & VSCode extension](https://github.com/Sythivo/zune-debugger-vscode) built on top of this.
+
+- Supports breakpoints, stepping, variable inspection, and more.
+
+```sh
+zune debug src/main.luau
+(dbg) break add src/main.luau:10
+(dbg): Added breakpoint, line: 10.
+(dbg) run
+```
+
+An example of the VSCode extension below:
+
+<Image src={"https://github.com/Sythivo/zune-debugger-vscode/blob/8fd19c284b43dc3ffff127dda6f7c1379f83d64e/assets/sample.png?raw=true"} className="text-center mx-auto pt-2 pb-2" width={1024} height={1024} alt='' />
+
+### Run
+Added some run flags to control the execution behavior of luau scripts, and a flag to disable all libraries.
+
+```sh
+zune run --limbo src/unsecure.luau
+```
+
+### Bundle
+A bundler has been added in this version, allowing the bundling of multiple scripts and files with zune. And run as a standalone executable.
+
+```sh
+zune bundle src/main.luau "src/**/*.luau"
+```
+
+### REPL
+Small improvements to the REPL, such as better cursor control.
+
+### FileSystem
+The `fs` library has been changed and more stabilized in this version. A new general File object.
+
+- Async + Sync file operations.
+- Added general FileHandle object.
+- Added basic `fs.createFile` and `fs.openFile` functions.
+- Added many path-related functions into `fs.path` namespace.
+- Added `fs.embedFile`, `fs.embeddedFiles`, and `fs.embeddedScripts` to access bundled files and scripts.
+- Improved fs watcher.
+
+### Task
+The `task` library has not really changed, but the result of new General Runtime changes has improved the performance of this library.
+
+### Luau
+The `luau` library has been improved, and new additions have been made to allow more flexibility around `luau`. New API to give more
+control over the luau VM and the luau parser.
+
+- Added `luau.coverage` to get coverage data from a luau function.
+- Added `luau.parse` and `luau.parseExpr` to parse luau source code and expressions, returning Ast table representations.
+- Added `luau.garbagecollect` to force garbage collection.
+
+### Serde
+The `serde` library has been improved with new additions. Just some API additions and slight changes.
+
+- Added `serde.flate` for flate compression and decompression.
+- Added/Renamed Frame and Standard lz4 compression and decompression APIs.
+- Improved `serde.json` and `serde.json5` APIs.
+
+### IO
+The `io` library in this version has changed quite a lot since `0.4.*`, removing many terminal sequences and
+color-related APIs, as they didn't do much besides do what a helper function would do.
+
+- `stdin`, `stdout`, and `stderr` are now FileHandle objects.
+- Removed all color-related APIs.
+- Added `io.format` to format args with zune's formatter.
+- More terminal APIs have been added to `io.terminal`.
+- Added `io.createBufferSink` for a builtin growable dynamic buffer.
+- Added `io.createFixedBufferStream` for a builtin buffer reader/writer stream.
+
+### Crypto
+The `crypto` library has been improved quite a lot in this version. With the removal of old pure functions, replaced with
+An object-based API for hashing.
+
+- Added `CryptoHasher` object for hashing input.
+- Removed hmac and hash functions in favor of the new `CryptoHasher` object.
+- Added many `aead` functions for authenticated encryption and decryption.
+- Added `tls` functions for `net` library sockets.
+
+### Regex
+The `regex` library has mainly just been improved, such as changing the whole regex backend from `std::regex` from C++ to `PCRE2`.
+
+- Switched backend.
+- Added unicode support.
+
+### Network
+This version of `net` has been improved and changed quite a lot. Removing the original heavy HTTP server, 
+buggy client, and non-spec-compliant websocket client/server. This version is an in-house solution, giving a dedicated backend entirely for zune and Luau.
+
+- New Socket objects.
+- Added `net.createSocket` to create any kind of socket.
+- Moved and improved `http` based API into `net.http`.
+  - Improved HTTP server.
+  - Improved HTTP client and WebSocket.
+- Fixes many original bugs in the `request` API.
+
+### DateTime
+Small improvements to the `datetime` library, such as more formatting and slight optimizations.
+
+- Less memory usage.
+- More formatting options.
+
+### Process
+Many improvements to the `process` library, such as better child process handling, async processing waiting, and more.
+
+- Added `ProcessChild` object for child process handling.
+- `process.run` is async.
+
+### Foreign Function Interface (FFI)
+The `ffi` library has been changed a lot in this version, most notably for faster performance and safety. Adding a C compiler
+for an easier time bundling C code in your project, although this would be much slower than `clang` or `gcc`.
+
+- Compile C code and load symbols.
+- Backend switched to `tinycc` from `libffi`.
+- Tagged pointers (useful for strict pointer usage correctness).
+
+A ton of original APIs from 0.4.* have been changed and/or renamed.
+- Such as no longer being able to use buffers in parameters as allocated data.
+
+```luau
+local ffi = zune.ffi
+
+local compiled = ffi.c.compile([[
+    int hello() {
+        return 50;
+    }
+    int add(int a) {
+        return a + 5;
+    }
+    double add_double(double a) {
+        return a + 2.5;
+    }
+]]);
+
+local hello_fn = ffi.fn({ returns = ffi.types.i32, args = {} }, compiled:getSymbol("hello"));
+local add_fn = ffi.fn({ returns = ffi.types.i32, args = {ffi.types.i32} }, compiled:getSymbol("add"));
+local add_double_fn = ffi.fn({ returns = ffi.types.double, args = {ffi.types.double} }, compiled:getSymbol("add_double"));
+
+print(hello_fn()) -- 50
+print(add_fn(25)) -- 30
+print(add_double_fn(62.5)) -- 65
+
+local ptr = ffi.alloc(12)
+
+print(ptr) -- <pointer: 0x12345678>
+print(ffi.len(ptr)) -- 12
+
+local data = buffer.create(12)
+buffer.writei32(data, 0, 123)
+buffer.writei32(data, 4, 456)
+buffer.writei32(data, 8, 789)
+
+ffi.copy(data, 0, ptr, 0, 12)
+ptr:write(0, data, 0, 12)
+```
+
+An example of the FFI usage with GLFW:
+
+<Image src={"https://github.com/user-attachments/assets/ffdcdf4b-13a5-4692-9e23-1c17af4e1cba"} />
+
+### SQLite
+An SQLite3 library for zune. This library uses the `sqlite3` C library for
+interfacing with SQLite databases.
+
+Read more about the API in the SQLite documentation.
+
+```luau
+local sqlite = zune.sqlite;
+
+local db = sqlite.open();
+
+db:exec("CREATE TABLE users(id TEXT PRIMARY KEY, amt FLOAT)");
+
+local query = db:query("INSERT INTO users VALUES (:id, :amt)");
+
+print(query:run({
+    [":id"] = "user1",
+    [":amt"] = 200.50,
+})) -- { last_insert_row_id = 1, changes = 1 }
+```
+
+### Require
+This is a new library to interact with zune's required implementation, such as accessing the cache or resolving your paths, with custom configurations.
+
+### Random
+The `random` library is a new addition, providing a simple API to create and use PRNG, and use many kinds of random.
+
+- Includes a `roblox` like random generator implementation.
+
+### Thread
+This is a new library to utilize hardware threads in zune, allowing you to run code in parallel with other threads.
