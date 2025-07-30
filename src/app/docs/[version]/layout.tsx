@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
-import { Head, Banner, Image } from 'nextra/components';
-import { Layout, Footer, Navbar, NotFoundPage } from "nextra-theme-docs";
+import { Layout, NotFoundPage } from "nextra-theme-docs";
 import { getPageMap } from 'nextra/page-map';
 import '../../styles/global.css';
-import { generateStaticParamsFor } from 'nextra/pages';
 
 export async function generateStaticParams() {
     return (await getPageMap("/docs/")).map((page) => ({ version: (page as any).name }));;
