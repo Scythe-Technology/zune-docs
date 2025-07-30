@@ -34,6 +34,5 @@ jobs:
           ls
           ls plugins
 
-
       - name: Build
         run: bun run build
