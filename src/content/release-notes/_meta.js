@@ -3,5 +3,5 @@ export default {
         type: 'page',
         title: 'Release Notes',
     },
-    // ["0.5.0"]: { type: 'page' },
+    ["0.5.0"]: { type: 'page' },
 }
