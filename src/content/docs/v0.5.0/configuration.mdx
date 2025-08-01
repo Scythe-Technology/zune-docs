@@ -10,33 +10,61 @@ It would not change the bundled application after it is already built.
 
 ## Example
 ```toml
+[workspace]
+cwd = "."
+run_path = "cmds"
+
+[workspace.scripts]
+main = "cmds/main.luau"
+
 [runtime.debug]
-detailedError = true
+detailed_error = true
 
 [runtime.luau.options]
-debugLevel = 2
-optimizationLevel = 1
-nativeCodeGen = true
+debug_level = 2
+optimization_level = 1
+native_code_gen = true
 
 [resolvers.formatter]
-maxDepth = 4
-useColor = true
-showTableAddress = true
-showRecursiveTable = false
-displayBufferContentsMax = 48
+max_depth = 4
+use_color = true
+table_address = true
+recursive_table = false
+buffer_max_display = 48
 
 [runtime.luau.fflags]
 DebugCodegenOptSize = false
 
-[features.builtins]
+[features.builtin]
 ffi = false
 ```
 
 ## Settings
 
+#### `workspace.cwd`
+  Defines the current working directory of the workspace.
+  - Example: `cwd = "src"{:toml}`
+
+#### `workspace.run_path`
+  Defines where the `zune run` command should look for scripts.
+  - Example: `run_path = "cmds"{:toml}`
+
+#### `workspace.test_path`
+  Defines where the `zune test` command should look for scripts.
+  - Example: `test_path = "tests"{:toml}`
+
+#### `workspace.scripts`
+  Defines shortname for scripts in the cwd workspace.
+  - Any script defined here can be run with `zune run <script_name>` or `zune test <script_name>`.
+  - `<script_name> = <path>{:luau}`
+    - `<script_name>` must be a valid identifier.
+    - `<path>` must be a string and only works relative to the workspace defined cwd, absolute paths also works.
+  - Example: `main = "cmds/main.luau"{:toml}`
+  - Example: `test = "tests/test.luau"{:toml}`
+
 #### `runtime.debug`
   Modify the debug settings of the runtime.
-  - `detailedError: boolean{:luau}` - Show detailed error messages.
+  - `detailed_error: boolean{:luau}` - Show detailed error messages.
   <details>
   <summary>Preview</summary>
   **Disabled**
@@ -61,12 +89,12 @@ ffi = false
   </details>
 #### `runtime.luau.options`
   Modify the compiler settings, applies to every loaded luau code in zune.
-  - `debugLevel: number{:luau}` - Debug level for the compiler.
-  - `optimizationLevel: number{:luau}` - Optimization level for the compiler.
-  - `nativeCodeGen: boolean{:luau}` - Enable native code generation.
+  - `debug_level: number{:luau}` - Debug level for the compiler.
+  - `optimization_level: number{:luau}` - Optimization level for the compiler.
+  - `native_code_gen: boolean{:luau}` - Enable native code generation.
 #### `resolvers.formatter`
   Modify the output of the `print`/[`stdio.format`](./api/stdio#format) function.
-  - `maxDepth: number{:luau}` - Maximum depth to display tables.
+  - `max_depth: number{:luau}` - Maximum depth to display tables.
     <details>
     <summary>Preview</summary>
     `1`
@@ -90,7 +118,7 @@ ffi = false
       [2m}[0m
       ```
     </details>
-  - `useColor: boolean{:luau}` - Use color in output.
+  - `use_color: boolean{:luau}` - Use color in output.
     <details>
     <summary>Preview</summary>
     **Disabled**
@@ -106,7 +134,7 @@ ffi = false
       [2m}[0m
       ```
     </details>
-  - `showTableAddress: boolean{:luau}` - Show table address in output.
+  - `table_address: boolean{:luau}` - Show table address in output.
     <details>
     <summary>Preview</summary>
     **Disabled**
@@ -118,7 +146,7 @@ ffi = false
       [2m<table: 0x1235678> { }
       ```
     </details>
-  - `showRecursiveTable: boolean{:luau}` - Show recursive tables in output.
+  - `recursive_table: boolean{:luau}` - Show recursive tables in output.
     <details>
     <summary>Preview</summary>
     **Disabled**
@@ -142,7 +170,7 @@ ffi = false
       [2m}[0m
       ```
     </details>
-  - `displayBufferContentsMax: number{:luau}` - Maximum amount of data to display previewing buffers.
+  - `buffer_max_display: number{:luau}` - Maximum amount of data to display previewing buffers.
     <details>
     <summary>Preview</summary>
     `4`
@@ -158,10 +186,10 @@ ffi = false
   Modify the flags of the [Luau](https://luau.org/) compiler or runtime.
   Use the `zune luau list-fflags` command to list fflags with default values, flags without a default value would not be shown but hidden flags could still be modified.
 
-#### `features.builtins`
+#### `features.builtin`
   Enable/disable built-in features.
   - All of zune's api can be disabled or enabled.
 
 ## Environment Variables
 Environment variables can also be used to configure the zune runtime.
-- `NO_COLOR` - Disable color in output, overrides `resolvers.formatters.useColor` in `zune.toml`.
+- `NO_COLOR` - Disable color in output, overrides `resolvers.formatters.use_color` in `zune.toml`.
