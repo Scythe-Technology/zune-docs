@@ -59,7 +59,7 @@ export default async function Page(props) {
                   </svg>View Source</a>
               </div>
               <div className="text-white dark:text-black h-full">
-                <a href="/docs"
+                <a href="/docs/v0.5.0"
                   className="rounded-md h-full inline-block bg-black dark:bg-white px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-neutral-900 dark:hover:bg-neutral-400 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-neutral-400 dark:focus-visible:outline-neutral-900"
                   rel="noreferrer" style={{ textDecoration: "none", color: "inherit" }} >Get Started</a>
               </div>
