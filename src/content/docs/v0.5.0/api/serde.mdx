@@ -174,11 +174,12 @@ toml.decode(toml: string): {[string]: any}
 #### encode
 Encodes a table to YAML.
 ```luau tooltips
-yaml.encode(object: {[string]: any}): string
+-- @hover: (21,30)[type YamlInput = string | number | boolean | {[string]: YamlInput}]
+yaml.encode(object: YamlInput): string
 ```
 <details open>
 <summary>Parameters</summary>
-- `object: {[string]: any}{:luau}` - The table to encode.
+- `object: YamlInput{:luau}` - The value to encode.
 </details>
 <details>
 <summary>Throws</summary>
@@ -188,7 +189,8 @@ yaml.encode(object: {[string]: any}): string
 #### decode
 Decodes YAML.
 ```luau tooltips
-yaml.decode(yaml: string): {[string]: any}
+-- @hover: (28,37)[type YamlOuput = string | {[string]: YamlOuput}]
+yaml.decode(yaml: string): YamlOuput
 ```
 <details open>
 <summary>Parameters</summary>
