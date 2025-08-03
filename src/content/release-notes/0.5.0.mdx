@@ -53,7 +53,13 @@ An example of the VSCode extension below:
 
 <Image src={"https://github.com/Sythivo/zune-debugger-vscode/blob/8fd19c284b43dc3ffff127dda6f7c1379f83d64e/assets/sample.png?raw=true"} className="text-center mx-auto pt-2 pb-2" width={1024} height={1024} alt='' />
 
-### Run
+### Configuration
+There were small and new changes to the configuration settings, in `zune.toml`.
+- Changed casing to snake_case to be similar to most toml files.
+- Shortened format setting names
+- Added `workspace` setting with scripts for workspace scripts.
+
+### Run/Test
 Added some run flags to control the execution behavior of luau scripts, and a flag to disable all libraries.
 
 ```sh
