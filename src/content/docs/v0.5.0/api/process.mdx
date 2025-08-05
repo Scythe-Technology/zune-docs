@@ -59,6 +59,7 @@ Creates a new process.
     cwd: string?,
     env: { [string]: string }?,
     shell: (boolean | string)?,
+    stdio: "inherit" | "pipe" | "ignore",
 }]
 -- @link: (65,77)[../objects/ProcessChild]
 create(exec: string, args: { string }?, opts: ProcessOptions?): ProcessChild
@@ -84,6 +85,7 @@ Runs a new process, and yields for the result.
     cwd: string?,
     env: { [string]: string }?,
     shell: (boolean | string)?,
+    stdio: "inherit" | "pipe" | "ignore",
 }]
 -- @hover: (62,78)[
 type ProcessResult = {
