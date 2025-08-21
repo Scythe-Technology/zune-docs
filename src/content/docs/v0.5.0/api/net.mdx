@@ -1,7 +1,10 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # Network
 `zune.net`
 
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 A library to do networking in luau. Provides functions to create sockets, start an HTTP server, make HTTP requests, and handle WebSockets.
 
@@ -9,7 +12,7 @@ A library to do networking in luau. Provides functions to create sockets, start 
 ### ADDRF
 The table of address families.
 ```luau tooltips
--- @hover: (9,14)[{
+-- @hover: (9,14)[<table> = {
     RDS: number,
     ROSE: number,
     BRIDGE: number,
@@ -19,15 +22,53 @@ The table of address families.
     MPLS: number,
     ROUTE: number,
     WANPIPE: number,
-    ... truncated
+    UNSPEC: number,
+    CAIF: number,
+    NETROM: number,
+    UNIX: number,
+    INET: number,
+    ATMSVC: number,
+    MAX: number,
+    NETLINK: number,
+    IUCV: number,
+    SMC: number,
+    INET6: number,
+    TIPC: number,
+    KEY: number,
+    QIPCRTR: number,
+    VSOCK: number,
+    IPX: number,
+    ASH: number,
+    IB: number,
+    PACKET: number,
+    KCM: number,
+    DECnet: number,
+    RXRPC: number,
+    NETBEUI: number,
+    NFC: number,
+    ALG: number,
+    IEEE802154: number,
+    ISDN: number,
+    XDP: number,
+    LOCAL: number,
+    BLUETOOTH: number,
+    CAN: number,
+    LLC: number,
+    APPLETALK: number,
+    PPPOX: number,
+    ATMPVC: number,
+    AX25: number,
+    ECONET: number,
+    IRDA: number,
+    SECURITY: number,
+    X25: number, 
 }]
 ADDRF: <table>
 ```
-
 ### SOCKF
 Table of socket flags.
 ```luau tooltips
--- @hover: (9,14)[{
+-- @hover: (9,14)[<table> = {
     DCCP: number,
     RAW: number,
     RDM: number,
@@ -36,15 +77,14 @@ Table of socket flags.
     STREAM: number,
     SEQPACKET: number,
     CLOEXEC: number,
-    NONBLOCK: number,
+    NONBLOCK: number, 
 }]
 SOCKF: <table>
 ```
-
 ### SOCKOPT
 Table of socket options.
 ```luau tooltips
--- @hover: (11,16)[{
+-- @hover: (11,16)[<table> = {
     ATTACH_FILTER: number,
     CNX_ADVICE: number,
     PEERCRED: number,
@@ -54,15 +94,72 @@ Table of socket options.
     SNDBUF: number,
     DONTROUTE: number,
     ZEROCOPY: number,
-    ... truncated
+    PASSCRED: number,
+    DETACH_REUSEPORT_BPF: number,
+    ATTACH_REUSEPORT_EBPF: number,
+    MEMINFO: number,
+    COOKIE: number,
+    SNDBUFFORCE: number,
+    PRIORITY: number,
+    BSDCOMPAT: number,
+    SNDTIMEO: number,
+    BINDTODEVICE: number,
+    OOBINLINE: number,
+    BPF_EXTENSIONS: number,
+    TIMESTAMP_NEW: number,
+    NO_CHECK: number,
+    WIFI_STATUS: number,
+    PEERGROUPS: number,
+    TYPE: number,
+    NOFCS: number,
+    DOMAIN: number,
+    TIMESTAMPNS_NEW: number,
+    SNDLOWAT: number,
+    KEEPALIVE: number,
+    PEEK_OFF: number,
+    PEERSEC: number,
+    PEERNAME: number,
+    RCVBUF: number,
+    REUSEPORT: number?,
+    INCOMING_NAPI_ID: number,
+    TIMESTAMPING_OLD: number,
+    RCVBUFFORCE: number,
+    REUSEADDR: number,
+    MAX_PACING_RATE: number,
+    MARK: number,
+    RCVTIMEO_NEW: number,
+    BUSY_POLL: number,
+    TIMESTAMPING_NEW: number,
+    BINDTOIFINDEX: number,
+    TXTIME: number,
+    SECURITY_ENCRYPTION_NETWORK: number,
+    LOCK_FILTER: number,
+    RCVLOWAT: number,
+    SECURITY_ENCRYPTION_TRANSPORT: number,
+    ATTACH_BPF: number,
+    INCOMING_CPU: number,
+    ERROR: number,
+    SELECT_ERR_QUEUE: number,
+    DETACH_BPF: number,
+    SNDTIMEO_NEW: number,
+    TIMESTAMPNS_OLD: number,
+    PASSSEC: number,
+    TIMESTAMP_OLD: number,
+    GET_FILTER: number,
+    DETACH_FILTER: number,
+    ATTACH_REUSEPORT_CBPF: number,
+    BROADCAST: number,
+    SECURITY_AUTHENTICATION: number,
+    PROTOCOL: number,
+    ACCEPTCONN: number,
+    RCVTIMEO: number, 
 }]
 SOCKOPT: <table>
 ```
-
 ### SOCKOPTLV
 Table of socket option levels.
 ```luau tooltips
--- @hover: (13,18)[{
+-- @hover: (13,18)[<table> = {
     PPPOL2TP: number,
     RDS: number,
     TIPC: number,
@@ -72,15 +169,32 @@ Table of socket option levels.
     PACKET: number,
     IPV6: number,
     KCM: number,
-    ... truncated
+    RXRPC: number,
+    NETBEUI: number,
+    DECNET: number,
+    TLS: number,
+    ICMPV6: number,
+    RAW: number,
+    XDP: number,
+    SOCKET: number,
+    LLC: number,
+    NFC: number,
+    CAIF: number,
+    IUCV: number,
+    X25: number,
+    AAL: number,
+    NETLINK: number,
+    DCCP: number,
+    IRDA: number,
+    ATM: number,
+    IP: number, 
 }]
 SOCKOPTLV: <table>
 ```
-
 ### IPPROTO
 Table of IP protocols.
 ```luau tooltips
--- @hover: (11,16)[{
+-- @hover: (11,16)[<table> = {
     COMP: number,
     ICMP: number,
     ESP: number,
@@ -90,12 +204,33 @@ Table of IP protocols.
     MTP: number,
     GRE: number,
     SCTP: number,
-    ... truncated
+    MAX: number,
+    NONE: number,
+    FRAGMENT: number,
+    IDP: number,
+    UDPLITE: number,
+    HOPOPTS: number,
+    MH: number,
+    BEETPH: number,
+    AH: number,
+    IPIP: number,
+    IPV6: number,
+    PIM: number,
+    DSTOPTS: number,
+    UDP: number,
+    DCCP: number,
+    RAW: number,
+    PUP: number,
+    MPLS: number,
+    ENCAP: number,
+    RSVP: number,
+    ROUTING: number,
+    EGP: number,
+    TP: number,
+    IP: number, 
 }]
 IPPROTO: <table>
 ```
-
----
 ## Functions
 ### createSocket
 Creates a new socket from OS.
@@ -106,7 +241,7 @@ createSocket(address_family: number, flags: number, protocol: number): NetworkSo
 <details open>
 <summary>Parameters</summary>
 - `address_family: number{:luau}` - The address family to use.
-- `flags: number{:luau}` - The flags to use.
+- `flags: number{:luau}` - The socket type to use.
 - `protocol: number{:luau}` - The protocol to use.
 </details>
 <details>
@@ -118,58 +253,62 @@ createSocket(address_family: number, flags: number, protocol: number): NetworkSo
 ### getAddressList
 Gets a list of addresses for the provided name and port.
 ```luau tooltips
--- @hover: (46,60)[type NetworkAddress = {
+-- @hover: (47,61)[export type NetworkAddress = {
     family: number,
     port: number,
-    address: string,
+    address: string, 
 }]
-getAddressList(name: string, port: number): {NetworkAddress}
+getAddressList(name: string, port: number):  {NetworkAddress}
 ```
 <details open>
 <summary>Parameters</summary>
-- `address_family: number{:luau}` - The address family to use.
-- `flags: number{:luau}` - The flags to use.
-- `protocol: number{:luau}` - The protocol to use.
+- `name: string{:luau}` - The name to resolve.
+- `port: number{:luau}` - The port to resolve.
 </details>
 <details>
 <summary>Throws</summary>
 - IO Error
 </details>
 
----
 ## Namespaces
 ### http
 ---
 <h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
 #### serve
-Starts a server on the specified port.
+Starts a new HTTP server.
 ```luau tooltips
--- @hover: (13,25)[
-type ServerRequest = {
+-- @hover: (18,30)[-- references:
+-- @link: (8,21)[../objects/HttpWebSocket]
+-- (1) HttpWebSocket
+
+export type HttpServerResponse = {
+    status_code: number,
+    headers: {
+        [string]: string
+    }?,
+    body: (string | buffer)?, 
+}
+
+export type HttpServerRequest = {
     method: string,
     path: string,
-    query: {[string]: string},
-    headers: {[string]: string},
-    body: string?,
+    query: {
+        [string | number]: string
+    },
+    headers: {
+        [string]: string
+    },
+    body: string?, 
 }
 
-type ServerResponse = {
-    status_code: number,
-    headers: {[string]: string}?,
-    body: string | buffer,
+export type ServerWebSocketHandlers = {
+    upgrade: ((request: HttpServerRequest) -> boolean)?,
+    open: ((websocket: HttpWebSocket) -> ())?,
+    message: ((websocket: HttpWebSocket, message: string) -> ())?,
+    close: ((websocket: HttpWebSocket, code: number) -> ())?, 
 }
 
-type ServerWebSocketHandlers = {
-    upgrade: ((request: ServerRequest) -> boolean)?,
--- @link: (24,40)[../objects/NetHttpWebSocket]
-    open: ((websocket: NetHttpWebSocket) -> ())?,
--- @link: (27,43)[../objects/NetHttpWebSocket]
-    message: ((websocket: NetHttpWebSocket, message: string) -> ())?,
--- @link: (25,41)[../objects/NetHttpWebSocket]
-    close: ((websocket: NetHttpWebSocket, code: number) -> ())?,
-}
-
-type ServeOptions = {
+export type ServeOptions = {
     port: number,
     address: string?,
     reuse_address: boolean?,
@@ -177,11 +316,11 @@ type ServeOptions = {
     max_body_size: number?,
     client_timeout: number?,
     max_connections: number?,
-    request: (request: ServerRequest) -> string | buffer | ServerResponse,
-    websocket: ServerWebSocketHandlers?,
+    request: (request: HttpServerRequest) -> string | buffer | HttpServerResponse,
+    websocket: ServerWebSocketHandlers?, 
 }]
--- @link: (28,40)[../objects/NetHttpServer]
-serve(opts: ServeOptions): NetHttpServer
+-- @link: (33,43)[../objects/HttpServer]
+http.serve(opts: ServeOptions): HttpServer
 ```
 <details open>
 <summary>Parameters</summary>
@@ -191,26 +330,19 @@ serve(opts: ServeOptions): NetHttpServer
     - default: `"127.0.0.1"{:luau}`
   - `reuse_address: boolean?{:luau}` - Whether to reuse the address.
     - default: `false{:luau}`
-  - `backlog: number?{:luau}` - The maximum number of connections the
+  - `backlog: number?{:luau}` - The maximum number of connections the server will backlog to the OS.
     - default: `128{:luau}`
   - `max_body_size: number?{:luau}` - The maximum size of the request body.
     - default: `4096{:luau}`
   - `client_timeout: number?{:luau}` - The timeout for the client.
     - default: `60{:luau}`
-    - `0{:luau}` for no timeout
   - `max_connections: number?{:luau}` - The maximum number of connections.
+    - `0` for no limit
     - default: `1024{:luau}`
-    - `0{:luau}` for no limit
-  - `request: (ServerRequest) -> string | buffer | ServerResponse{:luau}` - The function to call when a request is received.
-    - If the function returns a `string{:luau}` or `buffer{:luau}`, the reuslt will be sent as the response body.
-    - If the function returns a `ServerResponse`, the result will be used as the response.
+  - `request: (request: HttpServerRequest) -> string | buffer | HttpServerResponse{:luau}` - The function to call when a request is received.
+    - If a `HttpServerResponse` is returned, it will be sent as the response.
+    - If a `string` or `buffer` is returned, it will be sent as the response body with a `200 OK` status.
   - `websocket: ServerWebSocketHandlers?{:luau}` - The handlers for WebSocket connections.
-    - `upgrade: ((ServerRequest) -> boolean)?{:luau}` - The function to call when a WebSocket upgrade request is received.
-      - If the function returns `true{:luau}`, the WebSocket connection will be accepted.
-      - If the function returns `false{:luau}`, the WebSocket connection will be rejected.
-    - `open: ((NetHttpWebSocket) -> ())?{:luau}` - The function to call when a WebSocket connection is opened.
-    - `message: ((NetHttpWebSocket, string) -> ())?{:luau}` - The function to call when a message is received on a WebSocket connection.
-    - `close: ((NetHttpWebSocket, number) -> ())?{:luau}` - The function to call when a WebSocket connection is closed.
 </details>
 <details>
 <summary>Throws</summary>
@@ -223,31 +355,77 @@ Makes a request to the specified host.
 
 Options are optional, defaults to GET request.
 ```luau tooltips
--- @hover: (29,43)[type RequestOptions = {
-    headers: {[string]: string}?,
+-- @hover: (34,52)[export type RequestOptions = {
+    headers: {
+        [string]: string
+    }?,
     method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
     body: (string | buffer)?,
-    allow_redirects: boolean?,
-}]
---@hover: (47,55)[type Response = {
+    allow_redirects: boolean?, 
+}
+
+type RequestOptionsType<T> = (RequestOptions & {
+    response_body_type: T
+})]
+-- @hover: (67,79)[export type HttpResponse<T> = {
     ok: boolean,
     status_code: number,
     status_reason: string,
-    headers: {[string]: string},
-    body: string,
+    headers: {
+        [string]: string
+    },
+    body: T, 
 }]
-request(host: string, opts: RequestOptions?): Response
+http.request(host: string, opts: RequestOptionsType<"string"?>?): HttpResponse<string>
+-- @hover: (66,78)[export type HttpResponse<T> = {
+    ok: boolean,
+    status_code: number,
+    status_reason: string,
+    headers: {
+        [string]: string
+    },
+    body: T, 
+}]
+-- @hover: (34,52)[export type RequestOptions = {
+    headers: {
+        [string]: string
+    }?,
+    method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+    body: (string | buffer)?,
+    allow_redirects: boolean?, 
+}
+
+type RequestOptionsType<T> = (RequestOptions & {
+    response_body_type: T
+})]
+http.request(host: string, opts: RequestOptionsType<"buffer">?): HttpResponse<buffer>
+-- @hover: (34,52)[export type RequestOptions = {
+    headers: {
+        [string]: string
+    }?,
+    method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+    body: (string | buffer)?,
+    allow_redirects: boolean?, 
+}
+
+type RequestOptionsType<T> = (RequestOptions & {
+    response_body_type: T
+})]
+-- @hover: (83,95)[export type HttpResponse<T> = {
+    ok: boolean,
+    status_code: number,
+    status_reason: string,
+    headers: {
+        [string]: string
+    },
+    body: T, 
+}]
+http.request(host: string, opts: RequestOptionsType<"string" | "buffer" | nil>?): HttpResponse<string | buffer>
 ```
 <details open>
 <summary>Parameters</summary>
 - `host: string{:luau}` - The host to make the request to.
-- `opts: RequestOptions?{:luau}` - The options for the request.
-  - `headers: {[string]: string}?{:luau}` - The headers to send with the request.
-  - `method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?{:luau}` - The HTTP method to use.
-    - default: `"GET"{:luau}`
-  - `body: (string | buffer)?{:luau}` - The body of the request.
-  - `allow_redirects: boolean?{:luau}` - Whether to follow redirects.
-    - default: `true{:luau}`
+- `opts: RequestOptionsType?{:luau}` - The options for the request.
 </details>
 <details>
 <summary>Throws</summary>
@@ -256,41 +434,42 @@ request(host: string, opts: RequestOptions?): Response
 </details>
 
 #### websocket
-Creates a websocket client.
 ```luau tooltips
--- @hover: (31,47)[type ServerResponse = {
+-- @hover: (36,52)[-- references:
+-- @link: (8,21)[../objects/HttpWebSocket]
+-- (1) HttpWebSocket
+
+export type HttpServerResponse = {
     status_code: number,
-    headers: {[string]: string}?,
-    body: string | buffer,
+    headers: {
+        [string]: string
+    }?,
+    body: (string | buffer)?, 
 }
 
-type WebSocketOptions = {
-    protocols: {string}?,
+export type WebSocketOptions = {
+    protocols:  {string}?,
     timeout: number?,
--- @link: (23,39)[../objects/NetHttpWebSocket]
-    accept: ((socket: NetHttpWebSocket, request: ServerResponse) -> boolean)?,
--- @link: (21,37)[../objects/NetHttpWebSocket]
-    open: ((socket: NetHttpWebSocket) -> ())?,
--- @link: (22,38)[../objects/NetHttpWebSocket]
-    close: ((socket: NetHttpWebSocket, close: number?) -> ())?,
--- @link: (24,40)[../objects/NetHttpWebSocket]
-    message: ((socket: NetHttpWebSocket, message: string) -> ())?,
+    accept: ((socket: HttpWebSocket, request: HttpServerResponse) -> boolean)?,
+    open: ((socket: HttpWebSocket) -> ())?,
+    close: ((socket: HttpWebSocket, close: number?) -> ())?,
+    message: ((socket: HttpWebSocket, message: string) -> ())?, 
 }]
--- @link: (50,66)[../objects/NetHttpWebSocket]
-websocket(host: string, opts: WebSocketOptions): NetHttpWebSocket
+-- @link: (55,68)[../objects/HttpWebSocket]
+http.websocket(host: string, opts: WebSocketOptions): HttpWebSocket
 ```
 <details open>
 <summary>Parameters</summary>
 - `host: string{:luau}` - The host to connect to.
 - `opts: WebSocketOptions{:luau}` - The options for the WebSocket.
-  - `protocols: {string}?{:luau}` - The protocols to send to the server.
+  - `protocols:  {string}?{:luau}` - The protocols to send to the server.
   - `timeout: number?{:luau}` - The timeout for the WebSocket connection.
+    - If the timeout is negative, the WebSocket will never timeout.
     - default: `30{:luau}`
-    - negative value for no timeout
-  - `accept: ((NetHttpWebSocket, ServerResponse) -> boolean)?{:luau}` - The function to call to accept the WebSocket connection.
-  - `open: ((NetHttpWebSocket) -> ())?{:luau}` - The function to call when the WebSocket is opened.
-  - `close: ((NetHttpWebSocket, number?) -> ())?{:luau}` - The function to call when the WebSocket is closed.
-  - `message: ((NetHttpWebSocket, string) -> ())?{:luau}` - The function to call when a message is received.
+  - `accept: ((socket: HttpWebSocket, request: HttpServerResponse) -> boolean)?{:luau}` - The function to call to accept the WebSocket connection.
+  - `open: ((socket: HttpWebSocket) -> ())?{:luau}` - The function to call when the WebSocket connection is opened.
+  - `close: ((socket: HttpWebSocket, close: number?) -> ())?{:luau}` - The function to call when the WebSocket connection is closed.
+  - `message: ((socket: HttpWebSocket, message: string) -> ())?{:luau}` - The function to call when a message is received.
 </details>
 <details>
 <summary>Throws</summary>

@@ -1,36 +1,29 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # Standard I/O
 `zune.io`
 
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 A library to use standard input/output in luau.
 
 ## Properties
-### MAX_READ
-The maximum amount of bytes luau can run.
-```luau
-MAX_READ: number
-```
-
-### stdin
-```luau tooltips
--- @link: (8,18)[../objects/FileHandle]
-stdin: FileHandle
-```
-
 ### stdout
 ```luau tooltips
 -- @link: (9,19)[../objects/FileHandle]
 stdout: FileHandle
 ```
-
 ### stderr
 ```luau tooltips
 -- @link: (9,19)[../objects/FileHandle]
 stderr: FileHandle
 ```
-
----
+### stdin
+```luau tooltips
+-- @link: (8,18)[../objects/FileHandle]
+stdin: FileHandle
+```
 ## Functions
 ### format
 Formats input to a readable string.
@@ -39,7 +32,7 @@ format(...any): string
 ```
 <details open>
 <summary>Parameters</summary>
-- `...any{:luau}` - The data to format.
+- `...any{:luau}` - The values to format.
 </details>
 <details>
 <summary>Throws</summary>
@@ -50,7 +43,7 @@ format(...any): string
 Creates a buffer sink.
 ```luau tooltips
 -- @hover: (24,41)[type BufferSinkOptions = {
-  limit: number?,
+    limit: number?, 
 }]
 -- @link: (45,55)[../objects/BufferSink]
 createBufferSink(opts: BufferSinkOptions?): BufferSink
@@ -59,7 +52,7 @@ createBufferSink(opts: BufferSinkOptions?): BufferSink
 <summary>Parameters</summary>
 - `opts: BufferSinkOptions?{:luau}` - The options for the buffer sink.
   - `limit: number?{:luau}` - The maximum amount of bytes allowed to be written to the buffer.
-    - default: `1073741824`
+    - default: `1073741824{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -67,21 +60,20 @@ createBufferSink(opts: BufferSinkOptions?): BufferSink
 </details>
 
 ### createFixedBufferStream
-Creates a buffer sink.
+Creates a buffer stream.
 ```luau tooltips
 -- @link: (42,54)[../objects/BufferStream]
 createFixedBufferStream(buffer: buffer): BufferStream
 ```
 <details open>
 <summary>Parameters</summary>
-- `buffer: buffer{:luau}` - The buffer to use for the stream.
+- `buffer: buffer{:luau}` - The buffer to create the stream with.
 </details>
 <details>
 <summary>Throws</summary>
 - Memory Error
 </details>
 
----
 ## Namespaces
 ### terminal
 ---
@@ -91,7 +83,6 @@ Whether the terminal is a TTY.
 ```luau tooltips
 terminal.isTTY: boolean
 ```
-
 ---
 <h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
 #### getCurrentMode

@@ -1,19 +1,22 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # Require
 `zune.require`
 
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 A library to use zune's require resolver in luau.
 
 ## Functions
 ### navigate
-````luau
+```luau tooltips
 navigate(path: string, from: string?, config: string?): string
-````
+```
 <details open>
 <summary>Parameters</summary>
 - `path: string{:luau}` - The path to navigate to.
-- `from: string?{:luau}` - The path to navigate from.
+- `from: string?{:luau}` - The path to navigate from. Defaults to the current file.
 - `config: string?{:luau}` - The configuration to use.
 </details>
 <details>
@@ -23,12 +26,12 @@ navigate(path: string, from: string?, config: string?): string
 </details>
 
 ### getCached
-```luau
+```luau tooltips
 getCached(resolvedPath: string): any?
 ```
 <details open>
 <summary>Parameters</summary>
-- `resolvedPath: string{:luau}` - The resolved path to fetch cached require.
+- `resolvedPath: string{:luau}`
 </details>
 <details>
 <summary>Throws</summary>

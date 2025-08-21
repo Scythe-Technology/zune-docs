@@ -1,18 +1,19 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # Multi Threading
 `zune.thread`
 
 ---
-import { Callout } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
 
 A library to create multiple lua states and execute in parallel.
 
 ## Properties
 ### isThread
+The current context of running program.
 ```luau tooltips
 isThread: boolean
 ```
-
----
 ## Functions
 ### fromModule
 Creates a new thread from a module. Resolves relative to the calling module.
@@ -22,36 +23,47 @@ fromModule(module: string): Thread
 ```
 <details open>
 <summary>Parameters</summary>
-- `module: string{:luau}` - The module to resolve.
+- `module: string{:luau}` - The module to load in the new thread.
 </details>
 <details>
 <summary>Throws</summary>
-- Thread Error
+- Luau Error
+- Require Error
 - Memory Error
 </details>
 
 ### fromBytecode
 Creates a new thread from bytecode.
 ```luau tooltips
--- @link: (42,48)[../objects/Thread]
-fromBytecode(bytecode: string | buffer): Thread
+-- @hover: (47,64)[type ThreadLoadOptions = {
+    chunk_name: string?,
+    native_code_gen: boolean?, 
+}]
+-- @link: (68,74)[../objects/Thread]
+fromBytecode(bytecode: string | buffer, opts: ThreadLoadOptions?): Thread
 ```
 <details open>
 <summary>Parameters</summary>
-- `bytecode: string | buffer{:luau}` - The bytecode to create the thread from.
+- `bytecode: string | buffer{:luau}` - The bytecode to load in the new thread.
+- `opts: ThreadLoadOptions?{:luau}` - The options for loading the bytecode.
+  - `chunk_name: string?{:luau}`
+    - default: `"(thread)"{:luau}`
+  - `native_code_gen: boolean?{:luau}`
+    - default: `true{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
-- Thread Error
+- Luau Error
 - Memory Error
 </details>
 
 ### receive
 Receives a message from the owner thread.
+
+Will error if called from the main thread.
 ```luau tooltips
 receive(): ...any
 ```
-<Callout type="info">This will error when called from Main Thread</Callout>
 <details>
 <summary>Throws</summary>
 - Thread Error
@@ -60,13 +72,14 @@ receive(): ...any
 
 ### send
 Sends a message to the owner thread.
+
+Will error if called from the main thread.
 ```luau tooltips
-send(...: any): ()
+send(...any): ()
 ```
-<Callout type="info">This will error when called from Main Thread</Callout>
 <details open>
 <summary>Parameters</summary>
-- `...: any{:luau}` - The values to send to the owner thread.
+- `...any{:luau}` - The values to send to the owner thread.
 </details>
 <details>
 <summary>Throws</summary>
@@ -75,7 +88,8 @@ send(...: any): ()
 </details>
 
 ### getCpuCount
-Returns the number of CPUs available.
+Gets the number of CPU cores available.
+If the number cannot be determined, it will return 1.
 ```luau tooltips
 getCpuCount(): number
 ```

@@ -1,6 +1,10 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # DateTime
 `zune.datetime`
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 A library to interact with date and time.
 
@@ -24,7 +28,7 @@ fromIsoDate(date: string): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
-- `date: string{:luau}` - The string to parse.
+- `date: string{:luau}` - The date string to parse.
 </details>
 <details>
 <summary>Throws</summary>
@@ -34,8 +38,8 @@ fromIsoDate(date: string): DateTime
 
 ### fromUnixTimestamp
 ```luau tooltips
--- @link: (33,41)[../objects/DateTime]
-fromIsoDate(timestamp: number): DateTime
+-- @link: (39,47)[../objects/DateTime]
+fromUnixTimestamp(timestamp: number): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
@@ -64,16 +68,8 @@ fromUnixTimestampMillis(timestamp: number): DateTime
 
 ### fromLocalTime
 ```luau tooltips
-fromLocalTime(
-    year: number,
-    month: number,
-    day: number,
-    hour: number,
-    minute: number,
-    second: number,
-    millisecond: number
--- @link: (4,12)[../objects/DateTime]
-): DateTime
+-- @link: (125,133)[../objects/DateTime]
+fromLocalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
@@ -93,16 +89,8 @@ fromLocalTime(
 
 ### fromUniversalTime
 ```luau tooltips
-fromUniversalTime(
-    year: number,
-    month: number,
-    day: number,
-    hour: number,
-    minute: number,
-    second: number,
-    millisecond: number
--- @link: (4,12)[../objects/DateTime]
-): DateTime
+-- @link: (129,137)[../objects/DateTime]
+fromUniversalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
@@ -131,7 +119,7 @@ parse(date: string): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
-- `date: string{:luau}` - The string to parse.
+- `date: string{:luau}` - The date string to parse.
 </details>
 <details>
 <summary>Throws</summary>

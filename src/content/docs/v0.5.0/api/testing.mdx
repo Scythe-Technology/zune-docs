@@ -1,8 +1,10 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # Testing
 `zune.testing`
 
 ---
-import { Callout } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
 
 A library to interact with the testing suite.
 
@@ -12,73 +14,87 @@ Whether the testing suite is running.
 ```luau tooltips
 running: boolean
 ```
-### _FAILED
-[for internal use]
+### _failed
+[Internal]
 
 The number of tests that have failed.
 ```luau tooltips
-_FAILED: number
+_failed: number
 ```
-
-### _COUNT
-[for internal use]
+### _count
+[Internal]
 
 The number of tests conducted.
-```luau
-_COUNT: number
+```luau tooltips
+_count: number
 ```
+### _start
+[Internal]
 
-### _START
-[for internal use]
-
-The time the testing suite started. Based on `os.clock()`.
-```luau
-_START: number
+The number of tests that have passed.
+```luau tooltips
+_start: number
 ```
+### expectEqual
+Expects a value to equal another.
 
----
+Similar to `assert(value == expected, ...)`
+
+```luau tooltips
+expectEqual: ((expected: any, value: any) -> ())
+```
 ## Functions
 ### test
-A function to run a test.
-```luau
-test(name: string, callback: () -> ()): ()
+Conducts a test.
+
+*Will be ignored if the testing suite is not running.*
+
+```luau tooltips
+test(name: string, callback: () -> (), timeout: number?): ()
 ```
-<Callout type="info">When the test suite is not running, the function will do nothing.</Callout>
 <details open>
 <summary>Parameters</summary>
 - `name: string{:luau}` - The name of the test.
-- `callback: () -> (){:luau}` - The function to run the test.
-  - The function should throw an error if the test fails.
+- `callback: () -> (){:luau}` - The callback to run the test.
+- `timeout: number?{:luau}` - The timeout on how long a test should last.
 </details>
 
 ### describe
-A function to describe the test scope.
-```luau
+Describes a test suite.
+
+*Will be ignored if the testing suite is not running.*
+
+```luau tooltips
 describe(name: string, callback: () -> ()): ()
 ```
-<Callout type="info">When the test suite is not running, the function will do nothing.</Callout>
 <details open>
 <summary>Parameters</summary>
-- `name: string{:luau}` - The name of the test suite.
-- `callback: () -> (){:luau}` - The function to run the test suite.
-  - The function should not error, and should call test functions.
-  - If the function does error, it will still count as a fail.
+- `name: string{:luau}` - The name of the suite.
+- `callback: () -> (){:luau}` - The callback to run the suite.
 </details>
 
 ### defer
+Defers a function.
+
 Deferred function will be executed after a test completes.
 Useful for cleaning up resources.
-```luau
+ 
+```luau tooltips
 defer(fn: () -> ()): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `fn: () -> (){:luau}` - The function to defer.
+- `fn: () -> (){:luau}`
 </details>
 
 ### expect
+Expects a value.
+
 ```luau tooltips
--- @hover: (21,32)[
+-- @hover: (36,51)[type ExpectCases = BasicCases & {
+    never: BasicCases, 
+}
+
 type BasicCases = {
     toBe: (expected: any) -> (),
     toBeDefined: () -> (),
@@ -91,73 +107,48 @@ type BasicCases = {
     toBeNan: () -> (),
     toHaveLength: (expected: number) -> (),
     toBeFalsy: () -> (),
-    toBeTruthy: () -> (),
-}
- 
-type ExpectCases = BasicCases & {
-    never: BasicCases,
-}]
--- @hover: (35,50)[
-type BasicCases = {
-    toBe: (expected: any) -> (),
-    toBeDefined: () -> (),
-    toBeCloseTo: (expected: number, precision: number) -> (),
-    toBeGreaterThan: (expected: number) -> (),
-    toBeGreaterThanOrEqual: (expected: number) -> (),
-    toBeLessThan: (expected: number) -> (),
-    toBeLessThanOrEqual: (expected: number) -> (),
-    toBeNil: () -> (),
-    toBeNan: () -> (),
-    toHaveLength: (expected: number) -> (),
-    toBeFalsy: () -> (),
-    toBeTruthy: () -> (),
-}
- 
-type ExpectCases = BasicCases & {
-    never: BasicCases,
+    toBeTruthy: () -> (), 
 }
 
 type FunctionalCases = ExpectCases & {
     toThrow: (expected: string?) -> (),
-    never: FunctionalCases,
+    never: FunctionalCases, 
 }]
-expect(value: any): ExpectCases | FunctionalCases
+expect(value: (...any) -> ...any): FunctionalCases
+-- @hover: (21,32)[type BasicCases = {
+    toBe: (expected: any) -> (),
+    toBeDefined: () -> (),
+    toBeCloseTo: (expected: number, precision: number) -> (),
+    toBeGreaterThan: (expected: number) -> (),
+    toBeGreaterThanOrEqual: (expected: number) -> (),
+    toBeLessThan: (expected: number) -> (),
+    toBeLessThanOrEqual: (expected: number) -> (),
+    toBeNil: () -> (),
+    toBeNan: () -> (),
+    toHaveLength: (expected: number) -> (),
+    toBeFalsy: () -> (),
+    toBeTruthy: () -> (), 
+}
+
+type ExpectCases = BasicCases & {
+    never: BasicCases, 
+}]
+expect(value: any): ExpectCases
 ```
 <details open>
 <summary>Parameters</summary>
-- `value: any{:luau}` - The value to test.
+- `value: (...any) -> ...any | any{:luau}` - The value to expect.
 </details>
 
 ### expected
 Expects a value to be true or non nil.
 
 Similar to `assert(value)`
-```luau
+
+```luau tooltips
 expected(value: any): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `value: any{:luau}` - The value to test.
-  - If the value is `false`, the test will fail.
-</details>
-<details>
-<summary>Throws</summary>
-- Lua Error
-</details>
-
-#### expectEqual
-Expects a value to equal another.
-
-Similar to `assert(value == expected, ...)`
-```luau
-expectEqual(expected: any, value: any): ()
-```
-<details open>
-<summary>Parameters</summary>
-- `expected: any{:luau}` - The expected value.
-- `value: any{:luau}` - The value to test.
-</details>
-<details>
-<summary>Throws</summary>
-- Lua Error
+- `value: any{:luau}` - The value to expect.
 </details>

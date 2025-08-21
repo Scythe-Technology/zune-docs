@@ -1,8 +1,10 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # Luau
 `zune.luau`
 
 ---
-import { Callout } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
 
 A library to parse, compile and run luau code.
 
@@ -10,17 +12,17 @@ A library to parse, compile and run luau code.
 ### compile
 Compiles `Luau` source code.
 ```luau tooltips
--- @hover: (31,45)[type CompileOptions = {
+-- @hover: (40,54)[export type CompileOptions = {
     debug_level: number?,
     optimization_level: number?,
-    coverage_level: number?,
+    coverage_level: number?, 
 }]
-compile(source: string, opts: CompileOptions?): string
+compile(source: string | buffer, opts: CompileOptions?): buffer
 ```
 <details open>
 <summary>Parameters</summary>
-- `source: string{:luau}` - The source code to compile.
-- `opts: CompileOptions?{:luau}` - The options for the compilation.
+- `source: string | buffer{:luau}` - The source code to compile.
+- `opts: CompileOptions?{:luau}` - The options for the compiler.
   - `debug_level: number?{:luau}` - The debug level for the compilation.
   - `optimization_level: number?{:luau}` - The optimization level for the compilation.
   - `coverage_level: number?{:luau}` - The coverage level for the compilation.
@@ -28,28 +30,30 @@ compile(source: string, opts: CompileOptions?): string
 <details>
 <summary>Throws</summary>
 - Luau Error
+- Memory Error
 </details>
 
 ### load
 Loads `Luau` bytecode into a function.
 ```luau tooltips
--- @hover: (30,41)[type LoadOptions = {
-    env: {[any]: any}?,
-    chunkName: string?,
-    nativeCodeGen: boolean?,
+-- @hover: (39,50)[export type LoadOptions = {
+    env: {
+        [any]: any
+    }?,
+    chunk_name: string?,
+    native_code_gen: boolean?, 
 }]
-load(bytecode: string, opts: LoadOptions?): ((...any) -> ...any)
+load(bytecode: string | buffer, opts: LoadOptions?): ((...any) -> ...any)
 ```
-<Callout type="info"> `nativeCodeGen` will be disabled if the table from `env` field has a metatable. </Callout>
-<Callout type="info"> If `env` is not provided, it will default to the global environment. </Callout>
 <details open>
 <summary>Parameters</summary>
-- `bytecode: string{:luau}` - The bytecode to load.
-- `opts: LoadOptions?{:luau}` - The options for the load.
+- `bytecode: string | buffer{:luau}` - The bytecode to load.
+- `opts: LoadOptions?{:luau}` - The options for loading the bytecode.
   - `env: {[any]: any}?{:luau}` - The environment to use for the loaded function.
-  - `chunkName: string?{:luau}` - The name of the chunk, used for debugging.
-    - default: `(load)`
-  - `nativeCodeGen: boolean?{:luau}` - Whether to enable native code generation.
+  - `chunk_name: string?{:luau}` - The name of the chunk, used for debugging.
+    - default: `"(load)"{:luau}`
+  - `native_code_gen: boolean?{:luau}` - Whether to enable native code generation.
+    - default: `true{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -59,13 +63,13 @@ load(bytecode: string, opts: LoadOptions?): ((...any) -> ...any)
 ### coverage
 Get coverage data from a function.
 ```luau tooltips
--- @hover: (36,48)[type CoverageData = {
+-- @hover: (37,49)[export type CoverageData = {
     name: string,
     line: number,
     depth: number,
-    [number]: number,
+    [number]: number, 
 }]
-coverage(fn: (...any) -> ...any): {CoverageData}
+coverage(fn: (...any) -> ...any):  {CoverageData}
 ```
 <details open>
 <summary>Parameters</summary>
@@ -75,43 +79,65 @@ coverage(fn: (...any) -> ...any): {CoverageData}
 ### parse
 Parses `Luau` source code.
 ```luau tooltips
--- @hover: (21,32)[type Location = {
+-- @hover: (30,41)[export type Location = {
     begin: Position,
-    ["end"]: Position,
+    ["end"]: Position, 
 }
 
-type ParseResult = {
-    errors: {
-        {
-            message: string,
-            location: Location,
-        }
+type Position = {
+    line: number,
+    column: number, 
+}
+
+export type ParseResult = {
+    errors:  {{
+        message: string,
+        location: Location, 
+    }
     }
 } | {
-    root: {any},
-    eof: { text: "", position: Position, tag: "eof" },
+    root:  {any},
+    eof: {
+        text: "",
+        position: Position,
+        tag: "eof"
+    },
     lines: number,
-    hot_comments: {
-        {
-            header: boolean,
-            content: string,
-            location: Location,
-        }
+    lineOffsets:  {number},
+    hotcomments:  {{
+        header: boolean,
+        content: string,
+        location: Location, 
+    }
     }
 }]
-parse(src: string): ParseResult
+parse(src: string | buffer): ParseResult
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: string{:luau}` - The source code to parse.
+- `src: string | buffer{:luau}` - The source code to parse.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
 </details>
 
 ### parseExpr
-Parses a single expression from `Luau` source code.
+Parses a `Luau` expression.
 ```luau tooltips
-parseExpr(src: string): any
+parseExpr(src: string | buffer): any
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: string{:luau}` - The source code to parse.
+- `src: string | buffer{:luau}` - The expression to parse.
 </details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### garbagecollect
+Runs a full garbage collection cycle.
+```luau tooltips
+garbagecollect(): ()
+```

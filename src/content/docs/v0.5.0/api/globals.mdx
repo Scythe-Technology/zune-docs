@@ -14,22 +14,40 @@ The global `zune` variable is a table that contains all the zune apis.
         debug: number,
         mode: "debug" | "release",
     }?,
+-- @link: (9,22)[./fs]
     fs: FileSystemLib,
+-- @link: (14,24)[./process]
     process: ProcessLib,
+-- @link: (14,24)[./testing]
     testing: TestingLib,
+-- @link: (11,18)[./task]
     task: TaskLib,
+-- @link: (10,20)[./net]
     net: NetworkLib,
+-- @link: (11,18)[./luau]
     luau: LuauLib,
+-- @link: (12,20)[./serde]
     serde: SerdeLib,
+-- @link: (9,14)[./io]
     io: IoLib,
+-- @link: (13,22)[./crypto]
     crypto: CryptoLib,
+-- @link: (12,20)[./regex]
     regex: RegexLib,
+-- @link: (15,26)[./datetime]
     datetime: DatetimeLib,
+-- @link: (10,16)[./ffi]
     ffi: FFILib,
+-- @link: (13,22)[./sqlite]
     sqlite: SQLiteLib,
+-- @link: (14,24)[./require]
     require: RequireLib,
+-- @link: (13,22)[./random]
     random: RandomLib,
+-- @link: (13,22)[./thread]
     thread: ThreadLib,
+-- @link: (10,16)[./mem]
+    mem: MemLib
 }]
 zune: <table>
 ```
@@ -75,7 +93,8 @@ _FILE: <table>
 
 ## Functions
 ### print
-Writes formatted values to `stderr`.
+Writes formatted values to `stderr`. `stderr` is the default for debugging.
+To write into `stdout`, use `io.stdout`.
 ```luau
 print(...any): ()
 ```
