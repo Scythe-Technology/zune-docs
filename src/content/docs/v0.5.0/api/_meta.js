@@ -19,4 +19,5 @@ export default {
   require: "require",
   random: "random",
   thread: "thread",
+  mem: "mem",
 }
