@@ -419,6 +419,20 @@ local function writeVisitor(overlap: any?, opts: WriterOptions)
         end
         return false
     end
+    printer.visitTypeArray = function(node: any)
+        if (overlap) then
+            if overlap.visitTypeArray and not overlap.visitTypeArray(node, printer) then
+                return false
+            end
+        end
+        write(node.openBrace.text)
+        if node.access then
+            write(node.access.text)
+        end
+        visitor.visitType(node.type, printer)
+        write(node.closeBrace.text)
+        return false
+    end
     return printer
 end
 
