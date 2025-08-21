@@ -13,14 +13,6 @@ local ordered_types = prep.ordered_types;
 local classes = prep.classes;
 local libraries = prep.libraries;
 
-for _, type in libraries do
-    type.type.export = {
-        text = "export",
-        leadingTrivia = {},
-        trailingTrivia = {},
-    }
-end
-
 local function resolvedTypeReferences(type: any): any
     if (type.tag ~= "table") then
         return type;
@@ -74,6 +66,12 @@ local function preprocessTypes()
         local old_name = type.name;
         local new_name = `_zune_{name}`;
         type.type.name.text = new_name;
+
+        type.type.export = {
+            text = "export",
+            leadingTrivia = {},
+            trailingTrivia = {},
+        };
 
         types[new_name] = type.type;
         types[type.name] = nil;

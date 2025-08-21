@@ -9,6 +9,7 @@ local visitor = require("./utils/visitor");
 local prep = require("./utils/prep");
 
 local types = prep.types;
+local classes = prep.classes;
 local libraries = prep.libraries;
 local declarations = prep.declarations;
 local documentations = prep.documentations;
@@ -88,6 +89,12 @@ local function preprocessTypes()
         documentations[new_name] = documentations[type.name];
         documentations[type.name] = nil;
         type.type.name.text = new_name;
+
+        type.type.export = {
+            text = "export",
+            leadingTrivia = {},
+            trailingTrivia = {},
+        };
 
         types[new_name] = type.type;
         types[type.name] = nil;
@@ -236,6 +243,9 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
         end
         doc.returns = returns;
     else
+        if (doc.documentation == "" and doc.code_sample == "") then
+            type_docs[`@roblox/{name}`] = nil;
+        end
         return;
     end
 end
@@ -243,7 +253,14 @@ end
 local function generateTypeDocsFile(): string
     for name, type in types do
         local documentation = table.clone(documentations[name] or {docs = {}, fields = {}});
+        if (not type.export) then
+            continue
+        end
         generateTypeDoc(`globaltype/{name}`, resolvedTypeReferences(type.type, documentation), documentation);
+    end
+    for name, type in classes do
+        local documentation = table.clone(documentations[name] or {docs = {}, fields = {}});
+        generateTypeDoc(`globaltype/{name}`, resolvedTypeReferences(type.type.type, documentation), documentation);
     end
 
     for library, summary in summaries do
