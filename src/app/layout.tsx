@@ -26,7 +26,7 @@ export default async function ({ children, ...props }) {
                 <Image src={LOGO_DARK} className="text-center dark:block hidden m-auto" style={{ height: '72px', objectFit: "cover" }} width={128} alt={"ZUNE"} />
             </>}
             projectLink="https://github.com/Scythe-Technology/zune"
-            chatLink="https://discord.gg/zEc7muuYbX"
+            chatLink="https://discord.gg/CqDxqcD8Ht"
         />
     )
     return (
