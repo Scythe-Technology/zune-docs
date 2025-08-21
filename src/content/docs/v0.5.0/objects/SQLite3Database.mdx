@@ -1,20 +1,25 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # SQLite3Database
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Methods
 ### transaction
+Creates a transaction function.
 ```luau tooltips
-:transaction(callback: (...any) -> (), kind: ("deferred" | "immediate" | "exclusive")?): ((...any) -> ())
+-- @hover: (49,64)[type TransactionKind = "deferred" | "immediate" | "exclusive"]
+:transaction(callback: ((A...) ->  R...), kind: TransactionKind?): ((A...) ->  R...)
 ```
 <details open>
 <summary>Parameters</summary>
-- `callback: (...any) -> (){:luau}` - The function to call within the transaction.
-- `kind: ("deferred" | "immediate" | "exclusive")?{:luau}` - The kind of transaction.
+- `callback: ((A...) -> R...){:luau}` - The callback to run inside the transaction.
+- `kind: TransactionKind?{:luau}` - The transaction mode to use.
 </details>
 <details>
 <summary>Throws</summary>
-- SQLite3 Error
-- Memory Error
+- Luau Error
 </details>
 
 ### query
@@ -24,7 +29,7 @@
 ```
 <details open>
 <summary>Parameters</summary>
-- `query: string{:luau}` - The SQL query to start.
+- `query: string{:luau}` - The query to prepare.
 </details>
 <details>
 <summary>Throws</summary>
@@ -34,12 +39,18 @@
 
 ### exec
 ```luau tooltips
--- @hover: (28,41)[type SQLite3Values = {[string]: number | string | buffer}]
-:exec(query: string, args: SQLite3Values?): ()
+-- @hover: (28,41)[export type SQLite3Values = {
+    [string]: number | string | buffer
+}]
+-- @hover: (45,58)[export type SQLite3Result = {
+    last_insert_row_id: number,
+    changes: number, 
+}]
+:exec(query: string, args: SQLite3Values?): SQLite3Result
 ```
 <details open>
 <summary>Parameters</summary>
-- `query: string{:luau}` - The SQL query to execute.
+- `query: string{:luau}` - The query to execute.
 - `args: SQLite3Values?{:luau}` - The arguments to bind to the query.
 </details>
 <details>

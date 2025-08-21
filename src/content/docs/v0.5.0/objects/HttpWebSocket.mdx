@@ -1,22 +1,11 @@
-# NetHttpWebSocket
+{/* This file was auto-generated with "zune-docs" */}
+
+# HttpWebSocket
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Methods
-### close
-Closes the WebSocket connection.
-```luau tooltips
-:close(code: number?): ()
-```
-<details open>
-<summary>Parameters</summary>
-- `code: number?{:luau}` - The close code to send, if not provided, it will default to `1000` (Normal Closure).
-</details>
-<details>
-<summary>Throws</summary>
-- Memory Error
-- WebSocket Error
-</details>
-
 ### send
 Sends a message to the connected WebSocket.
 ```luau tooltips
@@ -24,7 +13,23 @@ Sends a message to the connected WebSocket.
 ```
 <details open>
 <summary>Parameters</summary>
-- `message: string | buffer{:luau}` - The message to send to the WebSocket.
+- `message: string | buffer{:luau}` - The message to send.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+- WebSocket Error
+</details>
+
+### close
+Closes the WebSocket connection.
+```luau tooltips
+:close(code: number?): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `code: number?{:luau}` - The close code to send.
+  - default: `1000{:luau}`
 </details>
 <details>
 <summary>Throws</summary>

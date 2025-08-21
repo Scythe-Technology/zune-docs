@@ -1,13 +1,19 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # SQLite3Statement
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Methods
 ### run
 ```luau tooltips
--- @hover: (12,25)[type SQLite3Values = {[string]: number | string | buffer}]
--- @hover: (29,42)[type SQLite3Result = {
+-- @hover: (12,25)[export type SQLite3Values = {
+    [string]: number | string | buffer
+}]
+-- @hover: (29,42)[export type SQLite3Result = {
     last_insert_row_id: number,
-    changes: number,
+    changes: number, 
 }]
 :run(args: SQLite3Values?): SQLite3Result
 ```
@@ -23,8 +29,12 @@
 
 ### get
 ```luau tooltips
--- @hover: (12,25)[type SQLite3Values = {[string]: number | string | buffer}]
--- @hover: (29,42)[type SQLite3Values = {[string]: number | string | buffer}]
+-- @hover: (12,25)[export type SQLite3Values = {
+    [string]: number | string | buffer
+}]
+-- @hover: (29,42)[export type SQLite3Values = {
+    [string]: number | string | buffer
+}]
 :get(args: SQLite3Values?): SQLite3Values?
 ```
 <details open>
@@ -39,9 +49,13 @@
 
 ### all
 ```luau tooltips
--- @hover: (12,25)[type SQLite3Values = {[string]: number | string | buffer}]
--- @hover: (30,43)[type SQLite3Values = {[string]: number | string | buffer}]
-:all(args: SQLite3Values?): {SQLite3Values}
+-- @hover: (12,25)[export type SQLite3Values = {
+    [string]: number | string | buffer
+}]
+-- @hover: (31,44)[export type SQLite3Values = {
+    [string]: number | string | buffer
+}]
+:all(args: SQLite3Values?):  {SQLite3Values}
 ```
 <details open>
 <summary>Parameters</summary>
@@ -54,7 +68,7 @@
 </details>
 
 ### finalize
-closes the statement and frees resources.
+Closes the statement and frees resources.
 ```luau tooltips
 :finalize(): ()
 ```

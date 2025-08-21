@@ -1,85 +1,74 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # FFIPointer
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Methods
 ### release
 ```luau tooltips
+-- @link: (13,23)[../objects/FFIPointer]
 :release(): FFIPointer
 ```
 
 ### retain
 ```luau tooltips
+-- @link: (12,22)[../objects/FFIPointer]
 :retain(): FFIPointer
 ```
 
-### setTag
+### tag
 ```luau tooltips
-:setTag(tag: number): FFIPointer
+:tag(): number
+-- @link: (20,30)[../objects/FFIPointer]
+:tag(tag: number): FFIPointer
 ```
 <details open>
 <summary>Parameters</summary>
-- `tag: number{:luau}` - The tag to set.
+- `tag: number?{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
-
-### getTag
-```luau tooltips
-:getTag(): number
-```
 
 ### drop
 ```luau tooltips
+-- @link: (10,20)[../objects/FFIPointer]
 :drop(): FFIPointer
 ```
 
 ### offset
 ```luau tooltips
+-- @link: (26,36)[../objects/FFIPointer]
 :offset(offset: number): FFIPointer
 ```
 <details open>
 <summary>Parameters</summary>
-- `offset: number{:luau}` - The offset to apply to the pointer.
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-- Memory Error
+- `offset: number{:luau}`
 </details>
 
 ### read
 ```luau tooltips
+-- @link: (41,51)[../objects/FFIPointer]
 :read(srcOffset: number, dest: buffer | FFIPointer, destOffset: number, count: number): buffer
 ```
 <details open>
 <summary>Parameters</summary>
-- `srcOffset: number{:luau}` - The offset to read from the pointer.
-- `dest: buffer | FFIPointer{:luau}` - The destination to write the data to.
-- `destOffset: number{:luau}` - The offset to write to in the destination.
-- `count: number{:luau}` - The number of bytes to read.
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-- Memory Error
+- `srcOffset: number{:luau}`
+- `dest: buffer | FFIPointer{:luau}`
+- `destOffset: number{:luau}`
+- `count: number{:luau}`
 </details>
 
 ### write
 ```luau tooltips
+-- @link: (42,52)[../objects/FFIPointer]
 :write(destOffset: number, src: buffer | FFIPointer, srcOffset: number, count: number): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `destOffset: number{:luau}` - The offset to write to in the pointer.
-- `src: buffer | FFIPointer{:luau}` - The source to read the data from.
-- `srcOffset: number{:luau}` - The offset to read from in the source.
-- `count: number{:luau}` - The number of bytes to write.
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
+- `destOffset: number{:luau}`
+- `src: buffer | FFIPointer{:luau}`
+- `srcOffset: number{:luau}`
+- `count: number{:luau}`
 </details>
 
 ### readi8
@@ -90,10 +79,6 @@
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### readi16
 ```luau tooltips
@@ -102,10 +87,6 @@
 <details open>
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
 </details>
 
 ### readi32
@@ -116,10 +97,6 @@
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### readi64
 ```luau tooltips
@@ -128,11 +105,6 @@
 <details open>
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-- Memory Error
 </details>
 
 ### readu8
@@ -143,10 +115,6 @@
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### readu16
 ```luau tooltips
@@ -155,10 +123,6 @@
 <details open>
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
 </details>
 
 ### readu32
@@ -169,10 +133,6 @@
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### readu64
 ```luau tooltips
@@ -181,11 +141,6 @@
 <details open>
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-- Memory Error
 </details>
 
 ### readf32
@@ -196,10 +151,6 @@
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### readf64
 ```luau tooltips
@@ -209,23 +160,15 @@
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
-### readPtr
+### readptr
 ```luau tooltips
-:readPtr(offset: number?): FFIPointer
+-- @link: (28,38)[../objects/FFIPointer]
+:readptr(offset: number?): FFIPointer
 ```
 <details open>
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-- Memory Error
 </details>
 
 ### writei8
@@ -237,10 +180,6 @@
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### writei16
 ```luau tooltips
@@ -250,10 +189,6 @@
 <summary>Parameters</summary>
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
 </details>
 
 ### writei32
@@ -265,10 +200,6 @@
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### writei64
 ```luau tooltips
@@ -278,10 +209,6 @@
 <summary>Parameters</summary>
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
 </details>
 
 ### writeu8
@@ -293,10 +220,6 @@
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### writeu16
 ```luau tooltips
@@ -306,10 +229,6 @@
 <summary>Parameters</summary>
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
 </details>
 
 ### writeu32
@@ -321,10 +240,6 @@
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### writeu64
 ```luau tooltips
@@ -334,10 +249,6 @@
 <summary>Parameters</summary>
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
 </details>
 
 ### writef32
@@ -349,10 +260,6 @@
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
 ### writef64
 ```luau tooltips
@@ -363,65 +270,37 @@
 - `offset: number{:luau}`
 - `value: number | buffer | boolean{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
-### writePtr
+### writeptr
 ```luau tooltips
-:writePtr(offset: number, value: FFIPointer): ()
+-- @link: (34,44)[../objects/FFIPointer]
+:writeptr(offset: number, value: FFIPointer): ()
 ```
 <details open>
 <summary>Parameters</summary>
 - `offset: number{:luau}`
 - `value: FFIPointer{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
 
-### isNull
+### size
 ```luau tooltips
-:isNull(): boolean
-```
-
-### setSize
-```luau tooltips
-:setSize(size: number): ()
+:size(): number?
+:size(size: number): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `size: number{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
+- `size: number?{:luau}`
 </details>
 
-### getSize
+### alignment
 ```luau tooltips
-:getSize(): number?
-```
-
-### setAlignment
-```luau tooltips
-:setAlignment(alignment: number): ()
+:alignment(): number?
+:alignment(alignment: number): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `alignment: number{:luau}`
+- `alignment: number?{:luau}`
 </details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-</details>
-
-### getAlignment
-```luau tooltips
-:getAlignment(): number?
-```
 
 ### span
 ```luau tooltips
@@ -430,9 +309,4 @@
 <details open>
 <summary>Parameters</summary>
 - `offset: number?{:luau}`
-</details>
-<details>
-<summary>Throws</summary>
-- FFI Error
-- Memory Error
 </details>

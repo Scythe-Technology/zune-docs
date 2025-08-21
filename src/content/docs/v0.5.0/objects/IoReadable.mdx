@@ -1,0 +1,63 @@
+{/* This file was auto-generated with "zune-docs" */}
+
+# IoReadable
+
+---
+import { Callout, Tabs } from 'nextra/components'
+
+## Methods
+### read
+```luau tooltips
+:read(amount: number?, bytes: true?): buffer
+:read(amount: number?, bytes: false): string
+```
+<details open>
+<summary>Parameters</summary>
+- `amount: number?{:luau}` - The amount of bytes to read. If nil, reads until EOF or luau limit.
+- `bytes: true? | false{:luau}` - If false, the function will return a `string` instead of a `buffer`.
+  - default: `true{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- Reader Error
+</details>
+
+### readu8
+```luau tooltips
+:readu8(): number
+```
+
+### readu16
+```luau tooltips
+:readu16(): number
+```
+
+### readu32
+```luau tooltips
+:readu32(): number
+```
+
+### readi8
+```luau tooltips
+:readi8(): number
+```
+
+### readi16
+```luau tooltips
+:readi16(): number
+```
+
+### readi32
+```luau tooltips
+:readi32(): number
+```
+
+### readf32
+```luau tooltips
+:readf32(): number
+```
+
+### readf64
+```luau tooltips
+:readf64(): number
+```

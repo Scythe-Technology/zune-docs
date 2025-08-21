@@ -1,15 +1,25 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # BufferStream
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Methods
 ### read
 ```luau tooltips
-:read(amount: number?, bytes: boolean?): (buffer | string)?
+:read(amount: number?, bytes: true?): buffer
+:read(amount: number?, bytes: false): string
 ```
 <details open>
 <summary>Parameters</summary>
 - `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit.
-- `bytes: boolean?{:luau}` - If false, the function will return a `string` instead of a `buffer`.
+- `bytes: true? | false{:luau}` - If false, the function will return a `string` instead of a `buffer`.
+  - default: `true{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- Reader Error
 </details>
 
 ### write
@@ -19,6 +29,10 @@
 <details open>
 <summary>Parameters</summary>
 - `data: string | buffer{:luau}` - The data to write to the stream.
+</details>
+<details>
+<summary>Throws</summary>
+- Writer Error
 </details>
 
 ### pos
@@ -49,14 +63,32 @@
 - `offset: number{:luau}` - The offset to seek by.
 </details>
 
+### canRead
+```luau tooltips
+:canRead(amount: number?): boolean
+```
+<details open>
+<summary>Parameters</summary>
+- `amount: number?{:luau}` - The amount of bytes to check for reading availability.
+  - default: `0{:luau}`
+</details>
+
 ### writer
 ```luau tooltips
--- @link: (12,22)[../objects/Stream]
+-- @link: (12,22)[../objects/IoWritable]
 :writer(): IoWritable
 ```
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
 
 ### reader
 ```luau tooltips
--- @link: (12,22)[../objects/Stream]
+-- @link: (12,22)[../objects/IoReadable]
 :reader(): IoReadable
 ```
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>

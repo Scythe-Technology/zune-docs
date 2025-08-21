@@ -1,0 +1,30 @@
+{/* This file was auto-generated with "zune-docs" */}
+
+# FFIPointerType
+extends [`FFIDataType{:luau}`](../objects/FFIDataType)
+
+---
+import { Callout, Tabs } from 'nextra/components'
+
+## Methods
+### tag
+Get the tag id of the pointer type.
+```luau tooltips
+:tag(): number
+```
+
+### newTag
+Creates a new pointer type with the given tag.
+```luau tooltips
+-- @link: (32,46)[../objects/FFIPointerType]
+:newTag(tag: string | buffer): FFIPointerType
+```
+<details open>
+<summary>Parameters</summary>
+- `tag: string | buffer{:luau}` - The tag to set.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>

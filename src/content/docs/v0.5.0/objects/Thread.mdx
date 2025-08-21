@@ -1,8 +1,13 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # Thread
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Methods
 ### start
+Starts the thread.
 ```luau tooltips
 :start(): ()
 ```
@@ -34,7 +39,7 @@ Returns the status of the thread.
 ### receive
 Immediately receive or yields until a value is sent from the thread.
 ```luau tooltips
-:receive(): any
+:receive(): (...any)
 ```
 <details>
 <summary>Throws</summary>
@@ -45,11 +50,11 @@ Immediately receive or yields until a value is sent from the thread.
 ### send
 Sends a value to the thread.
 ```luau tooltips
-:send(...: any): ()
+:send(, ...any): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `...: any{:luau}` - The values to send to the thread.
+- `...any{:luau}` - The values to send to the thread.
 </details>
 <details>
 <summary>Throws</summary>

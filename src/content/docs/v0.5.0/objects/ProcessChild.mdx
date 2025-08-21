@@ -1,36 +1,51 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # ProcessChild
+
 ---
-import { Callout } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
 
 ## Properties
 ### stdin
 ```luau tooltips
--- @link: (8,18)[./FileHandle]
+-- @link: (8,18)[../objects/FileHandle]
 stdin: FileHandle?
 ```
-
 ### stdout
 ```luau tooltips
--- @link: (9,19)[./FileHandle]
+-- @link: (9,19)[../objects/FileHandle]
 stdout: FileHandle?
 ```
-
 ### stderr
 ```luau tooltips
--- @link: (9,19)[./FileHandle]
+-- @link: (9,19)[../objects/FileHandle]
 stderr: FileHandle?
 ```
-
----
 ## Methods
-### kill
-Kills the process.
-```luau tooltips
-:kill(): ()
-```
-
 ### wait
+Kills the process and yields until the process exits.
+```luau tooltips
+-- @hover: (10,23)[export type ProcessResult = {
+    ok: boolean,
+    code: number, 
+}]
+:wait(): ProcessResult
+```
+<details>
+<summary>Throws</summary>
+- Process Error
+</details>
+
+### kill
 Yields until the process exits.
 ```luau tooltips
-:wait(): ()
+-- @hover: (10,23)[export type ProcessResult = {
+    ok: boolean,
+    code: number, 
+}]
+:kill(): ProcessResult
 ```
+<details>
+<summary>Throws</summary>
+- Process Error
+</details>

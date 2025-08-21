@@ -1,7 +1,9 @@
-# NetworkSocket
----
+{/* This file was auto-generated with "zune-docs" */}
 
-A NetworkSocket is an object that represents a network socket. It provides methods to connect, send, and receive data over the network.
+# NetworkSocket
+
+---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Methods
 ### send
@@ -11,9 +13,9 @@ Sends data over the socket, and returns the number of bytes sent.
 ```
 <details open>
 <summary>Parameters</summary>
-- `data: string | buffer{:luau}` - The data to send over the socket.
-- `offset: number?{:luau}` - The offset of the string/buffer.
-  - default: `0`
+- `data: string | buffer{:luau}` - The data to send.
+- `offset: number?{:luau}` - The offset to start sending from.
+  - default: `0{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -28,11 +30,11 @@ Sends data over the socket, and returns the number of bytes sent.
 ```
 <details open>
 <summary>Parameters</summary>
-- `port: number{:luau}` - The port to send the data to.
-- `address: string{:luau}` - The address to send the data to.
-- `data: string | buffer{:luau}` - The data to send over the socket.
-- `offset: number?{:luau}` - The offset of the string/buffer.
-  - default: `0`
+- `port: number{:luau}` - The port to send the message to.
+- `address: string{:luau}` - The address to send the message to.
+- `data: string | buffer{:luau}` - The data to send.
+- `offset: number?{:luau}` - The offset to start sending from.
+  - default: `0{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -46,8 +48,8 @@ Sends data over the socket, and returns the number of bytes sent.
 ```
 <details open>
 <summary>Parameters</summary>
-- `max_size: number?{:luau}` - The max amount of bytes to receive.
-  - default: `8192`
+- `max_size: number?{:luau}` - The maximum size of the data to receive.
+  - default: `8192{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -57,17 +59,17 @@ Sends data over the socket, and returns the number of bytes sent.
 
 ### recvMsg
 ```luau tooltips
--- @hover: (31,45)[type NetworkAddress = {
+-- @hover: (31,45)[export type NetworkAddress = {
     family: number,
     port: number,
-    address: string,
+    address: string, 
 }]
 :recvMsg(max_size: number?): (NetworkAddress, buffer)
 ```
 <details open>
 <summary>Parameters</summary>
-- `max_size: number?{:luau}` - The max amount of bytes to receive.
-  - default: `8192`
+- `max_size: number?{:luau}` - The maximum size of the message to receive.
+  - default: `8192{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -78,6 +80,7 @@ Sends data over the socket, and returns the number of bytes sent.
 ### accept
 Yields and waits for a connection to be made on the socket, and returns a `NetworkSocket` object.
 ```luau tooltips
+-- @link: (12,25)[../objects/NetworkSocket]
 :accept(): NetworkSocket
 ```
 <details>
@@ -107,12 +110,12 @@ Starts listening for incoming connections on the socket.
 ```
 <details open>
 <summary>Parameters</summary>
-- `backlog: number?{:luau}` - The maximum number of connections the OS should queue before refusing new connections.
-  - default: `128`
+- `backlog: number?{:luau}` - The maximum number of connections to backlog.
+  - default: `128{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
-- Network Error
+- IO Error
 </details>
 
 ### bindIp
@@ -132,10 +135,10 @@ Binds the socket to the specified address and port.
 
 ### getName
 ```luau tooltips
--- @hover: (13,27)[type NetworkAddress = {
+-- @hover: (13,27)[export type NetworkAddress = {
     family: number,
     port: number,
-    address: string,
+    address: string, 
 }]
 :getName(): NetworkAddress
 ```
@@ -146,15 +149,15 @@ Binds the socket to the specified address and port.
 </details>
 
 ### setOption
-Sets an option for the socket.
+Sets a socket option on the socket.
 ```luau tooltips
 :setOption(level: number, optname: number, value: boolean | string | buffer): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `level: number{:luau}` - The level of the option to set.
-- `optname: number{:luau}` - The name of the option to set.
-- `value: boolean | string | buffer{:luau}` - The value to set the option to.
+- `level: number{:luau}` - The level of the option.
+- `optname: number{:luau}` - The name of the option.
+- `value: boolean | string | buffer{:luau}` - The value of the option.
 </details>
 <details>
 <summary>Throws</summary>
@@ -169,7 +172,7 @@ Closes the socket.
 <details>
 <summary>Throws</summary>
 - IO Error
-- Memory Error
+- Network Error
 </details>
 
 ### isOpen
@@ -177,7 +180,3 @@ Returns if the socket is open.
 ```luau tooltips
 :isOpen(): boolean
 ```
-<details>
-<summary>Throws</summary>
-- IO Error
-</details>

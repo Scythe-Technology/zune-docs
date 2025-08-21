@@ -1,18 +1,24 @@
-# FileHandle
----
+{/* This file was auto-generated with "zune-docs" */}
 
-A FileHandle is an object that represents an open file. It provides methods to read, write, and manipulate the file.
+# FileHandle
+
+---
+import { Callout, Tabs } from 'nextra/components'
+
+A FileHandle is an object that represents an open file. 
+It provides methods to read, write, and manipulate the file.
 
 ## Methods
 ### read
-Read the contents of the file.
+read from the file
 ```luau tooltips
-:read(amount: number?, useBuffer: boolean?): buffer | string
+:read(amount: number?, bytes: false?): string
+:read(amount: number?, bytes: true): buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit
-- `useBuffer: boolean?{:luau}` - If true, the function will return a `buffer` instead of a `string`.
+- `bytes: false? | true{:luau}` - If true, the function will return a `buffer` instead of a `string`.
 </details>
 <details>
 <summary>Throws</summary>
@@ -22,12 +28,13 @@ Read the contents of the file.
 ### readSync
 Read the contents of the file synchronously.
 ```luau tooltips
-:readSync(amount: number?, useBuffer: boolean?): string | buffer
+:readSync(amount: number?, bytes: false?): string
+:readSync(amount: number?, bytes: true): buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit
-- `useBuffer: boolean?{:luau}` - If true, the function will return a `buffer` instead of a `string`.
+- `bytes: false? | true{:luau}` - If true, the function will return a `buffer` instead of a `string`.
 </details>
 <details>
 <summary>Throws</summary>
@@ -117,7 +124,8 @@ Seeks the file from the end.
 ```
 <details open>
 <summary>Parameters</summary>
-- `amount: number?{:luau}` - The amount of bytes to seek from the end, if not provided, it will seek to the end of the file.
+- `amount: number?{:luau}` - The amount of bytes to seek from the end of the file.
+  - default: `0{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -131,7 +139,8 @@ Seeks the file to a specific position.
 ```
 <details open>
 <summary>Parameters</summary>
-- `amount: number?{:luau}` - The amount of bytes to seek from the start, if not provided, it will seek to 0.
+- `amount: number?{:luau}` - The amount of bytes to seek from the beginning of the file.
+  - default: `0{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -145,7 +154,8 @@ Seeks the file by relative to the current position.
 ```
 <details open>
 <summary>Parameters</summary>
-- `amount: number?{:luau}` - The amount of bytes to seek from the current seek, if not provided or 0, seek will not move.
+- `amount: number?{:luau}` - The amount of bytes to seek from the current seek.
+  - default: `0{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -159,7 +169,8 @@ Locks the file for reading or writing.
 ```
 <details open>
 <summary>Parameters</summary>
-- `lockMode: ("shared" | "exclusive" | "none")?{:luau}` - The mode to lock the file, if nil, locks the file in exclusive mode.
+- `lockMode: ("shared" | "exclusive" | "none")?{:luau}` - The mode to lock the file.
+  - default: `"exclusive"{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -190,7 +201,7 @@ Flushes the file. Writes the contents to the disk. This does not yield, it would
 Get readonly state or set the file to readonly.
 ```luau tooltips
 :readonly(): boolean
-:readonly(enabled: boolean?): ()
+:readonly(enabled: boolean): ()
 ```
 <details open>
 <summary>Parameters</summary>

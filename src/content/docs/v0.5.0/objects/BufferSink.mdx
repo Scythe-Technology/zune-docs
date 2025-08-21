@@ -1,26 +1,29 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # BufferSink
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Properties
 ### len
 ```luau tooltips
 len: number
 ```
-
 ### closed
 ```luau tooltips
 closed: boolean
 ```
-
----
 ## Methods
 ### flush
 ```luau tooltips
-:flush(bytes: boolean?): string | buffer
+:flush(bytes: true?): buffer
+:flush(bytes: false): string
 ```
 <details open>
 <summary>Parameters</summary>
-- `bytes: boolean?{:luau}` - If false, the function will return a `string` instead of a `buffer`.
+- `bytes: true? | false{:luau}`
+  - default: `true{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -33,7 +36,7 @@ closed: boolean
 ```
 <details open>
 <summary>Parameters</summary>
-- `data: string | buffer{:luau}` - The data to write.
+- `data: string | buffer{:luau}` - The data to write to write.
 </details>
 <details>
 <summary>Throws</summary>
@@ -42,9 +45,13 @@ closed: boolean
 
 ### writer
 ```luau tooltips
--- @link: (12,22)[../objects/Stream]
+-- @link: (12,22)[../objects/IoWritable]
 :writer(): IoWritable
 ```
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
 
 ### close
 ```luau tooltips

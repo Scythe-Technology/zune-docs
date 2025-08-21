@@ -1,14 +1,18 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # Regex
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Methods
 ### match
 ```luau tooltips
--- @hover: (34,44)[type RegexMatch = {
+-- @hover: (35,45)[export type RegexMatch = {
     string: string,
-    index: number,
+    index: number, 
 }]
-:match(input: string | buffer): {RegexMatch}?
+:match(input: string | buffer):  {RegexMatch}?
 ```
 <details open>
 <summary>Parameters</summary>
@@ -16,16 +20,17 @@
 </details>
 <details>
 <summary>Throws</summary>
+- Regex Error
 - Memory Error
 </details>
 
 ### search
 ```luau tooltips
--- @hover: (35,45)[type RegexMatch = {
+-- @hover: (36,46)[export type RegexMatch = {
     string: string,
-    index: number,
+    index: number, 
 }]
-:search(input: string | buffer): {RegexMatch}?
+:search(input: string | buffer):  {RegexMatch}?
 ```
 <details open>
 <summary>Parameters</summary>
@@ -39,16 +44,16 @@
 
 ### captures
 ```luau tooltips
--- @hover: (56,66)[type RegexMatch = {
+-- @hover: (57,67)[export type RegexMatch = {
     string: string,
-    index: number,
+    index: number, 
 }]
-:captures(input: string | buffer, global: boolean?): {{RegexMatch}}
+:captures(input: string | buffer, global: boolean?):  {{RegexMatch}}
 ```
 <details open>
 <summary>Parameters</summary>
 - `input: string | buffer{:luau}`
-- `global: boolean?{:luau}` - If true, the function will return all captures instead of just the first.
+- `global: boolean?{:luau}` - If true, the function will return all captures instead of just the first
   - default: `false{:luau}`
 </details>
 <details>
@@ -78,8 +83,8 @@ Format a string.
 ```
 <details open>
 <summary>Parameters</summary>
-- `str: string{:luau}` - The string to format.
-- `format: string{:luau}` - The format string to use.
+- `str: string{:luau}` - The string to replace.
+- `format: string{:luau}`
 </details>
 <details>
 <summary>Throws</summary>

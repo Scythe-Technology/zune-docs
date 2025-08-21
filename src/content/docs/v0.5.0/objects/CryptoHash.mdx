@@ -1,18 +1,24 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # CryptoHash
----
 
 ---
+import { Callout, Tabs } from 'nextra/components'
+
 ## Methods
 ### digest
 Returns the finalized hash value.
 
 If the hash object was created with a key, this would close the object.
 ```luau tooltips
-:digest(encoding: ("binary" | "hex" | "base64")?): string | buffer
+:digest(): buffer
+:digest(encoding: "binary"): buffer
+:digest(encoding: "hex" | "base64"): string
 ```
 <details open>
 <summary>Parameters</summary>
-- `bytes: boolean?{:luau}` - If false, the function will return a `string` instead of a `buffer`.
+- `encoding: "binary" | "hex" | "base64"?{:luau}` - The encoding of the output.
+  - default: `"binary"{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -37,6 +43,7 @@ Copies the current hash state.
 
 If the hash object was created with a key, the object must still be opened.
 ```luau tooltips
+-- @link: (10,20)[../objects/CryptoHash]
 :copy(): CryptoHash
 ```
 <details>

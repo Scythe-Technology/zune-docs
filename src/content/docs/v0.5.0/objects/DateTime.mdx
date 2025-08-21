@@ -1,43 +1,32 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # DateTime
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Properties
-### unixTimestamp
+### timestamp
 ```luau tooltips
-unixTimestamp: number
-UnixTimestamp: number
+timestamp: number
 ```
-
-### unixTimestampMillis
+### timestamp_millis
 ```luau tooltips
-unixTimestampMillis: number
-UnixTimestampMillis: number
+timestamp_millis: number
 ```
-
----
 ## Methods
 ### toLocalTime
 ```luau tooltips
--- @hover: (17,31)[type TimeDictionary = {
+-- @hover: (17,31)[export type TimeDictionary = {
     year: number,
     month: number,
     day: number,
     hour: number,
     minute: number,
     second: number,
-    millisecond: number,
+    millisecond: number, 
 }]
 :toLocalTime(): TimeDictionary
--- @hover: (17,31)[type TimeDictionary = {
-    year: number,
-    month: number,
-    day: number,
-    hour: number,
-    minute: number,
-    second: number,
-    millisecond: number,
-}]
-:ToLocalTime(): TimeDictionary
 ```
 <details>
 <summary>Throws</summary>
@@ -46,26 +35,16 @@ UnixTimestampMillis: number
 
 ### toUniversalTime
 ```luau tooltips
--- @hover: (21,35)[type TimeDictionary = {
+-- @hover: (21,35)[export type TimeDictionary = {
     year: number,
     month: number,
     day: number,
     hour: number,
     minute: number,
     second: number,
-    millisecond: number,
+    millisecond: number, 
 }]
 :toUniversalTime(): TimeDictionary
--- @hover: (21,35)[type TimeDictionary = {
-    year: number,
-    month: number,
-    day: number,
-    hour: number,
-    minute: number,
-    second: number,
-    millisecond: number,
-}]
-:ToUniversalTime(): TimeDictionary
 ```
 <details>
 <summary>Throws</summary>
@@ -76,7 +55,6 @@ UnixTimestampMillis: number
 Return the date in ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`
 ```luau tooltips
 :toIsoDate(): string
-:ToIsoDate(): string
 ```
 <details>
 <summary>Throws</summary>
@@ -85,9 +63,12 @@ Return the date in ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`
 
 ### formatLocalTime
 ```luau tooltips
-:formatLocalTime(): string
-:FormatLocalTime(): string
+:formatLocalTime(format: string): string
 ```
+<details open>
+<summary>Parameters</summary>
+- `format: string{:luau}`
+</details>
 <details>
 <summary>Throws</summary>
 - DateTime Error
@@ -96,9 +77,12 @@ Return the date in ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`
 
 ### formatUniversalTime
 ```luau tooltips
-:formatUniversalTime(): string
-:FormatUniversalTime(): string
+:formatUniversalTime(format: string): string
 ```
+<details open>
+<summary>Parameters</summary>
+- `format: string{:luau}`
+</details>
 <details>
 <summary>Throws</summary>
 - DateTime Error

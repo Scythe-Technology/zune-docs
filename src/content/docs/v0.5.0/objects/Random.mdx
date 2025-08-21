@@ -1,5 +1,9 @@
+{/* This file was auto-generated with "zune-docs" */}
+
 # Random
+
 ---
+import { Callout, Tabs } from 'nextra/components'
 
 ## Methods
 ### nextNumber
@@ -7,15 +11,13 @@ Generates a random number.
 
 If no arguments are provided, the function will generate a number between 0 and 1.
 ```luau tooltips
-:nextNumber(min: number?, max: number?): number
-:NextNumber(min: number?, max: number?): number
+:nextNumber(): number
+:nextNumber(min: number, max: number): number
 ```
 <details open>
 <summary>Parameters</summary>
-- `min: number?{:luau}` - The minimum number.
-  - If `max` is provided, `min` must also be provided.
-- `max: number?{:luau}` - The maximum number.
-  - If `min` is provided, `max` must also be provided.
+- `min: number?{:luau}` - The minimum value (inclusive).
+- `max: number?{:luau}` - The maximum value (inclusive).
 </details>
 <details>
 <summary>Throws</summary>
@@ -27,24 +29,27 @@ Generates a random integer.
 
 If no arguments are provided, the function will generate a number between the limits of a signed 32-bit integer.
 ```luau tooltips
-:nextInteger(min: number?, max: number?): number
-:NextInteger(min: number?, max: number?): number
+:nextInteger(min: number, max: number): number
 ```
 <details open>
 <summary>Parameters</summary>
-- `min: number?{:luau}` - The minimum number.
-  - If `max` is provided, `min` must also be provided.
-- `max: number?{:luau}` - The maximum number.
-  - If `min` is provided, `max` must also be provided.
+- `min: number{:luau}` - The minimum value (inclusive).
+- `max: number{:luau}` - The maximum value (inclusive).
 </details>
 <details>
 <summary>Throws</summary>
 - Range Error
 </details>
 
+### nextBoolean
+Generates a random boolean.
+```luau tooltips
+:nextBoolean(): boolean
+```
+
 ### clone
 Creates a new random number generator with the same state as the current one.
 ```luau tooltips
+-- @link: (11,17)[../objects/Random]
 :clone(): Random
-:Clone(): Random
 ```
