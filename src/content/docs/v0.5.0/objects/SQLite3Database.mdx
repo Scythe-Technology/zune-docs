@@ -24,12 +24,12 @@ Creates a transaction function.
 
 ### query
 ```luau tooltips
--- @link: (24,40)[../objects/SQLite3Statement]
-:query(query: string): SQLite3Statement
+-- @link: (33,49)[../objects/SQLite3Statement]
+:query(query: string | buffer): SQLite3Statement
 ```
 <details open>
 <summary>Parameters</summary>
-- `query: string{:luau}` - The query to prepare.
+- `query: string | buffer{:luau}` - The query to prepare.
 </details>
 <details>
 <summary>Throws</summary>
@@ -39,18 +39,18 @@ Creates a transaction function.
 
 ### exec
 ```luau tooltips
--- @hover: (28,41)[export type SQLite3Values = {
+-- @hover: (37,50)[export type SQLite3Values = {
     [string]: number | string | buffer
 }]
--- @hover: (45,58)[export type SQLite3Result = {
+-- @hover: (54,67)[export type SQLite3Result = {
     last_insert_row_id: number,
     changes: number, 
 }]
-:exec(query: string, args: SQLite3Values?): SQLite3Result
+:exec(query: string | buffer, args: SQLite3Values?): SQLite3Result
 ```
 <details open>
 <summary>Parameters</summary>
-- `query: string{:luau}` - The query to execute.
+- `query: string | buffer{:luau}` - The query to execute.
 - `args: SQLite3Values?{:luau}` - The arguments to bind to the query.
 </details>
 <details>

@@ -11,7 +11,7 @@ A library to do cryptographic operations in luau. Provides functions for hashing
 ## Functions
 ### createHash
 ```luau tooltips
--- @hover: (23,37)[type HashAlgorithms = 
+-- @hover: (23,43)[export type CryptoHashAlgorithms = 
     | "sha1"
     | "md5"
     | "blake3"
@@ -32,12 +32,12 @@ A library to do cryptographic operations in luau. Provides functions for hashing
     | "blake2s160"
     | "blake2s224"
     | "blake2s256"]
--- @link: (57,67)[../objects/CryptoHash]
-createHash(algorithm: HashAlgorithms, secret: string?): CryptoHash
+-- @link: (63,73)[../objects/CryptoHash]
+createHash(algorithm: CryptoHashAlgorithms, secret: string?): CryptoHash
 ```
 <details open>
 <summary>Parameters</summary>
-- `algorithm: HashAlgorithms{:luau}`
+- `algorithm: CryptoHashAlgorithms{:luau}`
 - `secret: string?{:luau}`
 </details>
 
@@ -47,7 +47,7 @@ createHash(algorithm: HashAlgorithms, secret: string?): CryptoHash
 <h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
 #### hash
 ```luau tooltips
--- @hover: (48,63)[type BcryptPasswordOptions = {
+-- @hover: (48,69)[type BcryptPasswordOptions = {
     algorithm: "bcrypt"?,
     cost: number?, 
 }
@@ -59,13 +59,13 @@ type Argon2PasswordOptions = {
     threads: number?, 
 }
 
-type PasswordOptions = BcryptPasswordOptions | Argon2PasswordOptions]
-password.hash(password: string | buffer, opts: PasswordOptions?): string
+export type CryptoPasswordOptions = BcryptPasswordOptions | Argon2PasswordOptions]
+password.hash(password: string | buffer, opts: CryptoPasswordOptions?): string
 ```
 <details open>
 <summary>Parameters</summary>
 - `password: string | buffer{:luau}` - The password to hash.
-- `opts: PasswordOptions?{:luau}` - The options for the password hashing.
+- `opts: CryptoPasswordOptions?{:luau}` - The options for the password hashing.
 </details>
 <details>
 <summary>Throws</summary>
@@ -374,21 +374,21 @@ tls.keyPairFromFile(certFile: string, keyFile: string): TlsCertKeyPair
 
 #### setupClient
 ```luau tooltips
--- @hover: (48,68)[-- references:
+-- @hover: (48,69)[-- references:
 -- @link: (8,21)[../objects/TlsCertBundle]
 -- (1) TlsCertBundle
 
-type TlsClientSetupConfig = {
+export type CryptoTlsClientConfig = {
     host: string,
     ca: TlsCertBundle, 
 }]
 -- @link: (25,38)[../objects/NetworkSocket]
-tls.setupClient(socket: NetworkSocket, config: TlsClientSetupConfig): ()
+tls.setupClient(socket: NetworkSocket, config: CryptoTlsClientConfig): ()
 ```
 <details open>
 <summary>Parameters</summary>
 - `socket: NetworkSocket{:luau}` - The socket to setup the client on.
-- `config: TlsClientSetupConfig{:luau}` - The configuration for the client.
+- `config: CryptoTlsClientConfig{:luau}` - The configuration for the client.
   - `host: string{:luau}` - The host.
   - `ca: TlsCertBundle{:luau}` - The CA bundle to use for verification.
 </details>
@@ -400,20 +400,20 @@ tls.setupClient(socket: NetworkSocket, config: TlsClientSetupConfig): ()
 
 #### setupServer
 ```luau tooltips
--- @hover: (48,68)[-- references:
+-- @hover: (48,69)[-- references:
 -- @link: (8,22)[../objects/TlsCertKeyPair]
 -- (1) TlsCertKeyPair
 
-type TlsServerSetupConfig = {
+export type CryptoTlsServerConfig = {
     auth: TlsCertKeyPair, 
 }]
 -- @link: (25,38)[../objects/NetworkSocket]
-tls.setupServer(socket: NetworkSocket, config: TlsServerSetupConfig): ()
+tls.setupServer(socket: NetworkSocket, config: CryptoTlsServerConfig): ()
 ```
 <details open>
 <summary>Parameters</summary>
 - `socket: NetworkSocket{:luau}` - The socket to setup the server on.
-- `config: TlsServerSetupConfig{:luau}` - The configuration for the server.
+- `config: CryptoTlsServerConfig{:luau}` - The configuration for the server.
   - `auth: TlsCertKeyPair{:luau}` - The certificate and key pair to use for the server.
 </details>
 <details>

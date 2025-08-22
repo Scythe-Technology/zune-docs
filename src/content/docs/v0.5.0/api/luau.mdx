@@ -12,17 +12,17 @@ A library to parse, compile and run luau code.
 ### compile
 Compiles `Luau` source code.
 ```luau tooltips
--- @hover: (40,54)[export type CompileOptions = {
+-- @hover: (40,58)[export type LuauCompileOptions = {
     debug_level: number?,
     optimization_level: number?,
     coverage_level: number?, 
 }]
-compile(source: string | buffer, opts: CompileOptions?): buffer
+compile(source: string | buffer, opts: LuauCompileOptions?): buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `source: string | buffer{:luau}` - The source code to compile.
-- `opts: CompileOptions?{:luau}` - The options for the compiler.
+- `opts: LuauCompileOptions?{:luau}` - The options for the compiler.
   - `debug_level: number?{:luau}` - The debug level for the compilation.
   - `optimization_level: number?{:luau}` - The optimization level for the compilation.
   - `coverage_level: number?{:luau}` - The coverage level for the compilation.
@@ -36,19 +36,19 @@ compile(source: string | buffer, opts: CompileOptions?): buffer
 ### load
 Loads `Luau` bytecode into a function.
 ```luau tooltips
--- @hover: (39,50)[export type LoadOptions = {
+-- @hover: (39,54)[export type LuauLoadOptions = {
     env: {
         [any]: any
     }?,
     chunk_name: string?,
     native_code_gen: boolean?, 
 }]
-load(bytecode: string | buffer, opts: LoadOptions?): ((...any) -> ...any)
+load(bytecode: string | buffer, opts: LuauLoadOptions?): ((...any) -> ...any)
 ```
 <details open>
 <summary>Parameters</summary>
 - `bytecode: string | buffer{:luau}` - The bytecode to load.
-- `opts: LoadOptions?{:luau}` - The options for loading the bytecode.
+- `opts: LuauLoadOptions?{:luau}` - The options for loading the bytecode.
   - `env: {[any]: any}?{:luau}` - The environment to use for the loaded function.
   - `chunk_name: string?{:luau}` - The name of the chunk, used for debugging.
     - default: `"(load)"{:luau}`
@@ -63,13 +63,13 @@ load(bytecode: string | buffer, opts: LoadOptions?): ((...any) -> ...any)
 ### coverage
 Get coverage data from a function.
 ```luau tooltips
--- @hover: (36,48)[export type CoverageData = {
+-- @hover: (36,52)[export type LuauCoverageData = {
     name: string,
     line: number,
     depth: number,
     [number]: number, 
 }]
-coverage(fn: (...any) -> ...any): {CoverageData}
+coverage(fn: (...any) -> ...any): {LuauCoverageData}
 ```
 <details open>
 <summary>Parameters</summary>

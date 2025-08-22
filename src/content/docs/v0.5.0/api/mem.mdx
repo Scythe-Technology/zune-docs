@@ -19,39 +19,39 @@ MAX_SIZE: number
 Gets the length of a slice.
 This is similar to `buffer.len` but this supports strings and FFI pointers as well.
 ```luau tooltips
--- @hover: (10,23)[-- references:
+-- @hover: (10,26)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-len(src: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+len(src: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to get the length of.
+- `src: MemReadableSlice{:luau}` - The source to get the length of.
 </details>
 
 ### copy
 Copies data from one slice to another.
 This is similar to `buffer.copy` but this supports strings and FFI pointers as well.
 ```luau tooltips
--- @hover: (52,65)[-- references:
+-- @hover: (12,28)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (12,25)[-- references:
+export type MemWritableSlice = buffer | FFIPointer]
+-- @hover: (55,71)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type WritableSlice = buffer | FFIPointer]
-copy(dest: WritableSlice, destOffset: number, src: ReadableSlice, srcOffset: number, count: number?): ()
+export type MemReadableSlice = string | buffer | FFIPointer]
+copy(dest: MemWritableSlice, destOffset: number, src: MemReadableSlice, srcOffset: number, count: number?): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `dest: WritableSlice{:luau}` - The destination to copy to.
+- `dest: MemWritableSlice{:luau}` - The destination to copy to.
 - `destOffset: number{:luau}` - The offset to start copying to in the destination.
-- `src: ReadableSlice{:luau}` - The source to copy from.
+- `src: MemReadableSlice{:luau}` - The source to copy from.
 - `srcOffset: number{:luau}` - The offset to start copying from in the source.
 - `count: number?{:luau}` - The number of bytes to copy. If not provided, will copy until the end of the source.
 </details>
@@ -65,16 +65,16 @@ Slices a portion of a source and returns it as a new buffer.
 
 This does allocate memory for the new buffer.
 ```luau tooltips
--- @hover: (12,25)[-- references:
+-- @hover: (12,28)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-slice(src: ReadableSlice, offset: number, count: number?): buffer
+export type MemReadableSlice = string | buffer | FFIPointer]
+slice(src: MemReadableSlice, offset: number, count: number?): buffer
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to slice from.
+- `src: MemReadableSlice{:luau}` - The source to slice from.
 - `offset: number{:luau}` - The offset to start the slice from.
 - `count: number?{:luau}` - The number of bytes to include in the slice. If not provided,
 </details>
@@ -86,23 +86,23 @@ slice(src: ReadableSlice, offset: number, count: number?): buffer
 ### eqlSlice
 Compares two slices for equality.
 ```luau tooltips
--- @hover: (13,26)[-- references:
+-- @hover: (51,67)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (48,61)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (13,29)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-eqlSlice(a: ReadableSlice, aOffset: number, b: ReadableSlice, bOffset: number, count: number?): boolean
+export type MemReadableSlice = string | buffer | FFIPointer]
+eqlSlice(a: MemReadableSlice, aOffset: number, b: MemReadableSlice, bOffset: number, count: number?): boolean
 ```
 <details open>
 <summary>Parameters</summary>
-- `a: ReadableSlice{:luau}` - The first slice to compare.
+- `a: MemReadableSlice{:luau}` - The first slice to compare.
 - `aOffset: number{:luau}` - The offset to start the comparison from in the first slice.
-- `b: ReadableSlice{:luau}` - The second slice to compare.
+- `b: MemReadableSlice{:luau}` - The second slice to compare.
 - `bOffset: number{:luau}` - The offset to start the comparison from in the second slice.
 - `count: number?{:luau}` - The number of bytes to compare.
 </details>
@@ -111,85 +111,85 @@ eqlSlice(a: ReadableSlice, aOffset: number, b: ReadableSlice, bOffset: number, c
 Compares two slices for equality.
 A shortcut for `eqlSlice(a, 0, b, 0, nil)`.
 ```luau tooltips
--- @hover: (26,39)[-- references:
+-- @hover: (8,24)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (8,21)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (29,45)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-eql(a: ReadableSlice, b: ReadableSlice): boolean
+export type MemReadableSlice = string | buffer | FFIPointer]
+eql(a: MemReadableSlice, b: MemReadableSlice): boolean
 ```
 <details open>
 <summary>Parameters</summary>
-- `a: ReadableSlice{:luau}` - The first slice to compare.
-- `b: ReadableSlice{:luau}` - The second slice to compare.
+- `a: MemReadableSlice{:luau}` - The first slice to compare.
+- `b: MemReadableSlice{:luau}` - The second slice to compare.
 </details>
 
 ### startsWith
 Checks if a slice starts with a given needle.
 ```luau tooltips
--- @hover: (19,32)[-- references:
+-- @hover: (45,61)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (42,55)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (19,35)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-startsWith(slice: ReadableSlice, needle: ReadableSlice): boolean
+export type MemReadableSlice = string | buffer | FFIPointer]
+startsWith(slice: MemReadableSlice, needle: MemReadableSlice): boolean
 ```
 <details open>
 <summary>Parameters</summary>
-- `slice: ReadableSlice{:luau}` - The slice to check.
-- `needle: ReadableSlice{:luau}` - The needle to check for.
+- `slice: MemReadableSlice{:luau}` - The slice to check.
+- `needle: MemReadableSlice{:luau}` - The needle to check for.
 </details>
 
 ### endsWith
 Checks if a slice ends with a given needle.
 ```luau tooltips
--- @hover: (17,30)[-- references:
+-- @hover: (43,59)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (40,53)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (17,33)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-endsWith(slice: ReadableSlice, needle: ReadableSlice): boolean
+export type MemReadableSlice = string | buffer | FFIPointer]
+endsWith(slice: MemReadableSlice, needle: MemReadableSlice): boolean
 ```
 <details open>
 <summary>Parameters</summary>
-- `slice: ReadableSlice{:luau}` - The slice to check.
-- `needle: ReadableSlice{:luau}` - The needle to check for.
+- `slice: MemReadableSlice{:luau}` - The slice to check.
+- `needle: MemReadableSlice{:luau}` - The needle to check for.
 </details>
 
 ### trim
 Trims the given values from both ends of the buffer.
 ```luau tooltips
--- @hover: (43,56)[-- references:
+-- @hover: (11,27)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (11,24)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (46,62)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-trim(src: ReadableSlice, values_to_strip: ReadableSlice): buffer
+export type MemReadableSlice = string | buffer | FFIPointer]
+trim(src: MemReadableSlice, values_to_strip: MemReadableSlice): buffer
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to trim.
-- `values_to_strip: ReadableSlice{:luau}` - The values to trim from the source.
+- `src: MemReadableSlice{:luau}` - The source to trim.
+- `values_to_strip: MemReadableSlice{:luau}` - The values to trim from the source.
 </details>
 <details>
 <summary>Throws</summary>
@@ -199,22 +199,22 @@ trim(src: ReadableSlice, values_to_strip: ReadableSlice): buffer
 ### trimLeft
 Trims the given values from the left end of the buffer.
 ```luau tooltips
--- @hover: (47,60)[-- references:
+-- @hover: (50,66)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (15,28)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (15,31)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-trimLeft(src: ReadableSlice, values_to_strip: ReadableSlice): buffer
+export type MemReadableSlice = string | buffer | FFIPointer]
+trimLeft(src: MemReadableSlice, values_to_strip: MemReadableSlice): buffer
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to trim.
-- `values_to_strip: ReadableSlice{:luau}` - The values to trim from the source.
+- `src: MemReadableSlice{:luau}` - The source to trim.
+- `values_to_strip: MemReadableSlice{:luau}` - The values to trim from the source.
 </details>
 <details>
 <summary>Throws</summary>
@@ -224,22 +224,22 @@ trimLeft(src: ReadableSlice, values_to_strip: ReadableSlice): buffer
 ### trimRight
 Trims the given values from the right end of the buffer.
 ```luau tooltips
--- @hover: (48,61)[-- references:
+-- @hover: (51,67)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (16,29)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (16,32)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-trimRight(src: ReadableSlice, values_to_strip: ReadableSlice): buffer
+export type MemReadableSlice = string | buffer | FFIPointer]
+trimRight(src: MemReadableSlice, values_to_strip: MemReadableSlice): buffer
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to trim.
-- `values_to_strip: ReadableSlice{:luau}` - The values to trim from the source.
+- `src: MemReadableSlice{:luau}` - The source to trim.
+- `values_to_strip: MemReadableSlice{:luau}` - The values to trim from the source.
 </details>
 <details>
 <summary>Throws</summary>
@@ -249,96 +249,96 @@ trimRight(src: ReadableSlice, values_to_strip: ReadableSlice): buffer
 ### indexOf
 Find the index of a needle in the buffer.
 ```luau tooltips
--- @hover: (37,50)[-- references:
+-- @hover: (40,56)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (14,27)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (14,30)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOf(src: ReadableSlice, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOf(src: MemReadableSlice, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
-- `needle: ReadableSlice{:luau}` - The needle to search for.
+- `src: MemReadableSlice{:luau}` - The source to search in.
+- `needle: MemReadableSlice{:luau}` - The needle to search for.
 </details>
 
 ### indexOfPos
 Find the index of a needle in the buffer, starting from the given offset.
 ```luau tooltips
--- @hover: (17,30)[-- references:
+-- @hover: (59,75)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (56,69)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (17,33)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfPos(src: ReadableSlice, offset: number, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfPos(src: MemReadableSlice, offset: number, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 - `offset: number{:luau}` - The offset to start searching from.
-- `needle: ReadableSlice{:luau}` - The needle to search for.
+- `needle: MemReadableSlice{:luau}` - The needle to search for.
 </details>
 
 ### lastIndexOf
 Find the last index of a needle in the buffer.
 ```luau tooltips
--- @hover: (41,54)[-- references:
+-- @hover: (18,34)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (18,31)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (44,60)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-lastIndexOf(src: ReadableSlice, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+lastIndexOf(src: MemReadableSlice, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
-- `needle: ReadableSlice{:luau}` - The needle to search for.
+- `src: MemReadableSlice{:luau}` - The source to search in.
+- `needle: MemReadableSlice{:luau}` - The needle to search for.
 </details>
 
 ### indexOfScalar
 Find the index of a scalar/char in the buffer.
 ```luau tooltips
--- @hover: (20,33)[-- references:
+-- @hover: (20,36)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfScalar(src: ReadableSlice, char: number): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfScalar(src: MemReadableSlice, char: number): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 - `char: number{:luau}` - The byte to search for.
 </details>
 
 ### indexOfScalarPos
 Find the index of a scalar/char in the buffer, starting from the given offset.
 ```luau tooltips
--- @hover: (23,36)[-- references:
+-- @hover: (23,39)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfScalarPos(src: ReadableSlice, offset: number, char: number): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfScalarPos(src: MemReadableSlice, offset: number, char: number): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 - `offset: number{:luau}` - The offset to start searching from.
 - `char: number{:luau}` - The byte to search for.
 </details>
@@ -346,166 +346,166 @@ indexOfScalarPos(src: ReadableSlice, offset: number, char: number): number?
 ### lastIndexOfScalar
 Find the last index of a scalar/char in the buffer.
 ```luau tooltips
--- @hover: (24,37)[-- references:
+-- @hover: (24,40)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-lastIndexOfScalar(src: ReadableSlice, char: number): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+lastIndexOfScalar(src: MemReadableSlice, char: number): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 - `char: number{:luau}` - The byte to search for.
 </details>
 
 ### indexOfAny
 Find the index of the first byte that is in the given `needle`.
 ```luau tooltips
--- @hover: (17,30)[-- references:
+-- @hover: (43,59)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (40,53)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (17,33)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfAny(src: ReadableSlice, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfAny(src: MemReadableSlice, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
-- `needle: ReadableSlice{:luau}` - The bytes to search for.
+- `src: MemReadableSlice{:luau}` - The source to search in.
+- `needle: MemReadableSlice{:luau}` - The bytes to search for.
 </details>
 
 ### indexOfAnyPos
 Find the index of the first byte that is in the given `needle`, starting from the given `offset`.
 ```luau tooltips
--- @hover: (20,33)[-- references:
+-- @hover: (20,36)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (59,72)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (62,78)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfAnyPos(src: ReadableSlice, offset: number, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfAnyPos(src: MemReadableSlice, offset: number, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 - `offset: number{:luau}` - The offset to start searching from.
-- `needle: ReadableSlice{:luau}` - The bytes to search for.
+- `needle: MemReadableSlice{:luau}` - The bytes to search for.
 </details>
 
 ### lastIndexOfAny
 Find the last index of a byte that is in the given `needle`.
 ```luau tooltips
--- @hover: (21,34)[-- references:
+-- @hover: (47,63)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (44,57)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (21,37)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-lastIndexOfAny(src: ReadableSlice, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+lastIndexOfAny(src: MemReadableSlice, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
-- `needle: ReadableSlice{:luau}` - The bytes to search for.
+- `src: MemReadableSlice{:luau}` - The source to search in.
+- `needle: MemReadableSlice{:luau}` - The bytes to search for.
 </details>
 
 ### indexOfNone
 Find the index of the first byte that is not in the given `needle`.
 ```luau tooltips
--- @hover: (41,54)[-- references:
+-- @hover: (18,34)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (18,31)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (44,60)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfNone(src: ReadableSlice, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfNone(src: MemReadableSlice, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
-- `needle: ReadableSlice{:luau}` - The bytes to not search for.
+- `src: MemReadableSlice{:luau}` - The source to search in.
+- `needle: MemReadableSlice{:luau}` - The bytes to not search for.
 </details>
 
 ### indexOfNonePos
 Find the index of the first byte that is not in the given `needle`, starting from the given `offset`.
 ```luau tooltips
--- @hover: (21,34)[-- references:
+-- @hover: (21,37)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (60,73)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (63,79)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfNonePos(src: ReadableSlice, offset: number, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfNonePos(src: MemReadableSlice, offset: number, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 - `offset: number{:luau}` - The offset to start searching from.
-- `needle: ReadableSlice{:luau}` - The bytes to not search for.
+- `needle: MemReadableSlice{:luau}` - The bytes to not search for.
 </details>
 
 ### lastIndexOfNone
 Find the last index of a byte that is not in the given `needle`.
 ```luau tooltips
--- @hover: (45,58)[-- references:
+-- @hover: (22,38)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (22,35)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (48,64)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-lastIndexOfNone(src: ReadableSlice, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+lastIndexOfNone(src: MemReadableSlice, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
-- `needle: ReadableSlice{:luau}` - The bytes to not search for.
+- `src: MemReadableSlice{:luau}` - The source to search in.
+- `needle: MemReadableSlice{:luau}` - The bytes to not search for.
 </details>
 
 ### indexOfDiff
 Find the index of the first difference between two buffers.
 ```luau tooltips
--- @hover: (41,54)[-- references:
+-- @hover: (18,34)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
--- @hover: (18,31)[-- references:
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (44,60)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfDiff(src: ReadableSlice, needle: ReadableSlice): number?
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfDiff(src: MemReadableSlice, needle: MemReadableSlice): number?
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
-- `needle: ReadableSlice{:luau}`
+- `src: MemReadableSlice{:luau}` - The source to search in.
+- `needle: MemReadableSlice{:luau}`
 </details>
 
 ### indexOfMax
@@ -513,16 +513,16 @@ Find the index of the maximum value in the buffer.
 
 Expects the buffer to be non-empty.
 ```luau tooltips
--- @hover: (17,30)[-- references:
+-- @hover: (17,33)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfMax(src: ReadableSlice): number
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfMax(src: MemReadableSlice): number
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 </details>
 
 ### indexOfMin
@@ -530,16 +530,16 @@ Find the index of the minimum value in the buffer.
 
 Expects the buffer to be non-empty.
 ```luau tooltips
--- @hover: (17,30)[-- references:
+-- @hover: (17,33)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfMin(src: ReadableSlice): number
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfMin(src: MemReadableSlice): number
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 </details>
 
 ### indexOfMinMax
@@ -547,32 +547,32 @@ Find both the index of the minimum and maximum values in the buffer.
 
 Expects the buffer to be non-empty.
 ```luau tooltips
--- @hover: (20,33)[-- references:
+-- @hover: (20,36)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-indexOfMinMax(src: ReadableSlice): (number, number)
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfMinMax(src: MemReadableSlice): (number, number)
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 </details>
 
 ### replaceScalar
 Replaces all occurrences of a scalar in the buffer with another scalar.
 - `[1, 2, 3, 2]` with (`2`, `4`) -> `[1, 4, 3, 4]`
 ```luau tooltips
--- @hover: (20,33)[-- references:
+-- @hover: (20,36)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type WritableSlice = buffer | FFIPointer]
-replaceScalar(src: WritableSlice, char: number, replacement: number): ()
+export type MemWritableSlice = buffer | FFIPointer]
+replaceScalar(src: MemWritableSlice, char: number, replacement: number): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: WritableSlice{:luau}` - The source to replace in.
+- `src: MemWritableSlice{:luau}` - The source to replace in.
 - `char: number{:luau}` - The byte to replace.
 - `replacement: number{:luau}` - The byte to replace with.
 </details>
@@ -582,16 +582,16 @@ Finds the maximum value in the buffer.
 
 Expects the buffer to be non-empty.
 ```luau tooltips
--- @hover: (10,23)[-- references:
+-- @hover: (10,26)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-max(src: ReadableSlice): number
+export type MemReadableSlice = string | buffer | FFIPointer]
+max(src: MemReadableSlice): number
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 </details>
 
 ### min
@@ -599,32 +599,32 @@ Finds the minimum value in the buffer.
 
 Expects the buffer to be non-empty.
 ```luau tooltips
--- @hover: (10,23)[-- references:
+-- @hover: (10,26)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type ReadableSlice = string | buffer | FFIPointer]
-min(src: ReadableSlice): number
+export type MemReadableSlice = string | buffer | FFIPointer]
+min(src: MemReadableSlice): number
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: ReadableSlice{:luau}` - The source to search in.
+- `src: MemReadableSlice{:luau}` - The source to search in.
 </details>
 
 ### reverse
 Reverses the buffer in place.
 - `[1, 2, 3]` -> `[3, 2, 1]`
 ```luau tooltips
--- @hover: (14,27)[-- references:
+-- @hover: (14,30)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type WritableSlice = buffer | FFIPointer]
-reverse(src: WritableSlice): ()
+export type MemWritableSlice = buffer | FFIPointer]
+reverse(src: MemWritableSlice): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: WritableSlice{:luau}` - The source to reverse in.
+- `src: MemWritableSlice{:luau}` - The source to reverse in.
 </details>
 
 ### rotate
@@ -632,32 +632,32 @@ Rotates the buffer to the left by the given amount.
 
 For example, rotating `[1, 2, 3, 4, 5]` by `2` would result in `[3, 4, 5, 1, 2]`.
 ```luau tooltips
--- @hover: (13,26)[-- references:
+-- @hover: (13,29)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type WritableSlice = buffer | FFIPointer]
-rotate(src: WritableSlice, amount: number): ()
+export type MemWritableSlice = buffer | FFIPointer]
+rotate(src: MemWritableSlice, amount: number): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: WritableSlice{:luau}` - The source to rotate in.
+- `src: MemWritableSlice{:luau}` - The source to rotate in.
 - `amount: number{:luau}` - The amount to rotate by.
 </details>
 
 ### set
 Sets the value of the buffer at the given offset to the given value, for the given count of bytes.
 ```luau tooltips
--- @hover: (11,24)[-- references:
+-- @hover: (11,27)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type WritableSlice = buffer | FFIPointer]
-set(dest: WritableSlice, value: number, offset: number?, count: number?): ()
+export type MemWritableSlice = buffer | FFIPointer]
+set(dest: MemWritableSlice, value: number, offset: number?, count: number?): ()
 ```
 <details open>
 <summary>Parameters</summary>
-- `dest: WritableSlice{:luau}` - The source to write in.
+- `dest: MemWritableSlice{:luau}` - The source to write in.
 - `value: number{:luau}` - The value to set.
 - `offset: number?{:luau}` - The offset to start writing at.
   - default: `0{:luau}`

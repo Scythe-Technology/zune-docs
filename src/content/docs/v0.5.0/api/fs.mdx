@@ -12,16 +12,16 @@ A library that provides access to the file system.
 ### createFile
 Creates a file. If the file already exists, the function will throw an error only when `exclusive` is `true`.
 ```luau tooltips
--- @hover: (32,49)[type CreateFileOptions = {
+-- @hover: (32,49)[export type FileCreateOptions = {
     exclusive: boolean?, 
 }]
 -- @link: (53,63)[../objects/FileHandle]
-createFile(path: string, opts: CreateFileOptions?): FileHandle
+createFile(path: string, opts: FileCreateOptions?): FileHandle
 ```
 <details open>
 <summary>Parameters</summary>
 - `path: string{:luau}` - The path to the file to open/create.
-- `opts: CreateFileOptions?{:luau}` - The create options.
+- `opts: FileCreateOptions?{:luau}` - The create options.
   - `exclusive: boolean?{:luau}` - If true, the function will fail if the file already exists.
     - default: `false{:luau}`
 </details>
@@ -33,16 +33,16 @@ createFile(path: string, opts: CreateFileOptions?): FileHandle
 ### openFile
 Opens a file. If the file does not exists, the function will throw an error.
 ```luau tooltips
--- @hover: (30,45)[type OpenFileOptions = {
+-- @hover: (30,45)[export type FileOpenOptions = {
     mode: string?, 
 }]
 -- @link: (49,59)[../objects/FileHandle]
-openFile(path: string, opts: OpenFileOptions?): FileHandle
+openFile(path: string, opts: FileOpenOptions?): FileHandle
 ```
 <details open>
 <summary>Parameters</summary>
 - `path: string{:luau}` - The path to the file to open.
-- `opts: OpenFileOptions?{:luau}` - The open options.
+- `opts: FileOpenOptions?{:luau}` - The open options.
   - `mode: string?{:luau}` - If provided, the file will be opened in the specified mode.
     - modes: `"r" | "w" | "rw"{:luau}`
     - default: `"rw"{:luau}`

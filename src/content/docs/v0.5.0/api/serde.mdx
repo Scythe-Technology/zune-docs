@@ -36,15 +36,15 @@ json.values: <table>
 #### encode
 Encodes a value to JSON.
 ```luau tooltips
--- @hover: (33,49)[type JsonEncodeConfig = {
+-- @hover: (33,54)[export type SerdeJsonEncodeConfig = {
     pretty_indent: number?, 
 }]
-json.encode(value: any, config: JsonEncodeConfig?): string
+json.encode(value: any, config: SerdeJsonEncodeConfig?): string
 ```
 <details open>
 <summary>Parameters</summary>
 - `value: any{:luau}` - The value to encode.
-- `config: JsonEncodeConfig?{:luau}` - The configuration for the encoding.
+- `config: SerdeJsonEncodeConfig?{:luau}` - The configuration for the encoding.
   - `pretty_indent: number?{:luau}` - The indentation level for pretty printing
     - default: `0{:luau}`
 </details>
@@ -56,15 +56,15 @@ json.encode(value: any, config: JsonEncodeConfig?): string
 #### decode
 Decodes JSON.
 ```luau tooltips
--- @hover: (35,51)[type JsonDecodeConfig = {
+-- @hover: (35,56)[export type SerdeJsonDecodeConfig = {
     preserve_null: boolean?, 
 }]
-json.decode(json: string, config: JsonDecodeConfig?): any
+json.decode(json: string, config: SerdeJsonDecodeConfig?): any
 ```
 <details open>
 <summary>Parameters</summary>
 - `json: string{:luau}` - The JSON string to decode.
-- `config: JsonDecodeConfig?{:luau}` - The configuration for the decoding.
+- `config: SerdeJsonDecodeConfig?{:luau}` - The configuration for the decoding.
   - `preserve_null: boolean?{:luau}` - Whether to preserve null values
     - default: `false{:luau}`
 </details>
@@ -100,15 +100,15 @@ json5.values: <table>
 #### encode
 Encodes a value to JSON.
 ```luau tooltips
--- @hover: (34,50)[type JsonEncodeConfig = {
+-- @hover: (34,55)[export type SerdeJsonEncodeConfig = {
     pretty_indent: number?, 
 }]
-json5.encode(value: any, config: JsonEncodeConfig?): string
+json5.encode(value: any, config: SerdeJsonEncodeConfig?): string
 ```
 <details open>
 <summary>Parameters</summary>
 - `value: any{:luau}` - The value to encode.
-- `config: JsonEncodeConfig?{:luau}` - The configuration for the encoding.
+- `config: SerdeJsonEncodeConfig?{:luau}` - The configuration for the encoding.
   - `pretty_indent: number?{:luau}` - The indentation level for pretty printing
     - default: `0{:luau}`
 </details>
@@ -120,15 +120,15 @@ json5.encode(value: any, config: JsonEncodeConfig?): string
 #### decode
 Decodes JSON.
 ```luau tooltips
--- @hover: (36,52)[type JsonDecodeConfig = {
+-- @hover: (36,57)[export type SerdeJsonDecodeConfig = {
     preserve_null: boolean?, 
 }]
-json5.decode(json: string, config: JsonDecodeConfig?): any
+json5.decode(json: string, config: SerdeJsonDecodeConfig?): any
 ```
 <details open>
 <summary>Parameters</summary>
 - `json: string{:luau}` - The JSON string to decode.
-- `config: JsonDecodeConfig?{:luau}` - The configuration for the decoding.
+- `config: SerdeJsonDecodeConfig?{:luau}` - The configuration for the decoding.
   - `preserve_null: boolean?{:luau}` - Whether to preserve null values
     - default: `false{:luau}`
 </details>
@@ -243,19 +243,19 @@ base64.decode(base64: buffer): buffer
 <h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
 #### compress
 ```luau tooltips
--- @hover: (34,59)[type GenericCompressionOptions = {
+-- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
     level: number?, 
 }]
-gzip.compress(raw: string, opts: GenericCompressionOptions?): string
--- @hover: (34,59)[type GenericCompressionOptions = {
+gzip.compress(raw: string, opts: SerdeGenericCompressionOptions?): string
+-- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
     level: number?, 
 }]
-gzip.compress(raw: buffer, opts: GenericCompressionOptions?): buffer
+gzip.compress(raw: buffer, opts: SerdeGenericCompressionOptions?): buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `raw: string | buffer{:luau}` - The data to compress. If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
-- `opts: GenericCompressionOptions?{:luau}` - The options for the compression.
+- `opts: SerdeGenericCompressionOptions?{:luau}` - The options for the compression.
   - `level: number?{:luau}` - The compression level
 </details>
 <details>
@@ -282,19 +282,19 @@ gzip.decompress(compressed: buffer): buffer
 <h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
 #### compress
 ```luau tooltips
--- @hover: (34,59)[type GenericCompressionOptions = {
+-- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
     level: number?, 
 }]
-zlib.compress(raw: string, opts: GenericCompressionOptions?): string
--- @hover: (34,59)[type GenericCompressionOptions = {
+zlib.compress(raw: string, opts: SerdeGenericCompressionOptions?): string
+-- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
     level: number?, 
 }]
-zlib.compress(raw: buffer, opts: GenericCompressionOptions?): buffer
+zlib.compress(raw: buffer, opts: SerdeGenericCompressionOptions?): buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `raw: string | buffer{:luau}` - The data to compress. If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
-- `opts: GenericCompressionOptions?{:luau}` - The options for the compression.
+- `opts: SerdeGenericCompressionOptions?{:luau}` - The options for the compression.
   - `level: number?{:luau}` - The compression level
 </details>
 <details>
@@ -335,19 +335,19 @@ lz4.compress(raw: buffer): buffer
 
 #### compressFrame
 ```luau tooltips
--- @hover: (38,63)[type GenericCompressionOptions = {
+-- @hover: (38,68)[export type SerdeGenericCompressionOptions = {
     level: number?, 
 }]
-lz4.compressFrame(raw: string, opts: GenericCompressionOptions?): string
--- @hover: (38,63)[type GenericCompressionOptions = {
+lz4.compressFrame(raw: string, opts: SerdeGenericCompressionOptions?): string
+-- @hover: (38,68)[export type SerdeGenericCompressionOptions = {
     level: number?, 
 }]
-lz4.compressFrame(raw: buffer, opts: GenericCompressionOptions?): buffer
+lz4.compressFrame(raw: buffer, opts: SerdeGenericCompressionOptions?): buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `raw: string | buffer{:luau}` - The data to compress. If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
-- `opts: GenericCompressionOptions?{:luau}` - The options for the compression.
+- `opts: SerdeGenericCompressionOptions?{:luau}` - The options for the compression.
   - `level: number?{:luau}` - The compression level
 </details>
 <details>
@@ -389,19 +389,19 @@ lz4.decompressFrame(compressed: buffer): buffer
 <h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
 #### compress
 ```luau tooltips
--- @hover: (34,59)[type GenericCompressionOptions = {
+-- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
     level: number?, 
 }]
-zstd.compress(raw: string, opts: GenericCompressionOptions?): string
--- @hover: (34,59)[type GenericCompressionOptions = {
+zstd.compress(raw: string, opts: SerdeGenericCompressionOptions?): string
+-- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
     level: number?, 
 }]
-zstd.compress(raw: buffer, opts: GenericCompressionOptions?): buffer
+zstd.compress(raw: buffer, opts: SerdeGenericCompressionOptions?): buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `raw: string | buffer{:luau}` - The data to compress. If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
-- `opts: GenericCompressionOptions?{:luau}` - The options for the compression.
+- `opts: SerdeGenericCompressionOptions?{:luau}` - The options for the compression.
   - `level: number?{:luau}` - The compression level
 </details>
 <details>

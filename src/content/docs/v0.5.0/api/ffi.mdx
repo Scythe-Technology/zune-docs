@@ -160,7 +160,7 @@ Creates a structure data type.
 -- There cannot be multiple fields in the same field table.
 -- Multiple fields with the same field name is not allowed.
 ```luau tooltips
--- @hover: (28,39)[-- references:
+-- @hover: (28,42)[-- references:
 -- @link: (8,19)[../objects/FFIDataType]
 -- (1) FFIDataType
 -- @link: (8,24)[../objects/FFIStructureType]
@@ -168,13 +168,13 @@ Creates a structure data type.
 -- @link: (8,22)[../objects/FFIPointerType]
 -- (3) FFIPointerType
 
-type AnyDataType = FFIDataType | FFIStructureType | FFIPointerType]
--- @link: (44,60)[../objects/FFIStructureType]
-struct(fields: {{[string]: AnyDataType}}): FFIStructureType
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType]
+-- @link: (47,63)[../objects/FFIStructureType]
+struct(fields: {{[string]: FFIAnyDataType}}): FFIStructureType
 ```
 <details open>
 <summary>Parameters</summary>
-- `fields: {{ [string]: AnyDataType }}{:luau}` - The fields of the structure.
+- `fields: {{ [string]: FFIAnyDataType }}{:luau}` - The fields of the structure.
 </details>
 <details>
 <summary>Throws</summary>
@@ -184,7 +184,7 @@ struct(fields: {{[string]: AnyDataType}}): FFIStructureType
 
 ### fn
 ```luau tooltips
--- @hover: (16,30)[-- references:
+-- @hover: (16,36)[-- references:
 -- @link: (8,19)[../objects/FFIDataType]
 -- (1) FFIDataType
 -- @link: (8,24)[../objects/FFIStructureType]
@@ -192,20 +192,20 @@ struct(fields: {{[string]: AnyDataType}}): FFIStructureType
 -- @link: (8,22)[../objects/FFIPointerType]
 -- (3) FFIPointerType
 
-type AnyDataType = FFIDataType | FFIStructureType | FFIPointerType
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType
 
-type FFIFunctionDef = {
-    returns: AnyDataType,
-    args: {AnyDataType}
+export type FFIFunctionDefintion = {
+    returns: FFIAnyDataType,
+    args: {FFIAnyDataType}
 }]
--- @link: (40,50)[../objects/FFIPointer]
-fn(definition: FFIFunctionDef, srcPtr: FFIPointer): ((...any) -> any)
+-- @link: (46,56)[../objects/FFIPointer]
+fn(definition: FFIFunctionDefintion, srcPtr: FFIPointer): ((...any) -> any)
 ```
 <details open>
 <summary>Parameters</summary>
-- `definition: FFIFunctionDef{:luau}` - The function definition.
-  - `returns: AnyDataType{:luau}` - The return type of the function.
-  - `args: {AnyDataType}{:luau}` - The argument types of the function.
+- `definition: FFIFunctionDefintion{:luau}` - The function definition.
+  - `returns: FFIAnyDataType{:luau}` - The return type of the function.
+  - `args: {FFIAnyDataType}{:luau}` - The argument types of the function.
 - `srcPtr: FFIPointer{:luau}` - The pointer to the function.
 </details>
 <details>
@@ -216,7 +216,7 @@ fn(definition: FFIFunctionDef, srcPtr: FFIPointer): ((...any) -> any)
 
 ### closure
 ```luau tooltips
--- @hover: (21,35)[-- references:
+-- @hover: (21,41)[-- references:
 -- @link: (8,19)[../objects/FFIDataType]
 -- (1) FFIDataType
 -- @link: (8,24)[../objects/FFIStructureType]
@@ -224,20 +224,20 @@ fn(definition: FFIFunctionDef, srcPtr: FFIPointer): ((...any) -> any)
 -- @link: (8,22)[../objects/FFIPointerType]
 -- (3) FFIPointerType
 
-type AnyDataType = FFIDataType | FFIStructureType | FFIPointerType
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType
 
-type FFIFunctionDef = {
-    returns: AnyDataType,
-    args: {AnyDataType}
+export type FFIFunctionDefintion = {
+    returns: FFIAnyDataType,
+    args: {FFIAnyDataType}
 }]
--- @link: (64,74)[../objects/FFIPointer]
-closure(definition: FFIFunctionDef, handler: (...any) -> any): FFIPointer
+-- @link: (70,80)[../objects/FFIPointer]
+closure(definition: FFIFunctionDefintion, handler: (...any) -> any): FFIPointer
 ```
 <details open>
 <summary>Parameters</summary>
-- `definition: FFIFunctionDef{:luau}` - The function definition.
-  - `returns: AnyDataType{:luau}` - The return type of the function.
-  - `args: {AnyDataType}{:luau}` - The argument types of the function.
+- `definition: FFIFunctionDefintion{:luau}` - The function definition.
+  - `returns: FFIAnyDataType{:luau}` - The return type of the function.
+  - `args: {FFIAnyDataType}{:luau}` - The argument types of the function.
 - `handler: (...any) -> any{:luau}` - The lua function to call.
 </details>
 <details>
@@ -248,7 +248,7 @@ closure(definition: FFIFunctionDef, handler: (...any) -> any): FFIPointer
 
 ### dlopen
 ```luau tooltips
--- @hover: (62,72)[-- references:
+-- @hover: (68,78)[-- references:
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
@@ -256,7 +256,7 @@ export type FFILibrary = {
     getSymbol: (self: FFILibrary, symbol: string) -> FFIPointer?,
     [string]: (...any) -> any, 
 }]
--- @hover: (44,58)[-- references:
+-- @hover: (44,64)[-- references:
 -- @link: (8,19)[../objects/FFIDataType]
 -- (1) FFIDataType
 -- @link: (8,24)[../objects/FFIStructureType]
@@ -264,18 +264,18 @@ export type FFILibrary = {
 -- @link: (8,22)[../objects/FFIPointerType]
 -- (3) FFIPointerType
 
-type AnyDataType = FFIDataType | FFIStructureType | FFIPointerType
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType
 
-type FFIFunctionDef = {
-    returns: AnyDataType,
-    args: {AnyDataType}
+export type FFIFunctionDefintion = {
+    returns: FFIAnyDataType,
+    args: {FFIAnyDataType}
 }]
-dlopen(path: string, functions: {[string]: FFIFunctionDef}): FFILibrary
+dlopen(path: string, functions: {[string]: FFIFunctionDefintion}): FFILibrary
 ```
 <details open>
 <summary>Parameters</summary>
 - `path: string{:luau}` - The path to the library.
-- `functions: { [string]: FFIFunctionDef }{:luau}` - The symbols to load from the library.
+- `functions: { [string]: FFIFunctionDefintion }{:luau}` - The symbols to load from the library.
 </details>
 <details>
 <summary>Throws</summary>
@@ -293,7 +293,7 @@ dlopen(path: string, functions: {[string]: FFIFunctionDef}): FFILibrary
 -- @link: (8,18)[../objects/FFIPointer]
 -- (1) FFIPointer
 
-type FFICompileOptions = {
+export type FFICompileOptions = {
     options: string?,
     files: {string}?,
     libraries: {string}?,

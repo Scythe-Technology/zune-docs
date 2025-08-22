@@ -277,7 +277,7 @@ getAddressList(name: string, port: number): {NetworkAddress}
 #### serve
 Starts a new HTTP server.
 ```luau tooltips
--- @hover: (18,30)[-- references:
+-- @hover: (18,34)[-- references:
 -- @link: (8,21)[../objects/HttpWebSocket]
 -- (1) HttpWebSocket
 
@@ -308,7 +308,7 @@ export type ServerWebSocketHandlers = {
     close: ((websocket: HttpWebSocket, code: number) -> ())?, 
 }
 
-export type ServeOptions = {
+export type HttpServeOptions = {
     port: number,
     address: string?,
     reuse_address: boolean?,
@@ -319,12 +319,12 @@ export type ServeOptions = {
     request: (request: HttpServerRequest) -> string | buffer | HttpServerResponse,
     websocket: ServerWebSocketHandlers?, 
 }]
--- @link: (33,43)[../objects/HttpServer]
-http.serve(opts: ServeOptions): HttpServer
+-- @link: (37,47)[../objects/HttpServer]
+http.serve(opts: HttpServeOptions): HttpServer
 ```
 <details open>
 <summary>Parameters</summary>
-- `opts: ServeOptions{:luau}` - The options for the server.
+- `opts: HttpServeOptions{:luau}` - The options for the server.
   - `port: number{:luau}` - The port to listen on.
   - `address: string?{:luau}` - The address to bind to.
     - default: `"127.0.0.1"{:luau}`
@@ -355,19 +355,7 @@ Makes a request to the specified host.
 
 Options are optional, defaults to GET request.
 ```luau tooltips
--- @hover: (34,52)[export type RequestOptions = {
-    headers: {
-        [string]: string
-    }?,
-    method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
-    body: (string | buffer)?,
-    allow_redirects: boolean?, 
-}
-
-type RequestOptionsType<T> = (RequestOptions & {
-    response_body_type: T
-})]
--- @hover: (67,79)[export type HttpResponse<T> = {
+-- @hover: (71,83)[export type HttpResponse<T> = {
     ok: boolean,
     status_code: number,
     status_reason: string,
@@ -376,17 +364,7 @@ type RequestOptionsType<T> = (RequestOptions & {
     },
     body: T, 
 }]
-http.request(host: string, opts: RequestOptionsType<"string"?>?): HttpResponse<string>
--- @hover: (66,78)[export type HttpResponse<T> = {
-    ok: boolean,
-    status_code: number,
-    status_reason: string,
-    headers: {
-        [string]: string
-    },
-    body: T, 
-}]
--- @hover: (34,52)[export type RequestOptions = {
+-- @hover: (34,56)[export type HttpRequestOptions = {
     headers: {
         [string]: string
     }?,
@@ -395,23 +373,11 @@ http.request(host: string, opts: RequestOptionsType<"string"?>?): HttpResponse<s
     allow_redirects: boolean?, 
 }
 
-type RequestOptionsType<T> = (RequestOptions & {
+export type HttpRequestOptionsType<T> = (HttpRequestOptions & {
     response_body_type: T
 })]
-http.request(host: string, opts: RequestOptionsType<"buffer">?): HttpResponse<buffer>
--- @hover: (34,52)[export type RequestOptions = {
-    headers: {
-        [string]: string
-    }?,
-    method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
-    body: (string | buffer)?,
-    allow_redirects: boolean?, 
-}
-
-type RequestOptionsType<T> = (RequestOptions & {
-    response_body_type: T
-})]
--- @hover: (83,95)[export type HttpResponse<T> = {
+http.request(host: string, opts: HttpRequestOptionsType<"string"?>?): HttpResponse<string>
+-- @hover: (70,82)[export type HttpResponse<T> = {
     ok: boolean,
     status_code: number,
     status_reason: string,
@@ -420,12 +386,46 @@ type RequestOptionsType<T> = (RequestOptions & {
     },
     body: T, 
 }]
-http.request(host: string, opts: RequestOptionsType<"string" | "buffer" | nil>?): HttpResponse<string | buffer>
+-- @hover: (34,56)[export type HttpRequestOptions = {
+    headers: {
+        [string]: string
+    }?,
+    method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+    body: (string | buffer)?,
+    allow_redirects: boolean?, 
+}
+
+export type HttpRequestOptionsType<T> = (HttpRequestOptions & {
+    response_body_type: T
+})]
+http.request(host: string, opts: HttpRequestOptionsType<"buffer">?): HttpResponse<buffer>
+-- @hover: (34,56)[export type HttpRequestOptions = {
+    headers: {
+        [string]: string
+    }?,
+    method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+    body: (string | buffer)?,
+    allow_redirects: boolean?, 
+}
+
+export type HttpRequestOptionsType<T> = (HttpRequestOptions & {
+    response_body_type: T
+})]
+-- @hover: (87,99)[export type HttpResponse<T> = {
+    ok: boolean,
+    status_code: number,
+    status_reason: string,
+    headers: {
+        [string]: string
+    },
+    body: T, 
+}]
+http.request(host: string, opts: HttpRequestOptionsType<"string" | "buffer" | nil>?): HttpResponse<string | buffer>
 ```
 <details open>
 <summary>Parameters</summary>
 - `host: string{:luau}` - The host to make the request to.
-- `opts: RequestOptionsType?{:luau}` - The options for the request.
+- `opts: HttpRequestOptionsType?{:luau}` - The options for the request.
 </details>
 <details>
 <summary>Throws</summary>
@@ -435,7 +435,7 @@ http.request(host: string, opts: RequestOptionsType<"string" | "buffer" | nil>?)
 
 #### websocket
 ```luau tooltips
--- @hover: (36,52)[-- references:
+-- @hover: (36,56)[-- references:
 -- @link: (8,21)[../objects/HttpWebSocket]
 -- (1) HttpWebSocket
 
@@ -447,7 +447,7 @@ export type HttpServerResponse = {
     body: (string | buffer)?, 
 }
 
-export type WebSocketOptions = {
+export type HttpWebSocketOptions = {
     protocols: {string}?,
     timeout: number?,
     accept: ((socket: HttpWebSocket, request: HttpServerResponse) -> boolean)?,
@@ -455,13 +455,13 @@ export type WebSocketOptions = {
     close: ((socket: HttpWebSocket, close: number?) -> ())?,
     message: ((socket: HttpWebSocket, message: string) -> ())?, 
 }]
--- @link: (55,68)[../objects/HttpWebSocket]
-http.websocket(host: string, opts: WebSocketOptions): HttpWebSocket
+-- @link: (59,72)[../objects/HttpWebSocket]
+http.websocket(host: string, opts: HttpWebSocketOptions): HttpWebSocket
 ```
 <details open>
 <summary>Parameters</summary>
 - `host: string{:luau}` - The host to connect to.
-- `opts: WebSocketOptions{:luau}` - The options for the WebSocket.
+- `opts: HttpWebSocketOptions{:luau}` - The options for the WebSocket.
   - `protocols: {string}?{:luau}` - The protocols to send to the server.
   - `timeout: number?{:luau}` - The timeout for the WebSocket connection.
     - If the timeout is negative, the WebSocket will never timeout.
