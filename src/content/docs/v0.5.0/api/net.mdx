@@ -253,12 +253,12 @@ createSocket(address_family: number, flags: number, protocol: number): NetworkSo
 ### getAddressList
 Gets a list of addresses for the provided name and port.
 ```luau tooltips
--- @hover: (47,61)[export type NetworkAddress = {
+-- @hover: (46,60)[export type NetworkAddress = {
     family: number,
     port: number,
     address: string, 
 }]
-getAddressList(name: string, port: number):  {NetworkAddress}
+getAddressList(name: string, port: number): {NetworkAddress}
 ```
 <details open>
 <summary>Parameters</summary>
@@ -448,7 +448,7 @@ export type HttpServerResponse = {
 }
 
 export type WebSocketOptions = {
-    protocols:  {string}?,
+    protocols: {string}?,
     timeout: number?,
     accept: ((socket: HttpWebSocket, request: HttpServerResponse) -> boolean)?,
     open: ((socket: HttpWebSocket) -> ())?,
@@ -462,7 +462,7 @@ http.websocket(host: string, opts: WebSocketOptions): HttpWebSocket
 <summary>Parameters</summary>
 - `host: string{:luau}` - The host to connect to.
 - `opts: WebSocketOptions{:luau}` - The options for the WebSocket.
-  - `protocols:  {string}?{:luau}` - The protocols to send to the server.
+  - `protocols: {string}?{:luau}` - The protocols to send to the server.
   - `timeout: number?{:luau}` - The timeout for the WebSocket connection.
     - If the timeout is negative, the WebSocket will never timeout.
     - default: `30{:luau}`

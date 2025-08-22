@@ -63,13 +63,13 @@ load(bytecode: string | buffer, opts: LoadOptions?): ((...any) -> ...any)
 ### coverage
 Get coverage data from a function.
 ```luau tooltips
--- @hover: (37,49)[export type CoverageData = {
+-- @hover: (36,48)[export type CoverageData = {
     name: string,
     line: number,
     depth: number,
     [number]: number, 
 }]
-coverage(fn: (...any) -> ...any):  {CoverageData}
+coverage(fn: (...any) -> ...any): {CoverageData}
 ```
 <details open>
 <summary>Parameters</summary>
@@ -90,26 +90,24 @@ type Position = {
 }
 
 export type ParseResult = {
-    errors:  {{
+    errors: {{
         message: string,
         location: Location, 
-    }
-    }
+    }}
 } | {
-    root:  {any},
+    root: {any},
     eof: {
         text: "",
         position: Position,
         tag: "eof"
     },
     lines: number,
-    lineOffsets:  {number},
-    hotcomments:  {{
+    lineOffsets: {number},
+    hotcomments: {{
         header: boolean,
         content: string,
         location: Location, 
-    }
-    }
+    }}
 }]
 parse(src: string | buffer): ParseResult
 ```

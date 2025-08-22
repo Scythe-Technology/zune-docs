@@ -30,7 +30,7 @@ arch:
 ### args
 The arguments passed to the process.
 ```luau tooltips
-args:  {string }
+args: {string}
 ```
 ### env
 The process enviroment table.
@@ -73,7 +73,7 @@ cwd(): string
 ### create
 Creates a new process.
 ```luau tooltips
--- @hover: (46,60)[export type ProcessOptions = {
+-- @hover: (45,59)[export type ProcessOptions = {
     cwd: string?,
     env: {
         [string]: string
@@ -81,8 +81,8 @@ Creates a new process.
     shell: (boolean | string)?,
     stdio: ("inherit" | "pipe" | "ignore")?, 
 }]
--- @link: (64,76)[../objects/ProcessChild]
-create(exec: string, args:  {string}?, opts: ProcessOptions?): ProcessChild
+-- @link: (63,75)[../objects/ProcessChild]
+create(exec: string, args: {string}?, opts: ProcessOptions?): ProcessChild
 ```
 <details open>
 <summary>Parameters</summary>
@@ -102,15 +102,7 @@ create(exec: string, args:  {string}?, opts: ProcessOptions?): ProcessChild
 ### run
 Runs a new process, and yields for the result.
 ```luau tooltips
--- @hover: (43,57)[export type ProcessOptions = {
-    cwd: string?,
-    env: {
-        [string]: string
-    }?,
-    shell: (boolean | string)?,
-    stdio: ("inherit" | "pipe" | "ignore")?, 
-}]
--- @hover: (61,77)[export type ProcessResult = {
+-- @hover: (60,76)[export type ProcessResult = {
     ok: boolean,
     code: number, 
 }
@@ -119,7 +111,15 @@ export type ProcessRunResult = ProcessResult & {
     stdout: string,
     stderr: string, 
 }]
-run(exec: string, args:  {string}?, opts: ProcessOptions?): ProcessRunResult
+-- @hover: (42,56)[export type ProcessOptions = {
+    cwd: string?,
+    env: {
+        [string]: string
+    }?,
+    shell: (boolean | string)?,
+    stdio: ("inherit" | "pipe" | "ignore")?, 
+}]
+run(exec: string, args: {string}?, opts: ProcessOptions?): ProcessRunResult
 ```
 <details open>
 <summary>Parameters</summary>

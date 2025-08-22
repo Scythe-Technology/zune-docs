@@ -72,7 +72,7 @@ readFile(path: string, bytes: true): buffer
 ### readDir
 Get directory entries from the provided path.
 ```luau tooltips
--- @hover: (26,40)[export type MetadataKind = 
+-- @hover: (25,39)[export type MetadataKind = 
     | "file"
     | "directory"
     | "sym_link"
@@ -89,7 +89,7 @@ type DirectoryEntry = {
     name: string,
     kind: MetadataKind, 
 }]
-readDir(path: string):  {DirectoryEntry }
+readDir(path: string): {DirectoryEntry}
 ```
 <details open>
 <summary>Parameters</summary>
@@ -311,9 +311,9 @@ Watches a directory for changes.
 *Does not watch subdirectories.*
 *Windows: Can watch changes in first child subdirectories.*
 ```luau tooltips
--- @hover: (56,66)[type WatchEvent = "created" | "modified" | "moved" | "renamed" | "deleted" | "metadata"]
--- @link: (77,88)[../objects/FileWatcher]
-watch(path: string, callback: (path: string, events:  {WatchEvent}) -> ()): FileWatcher
+-- @hover: (55,65)[type WatchEvent = "created" | "modified" | "moved" | "renamed" | "deleted" | "metadata"]
+-- @link: (76,87)[../objects/FileWatcher]
+watch(path: string, callback: (path: string, events: {WatchEvent}) -> ()): FileWatcher
 ```
 <details open>
 <summary>Parameters</summary>
@@ -343,7 +343,7 @@ embedFile(path: string): buffer
 ### embeddedFiles
 Will return the list of all embedded files, the table will always be empty when called from an unbundled context.
 ```luau tooltips
-embeddedFiles():  {string }
+embeddedFiles(): {string}
 ```
 <details>
 <summary>Throws</summary>
@@ -353,7 +353,7 @@ embeddedFiles():  {string }
 ### embeddedScripts
 Will return the list of all embedded scripts, the table will always be empty when called from an unbundled context.
 ```luau tooltips
-embeddedScripts():  {string }
+embeddedScripts(): {string}
 ```
 <details>
 <summary>Throws</summary>

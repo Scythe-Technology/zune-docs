@@ -160,7 +160,7 @@ Creates a structure data type.
 -- There cannot be multiple fields in the same field table.
 -- Multiple fields with the same field name is not allowed.
 ```luau tooltips
--- @hover: (29,40)[-- references:
+-- @hover: (28,39)[-- references:
 -- @link: (8,19)[../objects/FFIDataType]
 -- (1) FFIDataType
 -- @link: (8,24)[../objects/FFIStructureType]
@@ -169,8 +169,8 @@ Creates a structure data type.
 -- (3) FFIPointerType
 
 type AnyDataType = FFIDataType | FFIStructureType | FFIPointerType]
--- @link: (45,61)[../objects/FFIStructureType]
-struct(fields:  {{[string]: AnyDataType}}): FFIStructureType
+-- @link: (44,60)[../objects/FFIStructureType]
+struct(fields: {{[string]: AnyDataType}}): FFIStructureType
 ```
 <details open>
 <summary>Parameters</summary>
@@ -196,7 +196,7 @@ type AnyDataType = FFIDataType | FFIStructureType | FFIPointerType
 
 type FFIFunctionDef = {
     returns: AnyDataType,
-    args:  {AnyDataType }
+    args: {AnyDataType}
 }]
 -- @link: (40,50)[../objects/FFIPointer]
 fn(definition: FFIFunctionDef, srcPtr: FFIPointer): ((...any) -> any)
@@ -205,7 +205,7 @@ fn(definition: FFIFunctionDef, srcPtr: FFIPointer): ((...any) -> any)
 <summary>Parameters</summary>
 - `definition: FFIFunctionDef{:luau}` - The function definition.
   - `returns: AnyDataType{:luau}` - The return type of the function.
-  - `args:  {AnyDataType }{:luau}` - The argument types of the function.
+  - `args: {AnyDataType}{:luau}` - The argument types of the function.
 - `srcPtr: FFIPointer{:luau}` - The pointer to the function.
 </details>
 <details>
@@ -228,7 +228,7 @@ type AnyDataType = FFIDataType | FFIStructureType | FFIPointerType
 
 type FFIFunctionDef = {
     returns: AnyDataType,
-    args:  {AnyDataType }
+    args: {AnyDataType}
 }]
 -- @link: (64,74)[../objects/FFIPointer]
 closure(definition: FFIFunctionDef, handler: (...any) -> any): FFIPointer
@@ -237,7 +237,7 @@ closure(definition: FFIFunctionDef, handler: (...any) -> any): FFIPointer
 <summary>Parameters</summary>
 - `definition: FFIFunctionDef{:luau}` - The function definition.
   - `returns: AnyDataType{:luau}` - The return type of the function.
-  - `args:  {AnyDataType }{:luau}` - The argument types of the function.
+  - `args: {AnyDataType}{:luau}` - The argument types of the function.
 - `handler: (...any) -> any{:luau}` - The lua function to call.
 </details>
 <details>
@@ -268,7 +268,7 @@ type AnyDataType = FFIDataType | FFIStructureType | FFIPointerType
 
 type FFIFunctionDef = {
     returns: AnyDataType,
-    args:  {AnyDataType }
+    args: {AnyDataType}
 }]
 dlopen(path: string, functions: {[string]: FFIFunctionDef}): FFILibrary
 ```
@@ -295,10 +295,10 @@ dlopen(path: string, functions: {[string]: FFIFunctionDef}): FFILibrary
 
 type FFICompileOptions = {
     options: string?,
-    files:  {string}?,
-    libraries:  {string}?,
-    includes:  {string}?,
-    sysincludes:  {string}?,
+    files: {string}?,
+    libraries: {string}?,
+    includes: {string}?,
+    sysincludes: {string}?,
     symbols: {
         [string]: FFIPointer
     }?, 
@@ -311,9 +311,9 @@ c.compile(src: string, opts: FFICompileOptions?): FFICompiled
 - `src: string{:luau}` - The C source code to compile.
 - `opts: FFICompileOptions?{:luau}` - The options for the compilation.
   - `options: string?{:luau}` - The compiler options to use.
-  - `files:  {string}?{:luau}` - The files to include in the compilation.
-  - `libraries:  {string}?{:luau}` - The libraries to link against.
-  - `includes:  {string}?{:luau}` - The include directories to use.
-  - `sysincludes:  {string}?{:luau}` - The system include directories to use.
+  - `files: {string}?{:luau}` - The files to include in the compilation.
+  - `libraries: {string}?{:luau}` - The libraries to link against.
+  - `includes: {string}?{:luau}` - The include directories to use.
+  - `sysincludes: {string}?{:luau}` - The system include directories to use.
   - `symbols: {[string]: FFIPointer}?{:luau}` - The symbols to define.
 </details>
