@@ -48,13 +48,13 @@ type FFIPointerType = {
     newTag: (self: FFIPointerType, tag: string | buffer) -> FFIPointerType,
 }
 
-type AnyDataType = FFIDataType | FFIStructureType | FFIPointerType
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType
 
-type FFIFunctionDef = {
+export type FFIFunctionDefintion = {
     --- The return type of the function.
-    returns: AnyDataType,
+    returns: FFIAnyDataType,
     --- The argument types of the function.
-    args: { AnyDataType }
+    args: { FFIAnyDataType }
 }
 
 --- @class
@@ -99,7 +99,7 @@ type FFIPointer = {
     span: (self: FFIPointer, offset: number?) -> buffer,
 }
 
-type FFICompileOptions = {
+export type FFICompileOptions = {
     --- The compiler options to use.
     options: string?,
     --- The files to include in the compilation.
@@ -189,22 +189,22 @@ type FFILib = {
     --- @param fields The fields of the structure.
     --- @throws FFI Error
     --- @throws Memory Error
-    struct: (fields: {{ [string]: AnyDataType }}) -> FFIStructureType,
+    struct: (fields: {{ [string]: FFIAnyDataType }}) -> FFIStructureType,
     --- @param definition The function definition.
     --- @param srcPtr The pointer to the function.
     --- @throws FFI Error
     --- @throws Memory Error
-    fn: (definition: FFIFunctionDef, srcPtr: FFIPointer) -> ((...any) -> any),
+    fn: (definition: FFIFunctionDefintion, srcPtr: FFIPointer) -> ((...any) -> any),
     --- @param definition The function definition.
     --- @param handler The lua function to call.
     --- @throws FFI Error
     --- @throws Memory Error
-    closure: (definition: FFIFunctionDef, handler: (...any) -> any) -> FFIPointer,
+    closure: (definition: FFIFunctionDefintion, handler: (...any) -> any) -> FFIPointer,
     --- @param path The path to the library.
     --- @param functions The symbols to load from the library.
     --- @throws FFI Error
     --- @throws Memory Error
-    dlopen: (path: string, functions: { [string]: FFIFunctionDef }) -> FFILibrary,
+    dlopen: (path: string, functions: { [string]: FFIFunctionDefintion }) -> FFILibrary,
 }
 
 return {} :: FFILib;

@@ -4,13 +4,13 @@
 
 type __0__ = typeof(nil);
 
-type JsonEncodeConfig = {
+export type SerdeJsonEncodeConfig = {
     --- The indentation level for pretty printing
     --- @default 0
     pretty_indent: number?,
 }
 
-type JsonDecodeConfig = {
+export type SerdeJsonDecodeConfig = {
     --- Whether to preserve null values
     --- @default false
     preserve_null: boolean?,
@@ -21,12 +21,12 @@ type JsonEncoder = {
     --- @param value The value to encode.
     --- @param config The configuration for the encoding.
     --- @throws Memory Error
-    encode: (value: any, config: JsonEncodeConfig?) -> string,
+    encode: (value: any, config: SerdeJsonEncodeConfig?) -> string,
     --- Decodes JSON.
     --- @param json The JSON string to decode.
     --- @param config The configuration for the decoding.
     --- @throws Memory Error
-    decode: (json: string, config: JsonDecodeConfig?) -> any,
+    decode: (json: string, config: SerdeJsonDecodeConfig?) -> any,
     --- Indentation levels for JSON.
     indents: {
         none: number,
@@ -80,7 +80,7 @@ type Base64Encoder = {
         & ((base64: buffer) -> buffer),
 }
 
-type GenericCompressionOptions = {
+export type SerdeGenericCompressionOptions = {
     --- The compression level
     level: number?,
 }
@@ -91,8 +91,8 @@ type CompressionFn =
 
 
 type AdvancedCompressionFn =
-    & ((raw: string, opts: GenericCompressionOptions?) -> string)
-    & ((raw: buffer, opts: GenericCompressionOptions?) -> buffer)
+    & ((raw: string, opts: SerdeGenericCompressionOptions?) -> string)
+    & ((raw: buffer, opts: SerdeGenericCompressionOptions?) -> buffer)
 
 type DecompressionFn =
     & ((compressed: string) -> string)

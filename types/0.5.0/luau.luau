@@ -4,7 +4,7 @@
 
 type __0__ = typeof(nil);
 
-export type CompileOptions = {
+export type LuauCompileOptions = {
     --- The debug level for the compilation.
     debug_level: number?,
     --- The optimization level for the compilation.
@@ -13,7 +13,7 @@ export type CompileOptions = {
     coverage_level: number?,
 }
 
-export type LoadOptions = {
+export type LuauLoadOptions = {
     --- The environment to use for the loaded function.
     env: {[any]: any}?,
     --- The name of the chunk, used for debugging.
@@ -24,7 +24,7 @@ export type LoadOptions = {
     native_code_gen: boolean?,
 }
 
-export type CoverageData = {
+export type LuauCoverageData = {
     name: string,
     line: number,
     depth: number,
@@ -68,15 +68,15 @@ type LuauLib = {
     --- @param opts The options for the compiler.
     --- @throws Luau Error
     --- @throws Memory Error
-    compile: (source: string | buffer, opts: CompileOptions?) -> buffer,
+    compile: (source: string | buffer, opts: LuauCompileOptions?) -> buffer,
     --- Loads `Luau` bytecode into a function.
     --- @param bytecode The bytecode to load.
     --- @param opts The options for loading the bytecode.
     --- @throws Luau Error
-    load: (bytecode: string | buffer, opts: LoadOptions?) -> ((...any) -> ...any),
+    load: (bytecode: string | buffer, opts: LuauLoadOptions?) -> ((...any) -> ...any),
     --- Get coverage data from a function.
     --- @param fn The function to get the coverage data from.
-    coverage: (fn: (...any) -> ...any) -> {CoverageData},
+    coverage: (fn: (...any) -> ...any) -> {LuauCoverageData},
     --- Parses `Luau` source code.
     --- @param src The source code to parse.
     --- @throws Memory Error

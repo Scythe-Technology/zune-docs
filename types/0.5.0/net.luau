@@ -127,7 +127,7 @@ export type ServerWebSocketHandlers = {
     close: ((websocket: HttpWebSocket, code: number) -> ())?,
 }
 
-export type ServeOptions = {
+export type HttpServeOptions = {
     --- The port to listen on.
     port: number,
     --- The address to bind to.
@@ -165,7 +165,7 @@ export type HttpResponse<T> = {
     body: T,
 }
 
-export type RequestOptions = {
+export type HttpRequestOptions = {
     headers: {[string]: string}?,
     --- @default "GET"
     method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
@@ -174,7 +174,7 @@ export type RequestOptions = {
     allow_redirects: boolean?,
 }
 
-export type WebSocketOptions = {
+export type HttpWebSocketOptions = {
     --- The protocols to send to the server.
     protocols: {string}?,
     --- The timeout for the WebSocket connection.
@@ -398,7 +398,7 @@ type NetworkSocketOption = {
     RCVTIMEO: number,
 }
 
-type RequestOptionsType<T> = (RequestOptions & { response_body_type: T })
+export type HttpRequestOptionsType<T> = (HttpRequestOptions & { response_body_type: T })
 
 type NetworkLib = {
     ADDRF: NetworkAddressFamily,
@@ -425,7 +425,7 @@ type NetworkLib = {
         --- @param opts The options for the server.
         --- @throws IO Error
         --- @throws Network Error
-        serve: (opts: ServeOptions) -> HttpServer,
+        serve: (opts: HttpServeOptions) -> HttpServer,
         --- Makes a request to the specified host.
         ---
         --- Options are optional, defaults to GET request.
@@ -434,15 +434,15 @@ type NetworkLib = {
         --- @throws Request Error
         --- @throws Network Error
         request:
-            & ((host: string, opts: RequestOptionsType<"string"?>?) -> HttpResponse<string>)
-            & ((host: string, opts: RequestOptionsType<"buffer">?) -> HttpResponse<buffer>)
-            & ((host: string, opts: RequestOptionsType<"string" | "buffer" | nil>?) -> HttpResponse<string | buffer>),
+            & ((host: string, opts: HttpRequestOptionsType<"string"?>?) -> HttpResponse<string>)
+            & ((host: string, opts: HttpRequestOptionsType<"buffer">?) -> HttpResponse<buffer>)
+            & ((host: string, opts: HttpRequestOptionsType<"string" | "buffer" | nil>?) -> HttpResponse<string | buffer>),
         -- Creates a new WebSocket connection.
         --- @param host The host to connect to.
         --- @param opts The options for the WebSocket.
         --- @throws WebSocket Error
         --- @throws Network Error
-        websocket: (host: string, opts: WebSocketOptions) -> HttpWebSocket,
+        websocket: (host: string, opts: HttpWebSocketOptions) -> HttpWebSocket,
     }
 }
 

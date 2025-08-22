@@ -93,7 +93,7 @@ type BufferSink = {
     close: (self: BufferSink) -> (),
 }
 
-export type Terminal = {
+type Terminal = {
     --- Whether the terminal is a TTY.
     isTTY: boolean,
     --- Get current saved mode.
@@ -119,7 +119,7 @@ export type Terminal = {
     getSize: () -> (number?, number?),
 }
 
-type BufferSinkOptions = {
+export type BufferSinkOptions = {
     --- The maximum amount of bytes allowed to be written to the buffer.
     --- @default 1073741824
     limit: number?,

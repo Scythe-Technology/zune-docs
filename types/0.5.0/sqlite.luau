@@ -41,12 +41,12 @@ type SQLite3Database = {
     --- @param query The query to prepare.
     --- @throws SQLite3 Error
     --- @throws Memory Error
-    query: (self: SQLite3Database, query: string) -> SQLite3Statement,
+    query: (self: SQLite3Database, query: string | buffer) -> SQLite3Statement,
     --- @param query The query to execute.
     --- @param args The arguments to bind to the query.
     --- @throws SQLite3 Error
     --- @throws Memory Error
-    exec: (self: SQLite3Database, query: string, args: SQLite3Values?) -> SQLite3Result,
+    exec: (self: SQLite3Database, query: string | buffer, args: SQLite3Values?) -> SQLite3Result,
     close: (self: SQLite3Database) -> (),
 }
 

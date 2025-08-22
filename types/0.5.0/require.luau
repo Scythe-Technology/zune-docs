@@ -10,7 +10,7 @@ export type RequireLib = {
     --- @param config The configuration to use.
     --- @throws Require Error
     --- @throws Memory Error
-    navigate: (path: string, from: string?, config: string?) -> string,
+    navigate: (path: string | buffer, from: (string | buffer)?, config: string | buffer?) -> string,
     --- @param path The resolved path to fetch cached require.
     --- @throws Require Error
     --- @throws Memory Error

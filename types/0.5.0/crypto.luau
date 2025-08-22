@@ -36,7 +36,7 @@ type TlsCertBundle = {}
 --- @class
 type TlsCertKeyPair = {}
 
-type HashAlgorithms =
+export type CryptoHashAlgorithms =
     | "sha1"
     | "md5"
     | "blake3"
@@ -81,7 +81,7 @@ type Argon2PasswordOptions = {
     threads: number?,
 }
 
-type PasswordOptions = BcryptPasswordOptions | Argon2PasswordOptions
+export type CryptoPasswordOptions = BcryptPasswordOptions | Argon2PasswordOptions
 
 type EncryptedData = {
     cipher: buffer,
@@ -93,26 +93,26 @@ type Aead = {
     decrypt: (cipher: Input, tag: Input, key: Input, nonce: Input, ad: Input?) -> string,
 }
 
-type TlsClientSetupConfig = {
+export type CryptoTlsClientConfig = {
     --- The host.
     host: string,
     --- The CA bundle to use for verification.
     ca: TlsCertBundle,
 }
 
-type TlsServerSetupConfig = {
+export type CryptoTlsServerConfig = {
     --- The certificate and key pair to use for the server.
     auth: TlsCertKeyPair,
 }
 
 type CryptoLib = {
-    createHash: (algorithm: HashAlgorithms, secret: string?) -> CryptoHash,
+    createHash: (algorithm: CryptoHashAlgorithms, secret: string?) -> CryptoHash,
     password: {
         --- @param password The password to hash.
         --- @param opts The options for the password hashing.
         --- @throws Crypto Error
         --- @throws Memory Error
-        hash: (password: string | buffer, opts: PasswordOptions?) -> string,
+        hash: (password: string | buffer, opts: CryptoPasswordOptions?) -> string,
         --- @param password The password to verify.
         --- @param hash The hash to verify against.
         --- @throws Crypto Error
@@ -204,12 +204,12 @@ type CryptoLib = {
         --- @param config The configuration for the client.
         --- @throws Tls Error
         --- @throws Memory Error
-        setupClient: (socket: NetworkSocket, config: TlsClientSetupConfig) -> (),
+        setupClient: (socket: NetworkSocket, config: CryptoTlsClientConfig) -> (),
         --- @param socket The socket to setup the server on.
         --- @param config The configuration for the server.
         --- @throws Tls Error
         --- @throws Memory Error
-        setupServer: (socket: NetworkSocket, config: TlsServerSetupConfig) -> (),
+        setupServer: (socket: NetworkSocket, config: CryptoTlsServerConfig) -> (),
     },
 }
 

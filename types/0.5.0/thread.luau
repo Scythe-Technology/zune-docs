@@ -26,7 +26,7 @@ type Thread = {
     send: (self: Thread, ...any) -> (),
 }
 
-type ThreadLoadOptions = {
+export type ThreadLoadOptions = {
     --- @default "(thread)"
     chunk_name: string?,
     --- @default true

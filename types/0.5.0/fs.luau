@@ -123,13 +123,13 @@ type FileWatcher = {
     stop: (self: FileWatcher) -> (),
 }
 
-type CreateFileOptions = {
+export type FileCreateOptions = {
     --- If true, the function will fail if the file already exists.
     --- @default false
     exclusive: boolean?,
 }
 
-type OpenFileOptions = {
+export type FileOpenOptions = {
     --- If provided, the file will be opened in the specified mode.
     --- @modes "r" | "w" | "rw"
     --- @default "rw"
@@ -148,12 +148,12 @@ type FileSystemLib = {
     --- @param path The path to the file to open/create.
     --- @param opts The create options.
     --- @throws IO Error
-    createFile: (path: string, opts: CreateFileOptions?) -> FileHandle,
+    createFile: (path: string, opts: FileCreateOptions?) -> FileHandle,
     --- Opens a file. If the file does not exists, the function will throw an error.
     --- @param path The path to the file to open.
     --- @param opts The open options.
     --- @throws IO Error
-    openFile: (path: string, opts: OpenFileOptions?) -> FileHandle,
+    openFile: (path: string, opts: FileOpenOptions?) -> FileHandle,
     --- Read the contents of a file from the provided path.
     --- @param path The path to the file to read.
     --- @param bytes If true, returns a `buffer` instead of a `string`.
