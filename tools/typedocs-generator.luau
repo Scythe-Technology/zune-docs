@@ -189,6 +189,17 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
         code_sample = "",
     };
     type_docs[`@roblox/{name}`] = doc;
+
+    if (writtenDocs["example"]) then
+        local existing_code = writtenDocs["example"]:find("```") ~= nil;
+        if (not existing_code) then
+            doc.documentation ..= "\n```luau\n";
+        end
+        doc.documentation ..= writtenDocs["example"];
+        if (not existing_code) then
+            doc.documentation ..= "\n```\n";
+        end
+    end
     if (type.tag == "table") then
         local keys = {};
         for _, entry in type.entries do
@@ -209,9 +220,17 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
         doc.keys = keys;
     elseif (type.tag == "function") then
         local params = {};
+        local params_doc = {};
         for i, param in type.parameters do
             local param_name = if (param.node.name) then param.node.name.text else nil;
             local param_docs = writtenDocs[`param+{param_name}`];
+            if (param_docs) then
+                table.insert(params_doc, {
+                    name = param_name,
+                    docs = param_docs,
+                    default = writtenDocs[`default_param+{param_name}`],
+                });
+            end
             generateTypeDoc(`{name}/param/{i - 1}`, param.node.type, {docs = {}, raw = param_docs, fields = {}});
             table.insert(params, {
                 name = param_name,
@@ -233,6 +252,15 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
                 documentation = `@roblox/{name}/param/{i}`,
             });
         end
+        if (#params_doc > 0) then
+            doc.documentation ..= "\n\n**Parameters**\n";
+            for _, param in params_doc do
+                doc.documentation ..= `- \`{param.name}\`: {param.docs}\n`;
+                if (param.default) then
+                    doc.documentation ..= `  - default: \`{param.default}\`\n`;
+                end
+            end
+        end
         doc.params = params;
         local returns = {};
         if (type.returnTypes.tag == "explicit") then
@@ -242,6 +270,13 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
             end
         end
         doc.returns = returns;
+
+        if (writtenDocs["throws"]) then
+            doc.documentation ..= "\n\n**Throws**\n";
+            for _, line in writtenDocs["throws"]:split("\n") do
+                doc.documentation ..= `- {line}\n`;
+            end
+        end
     else
         if (doc.documentation == "" and doc.code_sample == "") then
             type_docs[`@roblox/{name}`] = nil;
@@ -271,6 +306,7 @@ local function generateTypeDocsFile(): string
         local doc = type_docs[`@roblox/globaltype/{lib_info.type.name.text}`];
         local sum_docs = parseDocumentation(summary);
         doc.documentation = sum_docs["summary"] or ""
+        doc.learn_more_link = `https://zune.sh/docs/v0.5.0/api/{library}`;
     end
 
     for decl, type in declarations do
