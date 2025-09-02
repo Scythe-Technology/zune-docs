@@ -14,7 +14,11 @@ type FFICompiled = {
     --- @param symbol The symbol to get.
     --- @throws FFI Error
     --- @throws Memory Error
-    getSymbol: (self: FFICompiled, symbol: string) -> FFIPointer?
+    getSymbol: (self: FFICompiled, symbol: string) -> FFIPointer?,
+    --- Lists all symbols in the compiled object.
+    --- @throws FFI Error
+    --- @throws Memory Error
+    listSymbols: (self: FFICompiled) -> {string},
 }
 
 --- @class
@@ -106,6 +110,8 @@ export type FFICompileOptions = {
     files: {string}?,
     --- The libraries to link against.
     libraries: {string}?,
+    --- The library paths to use.
+    library_paths: {string}?,
     --- The include directories to use.
     includes: {string}?,
     --- The system include directories to use.
