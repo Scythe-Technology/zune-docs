@@ -297,6 +297,7 @@ export type FFICompileOptions = {
     options: string?,
     files: {string}?,
     libraries: {string}?,
+    library_paths: {string}?,
     includes: {string}?,
     sysincludes: {string}?,
     symbols: {
@@ -313,6 +314,7 @@ c.compile(src: string, opts: FFICompileOptions?): FFICompiled
   - `options: string?{:luau}` - The compiler options to use.
   - `files: {string}?{:luau}` - The files to include in the compilation.
   - `libraries: {string}?{:luau}` - The libraries to link against.
+  - `library_paths: {string}?{:luau}` - The library paths to use.
   - `includes: {string}?{:luau}` - The include directories to use.
   - `sysincludes: {string}?{:luau}` - The system include directories to use.
   - `symbols: {[string]: FFIPointer}?{:luau}` - The symbols to define.
