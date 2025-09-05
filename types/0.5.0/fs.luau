@@ -50,14 +50,16 @@ type FileHandle = {
     --- @throws IO Error
     read:
         & ((self: FileHandle, amount: number?, bytes: false?) -> string)
-        & ((self: FileHandle, amount: number?, bytes: true) -> buffer),
+        & ((self: FileHandle, amount: number?, bytes: true) -> buffer)
+        & ((self: FileHandle, amount: number?, bytes: boolean) -> string | buffer),
     --- Read the contents of the file synchronously.
     --- @param amount The amount of bytes to read, if not provided, it will read until EOF or luau limit
     --- @param bytes If true, the function will return a `buffer` instead of a `string`.
     --- @throws IO Error
     readSync:
         & ((self: FileHandle, amount: number?, bytes: false?) -> string)
-        & ((self: FileHandle, amount: number?, bytes: true) -> buffer),
+        & ((self: FileHandle, amount: number?, bytes: true) -> buffer)
+        & ((self: FileHandle, amount: number?, bytes: boolean) -> string | buffer),
     --- Write the contents to the file.
     --- @param contents The contents to write to the file.
     --- @throws IO Error
@@ -127,6 +129,9 @@ export type FileCreateOptions = {
     --- If true, the function will fail if the file already exists.
     --- @default false
     exclusive: boolean?,
+    --- If true, the file will be truncated if it already exists.
+    --- @default true
+    truncate: boolean?,
 }
 
 export type FileOpenOptions = {
@@ -161,32 +166,47 @@ type FileSystemLib = {
     --- @throws IO Error
     readFile:
         & ((path: string) -> string)
-        & ((path: string, bytes: true) -> buffer),
+        & ((path: string, bytes: true) -> buffer)
+        & ((path: string, bytes: boolean) -> string | buffer),
+    --- Read the contents of a file from the provided path synchronously.
+    --- @param path The path to the file to read.
+    --- @param bytes If true, returns a `buffer` instead of a `string`.
+    --- @default_param bytes false
+    --- @throws IO Error
+    readFileSync:
+        & ((path: string) -> string)
+        & ((path: string, bytes: true) -> buffer)
+        & ((path: string, bytes: boolean) -> string | buffer),
     --- Get directory entries from the provided path.
     --- @param path The path to the directory to read.
     --- @throws IO Error
-    readDir: (path: string) -> { DirectoryEntry },
+    entries: (path: string) -> { DirectoryEntry },
     --- Write the contents to a file at the provided path.
     --- @param path The path to the file to write.
     --- @param contents The contents to write to the file. (This may be limited to the max luau `string`).
     --- @throws IO Error
     writeFile: (path: string, contents: string | buffer) -> (),
+    --- Write the contents to a file at the provided path synchronously.
+    --- @param path The path to the file to write.
+    --- @param contents The contents to write to the file. (This may be limited to the max luau `string`).
+    --- @throws IO Error
+    writeFileSync: (path: string, contents: string | buffer) -> (),
     --- Creates a directory at the provided path.
     --- @param path The path to the directory to create.
     --- @param recursive If true, the function will create all parent directories if they do not
     --- @default_param recursive false
     --- @throws IO Error
-    writeDir:  (path: string, recursive: boolean?) -> (),
+    makeDir:  (path: string, recursive: boolean?) -> (),
     --- Removes a file at the provided path.
     --- @param path The path to the file to remove.
     --- @throws IO Error
-    removeFile: (path: string) -> (),
+    deleteFile: (path: string) -> (),
     --- Removes a directory at the provided path.
     --- @param path The path to the directory to remove.
     --- @param recursive If true, the function will remove all files and directories inside the directory.
     --- @default_param recursive false
     --- @throws IO Error
-    removeDir: (path: string, recursive: boolean?) -> (),
+    deleteDir: (path: string, recursive: boolean?) -> (),
     --- Get metadata of a file or directory at the provided path.
     --- @param path The path to the file or directory to get metadata from.
     --- @throws IO Error

@@ -47,8 +47,7 @@ export type ParseResult = {
             message: string,
             location: Location,
         }
-    }
-} | {
+    }?,
     root: {any},
     eof: { text: "", position: Position, tag: "eof" },
     lines: number,
@@ -59,8 +58,8 @@ export type ParseResult = {
             content: string,
             location: Location,
         }
-    }
-};
+    },
+}
 
 type LuauLib = {
     --- Compiles `Luau` source code.

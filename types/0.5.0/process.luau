@@ -5,120 +5,6 @@
 type __0__ = typeof(nil);
 type FileHandle = typeof(nil :: any);
 
-export type CPUArchitecture =
-    | "aarch64"
-    | "x86_64"
-    -- | "x86"
-    -- | "arm"
-    -- | "aarch64_be"
-    -- | "aarch64_32"
-    -- | "riscv32"
-    | "riscv64"
-    -- | "wasm32"
-    -- | "wasm64"
-    -- | "armeb"
-    -- | "arc"
-    -- | "avr"
-    -- | "bpfel"
-    -- | "bpfeb"
-    -- | "csky"
-    -- | "dxil"
-    -- | "hexagon"
-    -- | "loongarch32"
-    -- | "loongarch64"
-    -- | "m68k"
-    -- | "mips"
-    -- | "mipsel"
-    -- | "mips64"
-    -- | "mips64el"
-    -- | "msp430"
-    -- | "powerpc"
-    -- | "powerpcle"
-    -- | "powerpc64"
-    -- | "powerpc64le"
-    -- | "r600"
-    -- | "amdgcn"
-    -- | "sparc"
-    -- | "sparc64"
-    -- | "sparcel"
-    -- | "s390x"
-    -- | "tce"
-    -- | "tcele"
-    -- | "thumb"
-    -- | "thumbeb"
-    -- | "xcore"
-    -- | "xtensa"
-    -- | "nvptx"
-    -- | "nvptx64"
-    -- | "le32"
-    -- | "le64"
-    -- | "amdil"
-    -- | "amdil64"
-    -- | "hsail"
-    -- | "hsail64"
-    -- | "spir"
-    -- | "spir64"
-    -- | "spirv"
-    -- | "spirv32"
-    -- | "spirv64"
-    -- | "kalimba"
-    -- | "shave"
-    -- | "lanai"
-    -- | "renderscript32"
-    -- | "renderscript64"
-    -- | "ve"
-    -- | "spu_2"
-
-export type OS =
-    | "linux"
-    | "windows"
-    | "macos"
-    -- | "freestanding"
-    -- | "ananas"
-    -- | "cloudabi"
-    -- | "dragonfly"
-    -- | "freebsd"
-    -- | "fuchsia"
-    -- | "ios"
-    -- | "kfreebsd"
-    -- | "lv2"
-    -- | "netbsd"
-    -- | "openbsd"
-    -- | "solaris"
-    -- | "uefi"
-    -- | "zos"
-    -- | "haiku"
-    -- | "minix"
-    -- | "rtems"
-    -- | "nacl"
-    -- | "aix"
-    -- | "cuda"
-    -- | "nvcl"
-    -- | "amdhsa"
-    -- | "ps4"
-    -- | "ps5"
-    -- | "elfiamcu"
-    -- | "tvos"
-    -- | "watchos"
-    -- | "driverkit"
-    -- | "visionos"
-    -- | "mesa3d"
-    -- | "contiki"
-    -- | "amdpal"
-    -- | "hermit"
-    -- | "hurd"
-    -- | "wasi"
-    -- | "emscripten"
-    -- | "shadermodel"
-    -- | "liteos"
-    -- | "serenity"
-    -- | "opencl"
-    -- | "glsl450"
-    -- | "vulkan"
-    -- | "plan9"
-    -- | "illumos"
-    -- | "other"
-
 export type ProcessOptions = {
     --- The current working directory of the process.
     cwd: string?,
@@ -154,12 +40,6 @@ type ProcessChild = {
 }
 
 type ProcessLib = {
-    --- The operating system that the process is running on.
-    os: OS,
-    --- The cpu architecture that the process is running on.
-    --- This property can have more possible values (Usually from a custom zune build for another architecture).
-    --- Currently this is based on the official releases of zune.
-    arch: CPUArchitecture,
     --- The arguments passed to the process.
     args: { string },
     --- The process enviroment table.
@@ -179,6 +59,8 @@ type ProcessLib = {
     --- @throws IO Error
     --- @throws Memory Error
     cwd: () -> string,
+    --- Get the current process ID.
+    pid: () -> number,
     --- Creates a new process.
     --- @param exec The executable to run.
     --- @param args The arguments to pass to the executable.

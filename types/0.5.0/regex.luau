@@ -25,6 +25,12 @@ type Regex = {
     --- @throws Regex Error
     --- @throws Memory Error
     captures: (self: Regex, input: string | buffer, global: boolean?) -> {{RegexMatch}},
+    --- @param input The input to split against the regex.
+    --- @param global If true, the function will return all splits instead of just the first
+    --- @default_param global false
+    --- @throws Regex Error
+    --- @throws Memory Error
+    split: (self: Regex, input: string | buffer, global: boolean?) -> {string},
     --- Returns if a string matches the pattern.
     --- @throws Regex Error
     isMatch: (self: Regex, input: string | buffer) -> boolean,

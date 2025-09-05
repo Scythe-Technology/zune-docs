@@ -18,7 +18,8 @@ type CryptoHash = {
     digest:
         & ((self: CryptoHash) -> buffer)
         & ((self: CryptoHash, encoding: "binary") -> buffer)
-        & ((self: CryptoHash, encoding: "hex" | "base64") -> string),
+        & ((self: CryptoHash, encoding: "hex" | "base64") -> string)
+        & ((self: CryptoHash, encoding: string) -> string | buffer),
     --- @param value The value to update the hash with.
     --- @throws Crypto Error
     update: (self: CryptoHash, value: string | buffer) -> (),
