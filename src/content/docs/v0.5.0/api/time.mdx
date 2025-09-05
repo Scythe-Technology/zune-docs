@@ -9,10 +9,26 @@ import { Callout, Tabs } from 'nextra/components'
 A library to interact with date and time.
 
 ## Functions
-### now
+### timestamp
+Returns the current unix timestamp in seconds.
 ```luau tooltips
--- @link: (8,16)[../objects/DateTime]
-now(): DateTime
+timestamp(): number
+```
+
+### timestampMillis
+Returns the current unix timestamp in milliseconds.
+```luau tooltips
+timestampMillis(): number
+```
+
+## Namespaces
+### date
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### now
+```luau tooltips
+-- @link: (13,21)[../objects/DateTime]
+date.now(): DateTime
 ```
 <details>
 <summary>Throws</summary>
@@ -20,11 +36,11 @@ now(): DateTime
 - Memory Error
 </details>
 
-### fromIsoDate
+#### fromIsoDate
 Parse a string in ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`.
 ```luau tooltips
--- @link: (28,36)[../objects/DateTime]
-fromIsoDate(date: string): DateTime
+-- @link: (33,41)[../objects/DateTime]
+date.fromIsoDate(date: string): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
@@ -36,10 +52,10 @@ fromIsoDate(date: string): DateTime
 - Memory Error
 </details>
 
-### fromUnixTimestamp
+#### fromUnixTimestamp
 ```luau tooltips
--- @link: (39,47)[../objects/DateTime]
-fromUnixTimestamp(timestamp: number): DateTime
+-- @link: (44,52)[../objects/DateTime]
+date.fromUnixTimestamp(timestamp: number): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
@@ -51,10 +67,10 @@ fromUnixTimestamp(timestamp: number): DateTime
 - Memory Error
 </details>
 
-### fromUnixTimestampMillis
+#### fromUnixTimestampMillis
 ```luau tooltips
--- @link: (45,53)[../objects/DateTime]
-fromUnixTimestampMillis(timestamp: number): DateTime
+-- @link: (50,58)[../objects/DateTime]
+date.fromUnixTimestampMillis(timestamp: number): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
@@ -66,10 +82,10 @@ fromUnixTimestampMillis(timestamp: number): DateTime
 - Memory Error
 </details>
 
-### fromLocalTime
+#### fromLocalTime
 ```luau tooltips
--- @link: (125,133)[../objects/DateTime]
-fromLocalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
+-- @link: (130,138)[../objects/DateTime]
+date.fromLocalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
@@ -87,10 +103,10 @@ fromLocalTime(year: number, month: number, day: number, hour: number, minute: nu
 - Memory Error
 </details>
 
-### fromUniversalTime
+#### fromUniversalTime
 ```luau tooltips
--- @link: (129,137)[../objects/DateTime]
-fromUniversalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
+-- @link: (134,142)[../objects/DateTime]
+date.fromUniversalTime(year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
@@ -108,14 +124,14 @@ fromUniversalTime(year: number, month: number, day: number, hour: number, minute
 - Memory Error
 </details>
 
-### parse
+#### parse
 Parse a date string.
 - Supports ISO8601 format, `YYYY-MM-DDTHH:MM:SSZ`.
 - Supports RFC3339 format, `YYYY-MM-DDTHH:MM:SS+00:00`.
 - Supports RFC2822 format, `Day, DD Mon YYYY HH:MM:SS GMT`.
 ```luau tooltips
--- @link: (22,30)[../objects/DateTime]
-parse(date: string): DateTime
+-- @link: (27,35)[../objects/DateTime]
+date.parse(date: string): DateTime
 ```
 <details open>
 <summary>Parameters</summary>
@@ -124,5 +140,21 @@ parse(date: string): DateTime
 <details>
 <summary>Throws</summary>
 - DateTime Error
+- Memory Error
+</details>
+
+### instant
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### now
+Returns a timespec in a buffer form, first 8 bytes are seconds,
+next 4 bytes are nanoseconds.
+buffer should always be 12 bytes long.
+```luau tooltips
+instant.now(): buffer
+```
+<details>
+<summary>Throws</summary>
+- Time Error
 - Memory Error
 </details>

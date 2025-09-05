@@ -62,6 +62,22 @@ import { Callout, Tabs } from 'nextra/components'
 - Memory Error
 </details>
 
+### split
+```luau tooltips
+:split(input: string | buffer, global: boolean?): {string}
+```
+<details open>
+<summary>Parameters</summary>
+- `input: string | buffer{:luau}` - The input to split against the regex.
+- `global: boolean?{:luau}` - If true, the function will return all splits instead of just the first
+  - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- Regex Error
+- Memory Error
+</details>
+
 ### isMatch
 Returns if a string matches the pattern.
 ```luau tooltips

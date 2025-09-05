@@ -13,7 +13,8 @@ A library that provides access to the file system.
 Creates a file. If the file already exists, the function will throw an error only when `exclusive` is `true`.
 ```luau tooltips
 -- @hover: (32,49)[export type FileCreateOptions = {
-    exclusive: boolean?, 
+    exclusive: boolean?,
+    truncate: boolean?, 
 }]
 -- @link: (53,63)[../objects/FileHandle]
 createFile(path: string, opts: FileCreateOptions?): FileHandle
@@ -24,6 +25,8 @@ createFile(path: string, opts: FileCreateOptions?): FileHandle
 - `opts: FileCreateOptions?{:luau}` - The create options.
   - `exclusive: boolean?{:luau}` - If true, the function will fail if the file already exists.
     - default: `false{:luau}`
+  - `truncate: boolean?{:luau}` - If true, the file will be truncated if it already exists.
+    - default: `true{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
@@ -57,11 +60,12 @@ Read the contents of a file from the provided path.
 ```luau tooltips
 readFile(path: string): string
 readFile(path: string, bytes: true): buffer
+readFile(path: string, bytes: boolean): string | buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `path: string{:luau}` - The path to the file to read.
-- `bytes: true?{:luau}` - If true, returns a `buffer` instead of a `string`.
+- `bytes: true | boolean?{:luau}` - If true, returns a `buffer` instead of a `string`.
   - default: `false{:luau}`
 </details>
 <details>
@@ -69,7 +73,25 @@ readFile(path: string, bytes: true): buffer
 - IO Error
 </details>
 
-### readDir
+### readFileSync
+Read the contents of a file from the provided path synchronously.
+```luau tooltips
+readFileSync(path: string): string
+readFileSync(path: string, bytes: true): buffer
+readFileSync(path: string, bytes: boolean): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the file to read.
+- `bytes: true | boolean?{:luau}` - If true, returns a `buffer` instead of a `string`.
+  - default: `false{:luau}`
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### entries
 Get directory entries from the provided path.
 ```luau tooltips
 -- @hover: (25,39)[export type MetadataKind = 
@@ -89,7 +111,7 @@ type DirectoryEntry = {
     name: string,
     kind: MetadataKind, 
 }]
-readDir(path: string): {DirectoryEntry}
+entries(path: string): {DirectoryEntry}
 ```
 <details open>
 <summary>Parameters</summary>
@@ -115,10 +137,25 @@ writeFile(path: string, contents: string | buffer): ()
 - IO Error
 </details>
 
-### writeDir
+### writeFileSync
+Write the contents to a file at the provided path synchronously.
+```luau tooltips
+writeFileSync(path: string, contents: string | buffer): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `path: string{:luau}` - The path to the file to write.
+- `contents: string | buffer{:luau}` - The contents to write to the file. (This may be limited to the max luau `string`).
+</details>
+<details>
+<summary>Throws</summary>
+- IO Error
+</details>
+
+### makeDir
 Creates a directory at the provided path.
 ```luau tooltips
-writeDir(path: string, recursive: boolean?): ()
+makeDir(path: string, recursive: boolean?): ()
 ```
 <details open>
 <summary>Parameters</summary>
@@ -131,10 +168,10 @@ writeDir(path: string, recursive: boolean?): ()
 - IO Error
 </details>
 
-### removeFile
+### deleteFile
 Removes a file at the provided path.
 ```luau tooltips
-removeFile(path: string): ()
+deleteFile(path: string): ()
 ```
 <details open>
 <summary>Parameters</summary>
@@ -145,10 +182,10 @@ removeFile(path: string): ()
 - IO Error
 </details>
 
-### removeDir
+### deleteDir
 Removes a directory at the provided path.
 ```luau tooltips
-removeDir(path: string, recursive: boolean?): ()
+deleteDir(path: string, recursive: boolean?): ()
 ```
 <details open>
 <summary>Parameters</summary>

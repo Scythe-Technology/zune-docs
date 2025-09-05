@@ -1,0 +1,16 @@
+# Info Command
+---
+
+The `info` command is used to display the built runtime.
+
+On linux the runtime would dynamically pick `io_uring` or `epoll` for async backend.
+
+This has an optional `all` parameter to get more details on the libraries zune shipped.
+
+### Usage
+
+```bash
+zune info [all]
+zune -V [all]
+zune --version [all]
+```

@@ -9,24 +9,6 @@ import { Callout, Tabs } from 'nextra/components'
 A library that interacts with the system process.
 
 ## Properties
-### os
-The operating system that the process is running on.
-```luau tooltips
-os: 
-    | "linux"
-    | "windows"
-    | "macos"
-```
-### arch
-The cpu architecture that the process is running on.
-This property can have more possible values (Usually from a custom zune build for another architecture).
-Currently this is based on the official releases of zune.
-```luau tooltips
-arch: 
-    | "aarch64"
-    | "x86_64"
-    | "riscv64"
-```
 ### args
 The arguments passed to the process.
 ```luau tooltips
@@ -69,6 +51,12 @@ cwd(): string
 - IO Error
 - Memory Error
 </details>
+
+### pid
+Get the current process ID.
+```luau tooltips
+pid(): number
+```
 
 ### create
 Creates a new process.

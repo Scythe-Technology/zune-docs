@@ -14,10 +14,11 @@ If the hash object was created with a key, this would close the object.
 :digest(): buffer
 :digest(encoding: "binary"): buffer
 :digest(encoding: "hex" | "base64"): string
+:digest(encoding: string): string | buffer
 ```
 <details open>
 <summary>Parameters</summary>
-- `encoding: "binary" | "hex" | "base64"?{:luau}` - The encoding of the output.
+- `encoding: "binary" | "hex" | "base64" | string?{:luau}` - The encoding of the output.
   - default: `"binary"{:luau}`
 </details>
 <details>

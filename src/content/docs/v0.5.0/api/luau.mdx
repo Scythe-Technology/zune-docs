@@ -93,8 +93,7 @@ export type ParseResult = {
     errors: {{
         message: string,
         location: Location, 
-    }}
-} | {
+    }}?,
     root: {any},
     eof: {
         text: "",
@@ -107,7 +106,7 @@ export type ParseResult = {
         header: boolean,
         content: string,
         location: Location, 
-    }}
+    }}, 
 }]
 parse(src: string | buffer): ParseResult
 ```

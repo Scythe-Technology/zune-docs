@@ -1,0 +1,120 @@
+{/* This file was auto-generated with "zune-docs" */}
+
+# Process
+`zune.process`
+
+---
+import { Callout, Tabs } from 'nextra/components'
+
+A library that interacts with the system process.
+
+## Properties
+### os
+The operating system the runtime was built for.
+```luau tooltips
+os: 
+    | "linux"
+    | "windows"
+    | "macos"
+    | "freebsd"
+```
+### abi
+The ABI that the runtime was built for.
+```luau tooltips
+abi: 
+    | "none"
+    | "gnu"
+    | "gnuabin32"
+    | "gnuabi64"
+    | "gnueabi"
+    | "gnueabihf"
+    | "gnuf32"
+    | "gnusf"
+    | "gnux32"
+    | "code16"
+    | "eabi"
+    | "eabihf"
+    | "ilp32"
+    | "android"
+    | "androideabi"
+    | "musl"
+    | "muslabin32"
+    | "muslabi64"
+    | "musleabi"
+    | "musleabihf"
+    | "muslf32"
+    | "muslsf"
+    | "muslx32"
+    | "msvc"
+    | "itanium"
+    | "cygnus"
+    | "simulator"
+    | "macabi"
+    | "ohos"
+    | "ohoseabi"
+```
+### cpu
+The CPU architecture.
+```luau tooltips
+-- @hover: (7,12)[<table> = {
+    arch: 
+        | "aarch64"
+        | "x86_64"
+        | "riscv64",
+    endian: "big" | "little", 
+}]
+cpu: <table>
+```
+### async
+The async I/O backend that the runtime is currently using.
+```luau tooltips
+async: "io_uring" | "epoll" | "kqueue" | "iocp"
+```
+## Functions
+### getFreeMemory
+Gets the total amount of free memory available.
+```luau tooltips
+getFreeMemory(): number
+```
+<details>
+<summary>Throws</summary>
+- Platform Error
+</details>
+
+### getTotalMemory
+Gets the total amount of memory currently allocated by the runtime.
+```luau tooltips
+getTotalMemory(): number
+```
+<details>
+<summary>Throws</summary>
+- Platform Error
+</details>
+
+### getPageSize
+Gets the page size of the system.
+```luau tooltips
+getPageSize(): number
+```
+
+### getKernelVersion
+Gets the kernel version of the operating system.
+```luau tooltips
+getKernelVersion(): string
+```
+<details>
+<summary>Throws</summary>
+- Memory Error
+- Platform Error
+</details>
+
+### getHostName
+Gets the hostname of the current machine.
+```luau tooltips
+getHostName(): string
+```
+<details>
+<summary>Throws</summary>
+- Memory Error
+- Platform Error
+</details>
