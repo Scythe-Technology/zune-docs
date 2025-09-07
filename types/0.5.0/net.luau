@@ -172,6 +172,19 @@ export type HttpRequestOptions = {
     body: (string | buffer)?,
     --- @default true
     allow_redirects: boolean?,
+    --- The timeout for the request in seconds.
+    --- - If the timeout is zero, the request will never timeout.
+    --- @default 30
+    timeout: number?,
+    --- The maximum size of the response body.
+    --- @default 1_048_576
+    max_body_size: number?,
+    --- The maximum size of the response headers for the parser.
+    --- @default 4096
+    max_header_size: number?,
+    --- The maximum number of headers to parse from the response.
+    --- @default 100
+    max_headers: number?,
 }
 
 export type HttpWebSocketOptions = {
