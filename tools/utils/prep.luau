@@ -9,7 +9,7 @@ local docs_path = process.args[2] or error("No documentation path provided");
 assert(fs.stat(docs_path).kind == "directory", "The provided path is not a directory");
 
 local type_paths = {};
-for _, entry in fs.readDir(docs_path) do
+for _, entry in fs.entries(docs_path) do
     if (entry.kind == "file") then
         table.insert(type_paths, fs.path.join(docs_path, entry.name));
     end
