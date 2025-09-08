@@ -447,6 +447,7 @@ type NetworkLib = {
         --- @throws Request Error
         --- @throws Network Error
         request:
+            & ((host: string) -> HttpResponse<string>)
             & ((host: string, opts: HttpRequestOptionsType<"string"?>?) -> HttpResponse<string>)
             & ((host: string, opts: HttpRequestOptionsType<"buffer">?) -> HttpResponse<buffer>)
             & ((host: string, opts: HttpRequestOptionsType<"string" | "buffer" | nil>?) -> HttpResponse<string | buffer>),

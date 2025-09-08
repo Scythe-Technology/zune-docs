@@ -119,6 +119,7 @@ type SerdeLib = {
     yaml: YamlEncoder,
     base64: Base64Encoder,
     gzip: GenericCompressor,
+    flate: GenericCompressor,
     zlib: GenericCompressor,
     lz4: {
         --- @param raw The data to compress. If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.

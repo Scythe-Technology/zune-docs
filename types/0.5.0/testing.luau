@@ -88,7 +88,7 @@ type ExpectHandler = {
     --- Expects a value to be similar to the expected table.
     ---
     --- @param expected The expected table.
-    similar: (expected: {[any]: any} | {any}) -> any,
+    similar: (expected: any) -> any,
 }
 
 type TestingLib = {
