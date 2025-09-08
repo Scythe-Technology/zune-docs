@@ -154,7 +154,7 @@ end
 preprocessTypes();
 
 if (fs.stat("./tools/out").kind == "none") then
-    fs.writeDir("./tools/out");
+    fs.makeDir("./tools/out");
 end
 print("Generating zune.d.luau...");
 fs.writeFile("./tools/out/zune.d.luau", generateDefintionFile());

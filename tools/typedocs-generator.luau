@@ -319,7 +319,7 @@ local function generateTypeDocsFile(): string
 end
 
 if (fs.stat("./tools/out").kind == "none") then
-    fs.writeDir("./tools/out");
+    fs.makeDir("./tools/out");
 end
 print("Generating zune.d.json...");
 fs.writeFile("./tools/out/zune.d.json", generateTypeDocsFile());
