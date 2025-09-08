@@ -59,13 +59,14 @@ openFile(path: string, opts: FileOpenOptions?): FileHandle
 Read the contents of a file from the provided path.
 ```luau tooltips
 readFile(path: string): string
+readFile(path: string, bytes: false?): string
 readFile(path: string, bytes: true): buffer
 readFile(path: string, bytes: boolean): string | buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `path: string{:luau}` - The path to the file to read.
-- `bytes: true | boolean?{:luau}` - If true, returns a `buffer` instead of a `string`.
+- `bytes: false? | true | boolean?{:luau}` - If true, returns a `buffer` instead of a `string`.
   - default: `false{:luau}`
 </details>
 <details>
@@ -77,13 +78,14 @@ readFile(path: string, bytes: boolean): string | buffer
 Read the contents of a file from the provided path synchronously.
 ```luau tooltips
 readFileSync(path: string): string
+readFileSync(path: string, bytes: false?): string
 readFileSync(path: string, bytes: true): buffer
 readFileSync(path: string, bytes: boolean): string | buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `path: string{:luau}` - The path to the file to read.
-- `bytes: true | boolean?{:luau}` - If true, returns a `buffer` instead of a `string`.
+- `bytes: false? | true | boolean?{:luau}` - If true, returns a `buffer` instead of a `string`.
   - default: `false{:luau}`
 </details>
 <details>

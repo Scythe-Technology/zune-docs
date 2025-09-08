@@ -12,14 +12,15 @@ It provides methods to read, write, and manipulate the file.
 ### read
 read from the file
 ```luau tooltips
+:read(amount: number?): string
 :read(amount: number?, bytes: false?): string
 :read(amount: number?, bytes: true): buffer
-:read(amount: number?, bytes: boolean): string | buffer
+:read(amount: number?, bytes: boolean?): string | buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit
-- `bytes: false? | true | boolean{:luau}` - If true, the function will return a `buffer` instead of a `string`.
+- `bytes: false? | true | boolean?{:luau}` - If true, the function will return a `buffer` instead of a `string`.
 </details>
 <details>
 <summary>Throws</summary>
@@ -29,14 +30,15 @@ read from the file
 ### readSync
 Read the contents of the file synchronously.
 ```luau tooltips
+:readSync(amount: number?): string
 :readSync(amount: number?, bytes: false?): string
 :readSync(amount: number?, bytes: true): buffer
-:readSync(amount: number?, bytes: boolean): string | buffer
+:readSync(amount: number?, bytes: boolean?): string | buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit
-- `bytes: false? | true | boolean{:luau}` - If true, the function will return a `buffer` instead of a `string`.
+- `bytes: false? | true | boolean?{:luau}` - If true, the function will return a `buffer` instead of a `string`.
 </details>
 <details>
 <summary>Throws</summary>

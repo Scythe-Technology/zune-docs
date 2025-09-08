@@ -34,8 +34,8 @@ The global `zune` variable is a table that contains all the zune apis.
     crypto: CryptoLib,
 -- @link: (12,20)[./regex]
     regex: RegexLib,
--- @link: (15,26)[./datetime]
-    datetime: DatetimeLib,
+-- @link: (11,18)[./time]
+    time: TimeLib,
 -- @link: (10,16)[./ffi]
     ffi: FFILib,
 -- @link: (13,22)[./sqlite]
@@ -48,6 +48,8 @@ The global `zune` variable is a table that contains all the zune apis.
     thread: ThreadLib,
 -- @link: (10,16)[./mem]
     mem: MemLib
+-- @link: (15,26)[./platform]
+    platform: PlatformLib
 }]
 zune: <table>
 ```
@@ -69,11 +71,11 @@ examples:
 
 The following code example shows how to detect if zune is running and provide the zune version with the Luau version.
 ```luau filename="detect_zune.luau" showLineNumbers
-local pattern = "(zune) (%d+%.%d+%.%d+)%-?([%.%w%d]*)%+(%d+%.%d+)"
+local pattern = "zune (%d+%.%d+%.%d+)%-?([%.%w%d]*)%+(%d+%.%d+)"
 
-local isZune, zuneVersion, buildTag, luauVersion = string.match(_VERSION, pattern)
+local zuneVersion, buildTag, luauVersion = string.match(_VERSION, pattern)
 
-if (isZune) then
+if (zuneVersion) then
     print(`zune Version: {zuneVersion}-{buildTag}`)
     print(`luau Version: {luauVersion}`)
 end

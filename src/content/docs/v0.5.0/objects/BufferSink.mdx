@@ -17,13 +17,14 @@ closed: boolean
 ## Methods
 ### flush
 ```luau tooltips
+:flush(): buffer
 :flush(bytes: true?): buffer
 :flush(bytes: false): string
-:flush(bytes: boolean): string | buffer
+:flush(bytes: boolean?): string | buffer
 ```
 <details open>
 <summary>Parameters</summary>
-- `bytes: true? | false | boolean{:luau}`
+- `bytes: true? | false | boolean?{:luau}`
   - default: `true{:luau}`
 </details>
 <details>

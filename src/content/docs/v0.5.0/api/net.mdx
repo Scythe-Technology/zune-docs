@@ -355,6 +355,16 @@ Makes a request to the specified host.
 
 Options are optional, defaults to GET request.
 ```luau tooltips
+-- @hover: (29,41)[export type HttpResponse<T> = {
+    ok: boolean,
+    status_code: number,
+    status_reason: string,
+    headers: {
+        [string]: string
+    },
+    body: T, 
+}]
+http.request(host: string): HttpResponse<string>
 -- @hover: (71,83)[export type HttpResponse<T> = {
     ok: boolean,
     status_code: number,

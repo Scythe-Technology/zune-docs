@@ -8,14 +8,15 @@ import { Callout, Tabs } from 'nextra/components'
 ## Methods
 ### read
 ```luau tooltips
+:read(amount: number?): buffer
 :read(amount: number?, bytes: true?): buffer
 :read(amount: number?, bytes: false): string
-:read(amount: number?, bytes: boolean): string | buffer
+:read(amount: number?, bytes: boolean?): string | buffer
 ```
 <details open>
 <summary>Parameters</summary>
 - `amount: number?{:luau}` - The amount of bytes to read, if not provided, it will read until EOF or luau limit.
-- `bytes: true? | false | boolean{:luau}` - If false, the function will return a `string` instead of a `buffer`.
+- `bytes: true? | false | boolean?{:luau}` - If false, the function will return a `string` instead of a `buffer`.
   - default: `true{:luau}`
 </details>
 <details>
