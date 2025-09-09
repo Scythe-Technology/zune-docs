@@ -16,6 +16,13 @@ local documentations = prep.documentations;
 local summaries = prep.summaries;
 
 local type_docs = {};
+local docs_order = {};
+
+local function addDoc(field: string, value: any)
+    assert(type_docs[field] == nil, `Duplicate documentation field: {field}`);
+    type_docs[field] = value;
+    table.insert(docs_order, field);
+end
 
 local function resolvedTypeReferences(type: any, docs: any): any
     if (type.tag ~= "table") then
@@ -188,7 +195,7 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
         documentation = writtenDocs["@base"] or docs.raw or "",
         code_sample = "",
     };
-    type_docs[`@roblox/{name}`] = doc;
+    addDoc(`@roblox/{name}`, doc);
 
     if (writtenDocs["example"]) then
         local existing_code = writtenDocs["example"]:find("```") ~= nil;
@@ -286,6 +293,9 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
 end
 
 local function generateTypeDocsFile(): string
+    for decl, type in declarations do
+        generateTypeDoc(`global/{decl}`, type, {docs = {}, fields = {}});
+    end
     for name, type in types do
         local documentation = table.clone(documentations[name] or {docs = {}, fields = {}});
         if (not type.export) then
@@ -309,13 +319,25 @@ local function generateTypeDocsFile(): string
         doc.learn_more_link = `https://zune.sh/docs/v0.5.0/api/{library}`;
     end
 
-    for decl, type in declarations do
-        generateTypeDoc(`global/{decl}`, type, {docs = {}, fields = {}});
+    local result: {string} = {"{\n  "};
+    local count = 1;
+    for _, field in docs_order do
+        local doc = type_docs[field];
+        if (not doc) then
+            continue;
+        end
+        if (count > 1) then
+            table.insert(result, ",\n  ");
+        end
+        count += 1;
+        local serialized_doc = serde.json.encode(doc, {
+            pretty_indent = serde.json.indents.two_spaces,
+        });
+        table.insert(result, `"{field}": {serialized_doc:gsub("\n", "\n  ")}`);
     end
+    table.insert(result, "\n}");
 
-    return serde.json.encode(type_docs, {
-        pretty_indent = serde.json.indents.two_spaces,
-    });
+    return table.concat(result, "");
 end
 
 if (fs.stat("./tools/out").kind == "none") then
