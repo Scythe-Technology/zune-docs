@@ -67,7 +67,9 @@ Creates a new process.
         [string]: string
     }?,
     shell: (boolean | string)?,
-    stdio: ("inherit" | "pipe" | "ignore")?, 
+    stdin: ("inherit" | "pipe" | "ignore")?,
+    stdout: ("inherit" | "pipe" | "ignore")?,
+    stderr: ("inherit" | "pipe" | "ignore")?, 
 }]
 -- @link: (63,75)[../objects/ProcessChild]
 create(exec: string, args: {string}?, opts: ProcessOptions?): ProcessChild
@@ -80,7 +82,9 @@ create(exec: string, args: {string}?, opts: ProcessOptions?): ProcessChild
   - `cwd: string?{:luau}` - The current working directory of the process.
   - `env: {[string]: string}?{:luau}` - The environment variables to set for the process.
   - `shell: (boolean | string)?{:luau}` - The shell to use, `true` would use the common shell for your os.
-  - `stdio: ("inherit" | "pipe" | "ignore")?{:luau}` - The stdio configuration for the process.
+  - `stdin: ("inherit" | "pipe" | "ignore")?{:luau}` - The stdin configuration for the process.
+  - `stdout: ("inherit" | "pipe" | "ignore")?{:luau}` - The stdout configuration for the process.
+  - `stderr: ("inherit" | "pipe" | "ignore")?{:luau}` - The stderr configuration for the process.
 </details>
 <details>
 <summary>Throws</summary>
@@ -105,7 +109,9 @@ export type ProcessRunResult = ProcessResult & {
         [string]: string
     }?,
     shell: (boolean | string)?,
-    stdio: ("inherit" | "pipe" | "ignore")?, 
+    stdin: ("inherit" | "pipe" | "ignore")?,
+    stdout: ("inherit" | "pipe" | "ignore")?,
+    stderr: ("inherit" | "pipe" | "ignore")?, 
 }]
 run(exec: string, args: {string}?, opts: ProcessOptions?): ProcessRunResult
 ```
@@ -117,7 +123,9 @@ run(exec: string, args: {string}?, opts: ProcessOptions?): ProcessRunResult
   - `cwd: string?{:luau}` - The current working directory of the process.
   - `env: {[string]: string}?{:luau}` - The environment variables to set for the process.
   - `shell: (boolean | string)?{:luau}` - The shell to use, `true` would use the common shell for your os.
-  - `stdio: ("inherit" | "pipe" | "ignore")?{:luau}` - The stdio configuration for the process.
+  - `stdin: ("inherit" | "pipe" | "ignore")?{:luau}` - The stdin configuration for the process.
+  - `stdout: ("inherit" | "pipe" | "ignore")?{:luau}` - The stdout configuration for the process.
+  - `stderr: ("inherit" | "pipe" | "ignore")?{:luau}` - The stderr configuration for the process.
 </details>
 <details>
 <summary>Throws</summary>

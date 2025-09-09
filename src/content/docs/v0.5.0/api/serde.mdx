@@ -371,6 +371,94 @@ zlib.decompress(compressed: string | buffer): string | buffer
 - Memory Error
 </details>
 
+### brotli
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### compress
+```luau tooltips
+-- @hover: (36,66)[export type SerdeGenericCompressionOptions = {
+    level: number?, 
+}]
+brotli.compress(raw: string, opts: SerdeGenericCompressionOptions?): string
+-- @hover: (36,66)[export type SerdeGenericCompressionOptions = {
+    level: number?, 
+}]
+brotli.compress(raw: buffer, opts: SerdeGenericCompressionOptions?): buffer
+-- @hover: (45,75)[export type SerdeGenericCompressionOptions = {
+    level: number?, 
+}]
+brotli.compress(raw: string | buffer, opts: SerdeGenericCompressionOptions?): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `raw: string | buffer{:luau}` - The data to compress. If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
+- `opts: SerdeGenericCompressionOptions?{:luau}` - The options for the compression.
+  - `level: number?{:luau}` - The compression level
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decompress
+```luau tooltips
+brotli.decompress(compressed: string): string
+brotli.decompress(compressed: buffer): buffer
+brotli.decompress(compressed: string | buffer): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `compressed: string | buffer{:luau}` - The compressed data to decompress.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+### zstd
+---
+<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
+#### compress
+```luau tooltips
+-- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
+    level: number?, 
+}]
+zstd.compress(raw: string, opts: SerdeGenericCompressionOptions?): string
+-- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
+    level: number?, 
+}]
+zstd.compress(raw: buffer, opts: SerdeGenericCompressionOptions?): buffer
+-- @hover: (43,73)[export type SerdeGenericCompressionOptions = {
+    level: number?, 
+}]
+zstd.compress(raw: string | buffer, opts: SerdeGenericCompressionOptions?): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `raw: string | buffer{:luau}` - The data to compress. If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
+- `opts: SerdeGenericCompressionOptions?{:luau}` - The options for the compression.
+  - `level: number?{:luau}` - The compression level
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
+#### decompress
+```luau tooltips
+zstd.decompress(compressed: string): string
+zstd.decompress(compressed: buffer): buffer
+zstd.decompress(compressed: string | buffer): string | buffer
+```
+<details open>
+<summary>Parameters</summary>
+- `compressed: string | buffer{:luau}` - The compressed data to decompress.
+</details>
+<details>
+<summary>Throws</summary>
+- Memory Error
+</details>
+
 ### lz4
 ---
 <h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
@@ -436,50 +524,6 @@ lz4.decompress(compressed: string | buffer, size: number): string | buffer
 lz4.decompressFrame(compressed: string): string
 lz4.decompressFrame(compressed: buffer): buffer
 lz4.decompressFrame(compressed: string | buffer): string | buffer
-```
-<details open>
-<summary>Parameters</summary>
-- `compressed: string | buffer{:luau}` - The compressed data to decompress.
-</details>
-<details>
-<summary>Throws</summary>
-- Memory Error
-</details>
-
-### zstd
----
-<h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`FUNCTIONS`</u></h4>
-#### compress
-```luau tooltips
--- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
-    level: number?, 
-}]
-zstd.compress(raw: string, opts: SerdeGenericCompressionOptions?): string
--- @hover: (34,64)[export type SerdeGenericCompressionOptions = {
-    level: number?, 
-}]
-zstd.compress(raw: buffer, opts: SerdeGenericCompressionOptions?): buffer
--- @hover: (43,73)[export type SerdeGenericCompressionOptions = {
-    level: number?, 
-}]
-zstd.compress(raw: string | buffer, opts: SerdeGenericCompressionOptions?): string | buffer
-```
-<details open>
-<summary>Parameters</summary>
-- `raw: string | buffer{:luau}` - The data to compress. If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
-- `opts: SerdeGenericCompressionOptions?{:luau}` - The options for the compression.
-  - `level: number?{:luau}` - The compression level
-</details>
-<details>
-<summary>Throws</summary>
-- Memory Error
-</details>
-
-#### decompress
-```luau tooltips
-zstd.decompress(compressed: string): string
-zstd.decompress(compressed: buffer): buffer
-zstd.decompress(compressed: string | buffer): string | buffer
 ```
 <details open>
 <summary>Parameters</summary>
