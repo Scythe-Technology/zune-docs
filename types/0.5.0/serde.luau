@@ -121,6 +121,8 @@ type SerdeLib = {
     gzip: GenericCompressor,
     flate: GenericCompressor,
     zlib: GenericCompressor,
+    brotli: GenericCompressor,
+    zstd: GenericCompressor,
     lz4: {
         --- @param raw The data to compress. If `raw` is a `buffer`, the function will return a `buffer` instead of a `string`.
         --- @throws Memory Error
@@ -140,7 +142,6 @@ type SerdeLib = {
         --- @throws Memory Error
         decompressFrame: DecompressionFn,
     },
-    zstd: GenericCompressor,
 }
 
 return {} :: SerdeLib;

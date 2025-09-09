@@ -12,8 +12,12 @@ export type ProcessOptions = {
     env: { [string]: string }?,
     --- The shell to use, `true` would use the common shell for your os.
     shell: (boolean | string)?,
-    --- The stdio configuration for the process.
-    stdio: ("inherit" | "pipe" | "ignore")?,
+    --- The stdin configuration for the process.
+    stdin: ("inherit" | "pipe" | "ignore")?,
+    --- The stdout configuration for the process.
+    stdout: ("inherit" | "pipe" | "ignore")?,
+    --- The stderr configuration for the process.
+    stderr: ("inherit" | "pipe" | "ignore")?,
 }
 
 export type ProcessResult = {
@@ -28,6 +32,7 @@ export type ProcessRunResult = ProcessResult & {
 
 --- @class
 type ProcessChild = {
+    pid: number,
     stdin: FileHandle?,
     stdout: FileHandle?,
     stderr: FileHandle?,
