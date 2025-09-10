@@ -35,7 +35,7 @@ export type CPUArchitecture =
     -- | "powerpc"
     -- | "powerpcle"
     -- | "powerpc64"
-    -- | "powerpc64le"
+    | "powerpc64le"
     -- | "r600"
     -- | "amdgcn"
     -- | "sparc"
