@@ -23,7 +23,6 @@ type MemLib = typeof(require("./mem"));
 type PlatformLib = typeof(require("./platform"));
 
 local _FILE: {
-    source: string?,
     main: boolean,
 }
 
