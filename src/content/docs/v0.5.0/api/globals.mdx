@@ -82,12 +82,10 @@ end
 ```
 
 ### _FILE
-The source file of the currently executing code. `source` property may not be available in all cases,
-such as executing without detailed error and not testing.
+The file information of the current running module.
 `_FILE` variable may not be available in all cases, such as executing luau in a custom environment.
 ```luau tooltips
 -- @hover: (9,14)[{
-   source: string?
    main: boolean,
 }]
 _FILE: <table>
