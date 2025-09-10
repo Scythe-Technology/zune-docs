@@ -103,6 +103,7 @@ export type NetworkAddress = {
 export type HttpServerRequest = {
     method: string,
     path: string,
+    raw_path: string,
     query: {[string | number]: string},
     headers: {[string]: string},
     body: string?,
@@ -411,8 +412,6 @@ type NetworkSocketOption = {
     RCVTIMEO: number,
 }
 
-export type HttpRequestOptionsType<T> = (HttpRequestOptions & { response_body_type: T })
-
 type NetworkLib = {
     ADDRF: NetworkAddressFamily,
     SOCKF: NetworkSocketFlags,
@@ -444,13 +443,14 @@ type NetworkLib = {
         --- Options are optional, defaults to GET request.
         --- @param host The host to make the request to.
         --- @param opts The options for the request.
+        --- @param bytes Whether to return the response body as a buffer or string.
         --- @throws Request Error
         --- @throws Network Error
         request:
             & ((host: string) -> HttpResponse<string>)
-            & ((host: string, opts: HttpRequestOptionsType<"string"?>?) -> HttpResponse<string>)
-            & ((host: string, opts: HttpRequestOptionsType<"buffer">?) -> HttpResponse<buffer>)
-            & ((host: string, opts: HttpRequestOptionsType<"string" | "buffer" | nil>?) -> HttpResponse<string | buffer>),
+            & ((host: string, opts: HttpRequestOptions?, bytes: false?) -> HttpResponse<string>)
+            & ((host: string, opts: HttpRequestOptions?, bytes: true) -> HttpResponse<buffer>)
+            & ((host: string, opts: HttpRequestOptions?, bytes: boolean?) -> HttpResponse<string | buffer>),
         -- Creates a new WebSocket connection.
         --- @param host The host to connect to.
         --- @param opts The options for the WebSocket.

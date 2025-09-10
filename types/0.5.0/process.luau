@@ -25,9 +25,9 @@ export type ProcessResult = {
     code: number,
 }
 
-export type ProcessRunResult = ProcessResult & {
-    stdout: string,
-    stderr: string,
+export type ProcessRunResult<T> = ProcessResult & {
+    stdout: T,
+    stderr: T,
 }
 
 --- @class
@@ -77,7 +77,12 @@ type ProcessLib = {
     --- @param args The arguments to pass to the executable.
     --- @param opts The options for the process.
     --- @throws Process Error
-    run: (exec: string, args: {string}?, opts: ProcessOptions?) -> ProcessRunResult,
+    run: 
+        & ((exec: string) -> ProcessRunResult<string>)
+        & ((exec: string, args: {string}?) -> ProcessRunResult<string>)
+        & ((exec: string, args: {string}?, opts: ProcessOptions?, bytes: false?) -> ProcessRunResult<string?>)
+        & ((exec: string, args: {string}?, opts: ProcessOptions?, bytes: true) -> ProcessRunResult<buffer?>)
+        & ((exec: string, args: {string}?, opts: ProcessOptions?, bytes: boolean?) -> ProcessRunResult<string | buffer?>),
     --- Exits the process with the given code.
     --- @param code The exit code.
     exit: (code: number) -> never,
