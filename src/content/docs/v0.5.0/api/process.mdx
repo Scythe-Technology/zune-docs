@@ -94,15 +94,26 @@ create(exec: string, args: {string}?, opts: ProcessOptions?): ProcessChild
 ### run
 Runs a new process, and yields for the result.
 ```luau tooltips
--- @hover: (60,76)[export type ProcessResult = {
+-- @hover: (20,36)[export type ProcessResult = {
     ok: boolean,
     code: number, 
 }
 
-export type ProcessRunResult = ProcessResult & {
-    stdout: string,
-    stderr: string, 
+export type ProcessRunResult<T> = ProcessResult & {
+    stdout: T,
+    stderr: T, 
 }]
+run(exec: string): ProcessRunResult<string>
+-- @hover: (37,53)[export type ProcessResult = {
+    ok: boolean,
+    code: number, 
+}
+
+export type ProcessRunResult<T> = ProcessResult & {
+    stdout: T,
+    stderr: T, 
+}]
+run(exec: string, args: {string}?): ProcessRunResult<string>
 -- @hover: (42,56)[export type ProcessOptions = {
     cwd: string?,
     env: {
@@ -113,12 +124,61 @@ export type ProcessRunResult = ProcessResult & {
     stdout: ("inherit" | "pipe" | "ignore")?,
     stderr: ("inherit" | "pipe" | "ignore")?, 
 }]
-run(exec: string, args: {string}?, opts: ProcessOptions?): ProcessRunResult
+-- @hover: (75,91)[export type ProcessResult = {
+    ok: boolean,
+    code: number, 
+}
+
+export type ProcessRunResult<T> = ProcessResult & {
+    stdout: T,
+    stderr: T, 
+}]
+run(exec: string, args: {string}?, opts: ProcessOptions?, bytes: false?): ProcessRunResult<string?>
+-- @hover: (42,56)[export type ProcessOptions = {
+    cwd: string?,
+    env: {
+        [string]: string
+    }?,
+    shell: (boolean | string)?,
+    stdin: ("inherit" | "pipe" | "ignore")?,
+    stdout: ("inherit" | "pipe" | "ignore")?,
+    stderr: ("inherit" | "pipe" | "ignore")?, 
+}]
+-- @hover: (73,89)[export type ProcessResult = {
+    ok: boolean,
+    code: number, 
+}
+
+export type ProcessRunResult<T> = ProcessResult & {
+    stdout: T,
+    stderr: T, 
+}]
+run(exec: string, args: {string}?, opts: ProcessOptions?, bytes: true): ProcessRunResult<buffer?>
+-- @hover: (42,56)[export type ProcessOptions = {
+    cwd: string?,
+    env: {
+        [string]: string
+    }?,
+    shell: (boolean | string)?,
+    stdin: ("inherit" | "pipe" | "ignore")?,
+    stdout: ("inherit" | "pipe" | "ignore")?,
+    stderr: ("inherit" | "pipe" | "ignore")?, 
+}]
+-- @hover: (77,93)[export type ProcessResult = {
+    ok: boolean,
+    code: number, 
+}
+
+export type ProcessRunResult<T> = ProcessResult & {
+    stdout: T,
+    stderr: T, 
+}]
+run(exec: string, args: {string}?, opts: ProcessOptions?, bytes: boolean?): ProcessRunResult<string | buffer?>
 ```
 <details open>
 <summary>Parameters</summary>
 - `exec: string{:luau}` - The executable to run.
-- `args: {string}?{:luau}` - The arguments to pass to the executable.
+- `args: {string}??{:luau}` - The arguments to pass to the executable.
 - `opts: ProcessOptions?{:luau}` - The options for the process.
   - `cwd: string?{:luau}` - The current working directory of the process.
   - `env: {[string]: string}?{:luau}` - The environment variables to set for the process.
@@ -126,6 +186,7 @@ run(exec: string, args: {string}?, opts: ProcessOptions?): ProcessRunResult
   - `stdin: ("inherit" | "pipe" | "ignore")?{:luau}` - The stdin configuration for the process.
   - `stdout: ("inherit" | "pipe" | "ignore")?{:luau}` - The stdout configuration for the process.
   - `stderr: ("inherit" | "pipe" | "ignore")?{:luau}` - The stderr configuration for the process.
+- `bytes: false? | true | boolean?{:luau}`
 </details>
 <details>
 <summary>Throws</summary>

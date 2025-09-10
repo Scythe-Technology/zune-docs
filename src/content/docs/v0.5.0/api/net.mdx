@@ -292,6 +292,7 @@ export type HttpServerResponse = {
 export type HttpServerRequest = {
     method: string,
     path: string,
+    raw_path: string,
     query: {
         [string | number]: string
     },
@@ -374,7 +375,7 @@ http.request(host: string): HttpResponse<string>
     },
     body: T, 
 }]
--- @hover: (34,56)[export type HttpRequestOptions = {
+-- @hover: (34,52)[export type HttpRequestOptions = {
     headers: {
         [string]: string
     }?,
@@ -385,13 +386,21 @@ http.request(host: string): HttpResponse<string>
     max_body_size: number?,
     max_header_size: number?,
     max_headers: number?, 
-}
-
-export type HttpRequestOptionsType<T> = (HttpRequestOptions & {
-    response_body_type: T
-})]
-http.request(host: string, opts: HttpRequestOptionsType<"string"?>?): HttpResponse<string>
--- @hover: (70,82)[export type HttpResponse<T> = {
+}]
+http.request(host: string, opts: HttpRequestOptions?, bytes: false?): HttpResponse<string>
+-- @hover: (34,52)[export type HttpRequestOptions = {
+    headers: {
+        [string]: string
+    }?,
+    method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+    body: (string | buffer)?,
+    allow_redirects: boolean?,
+    timeout: number?,
+    max_body_size: number?,
+    max_header_size: number?,
+    max_headers: number?, 
+}]
+-- @hover: (69,81)[export type HttpResponse<T> = {
     ok: boolean,
     status_code: number,
     status_reason: string,
@@ -400,7 +409,8 @@ http.request(host: string, opts: HttpRequestOptionsType<"string"?>?): HttpRespon
     },
     body: T, 
 }]
--- @hover: (34,56)[export type HttpRequestOptions = {
+http.request(host: string, opts: HttpRequestOptions?, bytes: true): HttpResponse<buffer>
+-- @hover: (34,52)[export type HttpRequestOptions = {
     headers: {
         [string]: string
     }?,
@@ -411,29 +421,8 @@ http.request(host: string, opts: HttpRequestOptionsType<"string"?>?): HttpRespon
     max_body_size: number?,
     max_header_size: number?,
     max_headers: number?, 
-}
-
-export type HttpRequestOptionsType<T> = (HttpRequestOptions & {
-    response_body_type: T
-})]
-http.request(host: string, opts: HttpRequestOptionsType<"buffer">?): HttpResponse<buffer>
--- @hover: (34,56)[export type HttpRequestOptions = {
-    headers: {
-        [string]: string
-    }?,
-    method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
-    body: (string | buffer)?,
-    allow_redirects: boolean?,
-    timeout: number?,
-    max_body_size: number?,
-    max_header_size: number?,
-    max_headers: number?, 
-}
-
-export type HttpRequestOptionsType<T> = (HttpRequestOptions & {
-    response_body_type: T
-})]
--- @hover: (87,99)[export type HttpResponse<T> = {
+}]
+-- @hover: (73,85)[export type HttpResponse<T> = {
     ok: boolean,
     status_code: number,
     status_reason: string,
@@ -442,12 +431,28 @@ export type HttpRequestOptionsType<T> = (HttpRequestOptions & {
     },
     body: T, 
 }]
-http.request(host: string, opts: HttpRequestOptionsType<"string" | "buffer" | nil>?): HttpResponse<string | buffer>
+http.request(host: string, opts: HttpRequestOptions?, bytes: boolean?): HttpResponse<string | buffer>
 ```
 <details open>
 <summary>Parameters</summary>
 - `host: string{:luau}` - The host to make the request to.
-- `opts: HttpRequestOptionsType?{:luau}` - The options for the request.
+- `opts: HttpRequestOptions?{:luau}` - The options for the request.
+  - `headers: {[string]: string}?{:luau}`
+  - `method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?{:luau}`
+    - default: `"GET"{:luau}`
+  - `body: (string | buffer)?{:luau}`
+  - `allow_redirects: boolean?{:luau}`
+    - default: `true{:luau}`
+  - `timeout: number?{:luau}` - The timeout for the request in seconds.
+    - If the timeout is zero, the request will never timeout.
+    - default: `30{:luau}`
+  - `max_body_size: number?{:luau}` - The maximum size of the response body.
+    - default: `1_048_576{:luau}`
+  - `max_header_size: number?{:luau}` - The maximum size of the response headers for the parser.
+    - default: `4096{:luau}`
+  - `max_headers: number?{:luau}` - The maximum number of headers to parse from the response.
+    - default: `100{:luau}`
+- `bytes: false? | true | boolean?{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
