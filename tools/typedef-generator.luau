@@ -13,6 +13,8 @@ local ordered_types = prep.ordered_types;
 local classes = prep.classes;
 local libraries = prep.libraries;
 
+local garbage_types = {};
+
 local function resolvedTypeReferences(type: any): any
     if (type.tag ~= "table") then
         return type;
@@ -25,9 +27,10 @@ local function resolvedTypeReferences(type: any): any
         end
         if (entry.value.tag == "reference") then
             local real_type = types[entry.value.name.text];
-            if (not real_type) then
+            if (not real_type or real_type.export) then
                 continue;
             end
+            garbage_types[entry.value.name.text] = true;
             local copy_entry = table.clone(entry);
             copy_entry.value = resolvedTypeReferences(real_type.type);
             copy_entries[i] = copy_entry;
@@ -121,6 +124,25 @@ local function preprocessTypes()
                 end
             end
         end
+    end
+
+    for type_name, type in types do
+        if libraries[type_name:sub(#("_zune_") + 1, -1)] then
+            continue;
+        end
+        local v = visitor.createVisitor()
+
+        v.visitTypeReference = function(node: any)
+            if (garbage_types[node.name.text]) then
+                garbage_types[node.name.text] = nil;
+            end
+        end
+
+        visitor.visitType(type.type, v);
+    end
+
+    for garbage_type_name, _ in garbage_types do
+        types[garbage_type_name] = nil;
     end
 end
 

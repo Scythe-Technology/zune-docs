@@ -5,7 +5,7 @@
 type __0__ = typeof(nil);
 type FileHandle = typeof(nil :: any);
 
-export type CPUArchitecture =
+export type PlatformCPUArchitecture =
     | "aarch64"
     | "x86_64"
     -- | "x86"
@@ -69,7 +69,7 @@ export type CPUArchitecture =
     -- | "ve"
     -- | "spu_2"
 
-export type OS =
+export type PlatformOS =
     | "linux"
     | "windows"
     | "macos"
@@ -119,7 +119,7 @@ export type OS =
     -- | "illumos"
     -- | "other"
 
-export type ABI =
+export type PlatformABI =
     | "none"
     | "gnu"
     | "gnuabin32"
@@ -153,17 +153,17 @@ export type ABI =
 
 type PlatformLib = {
     --- The operating system the runtime was built for.
-    os: OS,
+    os: PlatformOS,
     
     --- The ABI that the runtime was built for.
-    abi: ABI,
+    abi: PlatformABI,
     
     --- The CPU architecture.
     cpu: {
         --- The architecture the runtime was built for.
         --- This property can have more possible values (Usually from a custom zune build for another architecture).
         --- Currently this is based on the official releases of zune.
-        arch: CPUArchitecture,
+        arch: PlatformCPUArchitecture,
         --- The endianness of the architecture the runtime was built for.
         endian: "big" | "little",
     },
