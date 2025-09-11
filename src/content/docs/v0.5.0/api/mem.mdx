@@ -508,6 +508,28 @@ indexOfDiff(src: MemReadableSlice, needle: MemReadableSlice): number?
 - `needle: MemReadableSlice{:luau}`
 </details>
 
+### indexOfDiffPos
+Find the index of the first difference between two buffers, starting from the given offset.
+```luau tooltips
+-- @hover: (21,37)[-- references:
+-- @link: (8,18)[../objects/FFIPointer]
+-- (1) FFIPointer
+
+export type MemReadableSlice = string | buffer | FFIPointer]
+-- @hover: (63,79)[-- references:
+-- @link: (8,18)[../objects/FFIPointer]
+-- (1) FFIPointer
+
+export type MemReadableSlice = string | buffer | FFIPointer]
+indexOfDiffPos(src: MemReadableSlice, offset: number, needle: MemReadableSlice): number?
+```
+<details open>
+<summary>Parameters</summary>
+- `src: MemReadableSlice{:luau}` - The source to search in.
+- `offset: number{:luau}` - The offset to start searching from.
+- `needle: MemReadableSlice{:luau}`
+</details>
+
 ### indexOfMax
 Find the index of the maximum value in the buffer.
 
@@ -518,11 +540,13 @@ Expects the buffer to be non-empty.
 -- (1) FFIPointer
 
 export type MemReadableSlice = string | buffer | FFIPointer]
-indexOfMax(src: MemReadableSlice): number
+indexOfMax(src: MemReadableSlice, offset: number?, count: number?): number
 ```
 <details open>
 <summary>Parameters</summary>
 - `src: MemReadableSlice{:luau}` - The source to search in.
+- `offset: number?{:luau}` - The offset to start searching from.
+- `count: number?{:luau}` - The number of bytes to search. If not provided, will search until the end of the buffer.
 </details>
 
 ### indexOfMin
@@ -535,11 +559,13 @@ Expects the buffer to be non-empty.
 -- (1) FFIPointer
 
 export type MemReadableSlice = string | buffer | FFIPointer]
-indexOfMin(src: MemReadableSlice): number
+indexOfMin(src: MemReadableSlice, offset: number?, count: number?): number
 ```
 <details open>
 <summary>Parameters</summary>
 - `src: MemReadableSlice{:luau}` - The source to search in.
+- `offset: number?{:luau}` - The offset to start searching from.
+- `count: number?{:luau}` - The number of bytes to search. If not provided, will search until the end of the buffer.
 </details>
 
 ### indexOfMinMax
@@ -552,11 +578,13 @@ Expects the buffer to be non-empty.
 -- (1) FFIPointer
 
 export type MemReadableSlice = string | buffer | FFIPointer]
-indexOfMinMax(src: MemReadableSlice): (number, number)
+indexOfMinMax(src: MemReadableSlice, offset: number?, count: number?): (number, number)
 ```
 <details open>
 <summary>Parameters</summary>
 - `src: MemReadableSlice{:luau}` - The source to search in.
+- `offset: number?{:luau}` - The offset to start searching from.
+- `count: number?{:luau}` - The number of bytes to search. If not provided, will search until the end of the buffer.
 </details>
 
 ### replaceScalar
@@ -568,13 +596,15 @@ Replaces all occurrences of a scalar in the buffer with another scalar.
 -- (1) FFIPointer
 
 export type MemWritableSlice = buffer | FFIPointer]
-replaceScalar(src: MemWritableSlice, char: number, replacement: number): ()
+replaceScalar(src: MemWritableSlice, char: number, replacement: number, offset: number?, count: number?): ()
 ```
 <details open>
 <summary>Parameters</summary>
 - `src: MemWritableSlice{:luau}` - The source to replace in.
 - `char: number{:luau}` - The byte to replace.
 - `replacement: number{:luau}` - The byte to replace with.
+- `offset: number?{:luau}` - The offset to start replacing from.
+- `count: number?{:luau}` - The number of bytes to replace. If not provided, will replace until the end of the buffer.
 </details>
 
 ### max
@@ -587,11 +617,13 @@ Expects the buffer to be non-empty.
 -- (1) FFIPointer
 
 export type MemReadableSlice = string | buffer | FFIPointer]
-max(src: MemReadableSlice): number
+max(src: MemReadableSlice, offset: number?, count: number?): number
 ```
 <details open>
 <summary>Parameters</summary>
 - `src: MemReadableSlice{:luau}` - The source to search in.
+- `offset: number?{:luau}` - The offset to start searching from.
+- `count: number?{:luau}` - The number of bytes to search. If not provided, will search until the end of the buffer.
 </details>
 
 ### min
@@ -604,11 +636,13 @@ Expects the buffer to be non-empty.
 -- (1) FFIPointer
 
 export type MemReadableSlice = string | buffer | FFIPointer]
-min(src: MemReadableSlice): number
+min(src: MemReadableSlice, offset: number?, count: number?): number
 ```
 <details open>
 <summary>Parameters</summary>
 - `src: MemReadableSlice{:luau}` - The source to search in.
+- `offset: number?{:luau}` - The offset to start searching from.
+- `count: number?{:luau}` - The number of bytes to search. If not provided, will search until
 </details>
 
 ### reverse
@@ -620,11 +654,13 @@ Reverses the buffer in place.
 -- (1) FFIPointer
 
 export type MemWritableSlice = buffer | FFIPointer]
-reverse(src: MemWritableSlice): ()
+reverse(src: MemWritableSlice, offset: number?, count: number?): ()
 ```
 <details open>
 <summary>Parameters</summary>
 - `src: MemWritableSlice{:luau}` - The source to reverse in.
+- `offset: number?{:luau}` - The offset to start reversing from.
+- `count: number?{:luau}` - The number of bytes to reverse. If not provided, will reverse until
 </details>
 
 ### rotate
@@ -637,12 +673,14 @@ For example, rotating `[1, 2, 3, 4, 5]` by `2` would result in `[3, 4, 5, 1, 2]`
 -- (1) FFIPointer
 
 export type MemWritableSlice = buffer | FFIPointer]
-rotate(src: MemWritableSlice, amount: number): ()
+rotate(src: MemWritableSlice, amount: number, offset: number?, count: number?): ()
 ```
 <details open>
 <summary>Parameters</summary>
 - `src: MemWritableSlice{:luau}` - The source to rotate in.
 - `amount: number{:luau}` - The amount to rotate by.
+- `offset: number?{:luau}` - The offset to start rotating from.
+- `count: number?{:luau}` - The number of bytes to rotate. If not provided, will rotate up to the end of the buffer.
 </details>
 
 ### set

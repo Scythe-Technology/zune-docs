@@ -43,7 +43,8 @@ format(...any): string
 Creates a buffer sink.
 ```luau tooltips
 -- @hover: (24,41)[export type BufferSinkOptions = {
-    limit: number?, 
+    limit: number?,
+    size: number?, 
 }]
 -- @link: (45,55)[../objects/BufferSink]
 createBufferSink(opts: BufferSinkOptions?): BufferSink
@@ -53,6 +54,8 @@ createBufferSink(opts: BufferSinkOptions?): BufferSink
 - `opts: BufferSinkOptions?{:luau}` - The options for the buffer sink.
   - `limit: number?{:luau}` - The maximum amount of bytes allowed to be written to the buffer.
     - default: `1073741824{:luau}`
+  - `size: number?{:luau}` - The initial size of the buffer.
+    - default: `0{:luau}`
 </details>
 <details>
 <summary>Throws</summary>
