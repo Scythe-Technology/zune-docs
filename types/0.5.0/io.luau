@@ -129,6 +129,9 @@ export type BufferSinkOptions = {
     --- The maximum amount of bytes allowed to be written to the buffer.
     --- @default 1073741824
     limit: number?,
+    --- The initial size of the buffer.
+    --- @default 0
+    size: number?,
 }
 
 type IoLib = {

@@ -122,47 +122,67 @@ type MemLib = {
     --- Find the index of the first difference between two buffers.
     --- @param src The source to search in.
     indexOfDiff: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
+    --- Find the index of the first difference between two buffers, starting from the given offset.
+    --- @param src The source to search in.
+    --- @param offset The offset to start searching from.
+    indexOfDiffPos: (src: MemReadableSlice, offset: number, needle: MemReadableSlice) -> number?,
     --- Find the index of the maximum value in the buffer.
     ---
     --- Expects the buffer to be non-empty.
     --- @param src The source to search in.
-    indexOfMax: (src: MemReadableSlice) -> number,
+    --- @param offset The offset to start searching from.
+    --- @param count The number of bytes to search. If not provided, will search until the end of the buffer.
+    indexOfMax: (src: MemReadableSlice, offset: number?, count: number?) -> number,
     --- Find the index of the minimum value in the buffer.
     ---
     --- Expects the buffer to be non-empty.
     --- @param src The source to search in.
-    indexOfMin: (src: MemReadableSlice) -> number,
+    --- @param offset The offset to start searching from.
+    --- @param count The number of bytes to search. If not provided, will search until the end of the buffer.
+    indexOfMin: (src: MemReadableSlice, offset: number?, count: number?) -> number,
     --- Find both the index of the minimum and maximum values in the buffer.
     ---
     --- Expects the buffer to be non-empty.
     --- @param src The source to search in.
-    indexOfMinMax: (src: MemReadableSlice) -> (number, number),
+    --- @param offset The offset to start searching from.
+    --- @param count The number of bytes to search. If not provided, will search until the end of the buffer.
+    indexOfMinMax: (src: MemReadableSlice, offset: number?, count: number?) -> (number, number),
     --- Replaces all occurrences of a scalar in the buffer with another scalar.
     --- - `[1, 2, 3, 2]` with (`2`, `4`) -> `[1, 4, 3, 4]`
     --- @param src The source to replace in.
     --- @param char The byte to replace.
     --- @param replacement The byte to replace with.
-    replaceScalar: (src: MemWritableSlice, char: number, replacement: number) -> (),
+    --- @param offset The offset to start replacing from.
+    --- @param count The number of bytes to replace. If not provided, will replace until the end of the buffer.
+    replaceScalar: (src: MemWritableSlice, char: number, replacement: number, offset: number?, count: number?) -> (),
     --- Finds the maximum value in the buffer.
     ---
     --- Expects the buffer to be non-empty.
     --- @param src The source to search in.
-    max: (src: MemReadableSlice) -> number,
+    --- @param offset The offset to start searching from.
+    --- @param count The number of bytes to search. If not provided, will search until the end of the buffer.
+    max: (src: MemReadableSlice, offset: number?, count: number?) -> number,
     --- Finds the minimum value in the buffer.
     ---
     --- Expects the buffer to be non-empty.
     --- @param src The source to search in.
-    min: (src: MemReadableSlice) -> number,
+    --- @param offset The offset to start searching from.
+    --- @param count The number of bytes to search. If not provided, will search until
+    min: (src: MemReadableSlice, offset: number?, count: number?) -> number,
     --- Reverses the buffer in place.
     --- - `[1, 2, 3]` -> `[3, 2, 1]`
     --- @param src The source to reverse in.
-    reverse: (src: MemWritableSlice) -> (),
+    --- @param offset The offset to start reversing from.
+    --- @param count The number of bytes to reverse. If not provided, will reverse until
+    reverse: (src: MemWritableSlice, offset: number?, count: number?) -> (),
     --- Rotates the buffer to the left by the given amount.
     ---
     --- For example, rotating `[1, 2, 3, 4, 5]` by `2` would result in `[3, 4, 5, 1, 2]`.
     --- @param src The source to rotate in.
     --- @param amount The amount to rotate by.
-    rotate: (src: MemWritableSlice, amount: number) -> (),
+    --- @param offset The offset to start rotating from.
+    --- @param count The number of bytes to rotate. If not provided, will rotate up to the end of the buffer.
+    rotate: (src: MemWritableSlice, amount: number, offset: number?, count: number?) -> (),
     --- Sets the value of the buffer at the given offset to the given value, for the given count of bytes.
     --- @param dest The source to write in.
     --- @param value The value to set.
