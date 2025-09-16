@@ -119,6 +119,10 @@ type CryptoLib = {
         --- @throws Crypto Error
         verify: (password: string | buffer, hash: string | buffer) -> boolean,
     },
+    uuid: {
+        v4: () -> string,
+        v7: () -> string,
+    },
     --- Cryptographically secure random number generator.
     random: {
         --- Generates a random number (f64).
