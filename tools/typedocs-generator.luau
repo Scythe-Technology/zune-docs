@@ -199,13 +199,15 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
 
     if (writtenDocs["example"]) then
         local existing_code = writtenDocs["example"]:find("```") ~= nil;
+        doc.documentation ..= "\n";
         if (not existing_code) then
-            doc.documentation ..= "\n```luau\n";
+            doc.documentation ..= "```luau\n";
         end
         doc.documentation ..= writtenDocs["example"];
         if (not existing_code) then
-            doc.documentation ..= "\n```\n";
+            doc.documentation ..= "\n```";
         end
+        doc.documentation ..= "\n";
     end
     if (type.tag == "table") then
         local keys = {};

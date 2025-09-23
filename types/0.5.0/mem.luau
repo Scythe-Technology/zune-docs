@@ -190,6 +190,24 @@ type MemLib = {
     --- @default_param offset 0
     --- @param count The number of bytes to write. If not provided, will write until the end of the buffer.
     set: (dest: MemWritableSlice, value: number, offset: number?, count: number?) -> (),
+    --- Reads a vector with only 2 elements from a buffer.
+    --- @param src The source to read from.
+    --- @param offset The offset to start reading from.
+    toVector2: (src: MemReadableSlice, offset: number?) -> vector,
+    --- Reads a vector with only 3 elements from a buffer.
+    --- @param src The source to read from.
+    --- @param offset The offset to start reading from.
+    toVector3: (src: MemReadableSlice, offset: number?) -> vector,
+    --- Writes a vector with only 2 elements to a buffer.
+    --- @param dest The destination to write to.
+    --- @param offset The offset to start writing to.
+    --- @param vec The vector to write.
+    writeVector2: (dest: MemWritableSlice, offset: number?, vec: vector) -> (),
+    --- Writes a vector with only 3 elements to a buffer.
+    --- @param dest The destination to write to.
+    --- @param offset The offset to start writing to.
+    --- @param vec The vector to write.
+    writeVector3: (dest: MemWritableSlice, offset: number?, vec: vector) -> (),
 }
 
 return {} :: MemLib;

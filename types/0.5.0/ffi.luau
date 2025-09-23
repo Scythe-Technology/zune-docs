@@ -27,6 +27,15 @@ type FFIDataType = {
     size: (self: FFIDataType) -> number,
     --- Get the alignment of the data type.
     alignment: (self: FFIDataType) -> number,
+    --- Create an array data type of the given count.
+    array: (self: FFIDataType, count: number) -> FFIArrayType,
+}
+
+--- @class FFIDataType
+type FFIVectorType = {
+    --- Get the offset of a index in the type.
+    --- @param index The index to get the offset of.
+    offset: (self: FFIStructureType, index: number) -> number,
 }
 
 --- @class FFIDataType
@@ -38,7 +47,16 @@ type FFIStructureType = {
     --- @param fields The fields to set in the structure.
     --- @throws FFI Error
     --- @throws Memory Error
-    new: (self: FFIStructureType, fields: {{ [string]: buffer | number }}) -> buffer,
+    new: (self: FFIStructureType, fields: { [string]: buffer | number | FFIPointer | vector }) -> buffer,
+}
+
+--- @class FFIVectorType
+type FFIArrayType = {
+    --- Creates a new instance of the array structure.
+    --- @param values The values to set in the array.
+    --- @throws FFI Error
+    --- @throws Memory Error
+    new: (self: FFIArrayType, values: { [number]: buffer | number | FFIPointer | vector }) -> buffer,
 }
 
 --- @class FFIDataType
@@ -52,7 +70,7 @@ type FFIPointerType = {
     newTag: (self: FFIPointerType, tag: string | buffer) -> FFIPointerType,
 }
 
-export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIArrayType | FFIPointerType
 
 export type FFIFunctionDefintion = {
     --- The return type of the function.
@@ -131,9 +149,9 @@ type FFILib = {
     --- The recommended suffix for the library file.
     ---
     --- Platforms:
-    --- - Windows: `.dll`
-    --- - Linux: `.so`
-    --- - macOS: `.dylib`
+    --- - Windows: `dll`
+    --- - Linux: `so`
+    --- - macOS: `dylib`
     suffix: string,
     types: {
         void: FFIDataType,
@@ -148,6 +166,8 @@ type FFILib = {
         float: FFIDataType,
         double: FFIDataType,
         pointer: FFIPointerType,
+        vector2_32: FFIVectorType,
+        vector3_32: FFIVectorType,
     },
     c: {
         --- @param src The C source code to compile.
@@ -172,13 +192,17 @@ type FFILib = {
     --- @throws FFI Error
     --- @throws Memory Error
     alloc: (size: number, alignment: number?) -> FFIPointer,
+    --- @param type The data type to allocate.
+    --- @throws FFI Error
+    --- @throws Memory Error
+    create: (type: FFIAnyDataType) -> FFIPointer,
     --- @param src The pointer to free. If the pointer is static, it must have a known size.
     --- @throws FFI Error
     --- @throws Memory Error
     free: (src: FFIPointer) -> (),
     --- @param src The pointer to duplicate. If the source is a static pointer, it must have a known size.
     --- @throws Memory Error
-    dupe: (src: buffer | FFIPointer) -> FFIPointer,
+    dupe: (src: buffer | FFIPointer | vector) -> FFIPointer,
     --- @param tag The tag id to get the name of.
     tagName: (tag: number) -> string?,
     --- Creates a structure data type.
