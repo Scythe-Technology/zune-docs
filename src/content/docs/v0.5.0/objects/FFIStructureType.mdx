@@ -20,11 +20,12 @@ Get the offset of a field in the structure.
 ### new
 Creates a new instance of the structure.
 ```luau tooltips
-:new(fields: {{[string]: buffer | number}}): buffer
+-- @link: (43,53)[../objects/FFIPointer]
+:new(fields: {[string]: buffer | number | FFIPointer | vector}): buffer
 ```
 <details open>
 <summary>Parameters</summary>
-- `fields: {{ [string]: buffer | number }}{:luau}` - The fields to set in the structure.
+- `fields: { [string]: buffer | number | FFIPointer | vector }{:luau}` - The fields to set in the structure.
 </details>
 <details>
 <summary>Throws</summary>

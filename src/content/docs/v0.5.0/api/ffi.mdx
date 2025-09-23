@@ -23,9 +23,9 @@ prefix: string
 The recommended suffix for the library file.
 
 Platforms:
-- Windows: `.dll`
-- Linux: `.so`
-- macOS: `.dylib`
+- Windows: `dll`
+- Linux: `so`
+- macOS: `dylib`
 ```luau tooltips
 suffix: string
 ```
@@ -43,7 +43,9 @@ suffix: string
     u64: FFIDataType,
     float: FFIDataType,
     double: FFIDataType,
-    pointer: FFIPointerType, 
+    pointer: FFIPointerType,
+    vector2_32: FFIVectorType,
+    vector3_32: FFIVectorType, 
 }]
 types: <table>
 ```
@@ -115,6 +117,32 @@ alloc(size: number, alignment: number?): FFIPointer
 - Memory Error
 </details>
 
+### create
+```luau tooltips
+-- @hover: (14,28)[-- references:
+-- @link: (8,19)[../objects/FFIDataType]
+-- (1) FFIDataType
+-- @link: (8,24)[../objects/FFIStructureType]
+-- (2) FFIStructureType
+-- @link: (8,20)[../objects/FFIArrayType]
+-- (3) FFIArrayType
+-- @link: (8,22)[../objects/FFIPointerType]
+-- (4) FFIPointerType
+
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIArrayType | FFIPointerType]
+-- @link: (31,41)[../objects/FFIPointer]
+create(type: FFIAnyDataType): FFIPointer
+```
+<details open>
+<summary>Parameters</summary>
+- `type: FFIAnyDataType{:luau}` - The data type to allocate.
+</details>
+<details>
+<summary>Throws</summary>
+- FFI Error
+- Memory Error
+</details>
+
 ### free
 ```luau tooltips
 -- @link: (11,21)[../objects/FFIPointer]
@@ -132,13 +160,13 @@ free(src: FFIPointer): ()
 
 ### dupe
 ```luau tooltips
--- @link: (33,43)[../objects/FFIPointer]
+-- @link: (42,52)[../objects/FFIPointer]
 -- @link: (20,30)[../objects/FFIPointer]
-dupe(src: buffer | FFIPointer): FFIPointer
+dupe(src: buffer | FFIPointer | vector): FFIPointer
 ```
 <details open>
 <summary>Parameters</summary>
-- `src: buffer | FFIPointer{:luau}` - The pointer to duplicate. If the source is a static pointer, it must have a known size.
+- `src: buffer | FFIPointer | vector{:luau}` - The pointer to duplicate. If the source is a static pointer, it must have a known size.
 </details>
 <details>
 <summary>Throws</summary>
@@ -165,10 +193,12 @@ Creates a structure data type.
 -- (1) FFIDataType
 -- @link: (8,24)[../objects/FFIStructureType]
 -- (2) FFIStructureType
+-- @link: (8,20)[../objects/FFIArrayType]
+-- (3) FFIArrayType
 -- @link: (8,22)[../objects/FFIPointerType]
--- (3) FFIPointerType
+-- (4) FFIPointerType
 
-export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType]
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIArrayType | FFIPointerType]
 -- @link: (47,63)[../objects/FFIStructureType]
 struct(fields: {{[string]: FFIAnyDataType}}): FFIStructureType
 ```
@@ -189,10 +219,12 @@ struct(fields: {{[string]: FFIAnyDataType}}): FFIStructureType
 -- (1) FFIDataType
 -- @link: (8,24)[../objects/FFIStructureType]
 -- (2) FFIStructureType
+-- @link: (8,20)[../objects/FFIArrayType]
+-- (3) FFIArrayType
 -- @link: (8,22)[../objects/FFIPointerType]
--- (3) FFIPointerType
+-- (4) FFIPointerType
 
-export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIArrayType | FFIPointerType
 
 export type FFIFunctionDefintion = {
     returns: FFIAnyDataType,
@@ -221,10 +253,12 @@ fn(definition: FFIFunctionDefintion, srcPtr: FFIPointer): ((...any) -> any)
 -- (1) FFIDataType
 -- @link: (8,24)[../objects/FFIStructureType]
 -- (2) FFIStructureType
+-- @link: (8,20)[../objects/FFIArrayType]
+-- (3) FFIArrayType
 -- @link: (8,22)[../objects/FFIPointerType]
--- (3) FFIPointerType
+-- (4) FFIPointerType
 
-export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIArrayType | FFIPointerType
 
 export type FFIFunctionDefintion = {
     returns: FFIAnyDataType,
@@ -261,10 +295,12 @@ export type FFILibrary = {
 -- (1) FFIDataType
 -- @link: (8,24)[../objects/FFIStructureType]
 -- (2) FFIStructureType
+-- @link: (8,20)[../objects/FFIArrayType]
+-- (3) FFIArrayType
 -- @link: (8,22)[../objects/FFIPointerType]
--- (3) FFIPointerType
+-- (4) FFIPointerType
 
-export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIPointerType
+export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIArrayType | FFIPointerType
 
 export type FFIFunctionDefintion = {
     returns: FFIAnyDataType,

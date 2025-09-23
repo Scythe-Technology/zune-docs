@@ -701,3 +701,69 @@ set(dest: MemWritableSlice, value: number, offset: number?, count: number?): ()
   - default: `0{:luau}`
 - `count: number?{:luau}` - The number of bytes to write. If not provided, will write until the end of the buffer.
 </details>
+
+### toVector2
+Reads a vector with only 2 elements from a buffer.
+```luau tooltips
+-- @hover: (16,32)[-- references:
+-- @link: (8,18)[../objects/FFIPointer]
+-- (1) FFIPointer
+
+export type MemReadableSlice = string | buffer | FFIPointer]
+toVector2(src: MemReadableSlice, offset: number?): vector
+```
+<details open>
+<summary>Parameters</summary>
+- `src: MemReadableSlice{:luau}` - The source to read from.
+- `offset: number?{:luau}` - The offset to start reading from.
+</details>
+
+### toVector3
+Reads a vector with only 3 elements from a buffer.
+```luau tooltips
+-- @hover: (16,32)[-- references:
+-- @link: (8,18)[../objects/FFIPointer]
+-- (1) FFIPointer
+
+export type MemReadableSlice = string | buffer | FFIPointer]
+toVector3(src: MemReadableSlice, offset: number?): vector
+```
+<details open>
+<summary>Parameters</summary>
+- `src: MemReadableSlice{:luau}` - The source to read from.
+- `offset: number?{:luau}` - The offset to start reading from.
+</details>
+
+### writeVector2
+Writes a vector with only 2 elements to a buffer.
+```luau tooltips
+-- @hover: (20,36)[-- references:
+-- @link: (8,18)[../objects/FFIPointer]
+-- (1) FFIPointer
+
+export type MemWritableSlice = buffer | FFIPointer]
+writeVector2(dest: MemWritableSlice, offset: number?, vec: vector): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `dest: MemWritableSlice{:luau}` - The destination to write to.
+- `offset: number?{:luau}` - The offset to start writing to.
+- `vec: vector{:luau}` - The vector to write.
+</details>
+
+### writeVector3
+Writes a vector with only 3 elements to a buffer.
+```luau tooltips
+-- @hover: (20,36)[-- references:
+-- @link: (8,18)[../objects/FFIPointer]
+-- (1) FFIPointer
+
+export type MemWritableSlice = buffer | FFIPointer]
+writeVector3(dest: MemWritableSlice, offset: number?, vec: vector): ()
+```
+<details open>
+<summary>Parameters</summary>
+- `dest: MemWritableSlice{:luau}` - The destination to write to.
+- `offset: number?{:luau}` - The offset to start writing to.
+- `vec: vector{:luau}` - The vector to write.
+</details>
