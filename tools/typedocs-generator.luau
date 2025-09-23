@@ -172,7 +172,7 @@ local function parseDocumentation(docs: { string }): any
             end
             current = tag;
         else
-            value = doc:match("%-%-%-%s*(.+)") :: any;
+            value = doc:match("%-%-%-%s(.+)") or doc:match("%-%-%-%s*(.+)") :: any;
             if (not value) then
                 if (doc:match("%-%-%-.*")) then
                     result[current] = (result[current] or "") .. `\n`;

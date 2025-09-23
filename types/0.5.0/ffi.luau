@@ -35,7 +35,7 @@ type FFIDataType = {
 type FFIVectorType = {
     --- Get the offset of a index in the type.
     --- @param index The index to get the offset of.
-    offset: (self: FFIStructureType, index: number) -> number,
+    offset: (self: FFIVectorType, index: number) -> number,
 }
 
 --- @class FFIDataType
@@ -207,8 +207,8 @@ type FFILib = {
     tagName: (tag: number) -> string?,
     --- Creates a structure data type.
     --- - The order of the fields is the number index of the field table.
-    --- -- There cannot be multiple fields in the same field table.
-    --- -- Multiple fields with the same field name is not allowed.
+    ---   - There cannot be multiple fields in the same field table.
+    ---   - Multiple fields with the same field name is not allowed.
     --- @example
     --- ```lua
     --- ffi.struct {
