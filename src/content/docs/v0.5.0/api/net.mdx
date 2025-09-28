@@ -280,6 +280,8 @@ Starts a new HTTP server.
 -- @hover: (18,34)[-- references:
 -- @link: (8,21)[../objects/HttpWebSocket]
 -- (1) HttpWebSocket
+-- @link: (8,22)[../objects/TlsCertKeyPair]
+-- (2) TlsCertKeyPair
 
 export type HttpServerResponse = {
     status_code: number,
@@ -315,10 +317,15 @@ export type HttpServeOptions = {
     reuse_address: boolean?,
     backlog: number?,
     max_body_size: number?,
+    max_header_size: number?,
+    max_headers: number?,
     client_timeout: number?,
     max_connections: number?,
     request: (request: HttpServerRequest) -> string | buffer | HttpServerResponse,
-    websocket: ServerWebSocketHandlers?, 
+    websocket: ServerWebSocketHandlers?,
+    tls: {
+        auth: TlsCertKeyPair?, 
+    }?, 
 }]
 -- @link: (37,47)[../objects/HttpServer]
 http.serve(opts: HttpServeOptions): HttpServer
@@ -334,7 +341,11 @@ http.serve(opts: HttpServeOptions): HttpServer
   - `backlog: number?{:luau}` - The maximum number of connections the server will backlog to the OS.
     - default: `128{:luau}`
   - `max_body_size: number?{:luau}` - The maximum size of the request body.
-    - default: `4096{:luau}`
+    - default: `1048576{:luau}`
+  - `max_header_size: number?{:luau}` - The maximum size of the request headers for the parser.
+    - default: `4092{:luau}`
+  - `max_headers: number?{:luau}` - The maximum number of headers to parse from the request.
+    - default: `100{:luau}`
   - `client_timeout: number?{:luau}` - The timeout for the client.
     - default: `60{:luau}`
   - `max_connections: number?{:luau}` - The maximum number of connections.
@@ -344,6 +355,7 @@ http.serve(opts: HttpServeOptions): HttpServer
     - If a `HttpServerResponse` is returned, it will be sent as the response.
     - If a `string` or `buffer` is returned, it will be sent as the response body with a `200 OK` status.
   - `websocket: ServerWebSocketHandlers?{:luau}` - The handlers for WebSocket connections.
+  - `tls: {auth: TlsCertKeyPair?, }?{:luau}` - Tls options for the server.
 </details>
 <details>
 <summary>Throws</summary>
@@ -375,7 +387,11 @@ http.request(host: string): HttpResponse<string>
     },
     body: T, 
 }]
--- @hover: (34,52)[export type HttpRequestOptions = {
+-- @hover: (34,52)[-- references:
+-- @link: (8,21)[../objects/TlsCertBundle]
+-- (1) TlsCertBundle
+
+export type HttpRequestOptions = {
     headers: {
         [string]: string
     }?,
@@ -385,10 +401,18 @@ http.request(host: string): HttpResponse<string>
     timeout: number?,
     max_body_size: number?,
     max_header_size: number?,
-    max_headers: number?, 
+    max_headers: number?,
+    tls: {
+        host: string?,
+        ca: TlsCertBundle?, 
+    }?, 
 }]
 http.request(host: string, opts: HttpRequestOptions?, bytes: false?): HttpResponse<string>
--- @hover: (34,52)[export type HttpRequestOptions = {
+-- @hover: (34,52)[-- references:
+-- @link: (8,21)[../objects/TlsCertBundle]
+-- (1) TlsCertBundle
+
+export type HttpRequestOptions = {
     headers: {
         [string]: string
     }?,
@@ -398,7 +422,11 @@ http.request(host: string, opts: HttpRequestOptions?, bytes: false?): HttpRespon
     timeout: number?,
     max_body_size: number?,
     max_header_size: number?,
-    max_headers: number?, 
+    max_headers: number?,
+    tls: {
+        host: string?,
+        ca: TlsCertBundle?, 
+    }?, 
 }]
 -- @hover: (69,81)[export type HttpResponse<T> = {
     ok: boolean,
@@ -410,7 +438,11 @@ http.request(host: string, opts: HttpRequestOptions?, bytes: false?): HttpRespon
     body: T, 
 }]
 http.request(host: string, opts: HttpRequestOptions?, bytes: true): HttpResponse<buffer>
--- @hover: (34,52)[export type HttpRequestOptions = {
+-- @hover: (34,52)[-- references:
+-- @link: (8,21)[../objects/TlsCertBundle]
+-- (1) TlsCertBundle
+
+export type HttpRequestOptions = {
     headers: {
         [string]: string
     }?,
@@ -420,7 +452,11 @@ http.request(host: string, opts: HttpRequestOptions?, bytes: true): HttpResponse
     timeout: number?,
     max_body_size: number?,
     max_header_size: number?,
-    max_headers: number?, 
+    max_headers: number?,
+    tls: {
+        host: string?,
+        ca: TlsCertBundle?, 
+    }?, 
 }]
 -- @hover: (73,85)[export type HttpResponse<T> = {
     ok: boolean,
@@ -452,6 +488,7 @@ http.request(host: string, opts: HttpRequestOptions?, bytes: boolean?): HttpResp
     - default: `4096{:luau}`
   - `max_headers: number?{:luau}` - The maximum number of headers to parse from the response.
     - default: `100{:luau}`
+  - `tls: {host: string?, ca: TlsCertBundle?, }?{:luau}` - Tls options for the request.
 - `bytes: false? | true | boolean?{:luau}` - Whether to return the response body as a buffer or string.
 </details>
 <details>
@@ -465,6 +502,8 @@ http.request(host: string, opts: HttpRequestOptions?, bytes: boolean?): HttpResp
 -- @hover: (36,56)[-- references:
 -- @link: (8,21)[../objects/HttpWebSocket]
 -- (1) HttpWebSocket
+-- @link: (8,21)[../objects/TlsCertBundle]
+-- (2) TlsCertBundle
 
 export type HttpServerResponse = {
     status_code: number,
@@ -475,12 +514,19 @@ export type HttpServerResponse = {
 }
 
 export type HttpWebSocketOptions = {
+    headers: {
+        [string]: string
+    }?,
     protocols: {string}?,
     timeout: number?,
     accept: ((socket: HttpWebSocket, request: HttpServerResponse) -> boolean)?,
     open: ((socket: HttpWebSocket) -> ())?,
     close: ((socket: HttpWebSocket, close: number?) -> ())?,
-    message: ((socket: HttpWebSocket, message: string) -> ())?, 
+    message: ((socket: HttpWebSocket, message: string) -> ())?,
+    tls: {
+        host: string?,
+        ca: TlsCertBundle?, 
+    }?, 
 }]
 -- @link: (59,72)[../objects/HttpWebSocket]
 http.websocket(host: string, opts: HttpWebSocketOptions): HttpWebSocket
@@ -489,6 +535,7 @@ http.websocket(host: string, opts: HttpWebSocketOptions): HttpWebSocket
 <summary>Parameters</summary>
 - `host: string{:luau}` - The host to connect to.
 - `opts: HttpWebSocketOptions{:luau}` - The options for the WebSocket.
+  - `headers: {[string]: string}?{:luau}`
   - `protocols: {string}?{:luau}` - The protocols to send to the server.
   - `timeout: number?{:luau}` - The timeout for the WebSocket connection.
     - If the timeout is negative, the WebSocket will never timeout.
@@ -497,6 +544,7 @@ http.websocket(host: string, opts: HttpWebSocketOptions): HttpWebSocket
   - `open: ((socket: HttpWebSocket) -> ())?{:luau}` - The function to call when the WebSocket connection is opened.
   - `close: ((socket: HttpWebSocket, close: number?) -> ())?{:luau}` - The function to call when the WebSocket connection is closed.
   - `message: ((socket: HttpWebSocket, message: string) -> ())?{:luau}` - The function to call when a message is received.
+  - `tls: {host: string?, ca: TlsCertBundle?, }?{:luau}` - Tls options for the WebSocket connection.
 </details>
 <details>
 <summary>Throws</summary>
