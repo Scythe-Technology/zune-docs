@@ -70,83 +70,117 @@ type MemLib = {
     --- Find the index of a needle in the buffer.
     --- @param src The source to search in.
     --- @param needle The needle to search for.
-    indexOf: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
+    find: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
     --- Find the index of a needle in the buffer, starting from the given offset.
     --- @param src The source to search in.
     --- @param offset The offset to start searching from.
     --- @param needle The needle to search for.
-    indexOfPos: (src: MemReadableSlice, offset: number, needle: MemReadableSlice) -> number?,
+    findPos: (src: MemReadableSlice, offset: number, needle: MemReadableSlice) -> number?,
     --- Find the last index of a needle in the buffer.
     --- @param src The source to search in.
     --- @param needle The needle to search for.
-    lastIndexOf: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
+    findLast: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
     --- Find the index of a scalar/char in the buffer.
     --- @param src The source to search in.
     --- @param char The byte to search for.
-    indexOfScalar: (src: MemReadableSlice, char: number) -> number?,
+    findScalar: (src: MemReadableSlice, char: number) -> number?,
     --- Find the index of a scalar/char in the buffer, starting from the given offset.
     --- @param src The source to search in.
     --- @param offset The offset to start searching from.
     --- @param char The byte to search for.
-    indexOfScalarPos: (src: MemReadableSlice, offset: number, char: number) -> number?,
+    findScalarPos: (src: MemReadableSlice, offset: number, char: number) -> number?,
     --- Find the last index of a scalar/char in the buffer.
     --- @param src The source to search in.
     --- @param char The byte to search for.
-    lastIndexOfScalar: (src: MemReadableSlice, char: number) -> number?,
+    findScalarLast: (src: MemReadableSlice, char: number) -> number?,
     --- Find the index of the first byte that is in the given `needle`.
     --- @param src The source to search in.
     --- @param needle The bytes to search for.
-    indexOfAny: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
+    findAny: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
     --- Find the index of the first byte that is in the given `needle`, starting from the given `offset`.
     --- @param src The source to search in.
     --- @param offset The offset to start searching from.
     --- @param needle The bytes to search for.
-    indexOfAnyPos: (src: MemReadableSlice, offset: number, needle: MemReadableSlice) -> number?,
+    findAnyPos: (src: MemReadableSlice, offset: number, needle: MemReadableSlice) -> number?,
     --- Find the last index of a byte that is in the given `needle`.
     --- @param src The source to search in.
     --- @param needle The bytes to search for.
-    lastIndexOfAny: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
+    findAnyLast: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
     --- Find the index of the first byte that is not in the given `needle`.
     --- @param src The source to search in.
     --- @param needle The bytes to not search for.
-    indexOfNone: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
+    findNone: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
     --- Find the index of the first byte that is not in the given `needle`, starting from the given `offset`.
     --- @param src The source to search in.
     --- @param offset The offset to start searching from.
     --- @param needle The bytes to not search for.
-    indexOfNonePos: (src: MemReadableSlice, offset: number, needle: MemReadableSlice) -> number?,
+    findNonePos: (src: MemReadableSlice, offset: number, needle: MemReadableSlice) -> number?,
     --- Find the last index of a byte that is not in the given `needle`.
     --- @param src The source to search in.
     --- @param needle The bytes to not search for.
-    lastIndexOfNone: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
+    findNoneLast: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
     --- Find the index of the first difference between two buffers.
     --- @param src The source to search in.
-    indexOfDiff: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
+    findDiff: (src: MemReadableSlice, needle: MemReadableSlice) -> number?,
     --- Find the index of the first difference between two buffers, starting from the given offset.
     --- @param src The source to search in.
     --- @param offset The offset to start searching from.
-    indexOfDiffPos: (src: MemReadableSlice, offset: number, needle: MemReadableSlice) -> number?,
+    findDiffPos: (src: MemReadableSlice, offset: number, needle: MemReadableSlice) -> number?,
     --- Find the index of the maximum value in the buffer.
     ---
     --- Expects the buffer to be non-empty.
     --- @param src The source to search in.
     --- @param offset The offset to start searching from.
     --- @param count The number of bytes to search. If not provided, will search until the end of the buffer.
-    indexOfMax: (src: MemReadableSlice, offset: number?, count: number?) -> number,
+    findMax: (src: MemReadableSlice, offset: number?, count: number?) -> number,
     --- Find the index of the minimum value in the buffer.
     ---
     --- Expects the buffer to be non-empty.
     --- @param src The source to search in.
     --- @param offset The offset to start searching from.
     --- @param count The number of bytes to search. If not provided, will search until the end of the buffer.
-    indexOfMin: (src: MemReadableSlice, offset: number?, count: number?) -> number,
+    findMin: (src: MemReadableSlice, offset: number?, count: number?) -> number,
     --- Find both the index of the minimum and maximum values in the buffer.
     ---
     --- Expects the buffer to be non-empty.
     --- @param src The source to search in.
     --- @param offset The offset to start searching from.
     --- @param count The number of bytes to search. If not provided, will search until the end of the buffer.
-    indexOfMinMax: (src: MemReadableSlice, offset: number?, count: number?) -> (number, number),
+    findMinMax: (src: MemReadableSlice, offset: number?, count: number?) -> (number, number),
+    --- Cuts the buffer only if it starts with the given prefix. Returning the rest of the buffer.
+    --- @param src The source to cut from.
+    --- @param prefix The prefix to check for.
+    --- @throws Memory Error
+    cutPrefix: (src: MemReadableSlice, prefix: MemReadableSlice) -> buffer?,
+    --- Cuts the buffer only if it ends with the given suffix. Returning the rest of the buffer.
+    --- @param src The source to cut from.
+    --- @param suffix The suffix to check for.
+    --- @throws Memory Error
+    cutSuffix: (src: MemReadableSlice, suffix: MemReadableSlice) -> buffer?,
+    --- Cuts the buffer at the first occurrence of the needle, returning the part before and after the needle.
+    --- If the needle is not found, returns nil.
+    --- @param src The source to cut from.
+    --- @param needle The needle to cut at.
+    --- @throws Memory Error
+    cut: (src: MemReadableSlice, needle: MemReadableSlice) -> (buffer?, buffer?),
+    --- Cuts the buffer at the last occurrence of the needle, returning the part before and after the needle.
+    --- If the needle is not found, returns nil.
+    --- @param src The source to cut from.
+    --- @param needle The needle to cut at.
+    --- @throws Memory Error
+    cutLast: (src: MemReadableSlice, needle: MemReadableSlice) -> (buffer?, buffer?),
+    --- Cuts the buffer at the first occurrence of the scalar/char, returning the part before and after the char.
+    --- If the char is not found, returns nil.
+    --- @param src The source to cut from.
+    --- @param char The byte to cut at.
+    --- @throws Memory Error
+    cutScalar: (src: MemReadableSlice, char: number) -> (buffer?, buffer?),
+    --- Cuts the buffer at the last occurrence of the scalar/char, returning the part before and after the char.
+    --- If the char is not found, returns nil.
+    --- @param src The source to cut from.
+    --- @param char The byte to cut at.
+    --- @throws Memory Error
+    cutScalarLast: (src: MemReadableSlice, char: number) -> (buffer?, buffer?),
     --- Replaces all occurrences of a scalar in the buffer with another scalar.
     --- - `[1, 2, 3, 2]` with (`2`, `4`) -> `[1, 4, 3, 4]`
     --- @param src The source to replace in.

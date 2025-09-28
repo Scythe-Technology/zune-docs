@@ -141,8 +141,14 @@ export type HttpServeOptions = {
     --- @default 128
     backlog: number?,
     --- The maximum size of the request body.
-    --- @default 4096
+    --- @default 1048576
     max_body_size: number?,
+    --- The maximum size of the request headers for the parser.
+    --- @default 4092
+    max_header_size: number?,
+    --- The maximum number of headers to parse from the request.
+    --- @default 100
+    max_headers: number?,
     --- The timeout for the client.
     --- @default 60
     client_timeout: number?,
@@ -156,6 +162,10 @@ export type HttpServeOptions = {
     request: (request: HttpServerRequest) -> string | buffer | HttpServerResponse,
     --- The handlers for WebSocket connections.
     websocket: ServerWebSocketHandlers?,
+    --- Tls options for the server.
+    tls: {
+        auth: TlsCertKeyPair?,
+    }?,
 }
 
 export type HttpResponse<T> = {
@@ -186,9 +196,15 @@ export type HttpRequestOptions = {
     --- The maximum number of headers to parse from the response.
     --- @default 100
     max_headers: number?,
+    --- Tls options for the request.
+    tls: {
+        host: string?,
+        ca: TlsCertBundle?,
+    }?,
 }
 
 export type HttpWebSocketOptions = {
+    headers: {[string]: string}?,
     --- The protocols to send to the server.
     protocols: {string}?,
     --- The timeout for the WebSocket connection.
@@ -203,6 +219,11 @@ export type HttpWebSocketOptions = {
     close: ((socket: HttpWebSocket, close: number?) -> ())?,
     --- The function to call when a message is received.
     message: ((socket: HttpWebSocket, message: string) -> ())?,
+    --- Tls options for the WebSocket connection.
+    tls: {
+        host: string?,
+        ca: TlsCertBundle?,
+    }?,
 }
 
 --- The table of address families.
