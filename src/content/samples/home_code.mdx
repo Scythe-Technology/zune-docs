@@ -1,7 +1,7 @@
 import { Tabs } from 'nextra/components'
 
 ### Run Luau on your machine
-<Tabs items={['Hello World', 'Process', 'Server', 'Testing']}>
+<Tabs items={['Hello World', 'Platform', 'Server', 'Testing']}>
   <Tabs.Tab>
 ```luau copy showLineNumbers filename="hello_world.luau"
 print("Hello World!")
@@ -15,10 +15,10 @@ Hello World!
   </Tabs.Tab>
   <Tabs.Tab>
 ```luau copy showLineNumbers filename="os_arch.luau"
-local process = zune.process
+local platform = zune.platform
 
-print(process.os) -- <Operating System>
-print(process.arch) -- <CPU Architecture>
+print(platform.os) -- <Operating System>
+print(platform.cpu.arch) -- <CPU Architecture>
 ```
 ```sh
 $ zune run os_arch
@@ -33,10 +33,10 @@ x86_64
 local net = zune.net
 
 local server = net.serve({
-     port = 8080,
-     request = function(req)
-          return "Hello!";
-     end
+    port = 8080,
+    request = function(req)
+        return "Hello!";
+    end
 })
 
 print("Http Server Running.")

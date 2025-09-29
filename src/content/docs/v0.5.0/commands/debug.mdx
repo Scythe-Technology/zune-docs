@@ -40,3 +40,9 @@ Disables print formatting
 ```bash
 zune debug --no-fmt ...
 ```
+
+### Ipc-port
+The client debugger would attempt to connect to `127.0.0.1:<port>` as a TCP Client with the provided `<port>` parameter after `--ipc-port=`, in this mode, the signals and controls have special message encoding.
+```bash
+zune debug --ipc-port=3000
+```

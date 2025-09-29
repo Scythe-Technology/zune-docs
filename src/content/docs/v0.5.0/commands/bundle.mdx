@@ -20,15 +20,17 @@ Requires should also work with bundled builds if you bundle with all your necess
 ### Usage
 
 ```bash
-zune bundle [...-flags] <entry> [...sources]
+zune bundle [...flags or files]
 ```
-- `[...-flags]` - flags to use for the bundle command.
-- `<entry>` - (**required**) the entry script that should be executed.
-- `[...sources]` - the scripts or files to bundle with (glob supported).
+- `[...flags or files]` - flags & files to use for the bundle command.
+
+The first source obtained by exact path or glob pattern would be the entry file that zune would execute, it is recommended to define the entry file first.
+
+The last flags would take priority.
 
 ### Example
 ```bash
-zune bundle --out=build/myproject src/main.luau src/**/*.luau -f **/*.png **/*.html
+zune bundle src/main.luau src/**/*.luau -f **/*.png **/*.html --out=build/myproject
 ```
 <FileTree>
   <FileTree.File name="zune.toml" />
@@ -50,6 +52,20 @@ zune bundle --out=build/myproject src/main.luau src/**/*.luau -f **/*.png **/*.h
 </FileTree>
 
 ## Flags
+
+### Read
+This flag is the only one that must be explicitly first and the path to the bundled app provided after.
+
+This would read the bundled app, and output information about the app, but only showing size, bundle format information, main entry file name, etc.
+
+In cases if an invalid bundled app is provided, `--read` flag would display if whether the bundle does not exist or is corrupted.
+
+Useful for validating the bundle, inspecting size/usage and entry script.
+```bash
+zune bundle --read <executable>
+```
+
+---
 
 All luau flags, like optimization level, debug level, native code generation, etc. are supported, this would be reflected on the final bundled build.
 
@@ -143,16 +159,16 @@ This can reduce the size of embedded files, and would be decompressed at runtime
 
 At times it is better to use this command when working with pretty medium or large files.
 ```bash
-zune bundle --compression=<zlib|lz4|zstd> ...
+zune bundle --compression=<zlib|lz4|zstd|gzip|flate> ...
 ```
 
 ## Sources
 
 ### Scripts
-When you pass `--scripts` or `-s` in the `[...sources]` section of the command,
-all arguments after this flag would be stored as `scripts` in the bundled app.
+When you pass `--scripts` or `-s` to the command,
+all file arguments after this flag would be stored as `scripts` in the bundled app.
 
-<Callout type="default">This is the default after the `entry` script is provided</Callout>
+<Callout type="default">This is the default when passing file arguments without explicitly using `--files`/`-f`</Callout>
 <Callout type="info">The file must have a `.luau` or `.lua` file extension</Callout>
 
 #### Example
@@ -161,8 +177,8 @@ zune bundle main.luau a.luau -s b.luau c.luau --scripts d.luau **/*.luau
 ```
 
 ### Files
-When you pass `--files` or `-f` in the `[...sources]` section of the command,
-all arguments after this flag would be stored as `files` in the bundled app.
+When you pass `--files` or `-f` to the command,
+all file arguments after this flag would be stored as `files` in the bundled app.
 
 <Callout type="info">If you are embedding a `luau`/`lua` file, you must NOT have the file included as a script before or after</Callout>
 
@@ -173,5 +189,5 @@ zune bundle main.luau -f a.txt b.png --files c.luau **/*.md
 
 #### Scripts & Files Example
 ```bash
-zune bundle main.luau -f a.txt -s b.luau --files c --scripts d.luau
+zune bundle -f a.txt -s main.luau b.luau --files c --scripts d.luau
 ```
