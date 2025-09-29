@@ -1,5 +1,5 @@
---- @name DateTime
---- @global `zune.datetime`
+--- @name Time
+--- @global `zune.time`
 --- @summary A library to interact with date and time.
 
 type __0__ = typeof(nil);

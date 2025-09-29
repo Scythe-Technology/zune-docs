@@ -53,7 +53,7 @@ type SQLite3Database = {
 type SQLiteLib = {
     --- Opens a SQLite3 database.
     --- @param path The path to the database file.
-    --- @default_param path `":memory:"`
+    --- @default_param path ":memory:"
     --- @throws SQLite3 Error
     --- @throws Memory Error
     open: (path: string?) -> SQLite3Database,

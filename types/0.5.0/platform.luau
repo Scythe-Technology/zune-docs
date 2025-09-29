@@ -1,6 +1,6 @@
---- @name Process
---- @global `zune.process`
---- @summary A library that interacts with the system process.
+--- @name Platform
+--- @global `zune.platform`
+--- @summary A library that provides information about the platform the runtime is running on, and some system information.
 
 type __0__ = typeof(nil);
 type FileHandle = typeof(nil :: any);

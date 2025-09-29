@@ -210,7 +210,7 @@ local function generatePageFunction(library: any, name: string, fn_types: {any},
         end
         if type.vararg then
             vararg = type.vararg;
-            if (#type.parameters > 0) then
+            if (#type.parameters > if (self) then 1 else 0) then
                 func ..= `, `;
             end
             if (type.vararg.tag == "generic") then
@@ -284,6 +284,7 @@ local function generatePageFunction(library: any, name: string, fn_types: {any},
                         or type.types[2].node.tag ~= "optional"
                     ) then
                         type_text = printer.printType(type):gsub("^%s+", "");
+                        optional = type_text:find("?$") ~= nil;
                     else
                         raw_type = type.types[1].node.name.text;
                         type_text = `{raw_type}?`;
@@ -291,6 +292,7 @@ local function generatePageFunction(library: any, name: string, fn_types: {any},
                     end
                 else
                     type_text = printer.printType(type):gsub("^%s+", "");
+                    optional = type_text:find("?$") ~= nil;
                 end
                 if (type_text == type_name) then
                     continue;
@@ -558,6 +560,7 @@ local function generatePage(library: any, summary: any)
             local ns_docs = parseDocumentation(namespace_docs.docs);
             if (ns_docs["@base"]) then
                 table.insert(page, ns_docs["@base"]);
+                table.insert(page, "");
             end
 
             if (#ns_properties > 0) then
