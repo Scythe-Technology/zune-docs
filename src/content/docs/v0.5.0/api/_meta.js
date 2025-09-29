@@ -13,7 +13,7 @@ export default {
   io: "io",
   crypto: "crypto",
   regex: "regex",
-  datetime: "datetime",
+  time: "time",
   ffi: "ffi",
   sqlite: "sqlite",
   require: "require",
