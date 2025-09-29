@@ -3,7 +3,13 @@
 import { Image, Callout } from 'nextra/components'
 import LOGO_TAG from '../../../public/logo-tag.png'
 
-This major release was long overdue and has been in development for a long time. The majority of the focus was on turning a poorly made runtime into a production-level runtime, with a lot of new features, improvements, and bug fixes.
+Total of **604** commits, **115185** added & **69545** removed lines.
+
+<sub>There are more uncounted commits done for zune dependencies managed by **Scythe-Technology** that was specifically done mainly for zune.</sub>
+
+---
+
+This major release was long overdue and has been in development for a long time. The majority of the focus was on turning a prototype runtime into a higher quality runtime, with a lot of new features, improvements, and bug fixes.
 
 Also, with a slight rebranding of the runtime. From `Zune` to `zune`/`ZUNE`, and a new logo.
 
@@ -38,7 +44,9 @@ Colored zune output can be disabled in `zune.toml` or NO_COLOR environment varia
 
 ### Debugger
 A debugger has been added in this version, allowing you to debug your Luau scripts.
-Currently, the debugger is an interactive CLI similar to `gdb` program or `repl` command, but there is a [DAP server & VSCode extension](https://github.com/Sythivo/zune-debugger-vscode) built on top of this.
+Currently, the debugger is an interactive CLI similar to `gdb` program or `repl` command.
+
+There is a [DAP server & VSCode extension](https://github.com/Sythivo/zune-debugger-vscode) built on using the IPC feature of the zune debugger.
 
 - Supports breakpoints, stepping, variable inspection, and more.
 
@@ -59,6 +67,14 @@ There were small and new changes to the configuration settings, in `zune.toml`.
 - Shortened format setting names
 - Added `workspace` setting with scripts for workspace scripts.
 
+### Info/Version
+A newer display information for showing more details about the compiled zune runtime, with a optional param `all` to list extra information.
+
+### Setup
+The setup command has been improved with also adding typedocs for the global type definitons.
+
+- Better windows support.
+
 ### Run/Test
 Added some run flags to control the execution behavior of luau scripts, and a flag to disable all libraries.
 
@@ -70,7 +86,7 @@ zune run --limbo src/unsecure.luau
 A bundler has been added in this version, allowing the bundling of multiple scripts and files with zune. And run as a standalone executable.
 
 ```sh
-zune bundle src/main.luau "src/**/*.luau"
+zune bundle src/main.luau src/**/*.luau -O2 --release
 ```
 
 ### REPL
@@ -100,11 +116,13 @@ control over the luau VM and the luau parser.
 ### Serde
 The `serde` library has been improved with new additions. Just some API additions and slight changes.
 
-- Added `serde.flate` for flate compression and decompression.
+- Added more compression algorithms.
 - Added/Renamed Frame and Standard lz4 compression and decompression APIs.
 - Improved `serde.json` and `serde.json5` APIs.
 
 ### IO
+<sub>Renamed from `stdio`.</sub>
+
 The `io` library in this version has changed quite a lot since `0.4.*`, removing many terminal sequences and
 color-related APIs, as they didn't do much besides do what a helper function would do.
 
@@ -141,17 +159,24 @@ buggy client, and non-spec-compliant websocket client/server. This version is an
   - Improved HTTP client and WebSocket.
 - Fixes many original bugs in the `request` API.
 
-### DateTime
-Small improvements to the `datetime` library, such as more formatting and slight optimizations.
+### Time
+<sub>Renamed from `datetime`.</sub>
+
+The `time` library has received small improvements and changes, such as more formatting and slight optimizations for the date object.
 
 - Less memory usage.
 - More formatting options.
+- Better parsing.
 
 ### Process
 Many improvements to the `process` library, such as better child process handling, async processing waiting, and more.
 
 - Added `ProcessChild` object for child process handling.
 - `process.run` is async.
+- Moved arch and os information to `platform` library.
+
+### Platform
+A new library which is can provide system information like RAM usage & compiled information of the zune binary, such as the current system async IO backend zune is utilizing.
 
 ### Foreign Function Interface (FFI)
 The `ffi` library has been changed a lot in this version, most notably for faster performance and safety. Adding a C compiler
@@ -236,3 +261,30 @@ The `random` library is a new addition, providing a simple API to create and use
 
 ### Thread
 This is a new library to utilize hardware threads in zune, allowing you to run code in parallel with other threads.
+
+```luau copy showLineNumbers filename="main.luau"
+local worker = zune.thread.fromModule("./worker")
+
+worker:start()
+
+for i = 1, 10 do
+    worker:send(i)
+end
+
+for i = 1, 10 do
+    local result = worker:receive()
+    print(result)
+end
+
+worker:join()
+```
+
+```luau copy showLineNumbers filename="worker.luau"
+local thread = zune.thread
+for i = 1, 10 do
+    local result = thread.receive()
+    print(result)
+    thread.send(result * 20)
+end
+```
+
