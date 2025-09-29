@@ -22,8 +22,13 @@ Also, with a slight rebranding of the runtime. From `Zune` to `zune`/`ZUNE`, and
 - `freebsd-riscv64`
 - `freebsd-powerpc64le`
 
+Up to a total of `12` supported targets.
+
 These new targets have been added since they do compile and can run `zune`, although there is zero testing on the CI workflow for the new targets.
 Consider these new targets experimental, as `zune` does not have primary focus on the new targets.
+
+### Smaller Size
+In this version, the executable size is much smaller than the previous releases `0.4.*`, showing single digit sizes in MB for majority of the primary targets.
 
 ### Breaking Changes
 - All functions that return a boolean & result tuple would now return only the results or throw a Lua error instead.
