@@ -13,4 +13,5 @@ export default {
   init: "init",
   luau: "luau",
   help: "help",
+  info: "info",
 }

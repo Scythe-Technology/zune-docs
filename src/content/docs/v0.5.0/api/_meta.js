@@ -20,4 +20,5 @@ export default {
   random: "random",
   thread: "thread",
   mem: "mem",
+  platform: "platform",
 }
