@@ -96,7 +96,7 @@ type AdvancedCompressionFn =
     & ((raw: string, opts: SerdeGenericCompressionOptions?) -> string)
     & ((raw: buffer, opts: SerdeGenericCompressionOptions?) -> buffer)
     & ((raw: string | buffer, opts: SerdeGenericCompressionOptions?) -> string | buffer)
-    
+
 type DecompressionFn =
     & ((compressed: string) -> string)
     & ((compressed: buffer) -> buffer)
