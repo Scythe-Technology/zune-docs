@@ -49,19 +49,19 @@ type FileHandle = {
     --- @param bytes If true, the function will return a `buffer` instead of a `string`.
     --- @throws IO Error
     read:
-        & ((self: FileHandle, amount: number?) -> string)
-        & ((self: FileHandle, amount: number?, bytes: false?) -> string)
+        & ((self: FileHandle, amount: number?, bytes: nil) -> string)
+        & ((self: FileHandle, amount: number?, bytes: false) -> string)
         & ((self: FileHandle, amount: number?, bytes: true) -> buffer)
-        & ((self: FileHandle, amount: number?, bytes: boolean?) -> string | buffer),
+        & ((self: FileHandle, amount: number?, bytes: boolean) -> string | buffer),
     --- Read the contents of the file synchronously.
     --- @param amount The amount of bytes to read, if not provided, it will read until EOF or luau limit
     --- @param bytes If true, the function will return a `buffer` instead of a `string`.
     --- @throws IO Error
     readSync:
-        & ((self: FileHandle, amount: number?) -> string)
-        & ((self: FileHandle, amount: number?, bytes: false?) -> string)
+        & ((self: FileHandle, amount: number?, bytes: nil) -> string)
+        & ((self: FileHandle, amount: number?, bytes: false) -> string)
         & ((self: FileHandle, amount: number?, bytes: true) -> buffer)
-        & ((self: FileHandle, amount: number?, bytes: boolean?) -> string | buffer),
+        & ((self: FileHandle, amount: number?, bytes: boolean) -> string | buffer),
     --- Write the contents to the file.
     --- @param contents The contents to write to the file.
     --- @throws IO Error
@@ -167,8 +167,8 @@ type FileSystemLib = {
     --- @default_param bytes false
     --- @throws IO Error
     readFile:
-        & ((path: string) -> string)
-        & ((path: string, bytes: false?) -> string)
+        & ((path: string, bytes: nil) -> string)
+        & ((path: string, bytes: false) -> string)
         & ((path: string, bytes: true) -> buffer)
         & ((path: string, bytes: boolean) -> string | buffer),
     --- Read the contents of a file from the provided path synchronously.
@@ -177,8 +177,8 @@ type FileSystemLib = {
     --- @default_param bytes false
     --- @throws IO Error
     readFileSync:
-        & ((path: string) -> string)
-        & ((path: string, bytes: false?) -> string)
+        & ((path: string, bytes: nil) -> string)
+        & ((path: string, bytes: false) -> string)
         & ((path: string, bytes: true) -> buffer)
         & ((path: string, bytes: boolean) -> string | buffer),
     --- Get directory entries from the provided path.

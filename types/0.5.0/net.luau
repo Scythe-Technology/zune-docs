@@ -469,9 +469,10 @@ type NetworkLib = {
         --- @throws Network Error
         request:
             & ((host: string) -> HttpResponse<string>)
-            & ((host: string, opts: HttpRequestOptions?, bytes: false?) -> HttpResponse<string>)
+            & ((host: string, opts: HttpRequestOptions?, bytes: nil) -> HttpResponse<string>)
+            & ((host: string, opts: HttpRequestOptions?, bytes: false) -> HttpResponse<string>)
             & ((host: string, opts: HttpRequestOptions?, bytes: true) -> HttpResponse<buffer>)
-            & ((host: string, opts: HttpRequestOptions?, bytes: boolean?) -> HttpResponse<string | buffer>),
+            & ((host: string, opts: HttpRequestOptions?, bytes: boolean) -> HttpResponse<string | buffer>),
         -- Creates a new WebSocket connection.
         --- @param host The host to connect to.
         --- @param opts The options for the WebSocket.

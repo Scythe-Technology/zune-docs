@@ -80,9 +80,10 @@ type ProcessLib = {
     run: 
         & ((exec: string) -> ProcessRunResult<string>)
         & ((exec: string, args: {string}?) -> ProcessRunResult<string>)
-        & ((exec: string, args: {string}?, opts: ProcessOptions?, bytes: false?) -> ProcessRunResult<string?>)
+        & ((exec: string, args: {string}?, opts: ProcessOptions?, bytes: nil) -> ProcessRunResult<string?>)
+        & ((exec: string, args: {string}?, opts: ProcessOptions?, bytes: false) -> ProcessRunResult<string?>)
         & ((exec: string, args: {string}?, opts: ProcessOptions?, bytes: true) -> ProcessRunResult<buffer?>)
-        & ((exec: string, args: {string}?, opts: ProcessOptions?, bytes: boolean?) -> ProcessRunResult<string | buffer?>),
+        & ((exec: string, args: {string}?, opts: ProcessOptions?, bytes: boolean) -> ProcessRunResult<string | buffer?>),
     --- Exits the process with the given code.
     --- @param code The exit code.
     exit: (code: number) -> never,

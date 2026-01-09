@@ -12,10 +12,10 @@ type IoReadable = {
     --- @default_param bytes true
     --- @throws Reader Error
     read:
-        & ((self: IoReadable, amount: number?) -> buffer)
-        & ((self: IoReadable, amount: number?, bytes: true?) -> buffer)
+        & ((self: IoReadable, amount: number?, bytes: nil) -> buffer)
+        & ((self: IoReadable, amount: number?, bytes: true) -> buffer)
         & ((self: IoReadable, amount: number?, bytes: false) -> string)
-        & ((self: IoReadable, amount: number?, bytes: boolean?) -> string | buffer),
+        & ((self: IoReadable, amount: number?, bytes: boolean) -> string | buffer),
     readu8: (self: IoReadable) -> number,
     readu16: (self: IoReadable) -> number,
     readu32: (self: IoReadable) -> number,
@@ -56,10 +56,10 @@ type BufferStream = {
     --- @default_param bytes true
     --- @throws Reader Error
     read:
-        & ((self: BufferStream, amount: number?) -> buffer)
-        & ((self: BufferStream, amount: number?, bytes: true?) -> buffer)
+        & ((self: BufferStream, amount: number?, bytes: nil) -> buffer)
+        & ((self: BufferStream, amount: number?, bytes: true) -> buffer)
         & ((self: BufferStream, amount: number?, bytes: false) -> string)
-        & ((self: BufferStream, amount: number?, bytes: boolean?) -> string | buffer),
+        & ((self: BufferStream, amount: number?, bytes: boolean) -> string | buffer),
     --- @param data The data to write to the stream.
     --- @throws Writer Error
     write: (self: BufferStream, data: string | buffer) -> (),
@@ -87,10 +87,10 @@ type BufferSink = {
     --- @default_param bytes true
     --- @throws Memory Error
     flush:
-        & ((self: BufferSink) -> buffer)
-        & ((self: BufferSink, bytes: true?) -> buffer)
+        & ((self: BufferSink, bytes: nil) -> buffer)
+        & ((self: BufferSink, bytes: true) -> buffer)
         & ((self: BufferSink, bytes: false) -> string)
-        & ((self: BufferSink, bytes: boolean?) -> string | buffer),
+        & ((self: BufferSink, bytes: boolean) -> string | buffer),
     --- @param data The data to write to write.
     --- @throws Memory Error
     write: (self: BufferSink, data: string | buffer) -> (),
