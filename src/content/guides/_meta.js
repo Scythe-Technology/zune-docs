@@ -11,4 +11,5 @@ export default {
         "type": "separator"
     },
     optimization: "Optimization",
+    foreign_function_interface: "Structs"
 }

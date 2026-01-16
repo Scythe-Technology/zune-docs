@@ -1,0 +1,248 @@
+# Struct Interaction
+
+import { Callout, Image } from 'nextra/components'
+
+<Callout type="info">This guide is for `0.5.*`</Callout>
+
+## FFI Structs
+
+Zune provides a well-encompassing API for interacting with libraries that compile to a C-like ABI. Although, this calls for low-level interaction in a language that otherwise doesn't expose a way to do so. In practice, this creates a problem with structs, which lack a native equivalent in Luau.
+
+As such, the zune FFI approximates with Buffers, and instead of returning a UserData wrapper, the implementation of interaction is left up to the developer instead. This gives you the ability to create your own interface, of which can be made to fit your personal needs without forcing a potentially unperformant solution upon you.
+
+### Struct Creation
+
+A common Raylib struct for a simple reference, a project commonly made bindings for.
+
+```luau
+local ffi = zune.ffi
+
+local StructExample = ffi.struct({
+    {x = ffi.types.float},
+    {y = ffi.types.float},
+    {width = ffi.types.float},
+    {height = ffi.types.float}
+})
+```
+
+### Struct Manipulation
+
+
+The simplest way to interact with Structs is to handle them like Buffers.
+
+#### Direct Example
+
+```luau
+local Struct: buffer = StructExample:new({
+    x = 10, --0
+    y = 15, --4
+    width = 50, --8
+    height = 25 --12
+})
+
+buffer.writef32(Struct, 4, 20)
+
+print(
+    buffer.readf32(Struct, 4), --20
+    buffer.readf32(Struct, 8) --50
+)
+```
+
+This is the easiest and most performant approach, however this relies on you to constantly know the offsets & datatype of the struct field, which can be an issue to keep track of in massive codebases.
+
+Some workarounds for this are to employ an Enum system, **like:**
+
+#### Enum Example
+
+```luau
+local Offsets = {
+    x = 0,
+    y = 4,
+    width = 8,
+    height = 12
+}
+
+buffer.writef32(Struct, Offsets.y, 20)
+
+print(
+    buffer.readf32(Struct, Offsets.y), --20
+    buffer.readf32(Struct, Offsets.width) --50
+)
+```
+
+Luau should be able to optimize away the indirection, but if you want to extend this into a more ergonomic system, you could make a simple Metatable wrapper **like:**
+
+#### Simple Metatable Example
+
+```luau
+--Continuing with an Enum like system
+local Offsets = {
+    x = 0,
+    y = 4,
+    width = 8,
+    height = 12
+}
+
+local function Read(Tbl, Index: string)
+    return buffer.readf32(Tbl.Struct, Offsets[Index])
+end
+
+local function Write(Tbl, Index: string, Value: number)
+    buffer.writef32(Tbl.Struct, Offsets[Index], Value)
+end
+
+local Rect = setmetatable(
+    {
+        Struct = StructExample:new({}) --This will create an empty struct filled with 0's
+    } :: typeof(Offsets), --for autocomplete
+    {
+        __index = Read,
+        __newindex = Write
+    }
+)
+
+print(Rect.height) --0
+```
+Now the main concern you should have with this is performance.
+
+A couple hundred of these? Probably not a big deal, but past a certain point, and with the frequency of interaction, or just complexity of the Metatable itself, you could have a serious performance bottleneck.
+
+Some simple things you could do is cache reads into local variables, and only apply changes after you're done, so for **example:**
+
+```luau
+local function UpdatePosition(Rect)
+    local RectPosition = vector.create(Rect.x, Rect.y)
+
+    --stuff
+
+    Rect.x = RectPosition.x
+    Rect.y = RectPosition.y
+end; UpdatePosition(Rect)
+```
+##### ECS Note
+
+Expanding off this, you could take a purely ECS approach in how you manage these Structs, which does strike a middleground in ease of use & performance. Due to how ECS is usually far more complex to implement, at least from scratch, I'd recommend using [JECS](https://github.com/Ukendio/jecs), and referring to this [demo](https://github.com/Sythivo/voxel-3d-demo).
+
+## Potential Issues
+
+### Memory Packing
+Unlike Buffers, Structs allocate memory with some consideration for the proceeding type, this is done for efficient memory packing, but can cause the **following**:
+
+#### Struct Alignments
+
+```luau
+--Using the Raylib example
+local Struct: buffer = StructExample:new({
+    x = 0, --0
+    y = 0, --4
+    width = 25, --8
+    height = 25 --12
+    --ends at 16
+})
+
+--So if we have a struct thats like...
+
+local StructExample = ffi.struct({
+    {ref1 = ffi.types.u8},--0
+    {ref2 = ffi.types.i32} --4
+})
+
+--Instead of...
+
+local StructExample = ffi.struct({
+    {ref1 = ffi.types.i32},--0
+    {ref2 = ffi.types.u8}, --4
+    {ref3 = ffi.types.u8} --5
+})
+```
+It could result in inconsistent offsets from what you may initially expect. Ideally no struct should be packed this inefficiently, but sometimes it might be done with an i32 (4 bytes) followed by a pointer (8 bytes), which isn't unreasonable.
+
+
+### Union Representation 
+
+While it may be rare to see an API making use of unions on their own, you may find them to be a common feature inside Structs. This may present an issue in representing certain Structs, so these solutions may remedy **them:**
+
+<sub>Examples of Union patterns in C.</sub>
+
+```c
+struct Problem {
+    int num;
+    union { // The size of unions in a struct is equal to the largest component in them.
+        char Test;
+        int Example;
+    }; // This union is 4 bytes because the largest type is an int.
+};
+
+// Another case is...
+
+struct tor {
+    int we;
+    union { 
+        int have;
+        union {
+            double a;
+        } p;
+    }; // This union is 8 bytes because the largest type is a double.
+};
+```
+So given this information, here are one of 2 optimal ways to represent them in **Luau:**
+
+
+#### Functional Example
+
+```luau
+type Union<Value> = {
+	[string]: Value
+}
+
+type Data = Union<
+	| FFIDataType
+	| FFIStructureType
+>
+
+local function union(Data: Data): Union<FFIAnyDataType>
+	local LargestDataType: number = 1
+	local CurrentSize: number = 1
+	local Name: string = ""
+
+	for Index: string, DataType in Data do 
+		local Type = typeof(DataType)
+
+		if Type == "FFIStructureType" or Type == "FFIDataType" then
+			CurrentSize = DataType:size()
+		elseif Type == "table" then
+			CurrentSize = (select(2, next(DataType, nil)) :: FFIArrayType):size()
+		end
+
+		if LargestDataType < CurrentSize then
+			Name = Index ; LargestDataType = CurrentSize
+		end
+	end
+
+	return {[Name] = u8:array(LargestDataType)}
+end
+
+local UnionTest = ffi.struct({
+    {num = ffi.types.i32},
+    union = { --This will recursively run, returning the largest derived value as the final struct field.
+        test1 = ffi.types.i32,
+
+        test2 = union {
+            example = ffi.types.double
+        }
+    }
+})
+```
+
+Or alternatively, if you'd rather do it by hand, you can do it like **so:**
+
+#### Direct Example
+
+```luau
+local UnionTest = ffi.struct({
+    {num = ffi.types.i32},
+    {example = ffi.types.double}
+})
+```
+
+While I'd say the prior example would be better for those reading the API, this is perfectly fine if you're not supposed to interact with the union field.
