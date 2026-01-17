@@ -14,7 +14,7 @@ As such, the zune FFI approximates with Buffers, and instead of returning a User
 
 A common Raylib struct for a simple reference, a project commonly made bindings for.
 
-```luau
+```luau copy showLineNumbers filename="Struct Example"
 local ffi = zune.ffi
 
 local StructExample = ffi.struct({
@@ -30,9 +30,9 @@ local StructExample = ffi.struct({
 
 The simplest way to interact with Structs is to handle them like Buffers.
 
-#### Direct Example
+#### Direct Interaction
 
-```luau
+```luau copy showLineNumbers
 local Struct: buffer = StructExample:new({
     x = 10, --0
     y = 15, --4
@@ -52,9 +52,9 @@ This is the easiest and most performant approach, however this relies on you to 
 
 Some workarounds for this are to employ an Enum system, **like:**
 
-#### Enum Example
+#### Enum Interaction
 
-```luau
+```luau copy showLineNumbers
 local Offsets = {
     x = 0,
     y = 4,
@@ -72,9 +72,9 @@ print(
 
 Luau should be able to optimize away the indirection, but if you want to extend this into a more ergonomic system, you could make a simple Metatable wrapper **like:**
 
-#### Simple Metatable Example
+#### Simple Metatable Interaction
 
-```luau
+```luau copy showLineNumbers
 --Continuing with an Enum like system
 local Offsets = {
     x = 0,
@@ -109,7 +109,7 @@ A couple hundred of these? Probably not a big deal, but past a certain point, an
 
 Some simple things you could do is cache reads into local variables, and only apply changes after you're done, so for **example:**
 
-```luau
+```luau copy showLineNumbers filename="Handling"
 local function UpdatePosition(Rect)
     local RectPosition = vector.create(Rect.x, Rect.y)
 
@@ -121,7 +121,7 @@ end; UpdatePosition(Rect)
 ```
 ##### ECS Note
 
-Expanding off this, you could take a purely ECS approach in how you manage these Structs, which does strike a middleground in ease of use & performance. Due to how ECS is usually far more complex to implement, at least from scratch, I'd recommend using [JECS](https://github.com/Ukendio/jecs), and referring to this [demo](https://github.com/Sythivo/voxel-3d-demo).
+Expanding off this, you could take a purely ECS approach in how you manage these Structs, which does strike a middleground in ease of use & performance. Due to how ECS is usually far more complex to implement, at least from scratch, I'd recommend using [JECS,](https://github.com/Ukendio/jecs) and referring to this [demo.](https://github.com/Sythivo/voxel-3d-demo)
 
 ## Potential Issues
 
@@ -130,7 +130,7 @@ Unlike Buffers, Structs allocate memory with some consideration for the proceedi
 
 #### Struct Alignments
 
-```luau
+```luau copy showLineNumbers
 --Using the Raylib example
 local Struct: buffer = StructExample:new({
     x = 0, --0
@@ -164,7 +164,7 @@ While it may be rare to see an API making use of unions on their own, you may fi
 
 <sub>Examples of Union patterns in C.</sub>
 
-```c
+```c copy showLineNumbers
 struct Problem {
     int num;
     union { // The size of unions in a struct is equal to the largest component in them.
@@ -190,7 +190,7 @@ So given this information, here are one of 2 optimal ways to represent them in *
 
 #### Functional Example
 
-```luau
+```luau copy showLineNumbers filename="Union Representation"
 type Union<Value> = {
 	[string]: Value
 }
@@ -236,9 +236,9 @@ local UnionTest = ffi.struct({
 
 Or alternatively, if you'd rather do it by hand, you can do it like **so:**
 
-#### Direct Example
+#### Manual Interaction
 
-```luau
+```luau copy showLineNumbers
 local UnionTest = ffi.struct({
     {num = ffi.types.i32},
     {example = ffi.types.double}

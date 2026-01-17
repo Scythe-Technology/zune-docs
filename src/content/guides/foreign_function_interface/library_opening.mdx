@@ -1,0 +1,115 @@
+# Opening a Dynamic Library
+
+<sub>Inclusive of .so/.dll/.dylib types of dynamic libraries.</sub>
+
+import { Callout, Image } from 'nextra/components'
+
+<Callout type="info">This guide is for `0.5.*`</Callout>
+
+## How to open a library
+
+Assume we have an API written in C, such **as:**
+
+<sub>Library API</sub>
+```c
+extern void PassNumbers(int num, int othernum);
+extern int GetNumber(void);
+```
+Lets also assume this will compile to a dynamic libary, for this example, lets assume "SharedExample.so" for the sake of this example.
+
+Knowing this, we can now open the library like **so:**
+
+<sub>Opening the Library in Zune</sub>
+```luau copy showLineNumbers filename="library.luau"
+local ffi = zune.ffi
+local void = ffi.types.void
+local int = ffi.types.i32
+
+--[=========================[+
+	This function is commonly used in zune bindings since it saves on writing out the whole table,
+	otherwise you'd have to do {return = {returntypes}, args = {argtypes}} everytime.
++]=========================]--
+
+local function fn(returns: any, args: { any })
+	return {
+		returns = returns,
+		args = args,
+	}
+end
+
+export type API = {
+	PassNumbers: (num: number, othernum: number) -> (),
+	GetNumber: () -> number,
+}
+
+local API_Example = {
+	PassNumbers = fn(void, {int, int}),
+	GetNumber = fn(int, {}) --you don't include 'void' as an arg type.
+}
+--assume we have a top src directory
+local path = "src/bin/SharedExample.so"
+
+local lib = ffi.dlopen(path, API_Example) :: API
+
+print(lib.GetNumber()) --returns a number
+```
+
+## Compiling a Library within Zune
+
+Zune also bundles a C compiler within its FFI library, allowing you to compile C code at runtime into a library.
+
+```luau copy showLineNumbers filename="compiler.luau"
+local ffi = zune.ffi
+local int = ffi.types.i32
+
+local API = ffi.c.compile([[
+	int sub(int num1, int num2) {
+		return num1 - num2;
+	}
+]])
+
+local sub = ffi.fn(
+	--Reusing the function provided earlier
+	fn(int, {int, int}),
+	API:getSymbol("sub")
+)
+
+
+print(sub(20, 10)) --10
+```
+
+The bundled compiler is a version of TinyCC, which does not provide all C language extensions, unlike GCC/MSVC/Clang which may provide most of them, but it does provide many of the [important ones.](https://www.ddl.unimi.it/manual/plugins/tcc-doc.htm#SEC5)
+
+### Inline Assembly
+
+One extension provided in TinyCC, though, is [GCC inline assembly.](https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html)
+
+Because TinyCC doesn't necessarily aim to produce highly optimized code, as its goals differ from that of the aforementioned compilers, you can take matters into your own hand and write your own assembly **functions:**
+
+```luau copy showLineNumbers filename="inline.luau"
+local ffi = zune.ffi
+local int = ffi.types.i32
+
+local API = ffi.c.compile([[
+	extern inline int sub(int num1, int num2) {
+		int ret;
+		asm (
+			"sub %[input1], %[input2]\n\t"
+			"mov %[input2], %0"
+			: "=r"(ret) : [input1] "r"(num1), [input2] "r"(num2)
+		);
+		// '=r' is the return operand, which is also represented by $0
+		// 'input1' can represent any register, but its usually something like eax or edi
+		// 'input2' likewise will also represent any register
+		return ret;
+	}
+]])
+
+local sub = ffi.fn(
+	fn(int, {int, int}),
+	API:getSymbol("sub")
+)
+
+
+print(sub(10, 20)) --10
+```
