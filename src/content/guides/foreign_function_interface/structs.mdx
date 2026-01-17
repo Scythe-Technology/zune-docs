@@ -28,7 +28,7 @@ local StructExample = ffi.struct({
 ### Struct Manipulation
 
 
-The simplest way to interact with Structs is to handle them like Buffers.
+The simplest way to interact with Structs is to handle them as they are.
 
 #### Direct Interaction
 
@@ -109,7 +109,7 @@ A couple hundred of these? Probably not a big deal, but past a certain point, an
 
 Some simple things you could do is cache reads into local variables, and only apply changes after you're done, so for **example:**
 
-```luau copy showLineNumbers filename="Handling"
+```luau copy showLineNumbers
 local function UpdatePosition(Rect)
     local RectPosition = vector.create(Rect.x, Rect.y)
 
