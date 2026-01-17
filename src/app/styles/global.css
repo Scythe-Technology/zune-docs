@@ -83,6 +83,11 @@ div.nextra-code {
     transform: scale(1) !important;
 }
 
+.nextra-card {
+    margin: 8px;
+    background-color: #070707;
+}
+
 /* x:dark:nextra-border {
     border-color: rgb(0, 0, 0) !important;
 }
