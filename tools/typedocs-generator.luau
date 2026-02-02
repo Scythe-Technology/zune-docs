@@ -195,7 +195,7 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
         documentation = writtenDocs["@base"] or docs.raw or "",
         code_sample = "",
     };
-    addDoc(`@roblox/{name}`, doc);
+    addDoc(`@zune/{name}`, doc);
 
     if (writtenDocs["example"]) then
         local existing_code = writtenDocs["example"]:find("```") ~= nil;
@@ -219,12 +219,12 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
             local sub_docs = docs.fields and docs.fields[key] or {docs = {}, fields = {}};
             if (entry.value.tag == "reference") then
                 if (types[entry.value.name.text]) then
-                    keys[key] = `@roblox/globaltype/{entry.value.name.text}`;
+                    keys[key] = `@zune/globaltype/{entry.value.name.text}`;
                     continue;
                 end
             end
             generateTypeDoc(`{name}.{key}`, entry.value, sub_docs);
-            keys[key] = `@roblox/{name}.{key}`;
+            keys[key] = `@zune/{name}.{key}`;
         end
         doc.keys = keys;
     elseif (type.tag == "function") then
@@ -243,7 +243,7 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
             generateTypeDoc(`{name}/param/{i - 1}`, param.node.type, {docs = {}, raw = param_docs, fields = {}});
             table.insert(params, {
                 name = param_name,
-                documentation = `@roblox/{name}/param/{i - 1}`,
+                documentation = `@zune/{name}/param/{i - 1}`,
             });
         end
         if (type.vararg) then
@@ -258,7 +258,7 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
             generateTypeDoc(`{name}/param/{i}`, type.vararg, {docs = {}, raw = param_docs, fields = {}});
             table.insert(params, {
                 name = "...",
-                documentation = `@roblox/{name}/param/{i}`,
+                documentation = `@zune/{name}/param/{i}`,
             });
         end
         if (#params_doc > 0) then
@@ -275,7 +275,7 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
         if (type.returnTypes.tag == "explicit") then
             for i, return_type in type.returnTypes.types do
                 generateTypeDoc(`{name}/return/{i - 1}`, return_type.node, {docs = {}, fields = {}});
-                table.insert(returns, `@roblox/{name}/return/{i - 1}`);
+                table.insert(returns, `@zune/{name}/return/{i - 1}`);
             end
         end
         doc.returns = returns;
@@ -288,7 +288,7 @@ local function generateTypeDoc(name: string, type: any, docs: any): ()
         end
     else
         if (doc.documentation == "" and doc.code_sample == "") then
-            type_docs[`@roblox/{name}`] = nil;
+            type_docs[`@zune/{name}`] = nil;
         end
         return;
     end
@@ -315,7 +315,7 @@ local function generateTypeDocsFile(): string
         if (not lib_info) then
             continue;
         end
-        local doc = type_docs[`@roblox/globaltype/{lib_info.type.name.text}`];
+        local doc = type_docs[`@zune/globaltype/{lib_info.type.name.text}`];
         local sum_docs = parseDocumentation(summary);
         doc.documentation = sum_docs["summary"] or ""
         doc.learn_more_link = `https://zune.sh/docs/v0.5.0/api/{library}`;
