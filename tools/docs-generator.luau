@@ -594,7 +594,7 @@ local function generatePage(library: any, summary: any)
                     local key = entry.key.text;
                     table.insert(page, `#### {key}`);
                     table.insert(page, `{generatePageProperty(
-                        key, entry.value, parseDocumentation((documentation.fields[key] or {docs = {}, fields = {}} :: any).docs), `{ns_entry.key.text}.{key}`
+                        key, entry.value, parseDocumentation((documentation.fields[key] or {docs = {}, fields = {}} :: any).docs), ns_entry.key.text
                     )}`);
                 end
             end
