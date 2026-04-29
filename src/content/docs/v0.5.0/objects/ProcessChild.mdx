@@ -27,7 +27,7 @@ stderr: FileHandle?
 ```
 ## Methods
 ### wait
-Kills the process and yields until the process exits.
+Yields until the process exits.
 ```luau tooltips
 -- @hover: (10,23)[export type ProcessResult = {
     ok: boolean,
@@ -41,7 +41,7 @@ Kills the process and yields until the process exits.
 </details>
 
 ### kill
-Yields until the process exits.
+Kills the process and yields until the process exits.
 ```luau tooltips
 -- @hover: (10,23)[export type ProcessResult = {
     ok: boolean,
