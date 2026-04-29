@@ -170,7 +170,7 @@ random.fill(buffer: buffer, offset: number, length: number): ()
 <h4 className="x:text-slate-900 x:dark:text-slate-100 x:mt-8 x:text-xl"><u>`NAMESPACES`</u></h4>
 #### aes_gcm
 ```luau tooltips
--- @hover: (24,29)[type EncryptedData = {
+-- @hover: (16,21)[type EncryptedData = {
     cipher: buffer,
     tag: buffer, 
 }
@@ -187,11 +187,11 @@ type Input = string | buffer
         decrypt: (cipher: Input, tag: Input, key: Input, nonce: Input, ad: Input?) -> string, 
     }, 
 }]
-aead.aes_gcm.aes_gcm: <table>
+aead.aes_gcm: <table>
 ```
 #### aes_ocb
 ```luau tooltips
--- @hover: (24,29)[type EncryptedData = {
+-- @hover: (16,21)[type EncryptedData = {
     cipher: buffer,
     tag: buffer, 
 }
@@ -208,11 +208,11 @@ type Input = string | buffer
         decrypt: (cipher: Input, tag: Input, key: Input, nonce: Input, ad: Input?) -> string, 
     }, 
 }]
-aead.aes_ocb.aes_ocb: <table>
+aead.aes_ocb: <table>
 ```
 #### aegis
 ```luau tooltips
--- @hover: (20,25)[type EncryptedData = {
+-- @hover: (14,19)[type EncryptedData = {
     cipher: buffer,
     tag: buffer, 
 }
@@ -269,11 +269,11 @@ type Input = string | buffer
         decrypt: (cipher: Input, tag: Input, key: Input, nonce: Input, ad: Input?) -> string, 
     }, 
 }]
-aead.aegis.aegis: <table>
+aead.aegis: <table>
 ```
 #### chacha_poly
 ```luau tooltips
--- @hover: (32,37)[type EncryptedData = {
+-- @hover: (20,25)[type EncryptedData = {
     cipher: buffer,
     tag: buffer, 
 }
@@ -306,11 +306,11 @@ type Input = string | buffer
         decrypt: (cipher: Input, tag: Input, key: Input, nonce: Input, ad: Input?) -> string, 
     }, 
 }]
-aead.chacha_poly.chacha_poly: <table>
+aead.chacha_poly: <table>
 ```
 #### salsa_poly
 ```luau tooltips
--- @hover: (30,35)[type EncryptedData = {
+-- @hover: (19,24)[type EncryptedData = {
     cipher: buffer,
     tag: buffer, 
 }
@@ -323,11 +323,11 @@ type Input = string | buffer
         decrypt: (cipher: Input, tag: Input, key: Input, nonce: Input, ad: Input?) -> string, 
     }, 
 }]
-aead.salsa_poly.salsa_poly: <table>
+aead.salsa_poly: <table>
 ```
 #### isap
 ```luau tooltips
--- @hover: (18,23)[type EncryptedData = {
+-- @hover: (13,18)[type EncryptedData = {
     cipher: buffer,
     tag: buffer, 
 }
@@ -340,7 +340,7 @@ type Input = string | buffer
         decrypt: (cipher: Input, tag: Input, key: Input, nonce: Input, ad: Input?) -> string, 
     }, 
 }]
-aead.isap.isap: <table>
+aead.isap: <table>
 ```
 ### tls
 ---
