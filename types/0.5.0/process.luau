@@ -36,10 +36,10 @@ type ProcessChild = {
     stdin: FileHandle?,
     stdout: FileHandle?,
     stderr: FileHandle?,
-    --- Kills the process and yields until the process exits.
+    --- Yields until the process exits.
     --- @throws Process Error
     wait: (self: ProcessChild) -> ProcessResult,
-    --- Yields until the process exits.
+    --- Kills the process and yields until the process exits.
     --- @throws Process Error
     kill: (self: ProcessChild) -> ProcessResult,
 }

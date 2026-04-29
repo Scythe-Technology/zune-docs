@@ -133,7 +133,7 @@ type TestingLib = {
     --- @param value The value to expect.
     --- @return Handler for expectations.
     expect: ((value: (...any) -> ...any) -> FunctionalCases) & ((value: any) -> ExpectCases) & ExpectHandler,
-    --- Expects a value to be true or non nil.
+    --- Expects the value to be a truthy value.
     ---
     --- Similar to `assert(value)`
     ---
