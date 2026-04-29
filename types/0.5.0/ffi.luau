@@ -72,7 +72,7 @@ type FFIPointerType = {
 
 export type FFIAnyDataType = FFIDataType | FFIStructureType | FFIArrayType | FFIPointerType
 
-export type FFIFunctionDefintion = {
+export type FFIFunctionDefinition = {
     --- The return type of the function.
     returns: FFIAnyDataType,
     --- The argument types of the function.
@@ -224,17 +224,17 @@ type FFILib = {
     --- @param srcPtr The pointer to the function.
     --- @throws FFI Error
     --- @throws Memory Error
-    fn: (definition: FFIFunctionDefintion, srcPtr: FFIPointer) -> ((...any) -> any),
+    fn: (definition: FFIFunctionDefinition, srcPtr: FFIPointer) -> ((...any) -> any),
     --- @param definition The function definition.
     --- @param handler The lua function to call.
     --- @throws FFI Error
     --- @throws Memory Error
-    closure: (definition: FFIFunctionDefintion, handler: (...any) -> any) -> FFIPointer,
+    closure: (definition: FFIFunctionDefinition, handler: (...any) -> any) -> FFIPointer,
     --- @param path The path to the library.
     --- @param functions The symbols to load from the library.
     --- @throws FFI Error
     --- @throws Memory Error
-    dlopen: (path: string, functions: { [string]: FFIFunctionDefintion }) -> FFILibrary,
+    dlopen: (path: string, functions: { [string]: FFIFunctionDefinition }) -> FFILibrary,
 }
 
 return {} :: FFILib;
