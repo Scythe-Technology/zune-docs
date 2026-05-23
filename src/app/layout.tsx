@@ -47,7 +47,7 @@ export default async function ({ children, ...props }) {
                 <meta content="ZUNE" property="og:title" />
                 <meta content="A luau runtime" property="og:description" />
                 <meta content="#151515" name="theme-color" />
-                <meta content="https://raw.githubusercontent.com/Scythe-Technology/zune-docs/master/public/logo-tag.png" property="og:image" />
+                <meta content="https://raw.githubusercontent.com/Scythe-Technology/zune-docs/master/public/social-card.png" property="og:image" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <link rel="icon" href="https://raw.githubusercontent.com/Scythe-Technology/zune-docs/master/public/logo.svg" />
