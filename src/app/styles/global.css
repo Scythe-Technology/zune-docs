@@ -16,6 +16,10 @@
     --x-color-gray-50: #5f5f5f;
 }
 
+body {
+    isolation: isolate;
+}
+
 .dark body {
     background-color: rgba(2, 2, 2, 1) !important;
 }
