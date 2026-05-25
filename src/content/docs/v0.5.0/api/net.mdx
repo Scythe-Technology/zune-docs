@@ -550,7 +550,6 @@ export type HttpWebSocketOptions = {
     protocols: {string}?,
     timeout: number?,
     accept: ((socket: HttpWebSocket, request: HttpServerResponse) -> boolean)?,
-    open: ((socket: HttpWebSocket) -> ())?,
     close: ((socket: HttpWebSocket, close: number?) -> ())?,
     message: ((socket: HttpWebSocket, message: string) -> ())?,
     tls: {
@@ -571,7 +570,6 @@ http.websocket(host: string, opts: HttpWebSocketOptions): HttpWebSocket
     - If the timeout is negative, the WebSocket will never timeout.
     - default: `30{:luau}`
   - `accept: ((socket: HttpWebSocket, request: HttpServerResponse) -> boolean)?{:luau}` - The function to call to accept the WebSocket connection.
-  - `open: ((socket: HttpWebSocket) -> ())?{:luau}` - The function to call when the WebSocket connection is opened.
   - `close: ((socket: HttpWebSocket, close: number?) -> ())?{:luau}` - The function to call when the WebSocket connection is closed.
   - `message: ((socket: HttpWebSocket, message: string) -> ())?{:luau}` - The function to call when a message is received.
   - `tls: {host: string?, ca: TlsCertBundle?, }?{:luau}` - Tls options for the WebSocket connection.
