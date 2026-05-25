@@ -213,8 +213,6 @@ export type HttpWebSocketOptions = {
     timeout: number?,
     --- The function to call to accept the WebSocket connection.
     accept: ((socket: HttpWebSocket, request: HttpServerResponse) -> boolean)?,
-    --- The function to call when the WebSocket connection is opened.
-    open: ((socket: HttpWebSocket) -> ())?,
     --- The function to call when the WebSocket connection is closed.
     close: ((socket: HttpWebSocket, close: number?) -> ())?,
     --- The function to call when a message is received.
