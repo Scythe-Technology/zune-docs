@@ -15,7 +15,8 @@ Compiles `Luau` source code.
 -- @hover: (40,58)[export type LuauCompileOptions = {
     debug_level: number?,
     optimization_level: number?,
-    coverage_level: number?, 
+    coverage_level: number?,
+    type_info_level: number?, 
 }]
 compile(source: string | buffer, opts: LuauCompileOptions?): buffer
 ```
@@ -26,6 +27,7 @@ compile(source: string | buffer, opts: LuauCompileOptions?): buffer
   - `debug_level: number?{:luau}` - The debug level for the compilation.
   - `optimization_level: number?{:luau}` - The optimization level for the compilation.
   - `coverage_level: number?{:luau}` - The coverage level for the compilation.
+  - `type_info_level: number?{:luau}` - The type info level for the compilation.
 </details>
 <details>
 <summary>Throws</summary>

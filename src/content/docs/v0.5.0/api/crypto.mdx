@@ -32,13 +32,13 @@ A library to do cryptographic operations in luau. Provides functions for hashing
     | "blake2s160"
     | "blake2s224"
     | "blake2s256"]
--- @link: (63,73)[../objects/CryptoHash]
-createHash(algorithm: CryptoHashAlgorithms, secret: string?): CryptoHash
+-- @link: (72,82)[../objects/CryptoHash]
+createHash(algorithm: CryptoHashAlgorithms, secret: string | buffer?): CryptoHash
 ```
 <details open>
 <summary>Parameters</summary>
 - `algorithm: CryptoHashAlgorithms{:luau}`
-- `secret: string?{:luau}`
+- `secret: string | buffer?{:luau}`
 </details>
 
 ## Namespaces
