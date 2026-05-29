@@ -107,7 +107,7 @@ export type CryptoTlsServerConfig = {
 }
 
 type CryptoLib = {
-    createHash: (algorithm: CryptoHashAlgorithms, secret: string?) -> CryptoHash,
+    createHash: (algorithm: CryptoHashAlgorithms, secret: string | buffer?) -> CryptoHash,
     password: {
         --- @param password The password to hash.
         --- @param opts The options for the password hashing.

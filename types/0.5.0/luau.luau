@@ -11,6 +11,8 @@ export type LuauCompileOptions = {
     optimization_level: number?,
     --- The coverage level for the compilation.
     coverage_level: number?,
+    --- The type info level for the compilation.
+    type_info_level: number?,
 }
 
 export type LuauLoadOptions = {

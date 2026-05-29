@@ -123,7 +123,7 @@ export type ServerWebSocketHandlers = {
     --- The function to call when a WebSocket connection is opened.
     open: ((websocket: HttpWebSocket) -> ())?,
     --- The function to call when a message is received on a WebSocket connection.
-    message: ((websocket: HttpWebSocket, message: string) -> ())?,
+    message: ((websocket: HttpWebSocket, message: string | buffer) -> ())?,
     --- The function to call when a WebSocket connection is closed.
     close: ((websocket: HttpWebSocket, code: number) -> ())?,
 }
@@ -150,7 +150,7 @@ export type HttpServeOptions = {
     --- @default 100
     max_headers: number?,
     --- The timeout for the client.
-    --- @default 60
+    --- @default 10
     client_timeout: number?,
     --- The maximum number of connections.
     --- - `0` for no limit
@@ -214,9 +214,9 @@ export type HttpWebSocketOptions = {
     --- The function to call to accept the WebSocket connection.
     accept: ((socket: HttpWebSocket, request: HttpServerResponse) -> boolean)?,
     --- The function to call when the WebSocket connection is closed.
-    close: ((socket: HttpWebSocket, close: number?) -> ())?,
+    close: ((socket: HttpWebSocket, close: number) -> ())?,
     --- The function to call when a message is received.
-    message: ((socket: HttpWebSocket, message: string) -> ())?,
+    message: ((socket: HttpWebSocket, message: string | buffer) -> ())?,
     --- Tls options for the WebSocket connection.
     tls: {
         host: string?,
