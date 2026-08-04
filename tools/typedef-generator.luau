@@ -153,7 +153,7 @@ local function generateDefintionFile(): string
         for _, type_name in list do
             local class = classes[type_name];
             if (class) then
-                table.insert(def, `declare class {type_name}{if (class.extends) then ` extends {class.extends}` else ""}`);
+                table.insert(def, `declare extern type {type_name}{if (class.extends) then ` extends {class.extends}` else ""} with`);
                 table.insert(def, `{writer.printType(class.type.type, nil, {exclude_brace = 0})}`);
                 table.insert(def, `end`);
                 continue;
