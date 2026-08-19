@@ -55,7 +55,17 @@ export default async function ({ children, ...props }) {
             <body>
                 <Layout
                     navbar={navbar}
-                    footer={<Footer>Scythe Technology © {new Date().getFullYear()}. Licensed under the MIT License.</Footer>}
+                    footer={<Footer>
+                        <p>
+                            <p>Scythe Technology © {new Date().getFullYear()}. Licensed under the MIT License.</p>
+                            <br />
+                            <small>
+                                <a href="https://luau.org" style={{ textDecoration: "underline" }}><b>Luau</b></a> is a trademark of Roblox Corporation.
+                                <br />
+                                ZUNE is an independent project and is not affiliated with or endorsed by Roblox or the Luau team.
+                            </small>
+                        </p>
+                    </Footer>}
                     docsRepositoryBase="https://github.com/Scythe-Technology/zune-docs/blob/master"
                     feedback={{ content: null }}
                     pageMap={await getPageMap()}
